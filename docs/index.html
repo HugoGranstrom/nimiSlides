@@ -9,12 +9,13 @@
       <div class="slides">
         <section>
 <section>
-<p>Hello1</p>
+<h2>Welcome to <a href="https://github.com/HugoGranstrom/nimib-reveal">nimib-reveal</a>!</h2>
+<p>These slides will show you what this theme is capable of ⛄</p>
 </section>
 </section>
 <section>
 <section>
-<p>Hello World Example</p>
+<h2>Hello World Example</h2>
 <pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Hello World&quot;</span></code></pre>
 <pre style="width: 100%"><samp>Hello World
 </samp></pre>
@@ -23,12 +24,13 @@
 <p>Hello Down here</p>
 </section>
 <section>
+<h2>A classic</h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </section>
 </section>
 <section>
 <section>
-<h1>This is a header</h1>
+<h1>Code example</h1>
 <pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">var</span> this: <span class="hljs-built_in">int</span>
 <span class="hljs-keyword">let</span> is_a = <span class="hljs-number">1</span>
 <span class="hljs-keyword">proc</span> code(b: <span class="hljs-built_in">int</span>) =
@@ -41,13 +43,15 @@ code(this)</code></pre>
 </section>
 <section>
 <section>
+<h2>Generating and showing images</h2>
 <pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">import</span> ggplotnim, random, sequtils
 randomize(<span class="hljs-number">42</span>)
-<span class="hljs-keyword">let</span> df = seqsToDf({ <span class="hljs-string">&quot;Energy&quot;</span> : cycle(linspace(<span class="hljs-number">0.0</span>, <span class="hljs-number">10.0</span>, <span class="hljs-number">25</span>).toRawSeq, <span class="hljs-number">2</span>),
-                    <span class="hljs-string">&quot;Counts&quot;</span> : concat(toSeq(<span class="hljs-number">0</span> ..&lt; <span class="hljs-number">25</span>).mapIt(rand(<span class="hljs-number">10.0</span>)),
-                                      toSeq(<span class="hljs-number">0</span> ..&lt; <span class="hljs-number">25</span>).mapIt(rand(<span class="hljs-number">10</span>).<span class="hljs-built_in">float</span>)),
-                    <span class="hljs-string">&quot;Type&quot;</span> : concat(newSeqWith(<span class="hljs-number">25</span>, <span class="hljs-string">&quot;background&quot;</span>),
-                                    newSeqWith(<span class="hljs-number">25</span>, <span class="hljs-string">&quot;candidates&quot;</span>)) })</code></pre>
+<span class="hljs-keyword">let</span> df = seqsToDf({
+  <span class="hljs-string">&quot;Energy&quot;</span> : cycle(linspace(<span class="hljs-number">0.0</span>, <span class="hljs-number">10.0</span>, <span class="hljs-number">25</span>).toRawSeq, <span class="hljs-number">2</span>),
+  <span class="hljs-string">&quot;Counts&quot;</span> : concat(toSeq(<span class="hljs-number">0</span> ..&lt; <span class="hljs-number">25</span>).mapIt(rand(<span class="hljs-number">10.0</span>)),
+                    toSeq(<span class="hljs-number">0</span> ..&lt; <span class="hljs-number">25</span>).mapIt(rand(<span class="hljs-number">10</span>).<span class="hljs-built_in">float</span>)),
+  <span class="hljs-string">&quot;Type&quot;</span> : concat(newSeqWith(<span class="hljs-number">25</span>, <span class="hljs-string">&quot;background&quot;</span>),
+                  newSeqWith(<span class="hljs-number">25</span>, <span class="hljs-string">&quot;candidates&quot;</span>)) })</code></pre>
 </section>
 <section>
 <pre style="width: 100%"><code class="nim hljs" data-noescape>ggplot(df, aes(<span class="hljs-string">&quot;Energy&quot;</span>, <span class="hljs-string">&quot;Counts&quot;</span>)) +
@@ -65,15 +69,7 @@ randomize(<span class="hljs-number">42</span>)
 </section>
 <section>
 <section>
-<p>This is the 'DSL' syntax!</p>
-</section>
-<section>
-<pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Good bye!&quot;</span></code></pre>
-<pre style="width: 100%"><samp>Good bye!
-</samp></pre>
-</section>
-<section>
-<p>This is the last slide!</p>
+<p>And a final <strong>reveal</strong>: These slides were created just using Nim!</p>
 </section>
 </section>
 

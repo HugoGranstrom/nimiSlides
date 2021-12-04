@@ -5,11 +5,14 @@ nbInit(theme = revealTheme)
 initReveal() # init the slide and introduce templates and variables
 
 # The first slide is created by default, no need to add it.
-nbText: "Hello1"
+nbText: """
+## Welcome to [nimib-reveal](https://github.com/HugoGranstrom/nimib-reveal)!
+These slides will show you what this theme is capable of ⛄
+"""
 
 # The we can add a slide to the right
 slideRight()
-nbText: "Hello World Example"
+nbText: "## Hello World Example"
 nbCode:
   echo "Hello World"
 
@@ -18,10 +21,11 @@ slideDown()
 nbText: "Hello Down here"
 
 slideDown()
+nbText: "## A classic"
 nbText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
 slideRight()
-nbText: "# This is a header"
+nbText: "# Code example"
 nbCode:
   var this: int
   let is_a = 1
@@ -31,14 +35,16 @@ nbCode:
   code(this)
 
 slideRight()
+nbText: "## Generating and showing images"
 nbCode:
   import ggplotnim, random, sequtils
   randomize(42)
-  let df = seqsToDf({ "Energy" : cycle(linspace(0.0, 10.0, 25).toRawSeq, 2),
-                      "Counts" : concat(toSeq(0 ..< 25).mapIt(rand(10.0)),
-                                        toSeq(0 ..< 25).mapIt(rand(10).float)),
-                      "Type" : concat(newSeqWith(25, "background"),
-                                      newSeqWith(25, "candidates")) })
+  let df = seqsToDf({
+    "Energy" : cycle(linspace(0.0, 10.0, 25).toRawSeq, 2),
+    "Counts" : concat(toSeq(0 ..< 25).mapIt(rand(10.0)),
+                      toSeq(0 ..< 25).mapIt(rand(10).float)),
+    "Type" : concat(newSeqWith(25, "background"),
+                    newSeqWith(25, "candidates")) })
 
 slideDown()
 nbCode:
@@ -49,12 +55,8 @@ nbCode:
 nbImage("images/multi_layer_histogram_0.png")                                      
 
 slideRight:
-  nbText: "This is the 'DSL' syntax!"
-
-slideDown:
-  nbCode echo "Good bye!"
-
-slideDown:
-  nbText: "This is the last slide!"
+  nbText: """
+And a final **reveal**: These slides were created just using Nim!
+  """
 
 nbSave()
