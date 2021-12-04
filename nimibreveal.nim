@@ -26,43 +26,55 @@ const document = """
 </html>
 """
 
+type
+  SlidesCtx* = ref object
+    sections*: seq[seq[tuple[start: int, finish: int]]]
+
 template initReveal*() =
   ## Call this after nbInit
-  var sections {.inject.}: seq[seq[tuple[start: int, finish: int]]] = @[@[(start: 0, finish: -1)]]
+  var slidesCtx {.inject.} = SlidesCtx(sections: @[@[(start: 0, finish: -1)]])
 
   template slideRight() =
     ## Add a slide to the right of the current one
-    sections[^1][^1].finish = nb.blocks.len - 1
-    sections.add @[(start: nb.blocks.len, finish: -1)]
+    slidesCtx.sections[^1][^1].finish = nb.blocks.len - 1
+    slidesCtx.sections.add @[(start: nb.blocks.len, finish: -1)]
 
   template slideDown() =
     ## Add a slide below the current one
-    sections[^1][^1].finish = nb.blocks.len - 1
-    sections[^1].add (start: nb.blocks.len, finish: -1)
+    slidesCtx.sections[^1][^1].finish = nb.blocks.len - 1
+    slidesCtx.sections[^1].add (start: nb.blocks.len, finish: -1)
 
-  template finishReveal*() =
-    ## Call this right before nbSave
-    proc renderReveal*(doc: NbDoc): string =
-      var content: string
-      for horiz in sections:
-        content &= "<section>\n" # this is the top level section
-        for vertical in horiz:
-          # vertical corresponds to a single slide with many blocks. Must loop over them all and call `renderHTMLBlock` 
-          # if vertical.finish == -1: it is the last slide, grab the rest of all blocks
-          let upper = 
-            if vertical.finish != -1: vertical.finish
-            else: doc.blocks.len - 1
-          
-          content &= "<section>\n"
-          for i in vertical.start .. upper:
-            content &= doc.blocks[i].renderHtmlBlock
-          content &= "</section>\n"
+  template slideRight(body: untyped) =
+    slideRight()
+    body
+  
+  template slideDown(body: untyped) =
+    slideDown()
+    body
+
+  proc renderReveal*(doc: NbDoc): string =
+    var content: string
+    for horiz in slidesCtx.sections:
+      content &= "<section>\n" # this is the top level section
+      for vertical in horiz:
+        # vertical corresponds to a single slide with many blocks. Must loop over them all and call `renderHTMLBlock` 
+        # if vertical.finish == -1: it is the last slide, grab the rest of all blocks
+        let upper = 
+          if vertical.finish != -1: vertical.finish
+          else: doc.blocks.len - 1
+        
+        content &= "<section>\n"
+        for i in vertical.start .. upper:
+          content &= doc.blocks[i].renderHtmlBlock
         content &= "</section>\n"
+      content &= "</section>\n"
 
-      doc.context["slides"] = content
-      # This is neccecary because it will show the <span> tag otherwise:
-      result = "{{> document}}".render(doc.context).replace("<code class=\"nim hljs\">", "<code class=\"nim hljs\" data-noescape>")
-    nb.render = renderReveal
+    doc.context["slides"] = content
+    # This is neccecary because it will show the <span> tag otherwise:
+    result = "{{> document}}".render(doc.context).replace("<code class=\"nim hljs\">", "<code class=\"nim hljs\" data-noescape>")
+    result = result.replace("<pre>", "<pre style=\"width: 100%\">") # this makes code blocks a little bit wider
+
+  nb.render = renderReveal    
 
 proc revealTheme*(doc: var NbDoc) =
   doc.partials["document"] = document

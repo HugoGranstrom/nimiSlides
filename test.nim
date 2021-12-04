@@ -8,19 +8,19 @@ initReveal() # init the slide and introduce templates and variables
 nbText: "Hello1"
 
 # The we can add a slide to the right
-slideRight
+slideRight()
 nbText: "Hello World Example"
 nbCode:
   echo "Hello World"
 
 # And then we add one below the previous one, etc
-slideDown
+slideDown()
 nbText: "Hello Down here"
 
-slideDown
+slideDown()
 nbText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
-slideRight
+slideRight()
 nbText: "# This is a header"
 nbCode:
   var this: int
@@ -30,7 +30,7 @@ nbCode:
   
   code(this)
 
-slideRight
+slideRight()
 nbCode:
   import ggplotnim, random, sequtils
   randomize(42)
@@ -40,13 +40,21 @@ nbCode:
                       "Type" : concat(newSeqWith(25, "background"),
                                       newSeqWith(25, "candidates")) })
 
-slideDown
+slideDown()
 nbCode:
   ggplot(df, aes("Energy", "Counts")) +
-    geom_histogram() + theme_opaque() +
+    geom_histogram() +
+    theme_opaque() +
     ggsave("images/multi_layer_histogram_0.png")
 nbImage("images/multi_layer_histogram_0.png")                                      
 
-# call finishReveal before nbSave to generate our render function from the slides structure.
-finishReveal()
+slideRight:
+  nbText: "This is the 'DSL' syntax!"
+
+slideDown:
+  nbCode echo "Good bye!"
+
+slideDown:
+  nbText: "This is the last slide!"
+
 nbSave()
