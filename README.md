@@ -2,7 +2,7 @@
 
 A Reveal.js theme for nimib.
 
-Example can be found in `docs/` folder and the generated slides can be seen here:
+An example can be found in `docs/` folder and the generated slides can be seen here: http://hugogranstrom.com/nimib-reveal/
 
 ## API
 Reveal.js has two directions which you can add slides in. To the right and down.
