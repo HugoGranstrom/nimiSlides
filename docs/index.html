@@ -16,8 +16,8 @@
 <section>
 <section>
 <h2>Hello World Example</h2>
-<pre style="width: 100%" ><code class="nim hljs" data-noescape><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Hello World&quot;</span></code></pre>
-<pre style="width: 100%"  style="background: #262623"><samp>Hello World
+<pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Hello World&quot;</span></code></pre>
+<pre style="width: 100%; background: #262623"><samp>Hello World
 </samp></pre>
 </section>
 <section>
@@ -31,20 +31,20 @@
 <section>
 <section>
 <h1>Code example</h1>
-<pre style="width: 100%" ><code class="nim hljs" data-noescape><span class="hljs-keyword">var</span> this: <span class="hljs-built_in">int</span>
+<pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">var</span> this: <span class="hljs-built_in">int</span>
 <span class="hljs-keyword">let</span> is_a = <span class="hljs-number">1</span>
 <span class="hljs-keyword">proc</span> code(b: <span class="hljs-built_in">int</span>) =
   <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;block&quot;</span>
 
 code(this)</code></pre>
-<pre style="width: 100%"  style="background: #262623"><samp>block
+<pre style="width: 100%; background: #262623"><samp>block
 </samp></pre>
 </section>
 </section>
 <section>
 <section>
 <h2>Generating and showing images</h2>
-<pre style="width: 100%" ><code class="nim hljs" data-noescape><span class="hljs-keyword">import</span> ggplotnim, random, sequtils
+<pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">import</span> ggplotnim, random, sequtils
 randomize(<span class="hljs-number">42</span>)
 <span class="hljs-keyword">let</span> df = seqsToDf({
   <span class="hljs-string">&quot;Energy&quot;</span> : cycle(linspace(<span class="hljs-number">0.0</span>, <span class="hljs-number">10.0</span>, <span class="hljs-number">25</span>).toRawSeq, <span class="hljs-number">2</span>),
@@ -54,11 +54,11 @@ randomize(<span class="hljs-number">42</span>)
                   newSeqWith(<span class="hljs-number">25</span>, <span class="hljs-string">&quot;candidates&quot;</span>)) })</code></pre>
 </section>
 <section>
-<pre style="width: 100%" ><code class="nim hljs" data-noescape>ggplot(df, aes(<span class="hljs-string">&quot;Energy&quot;</span>, <span class="hljs-string">&quot;Counts&quot;</span>)) +
+<pre style="width: 100%"><code class="nim hljs" data-noescape>ggplot(df, aes(<span class="hljs-string">&quot;Energy&quot;</span>, <span class="hljs-string">&quot;Counts&quot;</span>)) +
   geom_histogram() +
   theme_opaque() +
   ggsave(<span class="hljs-string">&quot;images/multi_layer_histogram_0.png&quot;</span>)</code></pre>
-<pre style="width: 100%"  style="background: #262623"><samp>StatusSuccess output of write_to_png
+<pre style="width: 100%; background: #262623"><samp>StatusSuccess output of write_to_png
 </samp></pre>
 <figure>
 <img src="images/multi_layer_histogram_0.png" alt="">
