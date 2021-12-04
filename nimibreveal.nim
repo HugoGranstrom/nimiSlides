@@ -72,7 +72,8 @@ template initReveal*() =
     doc.context["slides"] = content
     # This is neccecary because it will show the <span> tag otherwise:
     result = "{{> document}}".render(doc.context).replace("<code class=\"nim hljs\">", "<code class=\"nim hljs\" data-noescape>")
-    result = result.replace("<pre>", "<pre style=\"width: 100%\">") # this makes code blocks a little bit wider
+    result = result.replace("<pre><samp", "<pre style=\"background: #262623\"><samp") # add some background to code output block
+    result = result.replace("<pre", "<pre style=\"width: 100%\" ") # this makes code blocks a little bit wider
 
   nb.render = renderReveal    
 
