@@ -3,7 +3,7 @@ import nimibreveal
 
 nbInit(theme = revealTheme)
 initReveal() # init the slide and introduce templates and variables
-setSlidesTheme(Black)
+setSlidesTheme(White)
 
 # The first slide is created by default, no need to add it.
 nbText: """

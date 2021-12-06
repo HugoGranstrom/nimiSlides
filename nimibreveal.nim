@@ -6,7 +6,7 @@ const document = """
 <html>
   <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/reveal.min.css" integrity="sha512-vFD6wFRj2whK8/X/dMgxJHinKfGlwMYtN+yRCxvxvmOgIiMIlgrFb5iOuCoqwCID+Qcq2/gY8DpmNHcAjfHWxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/theme/black.min.css" integrity="sha512-DKeDMgkMDBNgY3g8T6H6Ft5cB7St0LOh5d69BvETIcTrP0E3d3KhANTMs5QOTMnenXy6JVKz/tENmffCLeXPiQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/theme/{{{slidesTheme}}}.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/plugin/highlight/monokai.min.css" integrity="sha512-z8wQkuDRFwCBfoj7KOiu1MECaRVoXx6rZQWL21x0BsVVH7JkqCp1Otf39qve6CrCycOOL5o9vgfII5Smds23rg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
@@ -29,7 +29,8 @@ const document = """
 type
   SlidesCtx* = ref object
     sections*: seq[seq[tuple[start: int, finish: int]]]
-
+  SlidesTheme* = enum
+    Black, Beige, Blood, League, Moon, Night, Serif, Simple, Sky, Solarized, White
 template initReveal*() =
   ## Call this after nbInit
   var slidesCtx {.inject.} = SlidesCtx(sections: @[@[(start: 0, finish: -1)]])
@@ -52,6 +53,9 @@ template initReveal*() =
     slideDown()
     body
 
+  template setSlidesTheme(theme: SlidesTheme) =
+    nb.context["slidesTheme"] = ($theme).toLower
+
   proc renderReveal*(doc: NbDoc): string =
     var content: string
     for horiz in slidesCtx.sections:
@@ -72,12 +76,13 @@ template initReveal*() =
     doc.context["slides"] = content
     # This is neccecary because it will show the <span> tag otherwise:
     result = "{{> document}}".render(doc.context).replace("<code class=\"nim hljs\">", "<code class=\"nim hljs\" data-noescape>")
-    result = result.replace("<pre><samp", "<pre style=\"width: 100%; background: #262623\"><samp") # add some background to code output block
+    result = result.replace("<pre><samp", "<pre style=\"width: 100%;\"><samp class=\"hljs\"") # add some background to code output block
     result = result.replace("<pre>", "<pre style=\"width: 100%\">") # this makes code blocks a little bit wider
 
   nb.render = renderReveal    
 
 proc revealTheme*(doc: var NbDoc) =
   doc.partials["document"] = document
+  doc.context["slidesTheme"] = "black"
 
 
