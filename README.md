@@ -2,7 +2,7 @@
 
 A Reveal.js theme for nimib.
 
-An example can be found in `docs/` folder and the generated slides can be seen here: http://hugogranstrom.com/nimib-reveal/
+An example can be found in `docs/` folder and the generated slides can be seen here: https://hugogranstrom.com/nimib-reveal/
 
 ## API
 Reveal.js has two directions which you can add slides in. To the right and down.
@@ -37,3 +37,16 @@ nbRight:
 nbDown:
   nbText: "This is as the bottom"
 ```
+
+## Themes
+There are some default themes for Reveal.js available using `setSlidesTheme`:
+```nim
+import nimib
+import nimibreveal
+
+nbInit(theme = revealTheme)
+initReveal() # init the slide and introduce templates and variables
+setSlidesTheme(White)
+```
+Available themes are: `Black`, `Beige`, `Blood`, `League`, `Moon`, `Night`, `Serif`, `Simple`, `Sky`, `Solarized`, `White`.
+The same site as above can be view with `White` theme here: https://hugogranstrom.com/nimib-reveal/index_white.html
