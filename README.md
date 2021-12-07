@@ -62,5 +62,12 @@ The same site as above can be view with `White` theme here: https://hugogranstro
 
 ## Roadmap 🗺
 - [ ] Make available `fragments` (https://revealjs.com/fragments/)
+  - [ ] Make it work with default options
+  - [ ] Support fragment animations
+  - [ ] Make fragments nestable?
 - [ ] Make available code animations (https://revealjs.com/code/)
+  - [ ] Line numbers
+  - [ ] Highlight lines
 - [ ] Presenter mode note (https://revealjs.com/speaker-view/)
+- [ ] Auto-slide (https://revealjs.com/auto-slide/)
+- [ ] Fit text (https://revealjs.com/layout/#fit-text)
