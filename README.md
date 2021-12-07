@@ -61,4 +61,6 @@ Available themes are: `Black`, `Beige`, `Blood`, `League`, `Moon`, `Night`, `Ser
 The same site as above can be view with `White` theme here: https://hugogranstrom.com/nimib-reveal/index_white.html
 
 ## Roadmap 🗺
-
+- [ ] Make available `fragments` (https://revealjs.com/fragments/)
+- [ ] Make available code animations (https://revealjs.com/code/)
+- [ ] Presenter mode note (https://revealjs.com/speaker-view/)
