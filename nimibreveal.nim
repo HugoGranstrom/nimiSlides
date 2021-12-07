@@ -62,6 +62,12 @@ template initReveal*() =
     slideDown()
     body
 
+  template removeCodeOutput =
+    if nb.blocks.len > 0:
+      var blk = nb.blocks[^1]
+      if blk.kind == nbkCode:
+        blk.output = ""
+
   template setSlidesTheme(theme: SlidesTheme) =
     nb.context["slidesTheme"] = ($theme).toLower
 

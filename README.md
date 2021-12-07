@@ -38,6 +38,15 @@ nbDown:
   nbText: "This is as the bottom"
 ```
 
+### Hiding code output
+If you want to not show the output of a code block, you can call `removeCodeOutput` right after your `nbCode` call like this:
+```nim
+nbCode:
+  echo "Hello world! Just kidding, you can't see this!"
+
+removeCodeOutput() # now the usual block showing "Hello world! Just kidding, you can't see this!" won't be visible and you save some space in your slide.
+```
+
 ## Themes
 There are some default themes for Reveal.js available using `setSlidesTheme`:
 ```nim
@@ -50,3 +59,6 @@ setSlidesTheme(White)
 ```
 Available themes are: `Black`, `Beige`, `Blood`, `League`, `Moon`, `Night`, `Serif`, `Simple`, `Sky`, `Solarized`, `White`.
 The same site as above can be view with `White` theme here: https://hugogranstrom.com/nimib-reveal/index_white.html
+
+## Roadmap 🗺
+

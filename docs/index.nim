@@ -54,6 +54,8 @@ nbCode:
     geom_histogram() +
     theme_opaque() +
     ggsave("images/multi_layer_histogram_0.png")
+removeCodeOutput # this hides the usual ggplotnim hint that is printed normally
+
 nbImage("images/multi_layer_histogram_0.png")                                      
 
 slideRight:
