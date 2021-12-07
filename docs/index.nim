@@ -4,6 +4,7 @@ import nimibreveal
 nbInit(theme = revealTheme)
 initReveal() # init the slide and introduce templates and variables
 setSlidesTheme(Black)
+nb.useLatex
 
 # The first slide is created by default, no need to add it.
 nbText: """
@@ -54,6 +55,14 @@ nbCode:
     theme_opaque() +
     ggsave("images/multi_layer_histogram_0.png")
 nbImage("images/multi_layer_histogram_0.png")                                      
+
+slideRight:
+  nbText: """
+## Math
+You can typeset math as well (using `nb.useLatex`):
+
+$$ e^{\pi i} = -1 $$
+  """
 
 slideRight:
   nbText: """
