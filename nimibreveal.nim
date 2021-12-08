@@ -57,7 +57,7 @@ type
     highlightCurrentBlue = "highlight-current-blue"
   Fragment* = ref object
     pos*: tuple[start: int, finish: int]
-    animation*: FragmentAnimation
+    animations*: seq[FragmentAnimation]
   Slide* = ref object
     pos*: tuple[start: int, finish: int]
     fragments*: seq[Fragment]
@@ -89,12 +89,12 @@ template initReveal*() =
     slideDown()
     body
 
-  template fragment(animations: varargs[FragmentAnimation], body: untyped) =
-    discard
-
-  template fragment(body: untyped) =
-    fragment(fadeIn):
-      body
+  template fragment(animation: varargs[FragmentAnimation] = @[fadeIn], body: untyped): untyped =
+    var currentSlide = slidesCtx.sections[^1][^1]
+    var fragment = Fragment(pos: (start: nb.blocks.len, finish: -1), animations: @animation)
+    currentSlide.fragments.add fragment
+    body
+    fragment.pos.finish = nb.blocks.high
 
   template removeCodeOutput =
     if nb.blocks.len > 0:
@@ -105,8 +105,15 @@ template initReveal*() =
   template setSlidesTheme(theme: SlidesTheme) =
     nb.context["slidesTheme"] = ($theme).toLower
 
-  proc renderSlide(slide: Slide): string =
-    discard
+  proc renderSlide(doc: NbDoc, slide: Slide): string =
+    let upper = 
+      if slide.pos.finish != -1: slide.pos.finish
+      else: doc.blocks.len - 1
+    
+    result = "<section>\n"
+    for i in slide.pos.start .. upper:
+      result &= doc.blocks[i].renderHtmlBlock
+    result &= "</section>\n"
 
   proc renderReveal*(doc: NbDoc): string =
     var content: string
@@ -115,14 +122,7 @@ template initReveal*() =
       for vertical in horiz:
         # vertical corresponds to a single slide with many blocks. Must loop over them all and call `renderHTMLBlock` 
         # if vertical.finish == -1: it is the last slide, grab the rest of all blocks
-        let upper = 
-          if vertical.pos.finish != -1: vertical.pos.finish
-          else: doc.blocks.len - 1
-        
-        content &= "<section>\n"
-        for i in vertical.pos.start .. upper:
-          content &= doc.blocks[i].renderHtmlBlock
-        content &= "</section>\n"
+        content &= doc.renderSlide(vertical)
       content &= "</section>\n"
 
     doc.context["slides"] = content
