@@ -63,23 +63,23 @@ type
     fragments*: seq[Fragment]
     notes*: seq[string]
   SlidesCtx* = ref object
-    sections*: seq[seq[tuple[start: int, finish: int]]]
+    sections*: seq[seq[Slide]]
   SlidesTheme* = enum
     Black, Beige, Blood, League, Moon, Night, Serif, Simple, Sky, Solarized, White
 
 template initReveal*() =
   ## Call this after nbInit
-  var slidesCtx {.inject.} = SlidesCtx(sections: @[@[(start: 0, finish: -1)]])
+  var slidesCtx {.inject.} = SlidesCtx(sections: @[@[Slide(pos: (start: 0, finish: -1))]])
 
   template slideRight() =
     ## Add a slide to the right of the current one
-    slidesCtx.sections[^1][^1].finish = nb.blocks.len - 1
-    slidesCtx.sections.add @[(start: nb.blocks.len, finish: -1)]
+    slidesCtx.sections[^1][^1].pos.finish = nb.blocks.len - 1
+    slidesCtx.sections.add @[Slide(pos: (start: nb.blocks.len, finish: -1))]
 
   template slideDown() =
     ## Add a slide below the current one
-    slidesCtx.sections[^1][^1].finish = nb.blocks.len - 1
-    slidesCtx.sections[^1].add (start: nb.blocks.len, finish: -1)
+    slidesCtx.sections[^1][^1].pos.finish = nb.blocks.len - 1
+    slidesCtx.sections[^1].add (Slide(pos: (start: nb.blocks.len, finish: -1)))
 
   template slideRight(body: untyped) =
     slideRight()
@@ -116,11 +116,11 @@ template initReveal*() =
         # vertical corresponds to a single slide with many blocks. Must loop over them all and call `renderHTMLBlock` 
         # if vertical.finish == -1: it is the last slide, grab the rest of all blocks
         let upper = 
-          if vertical.finish != -1: vertical.finish
+          if vertical.pos.finish != -1: vertical.pos.finish
           else: doc.blocks.len - 1
         
         content &= "<section>\n"
-        for i in vertical.start .. upper:
+        for i in vertical.pos.start .. upper:
           content &= doc.blocks[i].renderHtmlBlock
         content &= "</section>\n"
       content &= "</section>\n"
