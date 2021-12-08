@@ -36,10 +36,37 @@ const document = """
 """
 
 type
+  FragmentAnimation* = enum
+    fadeIn = "" # the default
+    fadeOut = "fade-out"
+    fadeUp = "fade-up"
+    fadeDown = "fade-down"
+    fadeLeft = "fade-left"
+    fadeRight = "fade-right"
+    fadeInThenOut = "fade-in-then-out"
+    fadeInThenSemiOut = "fade-in-then-semi-out"
+    grow = "grow"
+    semiFadeOut = "semi-fade-out"
+    shrink = "shrink"
+    strike = "strike"
+    highlightRed = "highlight-red"
+    highlightGreen = "highlight-green"
+    highlightBlue = "highlight-blue"
+    highlightCurrentRed = "highlight-current-red"
+    highlightCurrentGreen = "highlight-current-green"
+    highlightCurrentBlue = "highlight-current-blue"
+  Fragment* = ref object
+    pos*: tuple[start: int, finish: int]
+    animation*: FragmentAnimation
+  Slide* = ref object
+    pos*: tuple[start: int, finish: int]
+    fragments*: seq[Fragment]
+    notes*: seq[string]
   SlidesCtx* = ref object
     sections*: seq[seq[tuple[start: int, finish: int]]]
   SlidesTheme* = enum
     Black, Beige, Blood, League, Moon, Night, Serif, Simple, Sky, Solarized, White
+
 template initReveal*() =
   ## Call this after nbInit
   var slidesCtx {.inject.} = SlidesCtx(sections: @[@[(start: 0, finish: -1)]])
@@ -62,6 +89,13 @@ template initReveal*() =
     slideDown()
     body
 
+  template fragment(animations: varargs[FragmentAnimation], body: untyped) =
+    discard
+
+  template fragment(body: untyped) =
+    fragment(fadeIn):
+      body
+
   template removeCodeOutput =
     if nb.blocks.len > 0:
       var blk = nb.blocks[^1]
@@ -70,6 +104,9 @@ template initReveal*() =
 
   template setSlidesTheme(theme: SlidesTheme) =
     nb.context["slidesTheme"] = ($theme).toLower
+
+  proc renderSlide(slide: Slide): string =
+    discard
 
   proc renderReveal*(doc: NbDoc): string =
     var content: string
