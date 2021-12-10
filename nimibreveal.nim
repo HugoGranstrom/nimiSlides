@@ -1,4 +1,4 @@
-import std/[strutils]
+import std/[strutils, sequtils]
 import nimib
 import nimib/renders
 
@@ -55,12 +55,8 @@ type
     highlightCurrentRed = "highlight-current-red"
     highlightCurrentGreen = "highlight-current-green"
     highlightCurrentBlue = "highlight-current-blue"
-  Fragment* = ref object
-    pos*: tuple[start: int, finish: int]
-    animations*: seq[FragmentAnimation]
   Slide* = ref object
     pos*: tuple[start: int, finish: int]
-    fragments*: seq[Fragment]
     notes*: seq[string]
   SlidesCtx* = ref object
     sections*: seq[seq[Slide]]
@@ -89,12 +85,24 @@ template initReveal*() =
     slideDown()
     body
 
-  template fragment(animation: varargs[FragmentAnimation] = @[fadeIn], body: untyped): untyped =
-    var currentSlide = slidesCtx.sections[^1][^1]
-    var fragment = Fragment(pos: (start: nb.blocks.len, finish: -1), animations: @animation)
-    currentSlide.fragments.add fragment
+  template fragment(animations: varargs[seq[FragmentAnimation]] = @[@[fadeIn]], body: untyped): untyped =
+    ## Creates a fragment of the content of body. Nesting works.
+    ## animations: each seq of the varargs are animations that are to be applied at the same time. The first seq's animations
+    ##             are applied on the first button click, and the second seq's animations on the second click etc.
+    ## Example: 
+    ## `fragment(@[fadeIn, highlightBlue], @[shrink, semiFadeOut]): block` will at the first click of a button fadeIn and highlightBlue
+    ## the content of the block. At the second click the same content will shrink and semiFadeOut. This code is also equivilent with
+    ## `fragment(@[fadeIn, highlightBlue]): fragment(@[shrink, semiFadeOut]): block`.
+    for level in animations: # level are the animations to be applied simulataniously to a fragment
+      let classStr = join(level, " ")
+      nbText: "<div class=\"fragment " & classStr & "\">"
     body
-    fragment.pos.finish = nb.blocks.high
+    nbText: "</div>".repeat(@animations.len) # add a closing tag for every level
+
+  template fragment(animation: FragmentAnimation, body: untyped) =
+    ## fragment(animation) is shorthand for fragment(@[animation])
+    fragment(@[animation]):
+      body
 
   template removeCodeOutput =
     if nb.blocks.len > 0:
