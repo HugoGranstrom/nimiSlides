@@ -37,7 +37,7 @@ const document = """
 
 type
   FragmentAnimation* = enum
-    fadeIn = "" # the default
+    fadeIn = "fade-in" # the default
     fadeOut = "fade-out"
     fadeUp = "fade-up"
     fadeDown = "fade-down"
@@ -102,6 +102,10 @@ template initReveal*() =
   template fragment(animation: FragmentAnimation, body: untyped) =
     ## fragment(animation) is shorthand for fragment(@[animation])
     fragment(@[animation]):
+      body
+
+  template fragmentFadeIn(animation: FragmentAnimation, body: untyped) =
+    fragment(@[fadeIn], @[animation]):
       body
 
   template removeCodeOutput =
