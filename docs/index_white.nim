@@ -18,6 +18,7 @@ nbText: "## Hello World Example"
 nbCode:
   echo "Hello World"
 
+
 # And then we add one below the previous one, etc
 slideDown()
 nbText: "Hello Down here"
@@ -25,6 +26,21 @@ nbText: "Hello Down here"
 slideDown()
 nbText: "## A classic"
 nbText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+slideRight:
+  nbText: "## Fragments (animations)"
+  fragment:
+    nbText: "fadeIn"
+  fragment(fadeInThenOut):
+    nbText: "fadeInTheOut"
+  fragment(@[highlightGreen]):
+    nbText: "highlightGreen"
+  fragment(strike):
+    nbText: "strike"
+  fragment(@[fadeIn], @[grow], @[shrink], @[semiFadeOut]):
+    nbText: "fadeIn > grow > shrink > semiFadeOut"
+  fragment(fadeDown):
+    nbCode: echo "Works on code as well!"
 
 slideRight()
 nbText: "# Code example"
