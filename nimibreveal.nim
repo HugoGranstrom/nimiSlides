@@ -85,6 +85,23 @@ template initReveal*() =
     slideDown()
     body
 
+  template fragmentCore(animations: openArray[seq[FragmentAnimation]] = @[@[fadeIn]], endAnimations: seq[seq[FragmentAnimation]] = @[], body: untyped) =
+    ## Creates a fragment of the content of body. Nesting works.
+    ## animations: each seq in animations are animations that are to be applied at the same time. The first seq's animations
+    ##             are applied on the first button click, and the second seq's animations on the second click etc.
+    ## endAnimations: animations that should be applied AT THE END of block. 
+    ## Example: 
+    ## `fragment(@[@[fadeIn, highlightBlue], @[shrink, semiFadeOut]]): block` will at the first click of a button fadeIn and highlightBlue
+    ## the content of the block. At the second click the same content will shrink and semiFadeOut. This code is also equivilent with
+    ## `fragment(@[@[fadeIn, highlightBlue]]): fragment(@[@[shrink, semiFadeOut]]): block`.
+    ## `fragment(@[@[fadeIn]], @[@[fadeOut]]): block` will first fadeIn the entire block and perform eventual animations in nested fragments. Once
+    ## all of those are finished, it will run fadeOut on the entire block and its subfragments.
+    for level in animations: # level are the animations to be applied simulataniously to a fragment
+      let classStr = join(level, " ")
+      nbText: "<div class=\"fragment " & classStr & "\">"
+    body
+    nbText: "</div>".repeat(animations.len) # add a closing tag for every level
+
   template fragment(animations: varargs[seq[FragmentAnimation]] = @[@[fadeIn]], body: untyped): untyped =
     ## Creates a fragment of the content of body. Nesting works.
     ## animations: each seq of the varargs are animations that are to be applied at the same time. The first seq's animations
@@ -93,20 +110,20 @@ template initReveal*() =
     ## `fragment(@[fadeIn, highlightBlue], @[shrink, semiFadeOut]): block` will at the first click of a button fadeIn and highlightBlue
     ## the content of the block. At the second click the same content will shrink and semiFadeOut. This code is also equivilent with
     ## `fragment(@[fadeIn, highlightBlue]): fragment(@[shrink, semiFadeOut]): block`.
-    for level in animations: # level are the animations to be applied simulataniously to a fragment
-      let classStr = join(level, " ")
-      nbText: "<div class=\"fragment " & classStr & "\">"
-    body
-    nbText: "</div>".repeat(@animations.len) # add a closing tag for every level
+    fragmentCore(@animations):
+      body
 
   template fragment(animation: FragmentAnimation, body: untyped) =
     ## fragment(animation) is shorthand for fragment(@[animation])
-    fragment(@[animation]):
+    fragmentCore(@[@[animation]]):
       body
 
   template fragmentFadeIn(animation: FragmentAnimation, body: untyped) =
-    fragment(@[fadeIn], @[animation]):
+    fragmentCore(@[@[fadeIn], @[animation]]):
       body
+
+  template fragmentFadeOut(animation: FragmentAnimation, body: untyped) =
+    fragmentCore(@[@[animation]], endAnimation = @[fadeOut])
 
   template removeCodeOutput =
     if nb.blocks.len > 0:
