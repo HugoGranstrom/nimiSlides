@@ -34,6 +34,17 @@ slideDown:
     nbText: "Now the entire second part is shown"
     nbCode: echo "This code was shown without any animations :("
 
+slideDown:
+  nbText: "### Ending animations"
+  fragmentEnd(semiFadeOut):
+    fragment:
+      nbText: "This is first part"
+      fragment(fadeUp):
+        nbCode: echo "This is faded up!"
+    fragment:
+      nbText: "This is second part!"
+      nbCode: echo "When all this has been shown, semiFadeOut!"
+
 slideRight:
   let codeAnimations = [@[fadeIn], @[grow], @[shrink, semiFadeOut]] # you can save animations for easy reuse
   nbText: "### Let's make some animations to showcase code blocks one after another:"

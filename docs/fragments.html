@@ -17,60 +17,79 @@
 <section>
 <section>
 <h3>The basic animation is <code>fadeIn</code>:</h3>
-<div class="fragment fade-in">
+<div class="fragment fade-in" data-fragment-index="0">
 <p>Fade in!</p>
 </div>
-<div class="fragment fade-in-then-out">
+<div class="fragment fade-in-then-out" data-fragment-index="1">
 <p>Fade in, then out!</p>
 </div>
-<div class="fragment fade-in">
-<div class="fragment highlight-blue">
+<div class="fragment fade-in" data-fragment-index="2">
+<div class="fragment highlight-blue" data-fragment-index="3">
 <p>Fade in, then highlight text in blue!</p>
 </div></div>
-<div class="fragment fade-in">
-<div class="fragment highlight-blue">
+<div class="fragment fade-in" data-fragment-index="4">
+<div class="fragment highlight-blue" data-fragment-index="5">
 <p>Fade in, then highligt text in blue! (again but this time using <code>fragmentFadeIn</code>)</p>
 </div></div>
-<div class="fragment fade-in">
-<div class="fragment highlight-blue shrink">
+<div class="fragment fade-in" data-fragment-index="6">
+<div class="fragment highlight-blue shrink" data-fragment-index="7">
 <p>And now the same but a shrink at the same time as the highlighting!!</p>
 </div></div>
 </section>
 <section>
 <h3>Nesting of fragments</h3>
-<div class="fragment fade-in">
+<div class="fragment fade-in" data-fragment-index="8">
 <p>This is the first part</p>
-<div class="fragment fade-up">
+<div class="fragment fade-up" data-fragment-index="9">
 <pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;This code faded up&quot;</span></code></pre>
 <pre style="width: 100%;"><samp class="hljs">This code faded up
 </samp></pre>
 </div>
 </div>
-<div class="fragment fade-in">
+<div class="fragment fade-in" data-fragment-index="10">
 <p>Now the entire second part is shown</p>
 <pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;This code was shown without any animations :(&quot;</span></code></pre>
 <pre style="width: 100%;"><samp class="hljs">This code was shown without any animations :(
 </samp></pre>
 </div>
 </section>
+<section>
+<h3>Ending animations</h3>
+<div class="fragment semi-fade-out" data-fragment-index="14">
+<div class="fragment fade-in" data-fragment-index="11">
+<p>This is first part</p>
+<div class="fragment fade-up" data-fragment-index="12">
+<pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;This is faded up!&quot;</span></code></pre>
+<pre style="width: 100%;"><samp class="hljs">This is faded up!
+</samp></pre>
+</div>
+</div>
+<div class="fragment fade-in" data-fragment-index="13">
+<p>This is second part!</p>
+<pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;When all this has been shown, semiFadeOut!&quot;</span></code></pre>
+<pre style="width: 100%;"><samp class="hljs">When all this has been shown, semiFadeOut!
+</samp></pre>
+</div>
+</div>
+</section>
 </section>
 <section>
 <section>
 <h3>Let's make some animations to showcase code blocks one after another:</h3>
-<div class="fragment fade-in">
-<div class="fragment grow">
-<div class="fragment shrink semi-fade-out">
+<div class="fragment fade-in" data-fragment-index="15">
+<div class="fragment grow" data-fragment-index="16">
+<div class="fragment shrink semi-fade-out" data-fragment-index="17">
 <pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">let</span> s = <span class="hljs-string">&quot;&quot;&quot;This code block will fadeIn,
               grow and then shrink and semiFadeOut!&quot;&quot;&quot;</span></code></pre>
 </div></div></div>
-<div class="fragment fade-in">
-<div class="fragment grow">
-<div class="fragment shrink semi-fade-out">
+<div class="fragment fade-in" data-fragment-index="18">
+<div class="fragment grow" data-fragment-index="19">
+<div class="fragment shrink semi-fade-out" data-fragment-index="20">
 <pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">let</span> t = <span class="hljs-string">&quot;This code block will behave the same!&quot;</span></code></pre>
 </div></div></div>
-<div class="fragment fade-in">
-<div class="fragment grow">
-<div class="fragment shrink semi-fade-out">
+<div class="fragment fade-in" data-fragment-index="21">
+<div class="fragment grow" data-fragment-index="22">
+<div class="fragment shrink semi-fade-out" data-fragment-index="23">
 <pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">proc</span> hello(world: <span class="hljs-built_in">string</span>) =
   <span class="hljs-keyword">echo</span> world
 <span class="hljs-keyword">let</span> r = <span class="hljs-string">&quot;This too!&quot;</span>
@@ -83,22 +102,22 @@ hello(r)</code></pre>
 <section>
 <section>
 <p>Let's pass the green down the line!</p>
-<div class="fragment highlight-current-green">
+<div class="fragment highlight-current-green" data-fragment-index="24">
 <p>0</p>
 </div>
-<div class="fragment highlight-current-green">
+<div class="fragment highlight-current-green" data-fragment-index="25">
 <p>1</p>
 </div>
-<div class="fragment highlight-current-green">
+<div class="fragment highlight-current-green" data-fragment-index="26">
 <p>2</p>
 </div>
-<div class="fragment highlight-current-green">
+<div class="fragment highlight-current-green" data-fragment-index="27">
 <p>3</p>
 </div>
-<div class="fragment highlight-current-green">
+<div class="fragment highlight-current-green" data-fragment-index="28">
 <p>4</p>
 </div>
-<div class="fragment highlight-current-green">
+<div class="fragment highlight-current-green" data-fragment-index="29">
 <p>5</p>
 </div>
 </section>

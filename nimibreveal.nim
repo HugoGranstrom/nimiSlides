@@ -63,6 +63,11 @@ type
   SlidesTheme* = enum
     Black, Beige, Blood, League, Moon, Night, Serif, Simple, Sky, Solarized, White
 
+################################
+# This is modified code from nimib.
+# We need to render code blocks using the context to populate the {{ endFragment-i }} fields.
+################################
+
 proc renderHtmlTextOutput*(output: string, doc: NbDoc): string =
   renderMarkdown(output.strip).render(doc.context)
 
@@ -84,6 +89,8 @@ proc renderHtmlBlock*(blk: NbBlock, doc: NbDoc): string =
 <figcaption>{caption}</figcaption>
 </figure>
 """ & "\n"
+###########################
+###########################
 
 template initReveal*() =
   ## Call this after nbInit
@@ -160,8 +167,13 @@ template initReveal*() =
     fragmentCore(@[@[fadeIn], @[animation]]):
       body
 
-  template fragmentFadeOut(animation: FragmentAnimation, body: untyped) =
-    fragmentCore(@[@[animation]], endAnimation = @[fadeOut])
+  template fragmentEnd(endAnimation: varargs[seq[FragmentAnimation]], body: untyped) =
+    fragmentCore(endAnimations = @endAnimation):
+      body
+
+  template fragmentEnd(endAnimation: FragmentAnimation, body: untyped) =
+    fragmentCore(endAnimations = @[@[endAnimation]]):
+      body
 
   template removeCodeOutput =
     if nb.blocks.len > 0:
@@ -191,8 +203,6 @@ template initReveal*() =
         # if vertical.finish == -1: it is the last slide, grab the rest of all blocks
         content &= doc.renderSlide(vertical)
       content &= "</section>\n"
-    echo content
-    echo "Example: ", doc.context["endFragment-0"] # must pass context to all render calls individually. Could we use partials instead?
     doc.context["slides"] = content
     # This is neccecary because it will show the <span> tag otherwise:
     result = "{{> document}}".render(doc.context).replace("<code class=\"nim hljs\">", "<code class=\"nim hljs\" data-noescape>")
