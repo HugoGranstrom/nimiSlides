@@ -1,4 +1,4 @@
-import std/[strutils, sequtils]
+import std/[strutils, sequtils, algorithm, strformat]
 import nimib
 import nimib/renders
 
@@ -63,9 +63,33 @@ type
   SlidesTheme* = enum
     Black, Beige, Blood, League, Moon, Night, Serif, Simple, Sky, Solarized, White
 
+proc renderHtmlTextOutput*(output: string, doc: NbDoc): string =
+  renderMarkdown(output.strip).render(doc.context)
+
+proc renderHtmlBlock*(blk: NbBlock, doc: NbDoc): string =
+  case blk.kind
+  of nbkText:
+    result = blk.output.renderHtmlTextOutput(doc)
+  of nbkCode:
+    result = blk.code.renderHtmlCodeBody
+    if blk.output != "":
+      result.add blk.output.renderHtmlCodeOutput
+  of nbkImage:
+    let
+      image_url = blk.code
+      caption = blk.output
+    result = fmt"""
+<figure>
+<img src="{image_url}" alt="{caption}">
+<figcaption>{caption}</figcaption>
+</figure>
+""" & "\n"
+
 template initReveal*() =
   ## Call this after nbInit
   var slidesCtx {.inject.} = SlidesCtx(sections: @[@[Slide(pos: (start: 0, finish: -1))]])
+  nb.context["currentFragment"] = 0
+  nb.context["currentEndFragment"] = 0
 
   template slideRight() =
     ## Add a slide to the right of the current one
@@ -85,7 +109,7 @@ template initReveal*() =
     slideDown()
     body
 
-  template fragmentCore(animations: openArray[seq[FragmentAnimation]] = @[@[fadeIn]], endAnimations: seq[seq[FragmentAnimation]] = @[], body: untyped) =
+  template fragmentCore(animations: openArray[seq[FragmentAnimation]] = @[], endAnimations: openArray[seq[FragmentAnimation]] = @[], body: untyped) =
     ## Creates a fragment of the content of body. Nesting works.
     ## animations: each seq in animations are animations that are to be applied at the same time. The first seq's animations
     ##             are applied on the first button click, and the second seq's animations on the second click etc.
@@ -96,11 +120,25 @@ template initReveal*() =
     ## `fragment(@[@[fadeIn, highlightBlue]]): fragment(@[@[shrink, semiFadeOut]]): block`.
     ## `fragment(@[@[fadeIn]], @[@[fadeOut]]): block` will first fadeIn the entire block and perform eventual animations in nested fragments. Once
     ## all of those are finished, it will run fadeOut on the entire block and its subfragments.
+    var endIds: seq[string]
     for level in animations: # level are the animations to be applied simulataniously to a fragment
       let classStr = join(level, " ")
-      nbText: "<div class=\"fragment " & classStr & "\">"
+      let dataIndexStr = "data-fragment-index=\"" & $(nb.context["currentFragment"].vInt) & "\""
+      nbText: "<div class=\"fragment " & classStr & "\" " & dataIndexStr & ">"
+      nb.context["currentFragment"] = nb.context["currentFragment"].vInt + 1
+    for level in endAnimations:
+      let classStr = join(level, " ")
+      let id = "endFragment-" & $(nb.context["currentEndFragment"].vInt)
+      let dataIndexStr = "data-fragment-index=\"" & "{{ " & id & " }}" & "\""
+      nbText: "<div class=\"fragment " & classStr & "\" " & dataIndexStr & ">"
+      nb.context["currentEndFragment"] = nb.context["currentEndFragment"].vInt + 1
+      endIds.add id
     body
-    nbText: "</div>".repeat(animations.len) # add a closing tag for every level
+    for id in endIds:
+      # Add the end indices after the block:
+      nb.context[id] = $(nb.context["currentFragment"].vInt)
+      nb.context["currentFragment"] = nb.context["currentFragment"].vInt + 1
+    nbText: "</div>".repeat(animations.len + endAnimations.len) # add a closing tag for every level
 
   template fragment(animations: varargs[seq[FragmentAnimation]] = @[@[fadeIn]], body: untyped): untyped =
     ## Creates a fragment of the content of body. Nesting works.
@@ -141,7 +179,7 @@ template initReveal*() =
     
     result = "<section>\n"
     for i in slide.pos.start .. upper:
-      result &= doc.blocks[i].renderHtmlBlock
+      result &= doc.blocks[i].renderHtmlBlock(doc)
     result &= "</section>\n"
 
   proc renderReveal*(doc: NbDoc): string =
@@ -153,7 +191,8 @@ template initReveal*() =
         # if vertical.finish == -1: it is the last slide, grab the rest of all blocks
         content &= doc.renderSlide(vertical)
       content &= "</section>\n"
-
+    echo content
+    echo "Example: ", doc.context["endFragment-0"] # must pass context to all render calls individually. Could we use partials instead?
     doc.context["slides"] = content
     # This is neccecary because it will show the <span> tag otherwise:
     result = "{{> document}}".render(doc.context).replace("<code class=\"nim hljs\">", "<code class=\"nim hljs\" data-noescape>")
