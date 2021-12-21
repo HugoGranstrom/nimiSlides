@@ -36,7 +36,8 @@ slideDown:
 
 slideDown:
   nbText: "### Ending animations"
-  fragmentEnd(semiFadeOut):
+  fragmentEnd(semiFadeOut): # When all code of the block has been run, everything in it will semiFadeOut. 
+    # fragment(semiFadeOut) would instead semiFadeOut everything before the code in the block has even been shown.
     fragment:
       nbText: "This is first part"
       fragment(fadeUp):
