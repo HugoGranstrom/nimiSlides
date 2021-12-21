@@ -175,6 +175,16 @@ template initReveal*() =
     fragmentCore(endAnimations = @[@[endAnimation]]):
       body
 
+  template animateCode(lines: varargs[HSlice], body: untyped) =
+    ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
+    ## lines: Specify which lines to highlight and in which order. (Must be specified as a HSlice)
+    ## Ex: 
+    ## ```nim
+    ## animateCode(1..1, 2..3, 5..5, 4..4): body
+    ## ```
+    ## This will first highlight line 1, then lines 2 and 3, then line 5 and last line 4.
+    discard
+
   template removeCodeOutput =
     if nb.blocks.len > 0:
       var blk = nb.blocks[^1]
