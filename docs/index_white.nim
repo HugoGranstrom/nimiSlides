@@ -83,6 +83,11 @@ $$ e^{\pi i} = -1 $$
   """
 
 slideRight:
+  bigText: "This is big!"
+  bigText: "This is also big!"
+  nbText: "This is normal text!"
+
+slideRight:
   nbText: """
 And a final **reveal**: These slides were created just using Nim!
   """

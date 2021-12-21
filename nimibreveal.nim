@@ -185,6 +185,9 @@ template initReveal*() =
     ## This will first highlight line 1, then lines 2 and 3, then line 5 and last line 4.
     discard
 
+  template bigText(text: string) =
+    nbText: "<h2 class=\"r-fit-text\">" & text & "</h2>"
+
   template removeCodeOutput =
     if nb.blocks.len > 0:
       var blk = nb.blocks[^1]

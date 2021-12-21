@@ -99,6 +99,11 @@ fragmentFadeIn(highlightBlue): # same as fragment(@[fadeIn], @[highlightBlue])
 - highlightCurrentGreen
 - highlightCurrentBlue
 
+## Big Text
+If you have a short snippet of text you want to show as big as possible, use `bigText` instead of `nbText`:
+```nim
+bigText: "This is a big text!"
+```
 
 ## Hiding code output
 If you want to not show the output of a code block, you can call `removeCodeOutput` right after your `nbCode` call like this:
@@ -134,5 +139,5 @@ The same site as above can be view with `White` theme here: https://hugogranstro
   - [ ] Highlight lines
 - [ ] Presenter mode note (https://revealjs.com/speaker-view/)
 - [ ] Auto-slide (https://revealjs.com/auto-slide/)
-- [ ] Fit text (https://revealjs.com/layout/#fit-text)
+- [x] Fit text (https://revealjs.com/layout/#fit-text)
 - [ ] Backgrounds
