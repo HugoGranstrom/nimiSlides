@@ -8,7 +8,7 @@ nb.useLatex
 
 # The first slide is created by default, no need to add it.
 nbText: """
-## Welcome to [nimib-reveal](https://github.com/HugoGranstrom/nimib-reveal)!
+## Welcome to [nimiSlides](https://github.com/HugoGranstrom/nimib-reveal)!
 These slides will show you what this theme is capable of ⛄
 """
 
