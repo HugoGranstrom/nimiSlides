@@ -1,5 +1,5 @@
 import nimib
-import nimibreveal
+import nimiSlides
 
 nbInit(theme = revealTheme)
 initReveal() # init the slide and introduce templates and variables

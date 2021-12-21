@@ -1,4 +1,4 @@
-# nimib-reveal
+# nimiSlides 🛷
 
 A Reveal.js theme for nimib.
 
@@ -118,7 +118,7 @@ removeCodeOutput() # now the usual block showing "Hello world! Just kidding, you
 There are some default themes for Reveal.js available using `setSlidesTheme`:
 ```nim
 import nimib
-import nimibreveal
+import nimiSlides
 
 nbInit(theme = revealTheme)
 initReveal() # init the slide and introduce templates and variables
