@@ -14,7 +14,9 @@ const document = """
   <body>
     <div class="reveal">
       <div class="slides">
-        {{{ slides }}}
+        {{#blocks}}
+        {{&.}}
+        {{/blocks}}
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/reveal.js" integrity="sha512-+Dy2HJZ3Z1DWerDhqFE7AH2HTfnbq8RC1pKOashfMwx1s01fjPUebWoHqrRedU1yFimkexmzJJRilKxjs7lz8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -69,7 +71,7 @@ type
 # We need to render code blocks using the context to populate the {{ endFragment-i }} fields.
 ################################
 
-proc renderHtmlTextOutput*(output: string, doc: NbDoc): string =
+#[ proc renderHtmlTextOutput*(output: string, doc: NbDoc): string =
   renderMarkdown(output.strip).render(doc.context)
 
 proc renderHtmlBlock*(blk: NbBlock, doc: NbDoc): string =
@@ -89,7 +91,7 @@ proc renderHtmlBlock*(blk: NbBlock, doc: NbDoc): string =
 <img src="{image_url}" alt="{caption}">
 <figcaption>{caption}</figcaption>
 </figure>
-""" & "\n"
+""" & "\n" ]#
 ###########################
 ###########################
 
@@ -99,7 +101,7 @@ template initReveal*() =
   nb.context["currentFragment"] = 0
   nb.context["currentEndFragment"] = 0
 
-  template slideRight() =
+#[   template slideRight() =
     ## Add a slide to the right of the current one
     slidesCtx.sections[^1][^1].pos.finish = nb.blocks.len - 1
     slidesCtx.sections.add @[Slide(pos: (start: nb.blocks.len, finish: -1))]
@@ -107,15 +109,17 @@ template initReveal*() =
   template slideDown() =
     ## Add a slide below the current one
     slidesCtx.sections[^1][^1].pos.finish = nb.blocks.len - 1
-    slidesCtx.sections[^1].add (Slide(pos: (start: nb.blocks.len, finish: -1)))
+    slidesCtx.sections[^1].add (Slide(pos: (start: nb.blocks.len, finish: -1))) ]#
 
   template slideRight(body: untyped) =
-    slideRight()
+    nbText: "<section>"
     body
+    nbText: "</section>"
   
   template slideDown(body: untyped) =
-    slideDown()
+    nbText: "<section>"
     body
+    nbText: "</section>"
 
   template fragmentCore(animations: openArray[seq[FragmentAnimation]] = @[], endAnimations: openArray[seq[FragmentAnimation]] = @[], body: untyped) =
     ## Creates a fragment of the content of body. Nesting works.
@@ -145,6 +149,7 @@ template initReveal*() =
     for id in endIds:
       # Add the end indices after the block:
       nb.context[id] = $(nb.context["currentFragment"].vInt)
+      echo "\n\n\n\n\n" & id
       nb.context["currentFragment"] = nb.context["currentFragment"].vInt + 1
     nbText: "</div>".repeat(animations.len + endAnimations.len) # add a closing tag for every level
 
@@ -198,7 +203,7 @@ template initReveal*() =
   template setSlidesTheme(theme: SlidesTheme) =
     nb.context["slidesTheme"] = ($theme).toLower
 
-  proc renderSlide(doc: NbDoc, slide: Slide): string =
+#[   proc renderSlide(doc: NbDoc, slide: Slide): string =
     let upper = 
       if slide.pos.finish != -1: slide.pos.finish
       else: doc.blocks.len - 1
@@ -223,10 +228,12 @@ template initReveal*() =
     result = result.replace("<pre><samp", "<pre style=\"width: 100%;\"><samp class=\"hljs\"") # add some background to code output block
     result = result.replace("<pre>", "<pre style=\"width: 100%\">") # this makes code blocks a little bit wider
 
-  nb.render = renderReveal    
+  nb.render = renderReveal ]#    
 
 proc revealTheme*(doc: var NbDoc) =
   doc.partials["document"] = document
+  doc.partials["nbCodeSource"] = "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape>{{&codeHighlighted}}</code></pre>"
+  doc.partials["nbCodeOutput"] = "{{#output}}<pre style=\"width: 100%;\"><samp class=\"hljs\">{{output}}</samp></pre>{{/output}}"
   doc.context["slidesTheme"] = "black"
 
 
