@@ -113,7 +113,7 @@ proc renderHtmlBlock*(blk: NbBlock, doc: NbDoc): string =
 
 template initReveal*() =
   ## Call this after nbInit
-  var slidesCtx {.inject.} = SlidesCtx(sections: @[@[Slide(pos: (start: 0, finish: -1))]])
+  ##var slidesCtx {.inject.} = SlidesCtx(sections: @[@[Slide(pos: (start: 0, finish: -1))]])
   nb.context["currentFragment"] = 0
   nb.context["currentEndFragment"] = 0
 
@@ -136,6 +136,10 @@ template initReveal*() =
     nbText: "<section>"
     body
     nbText: "</section>"
+
+  template fragmentCore2(animations: openArray[seq[FragmentAnimation]] = @[], endAnimations: openArray[seq[FragmentAnimation]] = @[], body: untyped) =
+    newNbBlock("fragment", nb, nb.blk, body):
+      discard
 
   template fragmentCore(animations: openArray[seq[FragmentAnimation]] = @[], endAnimations: openArray[seq[FragmentAnimation]] = @[], body: untyped) =
     ## Creates a fragment of the content of body. Nesting works.
@@ -165,7 +169,7 @@ template initReveal*() =
     for id in endIds:
       # Add the end indices after the block:
       nb.context[id] = $(nb.context["currentFragment"].vInt)
-      echo "\n\n\n\n\n" & id
+      echo "\n\n\n\n\n" & id, " ", nb.context[id]
       nb.context["currentFragment"] = nb.context["currentFragment"].vInt + 1
     nbText: "</div>".repeat(animations.len + endAnimations.len) # add a closing tag for every level
 
@@ -197,7 +201,7 @@ template initReveal*() =
     fragmentCore(endAnimations = @[@[endAnimation]]):
       body
 
-  template animateCode(lines: varargs[HSlice], body: untyped) =
+  template animateCode(lines: varargs[HSlice[int, int]], body: untyped) =
     ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
     ## lines: Specify which lines to highlight and in which order. (Must be specified as a HSlice)
     ## Ex: 
@@ -205,7 +209,17 @@ template initReveal*() =
     ## animateCode(1..1, 2..3, 5..5, 4..4): body
     ## ```
     ## This will first highlight line 1, then lines 2 and 3, then line 5 and last line 4.
-    discard
+    newNbBlock("animateCode", nb, nb.blk, body):
+      var linesString: string
+      if lines.len > 0:
+        linesString &= "|"
+      for line in lines:
+        linesString &= $line.a & "-" & $line.b & "|"
+      if lines.len > 0:
+        linesString = linesString[0 .. ^2]
+      nb.blk.context["highlightLines"] = linesString
+      body
+
 
   template bigText(text: string) =
     nbText: "<h2 class=\"r-fit-text\">" & text & "</h2>"
@@ -218,6 +232,11 @@ template initReveal*() =
 
   template setSlidesTheme(theme: SlidesTheme) =
     nb.context["slidesTheme"] = ($theme).toLower
+
+  template useLocalReveal(path: string) =
+    discard
+    # set nb.partials["revealCSS/JS"]
+    # Should we set it relative to homeDir or srcDir?
 
 #[   proc renderSlide(doc: NbDoc, slide: Slide): string =
     let upper = 
@@ -254,8 +273,10 @@ proc revealTheme*(doc: var NbDoc) =
   doc.partials["nbCodeOutput"] = "{{#output}}<pre style=\"width: 100%;\"><samp class=\"hljs\">{{output}}</samp></pre>{{/output}}"
 
   doc.partials["revealCSS"] = revealCSS
-  
   doc.partials["revealJS"] = revealJS
+
+  doc.partials["animateCode"] = "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers=\"{{&highlightLines}}\">{{&codeHighlighted}}</code></pre>"
+  doc.renderPlans["animateCode"] = doc.renderPlans["nbCode"]
 
   doc.context["slidesTheme"] = "black"
 
