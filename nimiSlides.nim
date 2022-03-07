@@ -116,6 +116,7 @@ template initReveal*() =
   ##var slidesCtx {.inject.} = SlidesCtx(sections: @[@[Slide(pos: (start: 0, finish: -1))]])
   nb.context["currentFragment"] = 0
   nb.context["currentEndFragment"] = 0
+  var currentFragment, currentEndFragment: int
 
 #[   template slideRight() =
     ## Add a slide to the right of the current one
@@ -137,9 +138,35 @@ template initReveal*() =
     body
     nbText: "</section>"
 
+  template fragmentStartBlock(animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]]) =
+    discard
+
+  template fragmentEndBlock(endAnimations: openArray[seq[FragmentAnimation]], startBlock: NbBlock) =
+    # Modify startBlock's context
+    discard
+
   template fragmentCore2(animations: openArray[seq[FragmentAnimation]] = @[], endAnimations: openArray[seq[FragmentAnimation]] = @[], body: untyped) =
     newNbBlock("fragment", nb, nb.blk, body):
-      discard
+      var preFragments: seq[Table[string, string]]
+      var endFragments: seq[Table[string, string]]
+      for level in animations:
+        var frag: Table[string, string]
+        frag["classStr"] = join(level, " ") # eg. fade-in highlight-blue
+        frag["fragIndex"] = $currentFragment
+        currentFragment += 1
+        preFragments.add frag
+      for level in endAnimations:
+        var frag: Table[string, string]
+        frag["classStr"] = join(level, " ") # eg. fade-in highlight-blue
+        endFragments.add frag
+
+      body
+
+      # Fragments might be nested, so set fragIndex of endAnimations after the body has been run to get the correct indices
+      for frag in endFragments.mitems:
+        frag["fragIndex"] = $currentFragment
+        currentFragment += 1
+
 
   template fragmentCore(animations: openArray[seq[FragmentAnimation]] = @[], endAnimations: openArray[seq[FragmentAnimation]] = @[], body: untyped) =
     ## Creates a fragment of the content of body. Nesting works.
