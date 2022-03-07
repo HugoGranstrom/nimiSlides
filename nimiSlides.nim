@@ -218,7 +218,8 @@ template initReveal*() =
       if lines.len > 0:
         linesString = linesString[0 .. ^2]
       nb.blk.context["highlightLines"] = linesString
-      body
+      captureStdout(nb.blk.output):
+        body
 
 
   template bigText(text: string) =
@@ -227,8 +228,9 @@ template initReveal*() =
   template removeCodeOutput =
     if nb.blocks.len > 0:
       var blk = nb.blocks[^1]
-      if blk.kind == nbkCode:
+      if blk.command in ["nbCode", "animateCode"]:
         blk.output = ""
+        blk.context["output"] = ""
 
   template setSlidesTheme(theme: SlidesTheme) =
     nb.context["slidesTheme"] = ($theme).toLower
@@ -275,7 +277,7 @@ proc revealTheme*(doc: var NbDoc) =
   doc.partials["revealCSS"] = revealCSS
   doc.partials["revealJS"] = revealJS
 
-  doc.partials["animateCode"] = "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers=\"{{&highlightLines}}\">{{&codeHighlighted}}</code></pre>"
+  doc.partials["animateCode"] = "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers=\"{{&highlightLines}}\">{{&codeHighlighted}}</code></pre>\n" & doc.partials["nbCodeOutput"]
   doc.renderPlans["animateCode"] = doc.renderPlans["nbCode"]
 
   doc.context["slidesTheme"] = "black"

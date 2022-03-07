@@ -141,3 +141,4 @@ The same site as above can be view with `White` theme here: https://hugogranstro
 - [ ] Auto-slide (https://revealjs.com/auto-slide/)
 - [x] Fit text (https://revealjs.com/layout/#fit-text)
 - [ ] Backgrounds
+- [ ] Transitions (https://revealjs.com/transitions/)
