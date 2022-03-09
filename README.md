@@ -6,6 +6,7 @@ An example can be found in `docs/` folder and the generated slides can be seen h
 
 # Table of contents
 - [API](#api)
+  - [Animate Code](#animate-code)
   - [Fragments (animations)](#fragments-animations)
     - [End animations](#end-animations)
     - [List of fragments](#list-of-fragment-animations)
@@ -39,6 +40,18 @@ Start page → To the right → This is at the top
                             This is at the bottom          
 ```
 
+## Animate Code
+[Reveal.js supports highlighting lines of code](https://revealjs.com/code/#line-numbers-%26-highlights) and nimiSlides gives you convinient access to that feature using `animateCode`. It works like nimib's `nbCode` but accepts the lines and in which order they should be highlighted:
+```nim
+slide:
+  animateCode(1..1, 2..3, 5..5, 4..4):
+    echo "This is shown first"
+    echo "Then..."
+    echo "...these"
+    echo "This is shown last"
+    echo "This is shown before the line above it"
+```
+You pass in the lines as `HSlice`s in the order you want to highlight them and then the presentation will step through your code when you click forward.
 
 ## Fragments (animations)
 By default, the entire slide's content will be shown at once. But what if you want the header to be shown first and then the first paragraph and finally an image, how would you do that? That's where *fragments* come in! They allow you to divide your slide into multiple parts which are shown and animated after each other when you click forward in the animation. The best way to explain is probably with an example:
