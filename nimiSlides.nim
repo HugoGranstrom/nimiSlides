@@ -1,6 +1,6 @@
-import std/[strutils, sequtils, algorithm, strformat]
+import std/[strutils, strformat]
 import nimib
-import nimib/renders
+import nimib/capture
 
 const document = """
 <!DOCTYPE html>
@@ -74,59 +74,13 @@ type
     highlightCurrentRed = "highlight-current-red"
     highlightCurrentGreen = "highlight-current-green"
     highlightCurrentBlue = "highlight-current-blue"
-  Slide* = ref object
-    pos*: tuple[start: int, finish: int]
-    notes*: seq[string]
-  SlidesCtx* = ref object
-    sections*: seq[seq[Slide]]
+
   SlidesTheme* = enum
     Black, Beige, Blood, League, Moon, Night, Serif, Simple, Sky, Solarized, White
 
-################################
-# This is modified code from nimib.
-# We need to render code blocks using the context to populate the {{ endFragment-i }} fields.
-################################
-
-#[ proc renderHtmlTextOutput*(output: string, doc: NbDoc): string =
-  renderMarkdown(output.strip).render(doc.context)
-
-proc renderHtmlBlock*(blk: NbBlock, doc: NbDoc): string =
-  case blk.kind
-  of nbkText:
-    result = blk.output.renderHtmlTextOutput(doc)
-  of nbkCode:
-    result = blk.code.renderHtmlCodeBody
-    if blk.output != "":
-      result.add blk.output.renderHtmlCodeOutput
-  of nbkImage:
-    let
-      image_url = blk.code
-      caption = blk.output
-    result = fmt"""
-<figure>
-<img src="{image_url}" alt="{caption}">
-<figcaption>{caption}</figcaption>
-</figure>
-""" & "\n" ]#
-###########################
-###########################
-
 template initReveal*() =
   ## Call this after nbInit
-  ##var slidesCtx {.inject.} = SlidesCtx(sections: @[@[Slide(pos: (start: 0, finish: -1))]])
-  nb.context["currentFragment"] = 0
-  nb.context["currentEndFragment"] = 0
-  var currentFragment, currentEndFragment: int
-
-#[   template slideRight() =
-    ## Add a slide to the right of the current one
-    slidesCtx.sections[^1][^1].pos.finish = nb.blocks.len - 1
-    slidesCtx.sections.add @[Slide(pos: (start: nb.blocks.len, finish: -1))]
-
-  template slideDown() =
-    ## Add a slide below the current one
-    slidesCtx.sections[^1][^1].pos.finish = nb.blocks.len - 1
-    slidesCtx.sections[^1].add (Slide(pos: (start: nb.blocks.len, finish: -1))) ]#
+  var currentFragment: int
 
   template slideRight(autoAnimate = false, body: untyped) =
     if autoAnimate:
@@ -154,7 +108,6 @@ template initReveal*() =
         fragments.add frag
 
   template fragmentEndBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], startBlock: NbBlock) =
-    # Modify startBlock's context
     # Fragments might be nested, so set fragIndex of endAnimations after the body has been run to get the correct indices
     newNbBlock("fragmentEnd", nb, nb.blk, body):
       for level in endAnimations:
@@ -168,15 +121,6 @@ template initReveal*() =
     startBlock.context["fragments"] = fragments # set for start block
 
   template fragmentCore(animations: openArray[seq[FragmentAnimation]] = @[], endAnimations: openArray[seq[FragmentAnimation]] = @[], body: untyped) =
-      # could define seq[Table] here and pass to both calls and in fragmentEndBlock add all those to the context of fragmentStartBlock
-      var fragments: seq[Table[string, string]]
-      fragmentStartBlock(fragments, animations, endAnimations, body)
-      var startBlock = nb.blk # this *should* be the block created by fragmentStartBlock
-      body
-      fragmentEndBlock(fragments, animations, endAnimations, startBlock)
-
-
-  template fragmentCoreOld(animations: openArray[seq[FragmentAnimation]] = @[], endAnimations: openArray[seq[FragmentAnimation]] = @[], body: untyped) =
     ## Creates a fragment of the content of body. Nesting works.
     ## animations: each seq in animations are animations that are to be applied at the same time. The first seq's animations
     ##             are applied on the first button click, and the second seq's animations on the second click etc.
@@ -187,26 +131,11 @@ template initReveal*() =
     ## `fragment(@[@[fadeIn, highlightBlue]]): fragment(@[@[shrink, semiFadeOut]]): block`.
     ## `fragment(@[@[fadeIn]], @[@[fadeOut]]): block` will first fadeIn the entire block and perform eventual animations in nested fragments. Once
     ## all of those are finished, it will run fadeOut on the entire block and its subfragments.
-    var endIds: seq[string]
-    for level in animations: # level are the animations to be applied simulataniously to a fragment
-      let classStr = join(level, " ")
-      let dataIndexStr = "data-fragment-index=\"" & $(nb.context["currentFragment"].vInt) & "\""
-      nbText: "<div class=\"fragment " & classStr & "\" " & dataIndexStr & ">"
-      nb.context["currentFragment"] = nb.context["currentFragment"].vInt + 1
-    for level in endAnimations:
-      let classStr = join(level, " ")
-      let id = "endFragment-" & $(nb.context["currentEndFragment"].vInt)
-      let dataIndexStr = "data-fragment-index=\"" & "{{ " & id & " }}" & "\""
-      nbText: "<div class=\"fragment " & classStr & "\" " & dataIndexStr & ">"
-      nb.context["currentEndFragment"] = nb.context["currentEndFragment"].vInt + 1
-      endIds.add id
+    var fragments: seq[Table[string, string]]
+    fragmentStartBlock(fragments, animations, endAnimations, body)
+    var startBlock = nb.blk # this *should* be the block created by fragmentStartBlock
     body
-    for id in endIds:
-      # Add the end indices after the block:
-      nb.context[id] = $(nb.context["currentFragment"].vInt)
-      echo "\n\n\n\n\n" & id, " ", nb.context[id]
-      nb.context["currentFragment"] = nb.context["currentFragment"].vInt + 1
-    nbText: "</div>".repeat(animations.len + endAnimations.len) # add a closing tag for every level
+    fragmentEndBlock(fragments, animations, endAnimations, startBlock)
 
   template fragment(animations: varargs[seq[FragmentAnimation]] = @[@[fadeIn]], body: untyped): untyped =
     ## Creates a fragment of the content of body. Nesting works.
@@ -274,33 +203,6 @@ template initReveal*() =
     discard
     # set nb.partials["revealCSS/JS"]
     # Should we set it relative to homeDir or srcDir?
-
-#[   proc renderSlide(doc: NbDoc, slide: Slide): string =
-    let upper = 
-      if slide.pos.finish != -1: slide.pos.finish
-      else: doc.blocks.len - 1
-    
-    result = "<section>\n"
-    for i in slide.pos.start .. upper:
-      result &= doc.blocks[i].renderHtmlBlock(doc)
-    result &= "</section>\n"
-
-  proc renderReveal*(doc: NbDoc): string =
-    var content: string
-    for horiz in slidesCtx.sections:
-      content &= "<section>\n" # this is the top level section
-      for vertical in horiz:
-        # vertical corresponds to a single slide with many blocks. Must loop over them all and call `renderHTMLBlock` 
-        # if vertical.finish == -1: it is the last slide, grab the rest of all blocks
-        content &= doc.renderSlide(vertical)
-      content &= "</section>\n"
-    doc.context["slides"] = content
-    # This is neccecary because it will show the <span> tag otherwise:
-    result = "{{> document}}".render(doc.context).replace("<code class=\"nim hljs\">", "<code class=\"nim hljs\" data-noescape>")
-    result = result.replace("<pre><samp", "<pre style=\"width: 100%;\"><samp class=\"hljs\"") # add some background to code output block
-    result = result.replace("<pre>", "<pre style=\"width: 100%\">") # this makes code blocks a little bit wider
-
-  nb.render = renderReveal ]#    
 
 proc revealTheme*(doc: var NbDoc) =
   doc.partials["document"] = document
