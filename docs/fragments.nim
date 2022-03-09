@@ -6,14 +6,14 @@ initReveal() # init the slide and introduce templates and variables
 setSlidesTheme(Moon)
 nb.useLatex
 
-slideRight:
+slide:
   nbText: md"""
   # Fragments
   This slideshow is a showcase of the fragments capabilities of nimiSlides. For the source code, look [here](https://github.com/HugoGranstrom/nimib-reveal/blob/main/docs/fragments.nim).
   """
 
-slideRight:
-  slideDown:
+slide:
+  slide:
     nbText: "### The basic animation is `fadeIn`:"
     fragment:
       nbText: "Fade in!"
@@ -26,7 +26,7 @@ slideRight:
     fragment(@[fadeIn], @[highlightBlue, shrink]):
       nbText: "And now the same but a shrink at the same time as the highlighting!!"
 
-  slideDown:
+  slide:
     nbText: "### Nesting of fragments"
     fragment:
       nbText: "This is the first part"
@@ -36,7 +36,7 @@ slideRight:
       nbText: "Now the entire second part is shown"
       nbCode: echo "This code was shown without any animations :("
 
-  slideDown:
+  slide:
     nbText: "### Ending animations"
     fragmentEnd(semiFadeOut): # When all code of the block has been run, everything in it will semiFadeOut. 
       # fragment(semiFadeOut) would instead semiFadeOut everything before the code in the block has even been shown.
@@ -48,7 +48,7 @@ slideRight:
         nbText: "This is second part!"
         nbCode: echo "When all this has been shown, semiFadeOut!"
 
-slideRight:
+slide:
   let codeAnimations = [@[fadeIn], @[grow], @[shrink, semiFadeOut]] # you can save animations for easy reuse
   nbText: "### Let's make some animations to showcase code blocks one after another:"
   fragment(codeAnimations):
@@ -65,7 +65,7 @@ slideRight:
       let r = "This too!"
       hello(r)
 
-slideRight:
+slide:
   nbText: "Let's pass the green down the line!"
   for i in 0 .. 5:
     fragment(highlightCurrentGreen):
