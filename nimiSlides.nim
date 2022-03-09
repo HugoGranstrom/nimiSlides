@@ -238,7 +238,7 @@ proc revealTheme*(doc: var NbDoc) =
 
   doc.partials["fragmentStart"] = """
 {{#fragments}}
-<div class="fragment {{classStr}}" data-fragment-index="{{fragIndex}}"> 
+<div class="fragment {{&classStr}}" data-fragment-index="{{&fragIndex}}"> 
 {{/fragments}}
   """
 
