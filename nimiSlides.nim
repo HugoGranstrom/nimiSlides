@@ -138,37 +138,39 @@ template initReveal*() =
     body
     nbText: "</section>"
 
-  template fragmentStartBlock(animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]]) =
-    discard
-
-  template fragmentEndBlock(endAnimations: openArray[seq[FragmentAnimation]], startBlock: NbBlock) =
-    # Modify startBlock's context
-    discard
-
-  template fragmentCore2(animations: openArray[seq[FragmentAnimation]] = @[], endAnimations: openArray[seq[FragmentAnimation]] = @[], body: untyped) =
-    newNbBlock("fragment", nb, nb.blk, body):
-      var preFragments: seq[Table[string, string]]
-      var endFragments: seq[Table[string, string]]
+  template fragmentStartBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], body: untyped) =
+    newNbBlock("fragmentStart", nb, nb.blk, body):
       for level in animations:
         var frag: Table[string, string]
         frag["classStr"] = join(level, " ") # eg. fade-in highlight-blue
         frag["fragIndex"] = $currentFragment
         currentFragment += 1
-        preFragments.add frag
+        fragments.add frag
+
+  template fragmentEndBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], startBlock: NbBlock) =
+    # Modify startBlock's context
+    # Fragments might be nested, so set fragIndex of endAnimations after the body has been run to get the correct indices
+    newNbBlock("fragmentEnd", nb, nb.blk, body):
       for level in endAnimations:
         var frag: Table[string, string]
         frag["classStr"] = join(level, " ") # eg. fade-in highlight-blue
-        endFragments.add frag
-
-      body
-
-      # Fragments might be nested, so set fragIndex of endAnimations after the body has been run to get the correct indices
-      for frag in endFragments.mitems:
         frag["fragIndex"] = $currentFragment
         currentFragment += 1
-
+        fragments.add frag
+    nb.blk.context["fragments"] = fragments # set for end block
+    assert nb.blk != startBlock
+    startBlock.context["fragments"] = fragments # set for start block
 
   template fragmentCore(animations: openArray[seq[FragmentAnimation]] = @[], endAnimations: openArray[seq[FragmentAnimation]] = @[], body: untyped) =
+      # could define seq[Table] here and pass to both calls and in fragmentEndBlock add all those to the context of fragmentStartBlock
+      var fragments: seq[Table[string, string]]
+      fragmentStartBlock(fragments, animations, endAnimations, body)
+      var startBlock = nb.blk # this *should* be the block created by fragmentStartBlock
+      body
+      fragmentEndBlock(fragments, animations, endAnimations, startBlock)
+
+
+  template fragmentCoreOld(animations: openArray[seq[FragmentAnimation]] = @[], endAnimations: openArray[seq[FragmentAnimation]] = @[], body: untyped) =
     ## Creates a fragment of the content of body. Nesting works.
     ## animations: each seq in animations are animations that are to be applied at the same time. The first seq's animations
     ##             are applied on the first button click, and the second seq's animations on the second click etc.
@@ -307,6 +309,17 @@ proc revealTheme*(doc: var NbDoc) =
   doc.partials["animateCode"] = "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers=\"{{&highlightLines}}\">{{&codeHighlighted}}</code></pre>\n" & doc.partials["nbCodeOutput"]
   doc.renderPlans["animateCode"] = doc.renderPlans["nbCode"]
 
+  doc.partials["fragmentStart"] = """
+{{#fragments}}
+<div class="fragment {{classStr}}" data-fragment-index="{{fragIndex}}"> 
+{{/fragments}}
+  """
+
+  doc.partials["fragmentEnd"] = """
+{{#fragments}}
+</div>
+{{/fragments}}
+  """
   doc.context["slidesTheme"] = "black"
 
 
