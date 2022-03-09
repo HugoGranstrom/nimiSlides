@@ -87,17 +87,16 @@ template initReveal*() =
       nbText: "<section data-auto-animate>"
     else:
       nbText: "<section>"
-    when declaredInScope(CountVar):
-      when CountVar < 1:
-        static: inc CountVar
-        static: echo CountVar
+    when declaredInScope(CountVarNimiSlide):
+      when CountVarNimiSlide < 1:
+        static: inc CountVarNimiSlide
         body
-        static: dec CountVar
+        static: dec CountVarNimiSlide
       else:
         {.error: "You can only nest slides once!".}
     else:
       block:
-        var CountVar {.inject, compileTime.} = 0
+        var CountVarNimiSlide {.inject, compileTime.} = 0
         body
     nbText: "</section>"
 
