@@ -128,13 +128,19 @@ template initReveal*() =
     slidesCtx.sections[^1][^1].pos.finish = nb.blocks.len - 1
     slidesCtx.sections[^1].add (Slide(pos: (start: nb.blocks.len, finish: -1))) ]#
 
-  template slideRight(body: untyped) =
-    nbText: "<section>"
+  template slideRight(autoAnimate = false, body: untyped) =
+    if autoAnimate:
+      nbText: "<section data-auto-animate>"
+    else:
+      nbText: "<section>"
     body
     nbText: "</section>"
   
-  template slideDown(body: untyped) =
-    nbText: "<section>"
+  template slideDown(autoAnimate = false, body: untyped) =
+    if autoAnimate:
+      nbText: "<section data-auto-animate>"
+    else:
+      nbText: "<section>"
     body
     nbText: "</section>"
 
