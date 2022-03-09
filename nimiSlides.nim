@@ -82,6 +82,25 @@ template initReveal*() =
   ## Call this after nbInit
   var currentFragment: int
 
+  template slide(autoAnimate = false, body: untyped): untyped =
+    if autoAnimate:
+      nbText: "<section data-auto-animate>"
+    else:
+      nbText: "<section>"
+    when declaredInScope(CountVar):
+      when CountVar < 1:
+        static: inc CountVar
+        static: echo CountVar
+        body
+        static: dec CountVar
+      else:
+        {.error: "You can only nest slides once!".}
+    else:
+      block:
+        var CountVar {.inject, compileTime.} = 0
+        body
+    nbText: "</section>"
+
   template slideRight(autoAnimate = false, body: untyped) =
     if autoAnimate:
       nbText: "<section data-auto-animate>"
