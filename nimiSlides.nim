@@ -2,6 +2,9 @@ import std/[strutils, strformat]
 import nimib
 import nimib/capture
 
+when (NimMajor, NimMinor, NimPatch) > (1, 6, 0):
+  {.experimental: "flexibleOptionalParams".}
+
 const document = """
 <!DOCTYPE html>
 <html>
@@ -82,23 +85,26 @@ template initReveal*() =
   ## Call this after nbInit
   var currentFragment: int
 
-  template slide(autoAnimate = false, body: untyped): untyped =
+  template slide(autoAnimate: bool, body: untyped): untyped =
     if autoAnimate:
       nbText: "<section data-auto-animate>"
     else:
       nbText: "<section>"
     when declaredInScope(CountVarNimiSlide):
-      when CountVarNimiSlide < 1:
+      when CountVarNimiSlide < 2:
         static: inc CountVarNimiSlide
         body
         static: dec CountVarNimiSlide
       else:
         {.error: "You can only nest slides once!".}
     else:
-      block:
-        var CountVarNimiSlide {.inject, compileTime.} = 0
-        body
+      var CountVarNimiSlide {.inject, compileTime.} = 0
+      body
     nbText: "</section>"
+
+  template slide(body: untyped) =
+    slide(autoAnimate=false):
+      body
 
   template slideRight(autoAnimate = false, body: untyped) =
     if autoAnimate:
