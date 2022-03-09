@@ -25,6 +25,8 @@ slide:
       nbText: "Fade in, then highligt text in blue! (again but this time using `fragmentFadeIn`)"
     fragment(@[fadeIn], @[highlightBlue, shrink]):
       nbText: "And now the same but a shrink at the same time as the highlighting!!"
+    fragmentFadeIn(@[highlightCurrentGreen, grow], @[shrink]):
+      nbText: "Fade in, then highlight green and grow. Then shrink."
 
   slide:
     nbText: "### Nesting of fragments"
