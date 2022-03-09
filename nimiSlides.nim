@@ -2,9 +2,6 @@ import std/[strutils, strformat]
 import nimib
 import nimib/capture
 
-when (NimMajor, NimMinor, NimPatch) > (1, 6, 0):
-  {.experimental: "flexibleOptionalParams".}
-
 const document = """
 <!DOCTYPE html>
 <html>
@@ -84,6 +81,8 @@ type
 template initReveal*() =
   ## Call this after nbInit
   var currentFragment: int
+  when (NimMajor, NimMinor, NimPatch) > (1, 6, 0):
+    {.experimental: "flexibleOptionalParams".}
 
   template slide(autoAnimate: bool, body: untyped): untyped =
     if autoAnimate:
@@ -105,22 +104,6 @@ template initReveal*() =
   template slide(body: untyped) =
     slide(autoAnimate=false):
       body
-
-  template slideRight(autoAnimate = false, body: untyped) =
-    if autoAnimate:
-      nbText: "<section data-auto-animate>"
-    else:
-      nbText: "<section>"
-    body
-    nbText: "</section>"
-  
-  template slideDown(autoAnimate = false, body: untyped) =
-    if autoAnimate:
-      nbText: "<section data-auto-animate>"
-    else:
-      nbText: "<section>"
-    body
-    nbText: "</section>"
 
   template fragmentStartBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], body: untyped) =
     newNbBlock("fragmentStart", nb, nb.blk, body):
