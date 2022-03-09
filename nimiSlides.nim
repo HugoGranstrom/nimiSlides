@@ -1,4 +1,4 @@
-import std/[strutils, strformat]
+import std/[strutils, strformat, sequtils]
 import nimib
 import nimib/capture
 
@@ -162,6 +162,10 @@ template initReveal*() =
 
   template fragmentFadeIn(animation: FragmentAnimation, body: untyped) =
     fragmentCore(@[@[fadeIn], @[animation]]):
+      body
+
+  template fragmentFadeIn(animation: varargs[seq[FragmentAnimation]], body: untyped) =
+    fragmentCore(concat([@[@[fadeIn]], @animation])):
       body
 
   template fragmentEnd(endAnimation: varargs[seq[FragmentAnimation]], body: untyped) =
