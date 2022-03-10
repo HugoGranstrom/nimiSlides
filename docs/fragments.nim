@@ -2,7 +2,6 @@ import nimib
 import nimiSlides
 
 nbInit(theme = revealTheme)
-initReveal() # init the slide and introduce templates and variables
 setSlidesTheme(Moon)
 nb.useLatex
 

@@ -2,7 +2,6 @@ import nimib
 import nimiSlides
 
 nbInit(theme = revealTheme)
-initReveal() # init the slide and introduce templates and variables
 when defined(themeWhite):
   nb.filename = "./index_white.html"
   setSlidesTheme(White)

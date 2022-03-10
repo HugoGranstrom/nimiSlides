@@ -114,10 +114,6 @@ template useLocalReveal*(path: string) =
 template setSlidesTheme*(theme: SlidesTheme) =
   nb.context["slidesTheme"] = ($theme).toLower
 
-template initReveal*() =
-  ## Call this after nbInit
-  discard
-
 var currentFragment: int
 
 template rawBlock*(body: untyped) =
