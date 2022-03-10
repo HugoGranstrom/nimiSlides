@@ -219,6 +219,9 @@ template fragmentEnd*(endAnimation: FragmentAnimation, body: untyped) =
   fragmentCore(endAnimations = @[@[endAnimation]]):
     body
 
+proc toHSlice*(h: HSlice[int, int]): HSlice[int, int] = h
+proc toHSlice*(h: int): HSlice[int, int] = h .. h
+
 template animateCode*(lines: varargs[seq[HSlice[int, int]]], body: untyped) =
   ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
   ## lines: Specify which lines to highlight and in which order. (Must be specified as a seq[HSlice])
@@ -241,7 +244,7 @@ template animateCode*(lines: varargs[seq[HSlice[int, int]]], body: untyped) =
     captureStdout(nb.blk.output):
       body
 
-template animateCode*(lines: varargs[HSlice[int, int]], body: untyped) =
+template animateCode*(lines: varargs[HSlice[int, int], toHSlice], body: untyped) =
   ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
   ## lines: Specify which lines to highlight and in which order. (Must be specified as a HSlice)
   ## Ex: 
