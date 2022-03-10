@@ -3,7 +3,12 @@ import nimiSlides
 
 nbInit(theme = revealTheme)
 initReveal() # init the slide and introduce templates and variables
-setSlidesTheme(Black)
+when defined(themeWhite):
+  nb.filename = "./index_white.html"
+  setSlidesTheme(White)
+else:
+  setSlidesTheme(Black)
+
 nb.useLatex
 
 slide:
