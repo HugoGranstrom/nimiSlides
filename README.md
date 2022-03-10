@@ -60,7 +60,18 @@ slide:
     echo "This is shown last"
     echo "This is shown before the line above it"
 ```
-You pass in the lines as `HSlice`s in the order you want to highlight them and then the presentation will step through your code when you click forward.
+You pass in the lines as `HSlice`s in the order you want to highlight them and then the presentation will step through your code when you click forward. If you want to highlight lines that aren't beside each other at the same time (eg. line 4 and 6) you can't just create a range for that. Instead you can pass in `seq`s of ranges then:
+```nim
+slide:
+  animateCode(@[1..1], @[4..4, 6..6]):
+    echo "First this"
+    echo "not this"
+    echo "not this"
+    echo "Then this ..."
+    echo "not this"
+    echo "... and this"
+```
+Here line 1 will be highlighted first and then line 4 and 6 will be highlighted at the same time.
 
 ## Fragments (animations)
 By default, the entire slide's content will be shown at once. But what if you want the header to be shown first and then the first paragraph and finally an image, how would you do that? That's where *fragments* come in! They allow you to divide your slide into multiple parts which are shown and animated after each other when you click forward in the animation. The best way to explain is probably with an example:
@@ -175,7 +186,7 @@ The same site as above can be view with `White` theme here: https://hugogranstro
 - [ ] Make available code animations (https://revealjs.com/code/)
   - [ ] Line numbers
   - [x] Highlight lines
-  - [ ] Make overload for showing lines of code that aren't beside each other. (api: `animateCode(seq[HSlice[int, int]])`)
+  - [x] Make overload for showing lines of code that aren't beside each other. (api: `animateCode(seq[HSlice[int, int]])`)
 - [ ] Presenter mode note (https://revealjs.com/speaker-view/)
 - [ ] Auto-slide (https://revealjs.com/auto-slide/)
 - [x] Fit text (https://revealjs.com/layout/#fit-text)
