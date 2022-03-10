@@ -16,6 +16,15 @@ An example can be found in `docs/` folder and the generated slides can be seen h
 - [Roadmap](#roadmap-🗺)
 
 # API
+These lines are needed at the top of your nim files:
+```nim
+import nimib
+import nimiSlides
+
+nbInit(theme = revealTheme)
+initReveal()
+```
+
 Reveal.js has two directions which you can add slides in. To the right and down.
 By nesting slides you can make use of both directions. Right is the primary direction and down the secondary.
 Ex:
@@ -166,6 +175,7 @@ The same site as above can be view with `White` theme here: https://hugogranstro
 - [ ] Make available code animations (https://revealjs.com/code/)
   - [ ] Line numbers
   - [x] Highlight lines
+  - [ ] Make overload for showing lines of code that aren't beside each other. (api: `animateCode(seq[HSlice[int, int]])`)
 - [ ] Presenter mode note (https://revealjs.com/speaker-view/)
 - [ ] Auto-slide (https://revealjs.com/auto-slide/)
 - [x] Fit text (https://revealjs.com/layout/#fit-text)
