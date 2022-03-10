@@ -116,8 +116,7 @@ template setSlidesTheme*(theme: SlidesTheme) =
 
 template initReveal*() =
   ## Call this after nbInit
-  when (NimMajor, NimMinor, NimPatch) > (1, 6, 0):
-    {.experimental: "flexibleOptionalParams".}
+  discard
 
 var currentFragment: int
 
@@ -126,7 +125,7 @@ template rawBlock*(body: untyped) =
     nb.blk.output = block:
       body
 
-template slide*(autoAnimate: bool, body: untyped): untyped =
+template slide*(autoAnimate: untyped, body: untyped): untyped =
   if autoAnimate:
     rawBlock: "<section data-auto-animate>"
   else:
@@ -170,7 +169,7 @@ template fragmentEndBlock(fragments: seq[Table[string, string]], animations: ope
   assert nb.blk != startBlock
   startBlock.context["fragments"] = fragments # set for start block
 
-template fragmentCore*(animations: openArray[seq[FragmentAnimation]] = @[], endAnimations: openArray[seq[FragmentAnimation]] = @[], body: untyped) =
+template fragmentCore*(animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], body: untyped) =
   ## Creates a fragment of the content of body. Nesting works.
   ## animations: each seq in animations are animations that are to be applied at the same time. The first seq's animations
   ##             are applied on the first button click, and the second seq's animations on the second click etc.
@@ -195,28 +194,36 @@ template fragment*(animations: varargs[seq[FragmentAnimation]] = @[@[fadeIn]], b
   ## `fragment(@[fadeIn, highlightBlue], @[shrink, semiFadeOut]): block` will at the first click of a button fadeIn and highlightBlue
   ## the content of the block. At the second click the same content will shrink and semiFadeOut. This code is also equivilent with
   ## `fragment(@[fadeIn, highlightBlue]): fragment(@[shrink, semiFadeOut]): block`.
-  fragmentCore(@animations):
+  fragmentCore(@animations, newSeq[seq[FragmentAnimation]]()):
     body
 
 template fragment*(animation: FragmentAnimation, body: untyped) =
   ## fragment(animation) is shorthand for fragment(@[animation])
-  fragmentCore(@[@[animation]]):
+  fragment(@[@[animation]]):
+    body
+
+template fragment*(body: untyped) =
+  fragment(@[@[fadeIn]]):
     body
 
 template fragmentFadeIn*(animation: FragmentAnimation, body: untyped) =
-  fragmentCore(@[@[fadeIn], @[animation]]):
+  fragment(@[@[fadeIn], @[animation]]):
     body
 
 template fragmentFadeIn*(animation: varargs[seq[FragmentAnimation]], body: untyped) =
-  fragmentCore(concat([@[@[fadeIn]], @animation])):
+  fragment(concat([@[@[fadeIn]], @animation])):
+    body
+
+template fragmentFadeIn*(body: untyped) =
+  fragment(@[@[fadeIn]]):
     body
 
 template fragmentEnd*(endAnimation: varargs[seq[FragmentAnimation]], body: untyped) =
-  fragmentCore(endAnimations = @endAnimation):
+  fragmentCore(newSeq[seq[FragmentAnimation]](), @endAnimation):
     body
 
 template fragmentEnd*(endAnimation: FragmentAnimation, body: untyped) =
-  fragmentCore(endAnimations = @[@[endAnimation]]):
+  fragmentCore(newSeq[seq[FragmentAnimation]](), @[@[endAnimation]]):
     body
 
 proc toHSlice*(h: HSlice[int, int]): HSlice[int, int] = h
