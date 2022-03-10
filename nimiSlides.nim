@@ -84,11 +84,16 @@ template initReveal*() =
   when (NimMajor, NimMinor, NimPatch) > (1, 6, 0):
     {.experimental: "flexibleOptionalParams".}
 
+  template rawBlock(body: untyped) =
+    newNbBlock("rawBlock", nb, nb.blk, body):
+      nb.blk.output = block:
+        body
+
   template slide(autoAnimate: bool, body: untyped): untyped =
     if autoAnimate:
-      nbText: "<section data-auto-animate>"
+      rawBlock: "<section data-auto-animate>"
     else:
-      nbText: "<section>"
+      rawBlock: "<section>"
     when declaredInScope(CountVarNimiSlide):
       when CountVarNimiSlide < 2:
         static: inc CountVarNimiSlide
@@ -97,9 +102,10 @@ template initReveal*() =
       else:
         {.error: "You can only nest slides once!".}
     else:
-      var CountVarNimiSlide {.inject, compileTime.} = 0
+      var CountVarNimiSlide {.inject, compileTime.} = 1 # we just entered the first level
       body
-    nbText: "</section>"
+      static: dec CountVarNimiSlide
+    rawBlock: "</section>"
 
   template slide(body: untyped) =
     slide(autoAnimate=false):
@@ -198,7 +204,7 @@ template initReveal*() =
 
 
   template bigText(text: string) =
-    nbText: "<h2 class=\"r-fit-text\">" & text & "</h2>"
+    rawBlock: "<h2 class=\"r-fit-text\">" & text & "</h2>"
 
   template removeCodeOutput =
     if nb.blocks.len > 0:
@@ -224,6 +230,8 @@ proc revealTheme*(doc: var NbDoc) =
 
   doc.partials["revealCSS"] = revealCSS
   doc.partials["revealJS"] = revealJS
+
+  doc.partials["rawBlock"] = "{{&output}}"
 
   doc.partials["animateCode"] = "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers=\"{{&highlightLines}}\">{{&codeHighlighted}}</code></pre>\n" & doc.partials["nbCodeOutput"]
   doc.renderPlans["animateCode"] = doc.renderPlans["nbCode"]
