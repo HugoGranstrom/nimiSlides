@@ -22,7 +22,6 @@ import nimib
 import nimiSlides
 
 nbInit(theme = revealTheme)
-initReveal()
 ```
 
 Reveal.js has two directions which you can add slides in. To the right and down.
@@ -170,7 +169,6 @@ import nimib
 import nimiSlides
 
 nbInit(theme = revealTheme)
-initReveal() # init the slide and introduce templates and variables
 setSlidesTheme(White)
 ```
 Available themes are: `Black`, `Beige`, `Blood`, `League`, `Moon`, `Night`, `Serif`, `Simple`, `Sky`, `Solarized`, `White`.
