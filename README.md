@@ -154,12 +154,12 @@ bigText: "This is a big text!"
 ```
 
 ## Hiding code output
-If you want to not show the output of a code block, you can call `removeCodeOutput` right after your `nbCode` call like this:
+If you want to not show the output of a code block, you can call `nbClearOutput` right after your `nbCode` or `animateCode` call like this:
 ```nim
 nbCode:
   echo "Hello world! Just kidding, you can't see this!"
 
-removeCodeOutput() # now the usual block showing "Hello world! Just kidding, you can't see this!" won't be visible and you save some space in your slide.
+nbClearOutput() # now the usual block showing "Hello world! Just kidding, you can't see this!" won't be visible and you save some space in your slide.
 ```
 
 ## Themes

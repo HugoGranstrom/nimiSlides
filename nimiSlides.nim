@@ -88,8 +88,6 @@ proc revealTheme*(doc: var NbDoc) =
   doc.partials["revealCSS"] = revealCSS
   doc.partials["revealJS"] = revealJS
 
-  doc.partials["rawBlock"] = "{{&output}}"
-
   doc.partials["animateCode"] = "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers=\"{{&highlightLines}}\">{{&codeHighlighted}}</code></pre>\n" & doc.partials["nbCodeOutput"]
   doc.renderPlans["animateCode"] = doc.renderPlans["nbCode"]
 
@@ -116,16 +114,11 @@ template setSlidesTheme*(theme: SlidesTheme) =
 
 var currentFragment: int
 
-template rawBlock*(body: untyped) =
-  newNbBlock("rawBlock", nb, nb.blk, body):
-    nb.blk.output = block:
-      body
-
 template slide*(autoAnimate: untyped, body: untyped): untyped =
   if autoAnimate:
-    rawBlock: "<section data-auto-animate>"
+    nbRawOutput: "<section data-auto-animate>"
   else:
-    rawBlock: "<section>"
+    nbRawOutput: "<section>"
   when declaredInScope(CountVarNimiSlide):
     when CountVarNimiSlide < 2:
       static: inc CountVarNimiSlide
@@ -137,7 +130,7 @@ template slide*(autoAnimate: untyped, body: untyped): untyped =
     var CountVarNimiSlide {.inject, compileTime.} = 1 # we just entered the first level
     body
     static: dec CountVarNimiSlide
-  rawBlock: "</section>"
+  nbRawOutput: "</section>"
 
 template slide*(body: untyped) =
   slide(autoAnimate=false):
@@ -263,14 +256,8 @@ template animateCode*(lines: varargs[HSlice[int, int], toHSlice], body: untyped)
 
 
 template bigText*(text: string) =
-  rawBlock: "<h2 class=\"r-fit-text\">" & text & "</h2>"
+  nbRawOutput: "<h2 class=\"r-fit-text\">" & text & "</h2>"
 
-template removeCodeOutput*() =
-  if nb.blocks.len > 0:
-    var blk = nb.blocks[^1]
-    if blk.command in ["nbCode", "animateCode"]:
-      blk.output = ""
-      blk.context["output"] = ""
 
 
 
