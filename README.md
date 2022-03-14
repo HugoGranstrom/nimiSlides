@@ -13,6 +13,7 @@ An example can be found in `docs/` folder and the generated slides can be seen h
   - [Big Text](#big-text)
   - [Hiding code output](#hiding-code-output)
   - [Themes](#themes)
+  - [Local Reveal.js installation](#use-local-revealjs-installation)
 - [Roadmap](#roadmap-🗺)
 
 # API
