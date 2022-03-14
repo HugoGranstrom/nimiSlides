@@ -174,6 +174,27 @@ setSlidesTheme(White)
 Available themes are: `Black`, `Beige`, `Blood`, `League`, `Moon`, `Night`, `Serif`, `Simple`, `Sky`, `Solarized`, `White`.
 The same site as above can be view with `White` theme here: https://hugogranstrom.com/nimib-reveal/index_white.html
 
+## Use local Reveal.js installation
+By default nimiSlide will use a CDN version of Reveal.js so it will only work if you are connected to the internet. If you want to use it offline you have to download a release from their [Github](https://github.com/hakimel/reveal.js).
+Then call `useLocalReveal` with the path of the RevealJs folder relative to your nimib `homeDir`, which you specify in `nimib.toml` or else is the same folder as the `.nim` file is in.
+
+For example if your nimib `homeDir` is in `docs`, you unzip the Reveal.js file there such that the folder structure is as follows:
+```
+docs/
+  revealjsfolder/
+    css/
+    dist/
+    js/
+    plugin/
+    etc...
+  *here your .nim and .html files would be*
+```
+
+Then in your presentation `.nim` file add this line:
+```nim
+nb.useLocalReveal("revealjsfolder")
+```
+
 # Roadmap 🗺
 - [ ] Make available `fragments` (https://revealjs.com/fragments/)
   - [x] Make it work with default options

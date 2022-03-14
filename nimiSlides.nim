@@ -1,4 +1,4 @@
-import std/[strutils, strformat, sequtils]
+import std/[strutils, strformat, sequtils, os]
 import nimib
 import nimib/capture
 
@@ -104,10 +104,26 @@ proc revealTheme*(doc: var NbDoc) =
   """
   doc.context["slidesTheme"] = "black"
 
-template useLocalReveal*(path: string) =
-  discard
+proc useLocalReveal*(nb: var NbDoc, path: string) =
   # set nb.partials["revealCSS/JS"]
   # Should we set it relative to homeDir or srcDir?
+  let path = nb.srcDirRel.string / path
+  let themeString = "{{{slidesTheme}}}"
+  nb.partials["revealCSS"] = fmt"""
+<link rel="stylesheet" href="{path}/dist/reveal.css"/>
+<link rel="stylesheet" href="{path}/dist/theme/{themeString}.css"/>
+<link rel="stylesheet" href="{path}/plugin/highlight/monokai.css"/>  
+  """
+  
+  let latexStart = "{{#latex}}"
+  let latexEnd = "{{/latex}}"
+  nb.partials["revealJS"] = fmt"""
+<script src="{path}/dist/reveal.js"></script>
+<script src="{path}/plugin/highlight/highlight.js"></script>
+{latexStart}
+<script src="{path}/plugin/math/math.js"></script>
+{latexEnd}
+  """
 
 template setSlidesTheme*(theme: SlidesTheme) =
   nb.context["slidesTheme"] = ($theme).toLower
