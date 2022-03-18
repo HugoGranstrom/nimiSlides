@@ -1,6 +1,7 @@
 import std/[strutils, strformat, sequtils, os]
 import nimib
 import nimib/capture
+import toml_serialization
 
 type
   FragmentAnimation* = enum
@@ -25,6 +26,9 @@ type
 
   SlidesTheme* = enum
     Black, Beige, Blood, League, Moon, Night, Serif, Simple, Sky, Solarized, White
+
+  NimiSlidesConfig* = object
+    localReveal*: string
 
 const document = """
 <!DOCTYPE html>
@@ -78,6 +82,28 @@ const revealJS = """
 {{/latex}}
 """
 
+proc useLocalReveal*(nb: var NbDoc, path: string) =
+  let path = nb.srcDirRel.string / path
+  let themeString = "{{{slidesTheme}}}"
+  nb.partials["revealCSS"] = fmt"""
+<link rel="stylesheet" href="{path}/dist/reveal.css"/>
+<link rel="stylesheet" href="{path}/dist/theme/{themeString}.css"/>
+<link rel="stylesheet" href="{path}/plugin/highlight/monokai.css"/>  
+  """
+  
+  let latexStart = "{{#latex}}"
+  let latexEnd = "{{/latex}}"
+  nb.partials["revealJS"] = fmt"""
+<script src="{path}/dist/reveal.js"></script>
+<script src="{path}/plugin/highlight/highlight.js"></script>
+{latexStart}
+<script src="{path}/plugin/math/math.js"></script>
+{latexEnd}
+  """
+
+template setSlidesTheme*(theme: SlidesTheme) =
+  nb.context["slidesTheme"] = ($theme).toLower
+
 proc revealTheme*(doc: var NbDoc) =
   doc.partials["document"] = document
   doc.partials["head"] = head
@@ -104,29 +130,10 @@ proc revealTheme*(doc: var NbDoc) =
   """
   doc.context["slidesTheme"] = "black"
 
-proc useLocalReveal*(nb: var NbDoc, path: string) =
-  # set nb.partials["revealCSS/JS"]
-  # Should we set it relative to homeDir or srcDir?
-  let path = nb.srcDirRel.string / path
-  let themeString = "{{{slidesTheme}}}"
-  nb.partials["revealCSS"] = fmt"""
-<link rel="stylesheet" href="{path}/dist/reveal.css"/>
-<link rel="stylesheet" href="{path}/dist/theme/{themeString}.css"/>
-<link rel="stylesheet" href="{path}/plugin/highlight/monokai.css"/>  
-  """
-  
-  let latexStart = "{{#latex}}"
-  let latexEnd = "{{/latex}}"
-  nb.partials["revealJS"] = fmt"""
-<script src="{path}/dist/reveal.js"></script>
-<script src="{path}/plugin/highlight/highlight.js"></script>
-{latexStart}
-<script src="{path}/plugin/math/math.js"></script>
-{latexEnd}
-  """
-
-template setSlidesTheme*(theme: SlidesTheme) =
-  nb.context["slidesTheme"] = ($theme).toLower
+  let slidesConfig = Toml.decode(doc.rawCfg, NimiSlidesConfig, "nimislides")
+  if slidesConfig.localReveal != "":
+    echo "Using local Reveal.js installation specified in nimib.toml "
+    doc.useLocalReveal(slidesConfig.localReveal)
 
 var currentFragment: int
 

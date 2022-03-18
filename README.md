@@ -176,10 +176,13 @@ Available themes are: `Black`, `Beige`, `Blood`, `League`, `Moon`, `Night`, `Ser
 The same site as above can be view with `White` theme here: https://hugogranstrom.com/nimib-reveal/index_white.html
 
 ## Use local Reveal.js installation
-By default nimiSlide will use a CDN version of Reveal.js so it will only work if you are connected to the internet. If you want to use it offline you have to download a release from their [Github](https://github.com/hakimel/reveal.js).
-Then call `useLocalReveal` with the path of the RevealJs folder relative to your nimib `homeDir`, which you specify in `nimib.toml` or else is the same folder as the `.nim` file is in.
+By default nimiSlide will use a CDN version of Reveal.js so it will only work if you are connected to the internet. If you want to use it offline you have to download a release from their [Github](https://github.com/hakimel/reveal.js). There are two ways to specify this:
 
-For example if your nimib `homeDir` is in `docs`, you unzip the Reveal.js file there such that the folder structure is as follows:
+### Add path in nimib.toml
+Add a `[nimislides]` section to your `nimib.toml` file and add a field `localReveal = "path-to-reveal-folder"` where the path is relative to the `homeDir` (which hopefully is specified in the `nimib.toml` file).
+
+### Call useLocalReveal in your presentation file
+Call `useLocalReveal` with the path of the RevealJs folder relative to your nimib `homeDir`, which you specify in `nimib.toml` or else is the same folder as the `.nim` file is in. For example if your nimib `homeDir` is in `docs`, you unzip the Reveal.js file there such that the folder structure is as follows:
 ```
 docs/
   revealjsfolder/
