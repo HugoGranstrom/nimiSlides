@@ -130,10 +130,13 @@ proc revealTheme*(doc: var NbDoc) =
   """
   doc.context["slidesTheme"] = "black"
 
-  let slidesConfig = Toml.decode(doc.rawCfg, NimiSlidesConfig, "nimislides")
-  if slidesConfig.localReveal != "":
-    echo "Using local Reveal.js installation specified in nimib.toml "
-    doc.useLocalReveal(slidesConfig.localReveal)
+  try:
+    let slidesConfig = Toml.decode(doc.rawCfg, NimiSlidesConfig, "nimislides")
+    if slidesConfig.localReveal != "":
+      echo "Using local Reveal.js installation specified in nimib.toml "
+      doc.useLocalReveal(slidesConfig.localReveal)
+  except TomlError:
+    discard # if it doesn't exists, just let it be
 
 var currentFragment: int
 
