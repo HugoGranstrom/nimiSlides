@@ -153,7 +153,7 @@ template slide*(body: untyped) =
     body
 
 template fragmentStartBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], body: untyped) =
-  newNbBlock("fragmentStart", nb, nb.blk, body):
+  newNbBlock("fragmentStart", false, nb, nb.blk, body):
     for level in animations:
       var frag: Table[string, string]
       frag["classStr"] = join(level, " ") # eg. fade-in highlight-blue
@@ -163,7 +163,7 @@ template fragmentStartBlock(fragments: seq[Table[string, string]], animations: o
 
 template fragmentEndBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], startBlock: NbBlock) =
   # Fragments might be nested, so set fragIndex of endAnimations after the body has been run to get the correct indices
-  newNbBlock("fragmentEnd", nb, nb.blk, body):
+  newNbBlock("fragmentEnd", false, nb, nb.blk, body):
     for level in endAnimations:
       var frag: Table[string, string]
       frag["classStr"] = join(level, " ") # eg. fade-in highlight-blue
