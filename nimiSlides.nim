@@ -128,6 +128,10 @@ proc revealTheme*(doc: var NbDoc) =
 </div>
 {{/fragments}}
   """
+
+  doc.partials["bigText"] = """<h2 class="r-fit-text"> {{&outputToHtml}} </h2>"""
+  doc.renderPlans["bigText"] = doc.renderPlans["nbText"]
+
   doc.context["slidesTheme"] = "black"
 
   try:
@@ -291,7 +295,8 @@ template animateCode*(lines: varargs[HSlice[int, int], toHSlice], body: untyped)
 
 
 template bigText*(text: string) =
-  nbRawOutput: "<h2 class=\"r-fit-text\">" & text & "</h2>"
+  newNbBlock("bigText", false, nb, nb.blk, text):
+    nb.blk.output = text
 
 
 
