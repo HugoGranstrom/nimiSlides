@@ -113,17 +113,17 @@ It is worth keeping in mind that not all animations are compatible with each oth
 fragmentFadeIn(highlightBlue): # same as fragment(@[fadeIn], @[highlightBlue])
   nbText: "Hello"
 
-fragmentFadeIn(@[highlightBlue], @[grow]): # same as fragment(@[fadeIn], @[highlightBlue], @[grow])
-  nbText: "This will first fadeIn, then highlightBlue and lastly grow"
+fragmentFadeIn(@[highlightBlue], @[grow]): # same as fragment(@[fadeIn], @[highlightBlue], @[grows])
+  nbText: "This will first fadeIn, then highlightBlue and lastly grows"
 ```
 
 ### End animations
 You might also want to do an animation *after* a block has been shown. For example fading it out. This can be done similairly using the `fragmentEnd` template which accept inputs the same way as `fragment` does:
 ```nim
-fragmentEnd(@[semiFadeOut, shrink]): # when the animations inside have run, semiFadeOut and shrink all of it 
+fragmentEnd(@[semiFadeOut, shrinks]): # when the animations inside have run, semiFadeOut and shrink all of it 
   fragment(highlightBlue):
     nbText: "This turns blue"
-  fragment(shrink):
+  fragment(shrinks):
     nbText: "This shrinks"
 ```
 What will happen here is that the first text will turn blue, then the second text will shrink. And after that, *both* texts will semiFadeOut and shrink.
@@ -137,9 +137,9 @@ What will happen here is that the first text will turn blue, then the second tex
 - fadeRight
 - fadeInThenOut
 - fadeInThenSemiOut
-- grow
+- grows
 - semiFadeOut
-- shrink
+- shrinks
 - strike
 - highlightRed
 - highlightGreen

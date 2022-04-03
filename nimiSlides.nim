@@ -13,9 +13,9 @@ type
     fadeRight = "fade-right"
     fadeInThenOut = "fade-in-then-out"
     fadeInThenSemiOut = "fade-in-then-semi-out"
-    grow = "grow"
+    grows = "grow"
     semiFadeOut = "semi-fade-out"
-    shrink = "shrink"
+    shrinks = "shrink"
     strike = "strike"
     highlightRed = "highlight-red"
     highlightGreen = "highlight-green"
@@ -194,9 +194,9 @@ template fragmentCore*(animations: openArray[seq[FragmentAnimation]], endAnimati
   ##             are applied on the first button click, and the second seq's animations on the second click etc.
   ## endAnimations: animations that should be applied AT THE END of block. 
   ## Example: 
-  ## `fragment(@[@[fadeIn, highlightBlue], @[shrink, semiFadeOut]]): block` will at the first click of a button fadeIn and highlightBlue
+  ## `fragment(@[@[fadeIn, highlightBlue], @[shrinks, semiFadeOut]]): block` will at the first click of a button fadeIn and highlightBlue
   ## the content of the block. At the second click the same content will shrink and semiFadeOut. This code is also equivilent with
-  ## `fragment(@[@[fadeIn, highlightBlue]]): fragment(@[@[shrink, semiFadeOut]]): block`.
+  ## `fragment(@[@[fadeIn, highlightBlue]]): fragment(@[@[shrinks, semiFadeOut]]): block`.
   ## `fragment(@[@[fadeIn]], @[@[fadeOut]]): block` will first fadeIn the entire block and perform eventual animations in nested fragments. Once
   ## all of those are finished, it will run fadeOut on the entire block and its subfragments.
   var fragments: seq[Table[string, string]]
@@ -210,9 +210,9 @@ template fragment*(animations: varargs[seq[FragmentAnimation]] = @[@[fadeIn]], b
   ## animations: each seq of the varargs are animations that are to be applied at the same time. The first seq's animations
   ##             are applied on the first button click, and the second seq's animations on the second click etc.
   ## Example: 
-  ## `fragment(@[fadeIn, highlightBlue], @[shrink, semiFadeOut]): block` will at the first click of a button fadeIn and highlightBlue
+  ## `fragment(@[fadeIn, highlightBlue], @[shrinks, semiFadeOut]): block` will at the first click of a button fadeIn and highlightBlue
   ## the content of the block. At the second click the same content will shrink and semiFadeOut. This code is also equivilent with
-  ## `fragment(@[fadeIn, highlightBlue]): fragment(@[shrink, semiFadeOut]): block`.
+  ## `fragment(@[fadeIn, highlightBlue]): fragment(@[shrinks, semiFadeOut]): block`.
   fragmentCore(@animations, newSeq[seq[FragmentAnimation]]()):
     body
 

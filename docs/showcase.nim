@@ -40,8 +40,8 @@ slide:
         nbText: "Strike!"
       fragmentFadeIn(highlightGreen):
         nbText: "Green!"
-      fragmentFadeIn(@[grow], @[shrink], @[fadeOut]):
-        nbText: "fadeIn > grow > shrink > fadeOut"
+      fragmentFadeIn(@[grows], @[shrinks], @[fadeOut]):
+        nbText: "fadeIn > grows > shrinks > fadeOut"
       fragmentFadeIn:
         nbText: "And now that all is finished, semiFadeOut everything!"
   

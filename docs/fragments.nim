@@ -22,10 +22,10 @@ slide:
       nbText: "Fade in, then highlight text in blue!"
     fragmentFadeIn(highlightBlue):
       nbText: "Fade in, then highligt text in blue! (again but this time using `fragmentFadeIn`)"
-    fragment(@[fadeIn], @[highlightBlue, shrink]):
+    fragment(@[fadeIn], @[highlightBlue, shrinks]):
       nbText: "And now the same but a shrink at the same time as the highlighting!!"
-    fragmentFadeIn(@[highlightCurrentGreen, grow], @[shrink]):
-      nbText: "Fade in, then highlight green and grow. Then shrink."
+    fragmentFadeIn(@[highlightCurrentGreen, grows], @[shrinks]):
+      nbText: "Fade in, then highlight green and grows. Then shrink."
 
   slide:
     nbText: "### Nesting of fragments"
@@ -50,12 +50,12 @@ slide:
         nbCode: echo "When all this has been shown, semiFadeOut!"
 
 slide:
-  let codeAnimations = [@[fadeIn], @[grow], @[shrink, semiFadeOut]] # you can save animations for easy reuse
+  let codeAnimations = [@[fadeIn], @[grows], @[shrinks, semiFadeOut]] # you can save animations for easy reuse
   nbText: "### Let's make some animations to showcase code blocks one after another:"
   fragment(codeAnimations):
     nbCode:
       let s = """This code block will fadeIn,
-              grow and then shrink and semiFadeOut!"""
+              grows and then shrink and semiFadeOut!"""
   fragment(codeAnimations):
     nbCode:
       let t = "This code block will behave the same!"

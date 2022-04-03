@@ -41,8 +41,8 @@ slide:
     nbText: "highlightGreen"
   fragment(strike):
     nbText: "strike"
-  fragment(@[fadeIn], @[grow], @[shrink], @[semiFadeOut]):
-    nbText: "fadeIn > grow > shrink > semiFadeOut"
+  fragment(@[fadeIn], @[grows], @[shrinks], @[semiFadeOut]):
+    nbText: "fadeIn > grows > shrinks > semiFadeOut"
   fragment(fadeDown):
     nbCode: echo "Works on code as well!"
 
