@@ -108,7 +108,7 @@ proc revealTheme*(doc: var NbDoc) =
   doc.partials["document"] = document
   doc.partials["head"] = head
   doc.partials["main"] = main
-  doc.partials["nbCodeSource"] = "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape>{{&codeHighlighted}}</code></pre>"
+  doc.partials["nbCodeSource"] = "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers>{{&codeHighlighted}}</code></pre>"
   doc.partials["nbCodeOutput"] = "{{#output}}<pre style=\"width: 100%;\"><samp class=\"hljs\">{{output}}</samp></pre>{{/output}}"
 
   doc.partials["revealCSS"] = revealCSS
@@ -166,8 +166,8 @@ template slide*(body: untyped) =
   slide(autoAnimate=false):
     body
 
-template fragmentStartBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], body: untyped) =
-  newNbBlock("fragmentStart", false, nb, nb.blk, body):
+template fragmentStartBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]]) =
+  newNbSlimBlock("fragmentStart"):
     for level in animations:
       var frag: Table[string, string]
       frag["classStr"] = join(level, " ") # eg. fade-in highlight-blue
@@ -177,7 +177,7 @@ template fragmentStartBlock(fragments: seq[Table[string, string]], animations: o
 
 template fragmentEndBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], startBlock: NbBlock) =
   # Fragments might be nested, so set fragIndex of endAnimations after the body has been run to get the correct indices
-  newNbBlock("fragmentEnd", false, nb, nb.blk, body):
+  newNbSlimBlock("fragmentEnd"):
     for level in endAnimations:
       var frag: Table[string, string]
       frag["classStr"] = join(level, " ") # eg. fade-in highlight-blue
@@ -200,7 +200,7 @@ template fragmentCore*(animations: openArray[seq[FragmentAnimation]], endAnimati
   ## `fragment(@[@[fadeIn]], @[@[fadeOut]]): block` will first fadeIn the entire block and perform eventual animations in nested fragments. Once
   ## all of those are finished, it will run fadeOut on the entire block and its subfragments.
   var fragments: seq[Table[string, string]]
-  fragmentStartBlock(fragments, animations, endAnimations, body)
+  fragmentStartBlock(fragments, animations, endAnimations)
   var startBlock = nb.blk # this *should* be the block created by fragmentStartBlock
   body
   fragmentEndBlock(fragments, animations, endAnimations, startBlock)
@@ -265,7 +265,7 @@ template animateCode*(lines: varargs[seq[HSlice[int, int]]], body: untyped) =
   ## animateCode(@[1..1], @[3..4, 6..6]): body
   ## ```
   ## This will first highlight line 1, then lines 3, 4 and 6.
-  newNbBlock("animateCode", nb, nb.blk, body):
+  newNbCodeBlock("animateCode", body):
     var linesString: string
     if lines.len > 0:
       linesString &= "|"
@@ -295,7 +295,7 @@ template animateCode*(lines: varargs[HSlice[int, int], toHSlice], body: untyped)
 
 
 template bigText*(text: string) =
-  newNbBlock("bigText", false, nb, nb.blk, text):
+  newNbSlimBlock("bigText"):
     nb.blk.output = text
 
 
