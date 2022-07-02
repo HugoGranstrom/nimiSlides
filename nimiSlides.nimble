@@ -4,6 +4,7 @@ version       = "0.1"
 author        = "Hugo Granström"
 description   = "Reveal.js theme for nimib"
 license       = "MIT"
+srcDir        = "src"
 
 # Dependencies
 

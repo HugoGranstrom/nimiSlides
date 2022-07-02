@@ -1,4 +1,5 @@
 import std/[strutils, strformat, sequtils, os]
+export os
 import nimib
 import nimib/capture
 import toml_serialization
@@ -65,6 +66,7 @@ const main = """
       {{/latex}}
     ]
   });
+{{> customJS}}
 </script>
 """
 
@@ -119,7 +121,7 @@ proc revealTheme*(doc: var NbDoc) =
 
   doc.partials["fragmentStart"] = """
 {{#fragments}}
-<div class="fragment {{&classStr}}" data-fragment-index="{{&fragIndex}}"> 
+<div class="fragment {{&classStr}}" data-fragment-index="{{&fragIndex}}" data-fragment-index-nimib="{{&fragIndex}}"> 
 {{/fragments}}
   """
 
@@ -293,6 +295,104 @@ template animateCode*(lines: varargs[HSlice[int, int], toHSlice], body: untyped)
   animateCode(s):
     body
 
+template customJS(code: string) =
+  nb.partials["customJS"] = nb.partials.getOrDefault("customJS", "") & "\n" & code
+
+template typewriter*(textMessage: string, typeSpeed = 50) =
+  let localText = textMessage
+  let speed = typeSpeed
+  # HTML and add eventlistener
+  # check what we get back from reveal's event
+  let fragIndex = currentFragment # important it is before fragmentFadeIn!
+  let id = "typewriter" & $nb.newId()
+  fragmentFadeIn:
+    nbKaraxCode(id, localText, fragIndex, speed):
+      import std / jsconsole
+      import nimiSlides/revealFFI
+      var i = 0
+      proc typewriterLocal() =
+        echo "Typing ", fragindex
+        var el = getElementById(id.cstring)
+        if i < localText.len:
+          el.innerHtml &= $localText[i]
+          inc i
+          discard setTimeout(typewriterLocal, speed)
+      karaxHtml:
+        p(id = id)
+      
+      window.addEventListener("load", proc (event: Event) =
+        echo "Loading ", fragIndex
+        Reveal.on("fragmentshown",
+          proc (event: RevealEvent) =
+            if not event.fragment.isAnimatedCode:
+              let index = event.fragment.getFragmentIndex()
+              if fragIndex == index:
+                var el = getElementById(id.string)
+                el.innerHtml = ""
+                i = 0
+                echo "Starting ", fragIndex
+                typewriterLocal()
+        )
+        Reveal.on("fragmenthidden",
+          proc (event: RevealEvent) =
+            if not event.fragment.isAnimatedCode:
+              let index = event.fragment.getFragmentIndex()
+              if fragIndex == index:
+                discard
+        ))
+
+  #[ nbRawOutput: """
+  <p id="test">hej</p>
+  """
+  # try using reveal's eventlistener instead by checking the current fragment index!
+  # This requires the typewriter to be localted inside a fragment!
+  customJS: """
+  const text = "This text is typwritten"
+  var i = 0
+  const el = document.getElementById("test")
+
+  function typewriter() {
+    if (i < text.length) {
+      el.innerHTML += text.charAt(i)
+      i++
+      setTimeout(typewriter, 100)
+    }
+  }
+
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if(mutation.attributeName === 'style'){
+        console.log("style change");
+      }
+    });    
+  });
+
+  // Notify me of style changes
+  var observerConfig = {
+    attributes: true, 
+    attributeFilter: ["style"]
+  };
+
+  observer.observe(el, observerConfig)
+  console.log(el)
+
+  /*
+  const observer = new IntersectionObserver((entries, observer) => {
+    const ent = entries[0]
+    const target = ent.target
+    console.log(ent)
+    if (ent.isIntersecting) {
+      console.log("Visible!")
+      setTimeout(typewriter, 1000)
+    } else {
+      console.log("Invisible")
+      el.innerHTML = ""
+      i = 0
+    }
+  }, {rootMargin: '0px', threshhold: 1.0});
+  observer.observe(el);
+  */
+  """ ]#
 
 template bigText*(text: string) =
   newNbSlimBlock("bigText"):
