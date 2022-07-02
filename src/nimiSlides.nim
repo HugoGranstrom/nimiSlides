@@ -298,17 +298,18 @@ template animateCode*(lines: varargs[HSlice[int, int], toHSlice], body: untyped)
 template customJS(code: string) =
   nb.partials["customJS"] = nb.partials.getOrDefault("customJS", "") & "\n" & code
 
-template typewriter*(textMessage: string, typeSpeed = 50) =
+template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") =
   let localText = textMessage
   let speed = typeSpeed
+  let align = alignment
   # HTML and add eventlistener
   # check what we get back from reveal's event
   let fragIndex = currentFragment # important it is before fragmentFadeIn!
   let id = "typewriter" & $nb.newId()
   fragmentFadeIn:
-    nbKaraxCode(id, localText, fragIndex, speed):
-      import std / jsconsole
+    nbKaraxCode(id, localText, fragIndex, speed, align):
       import nimiSlides/revealFFI
+      import karax / vstyles
       var i = 0
       proc typewriterLocal() =
         echo "Typing ", fragindex
@@ -318,7 +319,7 @@ template typewriter*(textMessage: string, typeSpeed = 50) =
           inc i
           discard setTimeout(typewriterLocal, speed)
       karaxHtml:
-        p(id = id)
+        p(id = id, style=style(textAlign, align.kstring))
       
       window.addEventListener("load", proc (event: Event) =
         echo "Loading ", fragIndex
@@ -332,6 +333,7 @@ template typewriter*(textMessage: string, typeSpeed = 50) =
                 i = 0
                 echo "Starting ", fragIndex
                 typewriterLocal()
+              # else: save the timeout and end it and set innerhtml to full text
         )
         Reveal.on("fragmenthidden",
           proc (event: RevealEvent) =
