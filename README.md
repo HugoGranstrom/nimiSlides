@@ -1,6 +1,6 @@
 # nimiSlides 🛷 - Make beautiful presentations easily in Nim
 
-![showcase of nimiSlides](./static/nimib_v01.webm)
+![showcase of nimiSlides](./static/nimib_v01.webm.mp4)
 
 nimiSlides is Reveal.js theme for nimib which enables you to make beautiful slideshows just by writing Nim code.
 
