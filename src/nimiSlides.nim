@@ -61,8 +61,9 @@ const main = """
   Reveal.initialize({
     plugins: [ 
       RevealHighlight,
+      RevealNotes,
       {{#latex}}
-      RevealMath.KaTeX
+      RevealMath.KaTeX,
       {{/latex}}
     ]
   });
@@ -79,6 +80,7 @@ const revealCSS = """
 const revealJS = """
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/reveal.js" integrity="sha512-+Dy2HJZ3Z1DWerDhqFE7AH2HTfnbq8RC1pKOashfMwx1s01fjPUebWoHqrRedU1yFimkexmzJJRilKxjs7lz8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/plugin/highlight/highlight.min.js" integrity="sha512-U3fPDUX5bMrn1wnYqjaK44MFA9E6MKS+zPAg9WPAGF5XhReBeDj3FGaA831CjueG+YJxYA3WaO/m33kMIoOs/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/plugin/notes/notes.min.js" integrity="sha512-v2co+5nr0bgHekutTzF5jAB0UAjM95dpCF7VVw7WsFCjfxonbQo8Vwl487tNYl0iHWHHGV4o5xKBp5ifyhJkWg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {{#latex}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.1/plugin/math/math.min.js" integrity="sha512-8eviRBLZHoiXLqXeMl5XurkjNEGizTI8DHbSUoGxkYFd4RslHpIYTEQmLYtWUemc5FfMYOkPDFUcQKefPLjF7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {{/latex}}
@@ -98,6 +100,7 @@ proc useLocalReveal*(nb: var NbDoc, path: string) =
   nb.partials["revealJS"] = fmt"""
 <script src="{path}/dist/reveal.js"></script>
 <script src="{path}/plugin/highlight/highlight.js"></script>
+<script src="{path}/plugin/notes/notes.js"></script>
 {latexStart}
 <script src="{path}/plugin/math/math.js"></script>
 {latexEnd}
@@ -295,9 +298,6 @@ template animateCode*(lines: varargs[HSlice[int, int], toHSlice], body: untyped)
   animateCode(s):
     body
 
-template customJS(code: string) =
-  nb.partials["customJS"] = nb.partials.getOrDefault("customJS", "") & "\n" & code
-
 template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") =
   let localText = textMessage
   let speed = typeSpeed
@@ -354,7 +354,9 @@ template bigText*(text: string) =
   newNbSlimBlock("bigText"):
     nb.blk.output = text
 
-
-
-
-
+template speakerNote*(text: string) =
+  nbRawOutput: """
+<aside class="notes">
+  $1
+</aside>
+""" % [text]

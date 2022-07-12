@@ -16,6 +16,7 @@ An example can be found in `docs/` folder and the generated slides can be seen h
   - [Themes](#themes)
   - [Auto-animation](#automatic-animation)
   - [Typewriter](#typewriter)
+  - [Speaker View](#speaker-view)
   - [Local Reveal.js installation](#use-local-revealjs-installation)
 - [Roadmap](#roadmap-🗺)
 
@@ -214,6 +215,13 @@ slide:
 ```
 `typeSpeed` is the number of milliseconds between each character. 
 
+## Speaker view
+Reveal.js's [speaker mode](https://revealjs.com/speaker-view/) is enabled by default and can be accessed by pressing "S". To add speaker notes use `speakerNote`:
+```nim
+slide:
+  speakerNote: "This note will be visible on the speaker view"
+```
+
 ## Use local Reveal.js installation
 By default nimiSlide will use a CDN version of Reveal.js so it will only work if you are connected to the internet. If you want to use it offline you have to download a release from their [Github](https://github.com/hakimel/reveal.js). There are two ways to specify this:
 
@@ -249,7 +257,7 @@ nb.useLocalReveal("revealjsfolder")
   - [X] Line numbers
   - [x] Highlight lines
   - [x] Make overload for showing lines of code that aren't beside each other. (api: `animateCode(seq[HSlice[int, int]])`)
-- [ ] Presenter mode note (https://revealjs.com/speaker-view/)
+- [X] Presenter mode note (https://revealjs.com/speaker-view/)
 - [ ] Auto-slide (https://revealjs.com/auto-slide/)
 - [x] Fit text (https://revealjs.com/layout/#fit-text)
 - [ ] Backgrounds
