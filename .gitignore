@@ -2,5 +2,3 @@ nimcache/
 nimblecache/
 htmldocs/
 reveal.js-master/
-docs/*.html
-docs/images/
