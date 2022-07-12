@@ -311,13 +311,14 @@ template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") 
       import nimiSlides/revealFFI
       import karax / vstyles
       var i = 0
+      var timeout: Timeout
       proc typewriterLocal() =
         echo "Typing ", fragindex
         var el = getElementById(id.cstring)
         if i < localText.len:
           el.innerHtml &= $localText[i]
           inc i
-          discard setTimeout(typewriterLocal, speed)
+          timeout = setTimeout(typewriterLocal, speed)
       karaxHtml:
         p(id = id, style=style(textAlign, align.kstring))
       
@@ -328,11 +329,17 @@ template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") 
             if not event.fragment.isAnimatedCode:
               let index = event.fragment.getFragmentIndex()
               if fragIndex == index:
-                var el = getElementById(id.string)
+                var el = getElementById(id.cstring)
                 el.innerHtml = ""
                 i = 0
                 echo "Starting ", fragIndex
                 typewriterLocal()
+              else:
+                var el = getElementById(id.cstring)
+                i = localText.len
+                if not timeout.isNil:
+                  timeout.clearTimeout()
+                el.innerHtml = localText.cstring
               # else: save the timeout and end it and set innerhtml to full text
         )
         Reveal.on("fragmenthidden",
@@ -342,59 +349,6 @@ template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") 
               if fragIndex == index:
                 discard
         ))
-
-  #[ nbRawOutput: """
-  <p id="test">hej</p>
-  """
-  # try using reveal's eventlistener instead by checking the current fragment index!
-  # This requires the typewriter to be localted inside a fragment!
-  customJS: """
-  const text = "This text is typwritten"
-  var i = 0
-  const el = document.getElementById("test")
-
-  function typewriter() {
-    if (i < text.length) {
-      el.innerHTML += text.charAt(i)
-      i++
-      setTimeout(typewriter, 100)
-    }
-  }
-
-  var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if(mutation.attributeName === 'style'){
-        console.log("style change");
-      }
-    });    
-  });
-
-  // Notify me of style changes
-  var observerConfig = {
-    attributes: true, 
-    attributeFilter: ["style"]
-  };
-
-  observer.observe(el, observerConfig)
-  console.log(el)
-
-  /*
-  const observer = new IntersectionObserver((entries, observer) => {
-    const ent = entries[0]
-    const target = ent.target
-    console.log(ent)
-    if (ent.isIntersecting) {
-      console.log("Visible!")
-      setTimeout(typewriter, 1000)
-    } else {
-      console.log("Invisible")
-      el.innerHTML = ""
-      i = 0
-    }
-  }, {rootMargin: '0px', threshhold: 1.0});
-  observer.observe(el);
-  */
-  """ ]#
 
 template bigText*(text: string) =
   newNbSlimBlock("bigText"):
