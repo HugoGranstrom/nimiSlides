@@ -10,9 +10,12 @@ An example can be found in `docs/` folder and the generated slides can be seen h
   - [Fragments (animations)](#fragments-animations)
     - [End animations](#end-animations)
     - [List of fragments](#list-of-fragment-animations)
+    - [Fragment-animated lists](#fragment-animated-lists)
   - [Big Text](#big-text)
   - [Hiding code output](#hiding-code-output)
   - [Themes](#themes)
+  - [Auto-animation](#automatic-animation)
+  - [Typewriter](#typewriter)
   - [Local Reveal.js installation](#use-local-revealjs-installation)
 - [Roadmap](#roadmap-🗺)
 
@@ -148,6 +151,18 @@ What will happen here is that the first text will turn blue, then the second tex
 - highlightCurrentGreen
 - highlightCurrentBlue
 
+### Fragment-animated lists
+A common use-case for using animations is to reveal a list of list-items one at a time. This can be achieved using `fragmentList`:
+```nim
+slide:
+  fragmentList(@[
+    "First",
+    "Second",
+    "Third"
+  ], fadeIn)
+```
+Here the three strings will be reveal one after another when a key is pressed.
+
 ## Big Text
 If you have a short snippet of text you want to show as big as possible, use `bigText` instead of `nbText`:
 ```nim
@@ -175,6 +190,30 @@ setSlidesTheme(White)
 Available themes are: `Black`, `Beige`, `Blood`, `League`, `Moon`, `Night`, `Serif`, `Simple`, `Sky`, `Solarized`, `White`.
 The same site as above can be view with `White` theme here: https://hugogranstrom.com/nimib-reveal/index_white.html
 
+## Automatic animation
+Reveal.js has support for [auto-animation](https://revealjs.com/auto-animate/) which when possible, smoothly animates the transition between slides. Here is an example where the second list element will be smoothly added after the first one:
+```nim
+slide:
+  slide(autoAnimate=true):
+    nbText: """
+- One element
+"""
+  slide(autoAnimate=true):
+    nbText: """
+- One element
+- Two elements    
+"""
+```
+
+## Typewriter
+Do you want the effect of someone writing your text letter by letter? Then `typewriter` is what you are looking for!
+```nim
+slide:
+  typewriter("This text will be typed one letter at a time with the speed and alignement specified.",
+    typeSpeed=50, alignment="center")
+```
+`typeSpeed` is the number of milliseconds between each character. 
+
 ## Use local Reveal.js installation
 By default nimiSlide will use a CDN version of Reveal.js so it will only work if you are connected to the internet. If you want to use it offline you have to download a release from their [Github](https://github.com/hakimel/reveal.js). There are two ways to specify this:
 
@@ -200,14 +239,14 @@ nb.useLocalReveal("revealjsfolder")
 ```
 
 # Roadmap 🗺
-- [ ] Make available `fragments` (https://revealjs.com/fragments/)
+- [X] Make available `fragments` (https://revealjs.com/fragments/)
   - [x] Make it work with default options
   - [x] Support fragment animations
   - [x] Make fragments nestable
   - [x] Use `data-fragment-index` to allow ending blocks with an animation. Eg. fadeOut an entire block once it's finished.
-  - [ ] Make it work with lists
-- [ ] Make available code animations (https://revealjs.com/code/)
-  - [ ] Line numbers
+  - [X] Make it work with lists
+- [X] Make available code animations (https://revealjs.com/code/)
+  - [X] Line numbers
   - [x] Highlight lines
   - [x] Make overload for showing lines of code that aren't beside each other. (api: `animateCode(seq[HSlice[int, int]])`)
 - [ ] Presenter mode note (https://revealjs.com/speaker-view/)
@@ -215,4 +254,5 @@ nb.useLocalReveal("revealjsfolder")
 - [x] Fit text (https://revealjs.com/layout/#fit-text)
 - [ ] Backgrounds
 - [ ] Transitions (https://revealjs.com/transitions/)
-- [ ] Automatic animations
+- [X] Automatic animations
+- [X] Typewriter effect
