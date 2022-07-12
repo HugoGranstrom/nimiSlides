@@ -8,7 +8,14 @@ setSlidesTheme(Moon)
 
 slide:
   bigText: "Welcome to [nimiSlides](https://github.com/HugoGranstrom/nimib-reveal)! 🛷"
-  nbText: "These slides will show you what this [nimib](https://github.com/pietroppeter/nimib) theme is capable of"
+  nbText: "These slides will show you what this [nimib](https://github.com/pietroppeter/nimib) theme is capable of."
+  speakerNote "This is a note"
+
+slide:
+  speakerNote "This is another note"
+  nbText: "## Typewriter Effect"
+  typewriter("This text will be typed one letter at a time with the speed and alignement specified.",
+    typeSpeed=50, alignment="center")
 
 slide:
   slide:
@@ -63,7 +70,32 @@ slide:
     for text in texts:
       fragment(highlightCurrentBlue):
         nbText: text
-
+  
+  slide(autoAnimate=true):
+    nbText: "## Automatic animation"
+    nbText: """
+- One element
+"""
+  slide(autoAnimate=true):
+    nbText: "## Automatic animation"
+    nbText: """
+- One element
+- Two elements    
+"""
+  slide(autoAnimate=true):
+    nbText: "## Automatic animation"
+    nbText: """
+- One element
+- Two elements
+- Three elements
+"""
+  slide:
+    nbText: "## Fragment list"
+    fragmentList(@[
+    "First",
+    "Second",
+    "Third"
+    ], fadeIn)
 
 
 slide:
