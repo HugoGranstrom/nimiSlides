@@ -247,13 +247,13 @@ template fragmentEnd*(endAnimation: FragmentAnimation, body: untyped) =
   fragmentCore(newSeq[seq[FragmentAnimation]](), @[@[endAnimation]]):
     body
 
-#[ template fragmentList*(list: seq[string], animation: varargs[seq[FragmentAnimation]]) =
+template fragmentList*(list: seq[string], animation: varargs[seq[FragmentAnimation]]) =
   for s in list:
     fragment(animation):
       nbText: s
 
 template fragmentList*(list: seq[string], animation: FragmentAnimation) =
-  fragmentList(list, @[@[animation]]) ]#
+  fragmentList(list, @[@[animation]])
   
 
 proc toHSlice*(h: HSlice[int, int]): HSlice[int, int] = h
