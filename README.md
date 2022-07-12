@@ -3,6 +3,7 @@
 A Reveal.js theme for nimib.
 
 An example can be found in `docs/` folder and the generated slides can be seen here: https://hugogranstrom.com/nimib-reveal/
+
 A showcase of all nimiSlides' features can be found here: https://hugogranstrom.com/nimib-reveal/showcase.html
 
 # Table of contents

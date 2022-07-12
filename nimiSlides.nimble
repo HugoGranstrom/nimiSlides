@@ -18,8 +18,8 @@ task buildDocs, "build all .nim files in docs/":
     for (kind, path) in walkDir("docs/"):
         if path.endsWith(".nim"):
             echo "Building: " & path
-            let buildCommand = "nim r -d:nimibPreviewCodeAsInSource " & path
+            let buildCommand = "nim r " & path
             exec buildCommand
             if "index" in path:
-                let buildCommand = "nim r -d:nimibPreviewCodeAsInSource -d:themeWhite " & path
+                let buildCommand = "nim r -d:themeWhite " & path
                 exec buildCommand

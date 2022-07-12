@@ -12,12 +12,6 @@ slide:
   speakerNote "This is a note"
 
 slide:
-  speakerNote "This is another note"
-  nbText: "## Typewriter Effect"
-  typewriter("This text will be typed one letter at a time with the speed and alignement specified.",
-    typeSpeed=50, alignment="center")
-
-slide:
   slide:
     nbText: "You can have text, but also code:"
     nbCode:
@@ -36,6 +30,12 @@ slide:
       echo "And last this!"
     nbClearOutput()
     nbText: "Pretty cool if you ask me! 😎"
+
+slide:
+  speakerNote "This is another note"
+  nbText: "## Typewriter Effect"
+  typewriter("This text will be typed one letter at a time with the speed and alignement specified.",
+    typeSpeed=30, alignment="left")
 
 slide:
   slide:
