@@ -1,80 +1,83 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <meta content="text/html; charset=utf-8" http-equiv="content-type">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/reveal.min.css" integrity="sha512-vFD6wFRj2whK8/X/dMgxJHinKfGlwMYtN+yRCxvxvmOgIiMIlgrFb5iOuCoqwCID+Qcq2/gY8DpmNHcAjfHWxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/theme/black.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/plugin/highlight/monokai.min.css" integrity="sha512-z8wQkuDRFwCBfoj7KOiu1MECaRVoXx6rZQWL21x0BsVVH7JkqCp1Otf39qve6CrCycOOL5o9vgfII5Smds23rg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/reveal.min.css" integrity="sha512-vFD6wFRj2whK8/X/dMgxJHinKfGlwMYtN+yRCxvxvmOgIiMIlgrFb5iOuCoqwCID+Qcq2/gY8DpmNHcAjfHWxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/theme/black.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/plugin/highlight/monokai.min.css" integrity="sha512-z8wQkuDRFwCBfoj7KOiu1MECaRVoXx6rZQWL21x0BsVVH7JkqCp1Otf39qve6CrCycOOL5o9vgfII5Smds23rg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
-    <div class="reveal">
-      <div class="slides">
-        <section>
-<section>
-<h2>Welcome to <a href="https://github.com/HugoGranstrom/nimib-reveal">nimiSlides</a>!</h2>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+      <h2>Welcome to <a href="https://github.com/HugoGranstrom/nimib-reveal">nimiSlides</a>!</h2>
 <p>These slides will show you what this theme is capable of ⛄</p>
-</section>
-</section>
-<section>
-<section>
-<h2>Hello World Example</h2>
-<pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Hello World&quot;</span></code></pre>
-<pre style="width: 100%;"><samp class="hljs">Hello World
-</samp></pre>
-</section>
-<section>
-<p>Hello Down here</p>
-</section>
-<section>
-<h2>A classic</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-</section>
-</section>
-<section>
-<section>
-<h2>Fragments (animations)</h2>
-<div class="fragment fade-in" data-fragment-index="0">
-<p>fadeIn</p>
+      </section>
+      <section>
+      <section>
+      <h2>Hello World Example</h2>
+      <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Hello World&quot;</span></code></pre><pre style="width: 100%;"><samp class="hljs">Hello World</samp></pre>
+      </section>
+      <section>
+      <p>Hello Down here</p>
+      </section>
+      <section>
+      <h2>A classic</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </section>
+      </section>
+      <section>
+      <h2>Fragments (animations)</h2>
+      <div class="fragment fade-in" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+      <p>fadeIn</p>
+      </div>
+  
+      <div class="fragment fade-in-then-out" data-fragment-index="1" data-fragment-index-nimib="1"> 
+  
+      <p>fadeInTheOut</p>
+      </div>
+  
+      <div class="fragment highlight-green" data-fragment-index="2" data-fragment-index-nimib="2"> 
+  
+      <p>highlightGreen</p>
+      </div>
+  
+      <div class="fragment strike" data-fragment-index="3" data-fragment-index-nimib="3"> 
+  
+      <p>strike</p>
+      </div>
+  
+      <div class="fragment fade-in" data-fragment-index="4" data-fragment-index-nimib="4"> 
+<div class="fragment grow" data-fragment-index="5" data-fragment-index-nimib="5"> 
+<div class="fragment shrink" data-fragment-index="6" data-fragment-index-nimib="6"> 
+<div class="fragment semi-fade-out" data-fragment-index="7" data-fragment-index-nimib="7"> 
+  
+      <p>fadeIn &gt; grows &gt; shrinks &gt; semiFadeOut</p>
+      </div>
 </div>
-<div class="fragment fade-in-then-out" data-fragment-index="1">
-<p>fadeInTheOut</p>
 </div>
-<div class="fragment highlight-green" data-fragment-index="2">
-<p>highlightGreen</p>
 </div>
-<div class="fragment strike" data-fragment-index="3">
-<p>strike</p>
-</div>
-<div class="fragment fade-in" data-fragment-index="4">
-<div class="fragment grow" data-fragment-index="5">
-<div class="fragment shrink" data-fragment-index="6">
-<div class="fragment semi-fade-out" data-fragment-index="7">
-<p>fadeIn &gt; grow &gt; shrink &gt; semiFadeOut</p>
-</div></div></div></div>
-<div class="fragment fade-down" data-fragment-index="8">
-<pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Works on code as well!&quot;</span></code></pre>
-<pre style="width: 100%;"><samp class="hljs">Works on code as well!
-</samp></pre>
-</div>
-</section>
-</section>
-<section>
-<section>
-<h1>Code example</h1>
-<pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">var</span> this: <span class="hljs-built_in">int</span>
+  
+      <div class="fragment fade-down" data-fragment-index="8" data-fragment-index-nimib="8"> 
+  
+      <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Works on code as well!&quot;</span></code></pre><pre style="width: 100%;"><samp class="hljs">Works on code as well!</samp></pre>
+      </div>
+  
+      </section>
+      <section>
+      <h1>Code example</h1>
+      <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers><span class="hljs-keyword">var</span> this: <span class="hljs-built_in">int</span>
 <span class="hljs-keyword">let</span> is_a = <span class="hljs-number">1</span>
 <span class="hljs-keyword">proc</span> code(b: <span class="hljs-built_in">int</span>) =
   <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;block&quot;</span>
 
-code(this)</code></pre>
-<pre style="width: 100%;"><samp class="hljs">block
-</samp></pre>
-</section>
-</section>
-<section>
-<section>
-<h2>Generating and showing images</h2>
-<pre style="width: 100%"><code class="nim hljs" data-noescape><span class="hljs-keyword">import</span> ggplotnim, random, sequtils
+code(this)</code></pre><pre style="width: 100%;"><samp class="hljs">block</samp></pre>
+      </section>
+      <section>
+      <section>
+      <h2>Generating and showing images</h2>
+      <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers><span class="hljs-keyword">import</span> ggplotnim, random, sequtils
 randomize(<span class="hljs-number">42</span>)
 <span class="hljs-keyword">let</span> df = seqsToDf({
   <span class="hljs-string">&quot;Energy&quot;</span> : cycle(linspace(<span class="hljs-number">0.0</span>, <span class="hljs-number">10.0</span>, <span class="hljs-number">25</span>).toRawSeq, <span class="hljs-number">2</span>),
@@ -82,51 +85,45 @@ randomize(<span class="hljs-number">42</span>)
                     toSeq(<span class="hljs-number">0</span> ..&lt; <span class="hljs-number">25</span>).mapIt(rand(<span class="hljs-number">10</span>).<span class="hljs-built_in">float</span>)),
   <span class="hljs-string">&quot;Type&quot;</span> : concat(newSeqWith(<span class="hljs-number">25</span>, <span class="hljs-string">&quot;background&quot;</span>),
                   newSeqWith(<span class="hljs-number">25</span>, <span class="hljs-string">&quot;candidates&quot;</span>)) })</code></pre>
-</section>
-<section>
-<pre style="width: 100%"><code class="nim hljs" data-noescape>ggplot(df, aes(<span class="hljs-string">&quot;Energy&quot;</span>, <span class="hljs-string">&quot;Counts&quot;</span>)) +
+      </section>
+      <section>
+      <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>ggplot(df, aes(<span class="hljs-string">&quot;Energy&quot;</span>, <span class="hljs-string">&quot;Counts&quot;</span>)) +
   geom_histogram() +
   theme_opaque() +
   ggsave(<span class="hljs-string">&quot;images/multi_layer_histogram_0.png&quot;</span>)</code></pre>
-<figure>
+      <figure>
 <img src="images/multi_layer_histogram_0.png" alt="">
 <figcaption></figcaption>
 </figure>
-
-</section>
-</section>
-<section>
-<section>
-<h2>Math</h2>
+      </section>
+      </section>
+      <section>
+      <h2>Math</h2>
 <p>You can typeset math as well (using <code>nb.useLatex</code>):</p>
 <p>$$ e^{\pi i} = -1 $$</p>
-</section>
-</section>
-<section>
-<section>
-<h2 class="r-fit-text">This is big!</h2>
-<h2 class="r-fit-text">This is also big!</h2>
-<p>This is normal text!</p>
-</section>
-</section>
-<section>
-<section>
-<p>And a final <strong>reveal</strong>: These slides were created just using Nim!</p>
-</section>
-</section>
-
-      </div>
+      </section>
+      <section>
+      <h2 class="r-fit-text"> <p>This is big!</p> </h2>
+      <h2 class="r-fit-text"> <p>This is also big!</p> </h2>
+      <p>This is normal text!</p>
+      </section>
+      <section>
+      <p>And a final <strong>reveal</strong>: These slides were created just using Nim!</p>
+      </section>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/reveal.js" integrity="sha512-+Dy2HJZ3Z1DWerDhqFE7AH2HTfnbq8RC1pKOashfMwx1s01fjPUebWoHqrRedU1yFimkexmzJJRilKxjs7lz8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/plugin/highlight/highlight.min.js" integrity="sha512-U3fPDUX5bMrn1wnYqjaK44MFA9E6MKS+zPAg9WPAGF5XhReBeDj3FGaA831CjueG+YJxYA3WaO/m33kMIoOs/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.1/plugin/math/math.min.js" integrity="sha512-8eviRBLZHoiXLqXeMl5XurkjNEGizTI8DHbSUoGxkYFd4RslHpIYTEQmLYtWUemc5FfMYOkPDFUcQKefPLjF7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-      Reveal.initialize({
-        plugins: [ 
-          RevealHighlight,
-          RevealMath.KaTeX
-        ]
-      });
-    </script>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/reveal.js" integrity="sha512-+Dy2HJZ3Z1DWerDhqFE7AH2HTfnbq8RC1pKOashfMwx1s01fjPUebWoHqrRedU1yFimkexmzJJRilKxjs7lz8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/plugin/highlight/highlight.min.js" integrity="sha512-U3fPDUX5bMrn1wnYqjaK44MFA9E6MKS+zPAg9WPAGF5XhReBeDj3FGaA831CjueG+YJxYA3WaO/m33kMIoOs/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/plugin/notes/notes.min.js" integrity="sha512-v2co+5nr0bgHekutTzF5jAB0UAjM95dpCF7VVw7WsFCjfxonbQo8Vwl487tNYl0iHWHHGV4o5xKBp5ifyhJkWg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.1/plugin/math/math.min.js" integrity="sha512-8eviRBLZHoiXLqXeMl5XurkjNEGizTI8DHbSUoGxkYFd4RslHpIYTEQmLYtWUemc5FfMYOkPDFUcQKefPLjF7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    Reveal.initialize({
+      plugins: [ 
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX,
+      ]
+    });
+  </script>
   </body>
 </html>
