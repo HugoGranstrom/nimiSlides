@@ -12,7 +12,7 @@ nb.useLatex
 
 slide:
   nbText: """
-  ## Welcome to [nimiSlides](https://github.com/HugoGranstrom/nimib-reveal)!
+  ## Welcome to [nimiSlides](https://github.com/HugoGranstrom/nimiSlides)!
   These slides will show you what this theme is capable of ⛄
   """
 

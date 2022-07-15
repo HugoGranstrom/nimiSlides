@@ -1,12 +1,17 @@
-# nimiSlides 🛷 - Make beautiful presentations easily in Nim
+# nimiSlides 🛷 - Make beautiful presentations easily in Nim 👑
 
 nimiSlides is Reveal.js theme for nimib which enables you to make beautiful slideshows just by writing Nim code.
 
 https://user-images.githubusercontent.com/5092565/178597724-16287a00-5c31-4500-83d8-e07160a36369.mp4
 
-An example can be found in `docs/` folder and the generated slides can be seen here: https://hugogranstrom.com/nimib-reveal/
+An example can be found in `docs/` folder and the generated slides can be seen here: https://hugogranstrom.com/nimiSlides/
 
-A showcase of all nimiSlides' features can be found here: https://hugogranstrom.com/nimib-reveal/showcase.html
+A showcase of all nimiSlides' features can be found here: https://hugogranstrom.com/nimiSlides/showcase.html
+
+# Our goal 🥇
+
+Our goal is to provide the easiest way to create a slideshow in Nim, about Nim. And this while also providing
+lots of flexibility so you can tailor it to your liking.
 
 # Table of contents
 - [API](#api)
@@ -114,7 +119,7 @@ The second way is if you don't give any animations at all, it will default to `f
 fragment(): # same as fragment(fadeIn)
   nbText: "Hello"
 ```
-That was the basics of using fragments, if you want to see this in action you can look at the [fragments example code](/docs/fragments.nim) and the final result is available [here](https://hugogranstrom.com/nimib-reveal/fragments.html).
+That was the basics of using fragments, if you want to see this in action you can look at the [fragments example code](/docs/fragments.nim) and the final result is available [here](https://hugogranstrom.com/nimiSlides/fragments.html).
 
 It is worth keeping in mind that not all animations are compatible with each other, for example mixing `fadeUp` and `fadeDown` won't play out well. Also worth noting is that `fadeIn` is the default and don't have its own class in Reveal.js so it's overriden if any other animation is provided. For example `@[fadeIn, highlightBlue]` is the same to Reveal as just `@[highlightBlue]` so to get the `fadeIn` effect as well you have to put it in its own seq `@[fadeIn], @[highlightBlue]`. There is a shorthand for this:
 ```nim
@@ -193,7 +198,7 @@ nbInit(theme = revealTheme)
 setSlidesTheme(White)
 ```
 Available themes are: `Black`, `Beige`, `Blood`, `League`, `Moon`, `Night`, `Serif`, `Simple`, `Sky`, `Solarized`, `White`.
-The same site as above can be view with `White` theme here: https://hugogranstrom.com/nimib-reveal/index_white.html
+The same site as above can be view with `White` theme here: https://hugogranstrom.com/nimiSlides/index_white.html
 
 ## Automatic animation
 Reveal.js has support for [auto-animation](https://revealjs.com/auto-animate/) which when possible, smoothly animates the transition between slides. Here is an example where the second list element will be smoothly added after the first one:

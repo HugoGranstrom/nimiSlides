@@ -8,7 +8,7 @@ nb.useLatex
 slide:
   nbText: md"""
   # Fragments
-  This slideshow is a showcase of the fragments capabilities of nimiSlides. For the source code, look [here](https://github.com/HugoGranstrom/nimib-reveal/blob/main/docs/fragments.nim).
+  This slideshow is a showcase of the fragments capabilities of nimiSlides. For the source code, look [here](https://github.com/HugoGranstrom/nimiSlides/blob/main/docs/fragments.nim).
   """
 
 slide:

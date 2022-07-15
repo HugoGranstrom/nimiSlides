@@ -7,7 +7,7 @@ setSlidesTheme(Moon)
 
 
 slide:
-  bigText: "Welcome to [nimiSlides](https://github.com/HugoGranstrom/nimib-reveal)! 🛷"
+  bigText: "Welcome to [nimiSlides](https://github.com/HugoGranstrom/nimiSlides)! 🛷"
   nbText: "These slides will show you what this [nimib](https://github.com/pietroppeter/nimib) theme is capable of."
   speakerNote "This is a note"
 
