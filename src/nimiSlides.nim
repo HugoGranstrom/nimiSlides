@@ -69,6 +69,9 @@ const main = """
     {{#useScrollWheel}}
     mouseWheel: true,
     {{/useScrollWheel}}
+    {{#showSlideNumber}}
+    slideNumber: 'c/t',
+    {{/showSlideNumber}}
   });
 {{> customJS}}
 </script>
@@ -115,6 +118,9 @@ template setSlidesTheme*(theme: SlidesTheme) =
 template useScrollWheel*() =
   ## Enable using the scroll-wheel to step forward in slides.
   nb.context["useScrollWheel"] = true
+
+template showSlideNumber*() =
+  nb.context["showSlideNumber"] = true
 
 proc revealTheme*(doc: var NbDoc) =
   doc.partials["document"] = document
