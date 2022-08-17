@@ -65,7 +65,10 @@ const main = """
       {{#latex}}
       RevealMath.KaTeX,
       {{/latex}}
-    ]
+    ],
+    {{#useScrollWheel}}
+    mouseWheel: true,
+    {{/useScrollWheel}}
   });
 {{> customJS}}
 </script>
@@ -108,6 +111,10 @@ proc useLocalReveal*(nb: var NbDoc, path: string) =
 
 template setSlidesTheme*(theme: SlidesTheme) =
   nb.context["slidesTheme"] = ($theme).toLower
+
+template useScrollWheel*() =
+  ## Enable using the scroll-wheel to step forward in slides.
+  nb.context["useScrollWheel"] = true
 
 proc revealTheme*(doc: var NbDoc) =
   doc.partials["document"] = document
