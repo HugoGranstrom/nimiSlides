@@ -5,6 +5,8 @@ nbInit(theme = revealTheme)
 nb.useLatex()
 setSlidesTheme(Moon)
 
+useScrollWheel()
+showSlideNumber()
 
 slide:
   bigText: "Welcome to [nimiSlides](https://github.com/HugoGranstrom/nimiSlides)! 🛷"
