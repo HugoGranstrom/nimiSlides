@@ -27,6 +27,7 @@ lots of flexibility so you can tailor it to your liking.
   - [Typewriter](#typewriter)
   - [Speaker View](#speaker-view)
   - [Local Reveal.js installation](#use-local-revealjs-installation)
+  - [Misc. Config](#misc-configuration)
 - [Roadmap](#roadmap-🗺)
 
 # API
@@ -254,6 +255,9 @@ Then in your presentation `.nim` file add this line:
 ```nim
 nb.useLocalReveal("revealjsfolder")
 ```
+
+## Misc. Configuration
+- `useScrollWheel()`, this enables stepping forward in the presentation using the scroll-wheel.
 
 # Roadmap 🗺
 - [X] Make available `fragments` (https://revealjs.com/fragments/)
