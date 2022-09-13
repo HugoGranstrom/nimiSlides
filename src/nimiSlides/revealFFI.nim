@@ -25,3 +25,7 @@ when defined(js):
     raise newException(ValueError, "Element doesn't have a data-fragment-index field")
 
   proc on*(reveal: RevealType, event: cstring, listener: proc (event: RevealEvent)) {.importjs: "#.on(#, #)".}
+  template onReveal*(revealEvent: cstring, listener: proc (event: RevealEvent)) =
+    window.addEventListener("load", proc (event: Event) =
+      Reveal.on(revealEvent, listener)
+    )
