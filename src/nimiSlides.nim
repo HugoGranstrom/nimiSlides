@@ -184,13 +184,14 @@ template slide*(body: untyped) =
   slide(autoAnimate=false):
     body
 
-template fragmentStartBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]]) =
+template fragmentStartBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], indexOffset: int) =
   newNbSlimBlock("fragmentStart"):
     for level in animations:
       var frag: Table[string, string]
       frag["classStr"] = join(level, " ") # eg. fade-in highlight-blue
-      frag["fragIndex"] = $currentFragment
-      currentFragment += 1
+      frag["fragIndex"] = $(currentFragment + indexOffset)
+      if indexOffset == 0:
+        currentFragment += 1
       fragments.add frag
 
 template fragmentEndBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], startBlock: NbBlock) =
@@ -206,7 +207,7 @@ template fragmentEndBlock(fragments: seq[Table[string, string]], animations: ope
   assert nb.blk != startBlock
   startBlock.context["fragments"] = fragments # set for start block
 
-template fragmentCore*(animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], body: untyped) =
+template fragmentCore*(animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], indexOffset: untyped, body: untyped) =
   ## Creates a fragment of the content of body. Nesting works.
   ## animations: each seq in animations are animations that are to be applied at the same time. The first seq's animations
   ##             are applied on the first button click, and the second seq's animations on the second click etc.
@@ -218,10 +219,13 @@ template fragmentCore*(animations: openArray[seq[FragmentAnimation]], endAnimati
   ## `fragment(@[@[fadeIn]], @[@[fadeOut]]): block` will first fadeIn the entire block and perform eventual animations in nested fragments. Once
   ## all of those are finished, it will run fadeOut on the entire block and its subfragments.
   var fragments: seq[Table[string, string]]
-  fragmentStartBlock(fragments, animations, endAnimations)
+  fragmentStartBlock(fragments, animations, endAnimations, indexOffset)
   var startBlock = nb.blk # this *should* be the block created by fragmentStartBlock
   body
   fragmentEndBlock(fragments, animations, endAnimations, startBlock)
+
+template fragmentCore*(animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], body: untyped) =
+  fragmentCore(animations, endAnimations, 0, body)
 
 template fragment*(animations: varargs[seq[FragmentAnimation]] = @[@[fadeIn]], body: untyped): untyped =
   ## Creates a fragment of the content of body. Nesting works.
@@ -261,6 +265,15 @@ template fragmentEnd*(endAnimation: varargs[seq[FragmentAnimation]], body: untyp
 
 template fragmentEnd*(endAnimation: FragmentAnimation, body: untyped) =
   fragmentCore(newSeq[seq[FragmentAnimation]](), @[@[endAnimation]]):
+    body
+
+template fragmentThen*(an1, an2: seq[FragmentAnimation], body: untyped) =
+  fragmentCore(@[an2], newSeq[seq[FragmentAnimation]](), 1): # trigger these on the next animation, but don't increment the counter.
+    fragmentCore(@[an1], newSeq[seq[FragmentAnimation]]()):
+      body
+
+template fragmentThen*(an1, an2: FragmentAnimation, body: untyped) =
+  fragmentThen(@[an1], @[an2]):
     body
 
 template fragmentList*(list: seq[string], animation: varargs[seq[FragmentAnimation]]) =
@@ -333,7 +346,8 @@ template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") 
           inc i
           timeout = setTimeout(typewriterLocal, speed)
       karaxHtml:
-        p(id = id, style=style(textAlign, align.kstring))
+        p(id = id, style=style(textAlign, align.kstring)):
+          text localText.cstring
       
       window.addEventListener("load", proc (event: Event) =
         echo "Loading ", fragIndex
@@ -373,3 +387,10 @@ template speakerNote*(text: string) =
   $1
 </aside>
 """ % [text]
+
+template align*(text: string, body: untyped) =
+  nbRawOutput: """
+<div style="text-align: $1;">
+""" % text
+  body
+  nbRawOutput: "</div>"
