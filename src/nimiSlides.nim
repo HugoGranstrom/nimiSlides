@@ -164,9 +164,9 @@ var currentFragment: int
 
 template slide*(autoAnimate: untyped, body: untyped): untyped =
   if autoAnimate:
-    nbRawOutput: "<section data-auto-animate>"
+    nbRawHtml: "<section data-auto-animate>"
   else:
-    nbRawOutput: "<section>"
+    nbRawHtml: "<section>"
   when declaredInScope(CountVarNimiSlide):
     when CountVarNimiSlide < 2:
       static: inc CountVarNimiSlide
@@ -178,7 +178,7 @@ template slide*(autoAnimate: untyped, body: untyped): untyped =
     var CountVarNimiSlide {.inject, compileTime.} = 1 # we just entered the first level
     body
     static: dec CountVarNimiSlide
-  nbRawOutput: "</section>"
+  nbRawHtml: "</section>"
 
 template slide*(body: untyped) =
   slide(autoAnimate=false):
@@ -394,15 +394,15 @@ template bigText*(text: string) =
     nb.blk.output = text
 
 template speakerNote*(text: string) =
-  nbRawOutput: """
+  nbRawHtml: """
 <aside class="notes">
   $1
 </aside>
 """ % [text]
 
 template align*(text: string, body: untyped) =
-  nbRawOutput: """
+  nbRawHtml: """
 <div style="text-align: $1;">
 """ % text
   body
-  nbRawOutput: "</div>"
+  nbRawHtml: "</div>"
