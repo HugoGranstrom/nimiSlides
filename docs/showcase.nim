@@ -73,18 +73,18 @@ slide:
       fragment(highlightCurrentBlue):
         nbText: text
   
-  slide(autoAnimate=true):
+  slide(slideOptions(autoAnimate=true)):
     nbText: "## Automatic animation"
     nbText: """
 - One element
 """
-  slide(autoAnimate=true):
+  slide(slideOptions(autoAnimate=true)):
     nbText: "## Automatic animation"
     nbText: """
 - One element
 - Two elements    
 """
-  slide(autoAnimate=true):
+  slide(slideOptions(autoAnimate=true)):
     nbText: "## Automatic animation"
     nbText: """
 - One element
@@ -139,6 +139,18 @@ You can have the code generating an image in the slides and then load the image.
     fragment(fadeUp):
       nbImage("images/splineComp.png")      
 
+slide:
+  slide(slideOptions(colorBackground="#f1b434")):
+    nbText: "You can have different backgrounds"
+
+  slide(slideOptions(imageBackground="https://images.freeimages.com/images/large-previews/3d0/london-1452422.jpg")):
+    nbText: "Image background"
+
+  slide(slideOptions(videoBackground="https://user-images.githubusercontent.com/5092565/178597724-16287a00-5c31-4500-83d8-e07160a36369.mp4")):
+    nbText: "Video background"
+
+  slide(slideOptions(iframeBackground="https://pietroppeter.github.io/nimib/", iframeInteractive=true)):
+    nbText: "Iframe background"
   
 
 

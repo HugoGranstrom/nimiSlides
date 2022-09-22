@@ -9,15 +9,15 @@
   <body>
   <div class="reveal">
     <div class="slides">
-      <section>
+      <section >
       <h2 class="r-fit-text"> <p>Welcome to <a href="https://github.com/HugoGranstrom/nimiSlides">nimiSlides</a>! 🛷</p> </h2>
       <p>These slides will show you what this <a href="https://github.com/pietroppeter/nimib">nimib</a> theme is capable of.</p>
       <aside class="notes">
   This is a note
 </aside>
       </section>
-      <section>
-      <section>
+      <section >
+      <section >
       <p>You can have text, but also code:</p>
       <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers><span class="hljs-keyword">let</span> a = <span class="hljs-number">2</span>
 <span class="hljs-keyword">let</span> b = <span class="hljs-number">3</span>
@@ -25,7 +25,7 @@
       <p>Look! 👆 It even runs the code and shows the output!</p>
       <p>Next slide this way ↓</p>
       </section>
-      <section>
+      <section >
       <p>You can animate the code as well! 🎞</p>
       <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers="|1-1,|3-4,|5-5"><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;First this!&quot;</span>
 <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;But not this!&quot;</span>
@@ -36,7 +36,7 @@
       <p>Pretty cool if you ask me! 😎</p>
       </section>
       </section>
-      <section>
+      <section >
       <aside class="notes">
   This is another note
 </aside>
@@ -3053,17 +3053,18 @@ function to_469762070(node_469762073) {
   return result_469762075[0];
 
 }
-var rootid_452985903_469762057 = to_469762050(parseJson_603985094(makeNimstrLit("\"karax-1\"")));
-var id_452985904_469762063 = to_469762050(parseJson_603985094(makeNimstrLit("\"typewriter0\"")));
-var localtext_452985905_469762069 = to_469762050(parseJson_603985094(makeNimstrLit("\"This text will be typed one letter at a time with the speed and alignement specified.\"")));
-var fragindex_452985906_469762100 = to_469762070(parseJson_603985094(makeNimstrLit("0")));
-var speed_452985907_469762106 = to_469762070(parseJson_603985094(makeNimstrLit("30")));
-var align_452985908_469762112 = to_469762050(parseJson_603985094(makeNimstrLit("\"left\"")));
+var rootid_452985781_469762057 = to_469762050(parseJson_603985094(makeNimstrLit("\"karax-1\"")));
+var id_452985782_469762063 = to_469762050(parseJson_603985094(makeNimstrLit("\"typewriter0\"")));
+var localtext_452985783_469762069 = to_469762050(parseJson_603985094(makeNimstrLit("\"This text will be typed one letter at a time with the speed and alignement specified.\"")));
+var fragindex_452985784_469762100 = to_469762070(parseJson_603985094(makeNimstrLit("0")));
+var speed_452985785_469762106 = to_469762070(parseJson_603985094(makeNimstrLit("30")));
+var align_452985786_469762112 = to_469762050(parseJson_603985094(makeNimstrLit("\"left\"")));
 var gid_1174405727 = [0];
 var vcomponents_1207959565 = [{}];
 var kxi__nimib_kxi_3 = null;
-var i_452985910_469762171 = [0];
-var timeout_452985911_469762172 = [null];
+var postrendercallback_452985787_469762168 = [null];
+var i_452985789_469762175 = [0];
+var timeout_452985790_469762176 = [null];
 
 function newSeq_1140851702(len_1140851704) {
   var result_1140851705 = [];
@@ -3230,15 +3231,15 @@ function applyEvents_1140850942(n_1140850943) {
     var dest_1140850944 = n_1140850943.dom;
     Label1: do {
       var i_1140850952 = 0;
-      var colontmp__469762308 = 0;
-      colontmp__469762308 = (n_1140850943.events).length;
-      var i_469762309 = 0;
+      var colontmp__469762312 = 0;
+      colontmp__469762312 = (n_1140850943.events).length;
+      var i_469762313 = 0;
       Label2: do {
           Label3: while (true) {
-          if (!(i_469762309 < colontmp__469762308)) break Label3;
-            i_1140850952 = i_469762309;
+          if (!(i_469762313 < colontmp__469762312)) break Label3;
+            i_1140850952 = i_469762313;
             n_1140850943.events[i_1140850952]["Field2"] = wrapEvent_1140850842(dest_1140850944, n_1140850943, n_1140850943.events[i_1140850952]["Field0"], n_1140850943.events[i_1140850952]["Field1"]);
-            i_469762309 += 1;
+            i_469762313 += 1;
           }
       } while (false);
     } while (false);
@@ -3250,15 +3251,15 @@ function applyStyle_1241514464(n_1241514465, s_1241514466) {
     n_1241514465.style = {};
     Label1: do {
       var i_1241514479 = 0;
-      var colontmp__469762312 = 0;
-      colontmp__469762312 = (s_1241514466.length - 1);
-      var res_469762313 = 0;
+      var colontmp__469762316 = 0;
+      colontmp__469762316 = (s_1241514466.length - 1);
+      var res_469762317 = 0;
       Label2: do {
           Label3: while (true) {
-          if (!(res_469762313 <= colontmp__469762312)) break Label3;
-            i_1241514479 = res_469762313;
+          if (!(res_469762317 <= colontmp__469762316)) break Label3;
+            i_1241514479 = res_469762317;
             n_1241514465.style[s_1241514466[i_1241514479]] = s_1241514466[(i_1241514479 + 1)];
-            res_469762313 += 2;
+            res_469762317 += 2;
           }
       } while (false);
     } while (false);
@@ -3354,17 +3355,17 @@ function toDom_1140850970(n_1140850971, useAttachedNode_1140850972, kxi_11408509
       Label1: do {
         var k_1140851077 = null;
         Label2: do {
-          var i_469762293 = 0;
-          var colontmp__469762294 = 0;
-          colontmp__469762294 = (n_1140850971.kids).length;
-          var i_469762295 = 0;
+          var i_469762297 = 0;
+          var colontmp__469762298 = 0;
+          colontmp__469762298 = (n_1140850971.kids).length;
+          var i_469762299 = 0;
           Label3: do {
               Label4: while (true) {
-              if (!(i_469762295 < colontmp__469762294)) break Label4;
-                i_469762293 = i_469762295;
-                k_1140851077 = n_1140850971.kids[i_469762293];
+              if (!(i_469762299 < colontmp__469762298)) break Label4;
+                i_469762297 = i_469762299;
+                k_1140851077 = n_1140850971.kids[i_469762297];
                 result_1140850974.appendChild(toDom_1140850970(k_1140851077, useAttachedNode_1140850972, kxi_1140850973));
-                i_469762295 += 1;
+                i_469762299 += 1;
               }
           } while (false);
         } while (false);
@@ -3387,21 +3388,21 @@ function toDom_1140850970(n_1140850971, useAttachedNode_1140850972, kxi_11408509
       var k_1140851078 = null;
       var v_1140851079 = null;
       Label6: do {
-        var i_469762303 = 0;
-        var colontmp__469762304 = 0;
-        colontmp__469762304 = ((n_1140850971.attrs).length - 2);
-        var res_469762305 = 0;
+        var i_469762307 = 0;
+        var colontmp__469762308 = 0;
+        colontmp__469762308 = ((n_1140850971.attrs).length - 2);
+        var res_469762309 = 0;
         Label7: do {
             Label8: while (true) {
-            if (!(res_469762305 <= colontmp__469762304)) break Label8;
-              i_469762303 = res_469762305;
-              k_1140851078 = n_1140850971.attrs[i_469762303];
-              v_1140851079 = n_1140850971.attrs[(i_469762303 + 1)];
+            if (!(res_469762309 <= colontmp__469762308)) break Label8;
+              i_469762307 = res_469762309;
+              k_1140851078 = n_1140850971.attrs[i_469762307];
+              v_1140851079 = n_1140850971.attrs[(i_469762307 + 1)];
               if (!((v_1140851079 == null))) {
               result_1140850974.setAttribute(k_1140851078, v_1140851079);
               }
               
-              res_469762305 += 2;
+              res_469762309 += 2;
             }
         } while (false);
       } while (false);
@@ -3481,19 +3482,19 @@ function same_1140851118(n_1140851119, e_1140851120, nesting_1140851121) {
     
     Label3: do {
       var i_1140851158 = 0;
-      var colontmp__469762316 = 0;
-      colontmp__469762316 = len_1174405816(n_1140851119);
-      var i_469762317 = 0;
+      var colontmp__469762320 = 0;
+      colontmp__469762320 = len_1174405816(n_1140851119);
+      var i_469762321 = 0;
       Label4: do {
           Label5: while (true) {
-          if (!(i_469762317 < colontmp__469762316)) break Label5;
-            i_1140851158 = i_469762317;
+          if (!(i_469762321 < colontmp__469762320)) break Label5;
+            i_1140851158 = i_469762321;
             if (!(same_1140851118(HEX5BHEX5D_1174405823(n_1140851119, i_1140851158), e_1140851120.childNodes[i_1140851158], (nesting_1140851121 + 1)))) {
             result_1140851122 = false;
             break BeforeRet;
             }
             
-            i_469762317 += 1;
+            i_469762321 += 1;
           }
       } while (false);
     } while (false);
@@ -3555,19 +3556,19 @@ function eq_1241514238(a_1241514239, b_1241514240) {
     
     Label1: do {
       var i_1241514276 = 0;
-      var colontmp__469762343 = 0;
-      colontmp__469762343 = a_1241514239.length;
-      var i_469762344 = 0;
+      var colontmp__469762347 = 0;
+      colontmp__469762347 = a_1241514239.length;
+      var i_469762348 = 0;
       Label2: do {
           Label3: while (true) {
-          if (!(i_469762344 < colontmp__469762343)) break Label3;
-            i_1241514276 = i_469762344;
+          if (!(i_469762348 < colontmp__469762347)) break Label3;
+            i_1241514276 = i_469762348;
             if (!((a_1241514239[i_1241514276] == b_1241514240[i_1241514276]))) {
             result_1241514241 = false;
             break BeforeRet;
             }
             
-            i_469762344 += 1;
+            i_469762348 += 1;
           }
       } while (false);
     } while (false);
@@ -3587,19 +3588,19 @@ function sameAttrs_1174405979(a_1174405980, b_1174405981) {
     result_1174405982 = true;
     Label1: do {
       var i_1174405996 = 0;
-      var colontmp__469762347 = 0;
-      colontmp__469762347 = (a_1174405980.attrs).length;
-      var i_469762348 = 0;
+      var colontmp__469762351 = 0;
+      colontmp__469762351 = (a_1174405980.attrs).length;
+      var i_469762352 = 0;
       Label2: do {
           Label3: while (true) {
-          if (!(i_469762348 < colontmp__469762347)) break Label3;
-            i_1174405996 = i_469762348;
+          if (!(i_469762352 < colontmp__469762351)) break Label3;
+            i_1174405996 = i_469762352;
             if (!((a_1174405980.attrs[i_1174405996] == b_1174405981.attrs[i_1174405996]))) {
             result_1174405982 = false;
             break BeforeRet;
             }
             
-            i_469762348 += 1;
+            i_469762352 += 1;
           }
       } while (false);
     } while (false);
@@ -3655,19 +3656,19 @@ function eq_1140851172(a_1140851173, b_1140851174, recursive_1140851175) {
     
     Label1: do {
       var i_1140851193 = 0;
-      var colontmp__469762335 = 0;
-      colontmp__469762335 = len_1174405816(a_1140851173);
-      var i_469762336 = 0;
+      var colontmp__469762339 = 0;
+      colontmp__469762339 = len_1174405816(a_1140851173);
+      var i_469762340 = 0;
       Label2: do {
           Label3: while (true) {
-          if (!(i_469762336 < colontmp__469762335)) break Label3;
-            i_1140851193 = i_469762336;
+          if (!(i_469762340 < colontmp__469762339)) break Label3;
+            i_1140851193 = i_469762340;
             if ((eq_1140851172(HEX5BHEX5D_1174405823(a_1140851173, i_1140851193), HEX5BHEX5D_1174405823(b_1140851174, i_1140851193), recursive_1140851175) == 1)) {
             result_1140851176 = 1;
             break BeforeRet;
             }
             
-            i_469762336 += 1;
+            i_469762340 += 1;
           }
       } while (false);
     } while (false);
@@ -3721,19 +3722,19 @@ function eq_1140851172(a_1140851173, b_1140851174, recursive_1140851175) {
     
     Label6: do {
       var i_1140851219 = 0;
-      var colontmp__469762339 = 0;
-      colontmp__469762339 = len_1174405816(a_1140851173);
-      var i_469762340 = 0;
+      var colontmp__469762343 = 0;
+      colontmp__469762343 = len_1174405816(a_1140851173);
+      var i_469762344 = 0;
       Label7: do {
           Label8: while (true) {
-          if (!(i_469762340 < colontmp__469762339)) break Label8;
-            i_1140851219 = i_469762340;
+          if (!(i_469762344 < colontmp__469762343)) break Label8;
+            i_1140851219 = i_469762344;
             if (!((eq_1140851172(HEX5BHEX5D_1174405823(a_1140851173, i_1140851219), HEX5BHEX5D_1174405823(b_1140851174, i_1140851219), true) == 3))) {
             result_1140851176 = 1;
             break BeforeRet;
             }
             
-            i_469762340 += 1;
+            i_469762344 += 1;
           }
       } while (false);
     } while (false);
@@ -3776,18 +3777,18 @@ function updateAttributes_1140851262(newNode_1140851263, oldNode_1140851264) {
       var k_1140851269 = null;
       var __1140851270 = null;
       Label2: do {
-        var i_469762352 = 0;
-        var colontmp__469762353 = 0;
-        colontmp__469762353 = ((oldNode_1140851264.attrs).length - 2);
-        var res_469762354 = 0;
+        var i_469762356 = 0;
+        var colontmp__469762357 = 0;
+        colontmp__469762357 = ((oldNode_1140851264.attrs).length - 2);
+        var res_469762358 = 0;
         Label3: do {
             Label4: while (true) {
-            if (!(res_469762354 <= colontmp__469762353)) break Label4;
-              i_469762352 = res_469762354;
-              k_1140851269 = oldNode_1140851264.attrs[i_469762352];
-              __1140851270 = oldNode_1140851264.attrs[(i_469762352 + 1)];
+            if (!(res_469762358 <= colontmp__469762357)) break Label4;
+              i_469762356 = res_469762358;
+              k_1140851269 = oldNode_1140851264.attrs[i_469762356];
+              __1140851270 = oldNode_1140851264.attrs[(i_469762356 + 1)];
               oldNode_1140851264.dom.removeAttribute(k_1140851269);
-              res_469762354 += 2;
+              res_469762358 += 2;
             }
         } while (false);
       } while (false);
@@ -3796,21 +3797,21 @@ function updateAttributes_1140851262(newNode_1140851263, oldNode_1140851264) {
       var k_1140851271 = null;
       var v_1140851272 = null;
       Label6: do {
-        var i_469762358 = 0;
-        var colontmp__469762359 = 0;
-        colontmp__469762359 = ((newNode_1140851263.attrs).length - 2);
-        var res_469762360 = 0;
+        var i_469762362 = 0;
+        var colontmp__469762363 = 0;
+        colontmp__469762363 = ((newNode_1140851263.attrs).length - 2);
+        var res_469762364 = 0;
         Label7: do {
             Label8: while (true) {
-            if (!(res_469762360 <= colontmp__469762359)) break Label8;
-              i_469762358 = res_469762360;
-              k_1140851271 = newNode_1140851263.attrs[i_469762358];
-              v_1140851272 = newNode_1140851263.attrs[(i_469762358 + 1)];
+            if (!(res_469762364 <= colontmp__469762363)) break Label8;
+              i_469762362 = res_469762364;
+              k_1140851271 = newNode_1140851263.attrs[i_469762362];
+              v_1140851272 = newNode_1140851263.attrs[(i_469762362 + 1)];
               if (!((v_1140851272 == null))) {
               oldNode_1140851264.dom.setAttribute(k_1140851271, v_1140851272);
               }
               
-              res_469762360 += 2;
+              res_469762364 += 2;
             }
         } while (false);
       } while (false);
@@ -3828,19 +3829,19 @@ function getAttr_1174405795(n_1174405796, key_1174405797) {
   BeforeRet: do {
     Label1: do {
       var i_1174405807 = 0;
-      var colontmp__469762363 = 0;
-      colontmp__469762363 = ((n_1174405796.attrs).length - 2);
-      var res_469762364 = 0;
+      var colontmp__469762367 = 0;
+      colontmp__469762367 = ((n_1174405796.attrs).length - 2);
+      var res_469762368 = 0;
       Label2: do {
           Label3: while (true) {
-          if (!(res_469762364 <= colontmp__469762363)) break Label3;
-            i_1174405807 = res_469762364;
+          if (!(res_469762368 <= colontmp__469762367)) break Label3;
+            i_1174405807 = res_469762368;
             if ((n_1174405796.attrs[i_1174405807] == key_1174405797)) {
             result_1174405798 = n_1174405796.attrs[(i_1174405807 + 1)];
             break BeforeRet;
             }
             
-            res_469762364 += 2;
+            res_469762368 += 2;
           }
       } while (false);
     } while (false);
@@ -3854,15 +3855,15 @@ function removeAllEventHandlers_1140850806(d_1140850807) {
     if (!((d_1140850807.karaxEvents == null))) {
     Label1: do {
       var i_1140850823 = 0;
-      var colontmp__469762367 = 0;
-      colontmp__469762367 = d_1140850807.karaxEvents.length;
-      var i_469762368 = 0;
+      var colontmp__469762371 = 0;
+      colontmp__469762371 = d_1140850807.karaxEvents.length;
+      var i_469762372 = 0;
       Label2: do {
           Label3: while (true) {
-          if (!(i_469762368 < colontmp__469762367)) break Label3;
-            i_1140850823 = i_469762368;
+          if (!(i_469762372 < colontmp__469762371)) break Label3;
+            i_1140850823 = i_469762372;
             d_1140850807.removeEventListener(d_1140850807.karaxEvents[i_1140850823]["Field0"], d_1140850807.karaxEvents[i_1140850823]["Field1"]);
-            i_469762368 += 1;
+            i_469762372 += 1;
           }
       } while (false);
     } while (false);
@@ -3983,28 +3984,28 @@ function diff_1140851413(newNode_1140851414, oldNode_1140851415, parent_11408514
       var pos_1140851476 = (nimMin(oldPos_1140851462, newPos_1140851463) + 1);
       Label8: do {
         var i_1140851481 = 0;
-        var colontmp__469762322 = 0;
-        colontmp__469762322 = (pos_1140851476 - 1);
-        var res_469762323 = commonPrefix_1140851453;
+        var colontmp__469762326 = 0;
+        colontmp__469762326 = (pos_1140851476 - 1);
+        var res_469762327 = commonPrefix_1140851453;
         Label9: do {
             Label10: while (true) {
-            if (!(res_469762323 <= colontmp__469762322)) break Label10;
-              i_1140851481 = res_469762323;
+            if (!(res_469762327 <= colontmp__469762326)) break Label10;
+              i_1140851481 = res_469762327;
               diff_1140851413(HEX5BHEX5D_1174405823(newNode_1140851414, i_1140851481), HEX5BHEX5D_1174405823(oldNode_1140851415, i_1140851481), current_1140851417, current_1140851417.childNodes[i_1140851481], kxi_1140851418);
-              res_469762323 += 1;
+              res_469762327 += 1;
             }
         } while (false);
       } while (false);
       if (((oldPos_1140851462 + 1) == oldLength_1140851444)) {
       Label11: do {
         var i_1140851486 = 0;
-        var res_469762326 = pos_1140851476;
+        var res_469762330 = pos_1140851476;
         Label12: do {
             Label13: while (true) {
-            if (!(res_469762326 <= newPos_1140851463)) break Label13;
-              i_1140851486 = res_469762326;
+            if (!(res_469762330 <= newPos_1140851463)) break Label13;
+              i_1140851486 = res_469762330;
               addPatch_1140851282(kxi_1140851418, 2, current_1140851417, null, HEX5BHEX5D_1174405823(newNode_1140851414, i_1140851486), null);
-              res_469762326 += 1;
+              res_469762330 += 1;
             }
         } while (false);
       } while (false);
@@ -4013,13 +4014,13 @@ function diff_1140851413(newNode_1140851414, oldNode_1140851415, parent_11408514
         var before_1140851487 = current_1140851417.childNodes[(oldPos_1140851462 + 1)];
         Label14: do {
           var i_1140851492 = 0;
-          var res_469762329 = pos_1140851476;
+          var res_469762333 = pos_1140851476;
           Label15: do {
               Label16: while (true) {
-              if (!(res_469762329 <= newPos_1140851463)) break Label16;
-                i_1140851492 = res_469762329;
+              if (!(res_469762333 <= newPos_1140851463)) break Label16;
+                i_1140851492 = res_469762333;
                 addPatch_1140851282(kxi_1140851418, 3, current_1140851417, before_1140851487, HEX5BHEX5D_1174405823(newNode_1140851414, i_1140851492), null);
-                res_469762329 += 1;
+                res_469762333 += 1;
               }
           } while (false);
         } while (false);
@@ -4027,14 +4028,14 @@ function diff_1140851413(newNode_1140851414, oldNode_1140851415, parent_11408514
       
       Label17: do {
         var i_1140851497 = 0;
-        var res_469762332 = pos_1140851476;
+        var res_469762336 = pos_1140851476;
         Label18: do {
             Label19: while (true) {
-            if (!(res_469762332 <= oldPos_1140851462)) break Label19;
-              i_1140851497 = res_469762332;
+            if (!(res_469762336 <= oldPos_1140851462)) break Label19;
+              i_1140851497 = res_469762336;
               addPatch_1140851282(kxi__nimib_kxi_3, 4, null, null, null, HEX5BHEX5D_1174405823(oldNode_1140851415, i_1140851497));
               addPatch_1140851282(kxi_1140851418, 1, current_1140851417, current_1140851417.childNodes[i_1140851497], null, null);
-              res_469762332 += 1;
+              res_469762336 += 1;
             }
         } while (false);
       } while (false);
@@ -4099,15 +4100,15 @@ function moveDom_1140851347(dest_1140851348, src_1140851349) {
     
     Label1: do {
       var i_1140851363 = 0;
-      var colontmp__469762378 = 0;
-      colontmp__469762378 = len_1174405816(dest_1140851348);
-      var i_469762379 = 0;
+      var colontmp__469762382 = 0;
+      colontmp__469762382 = len_1174405816(dest_1140851348);
+      var i_469762383 = 0;
       Label2: do {
           Label3: while (true) {
-          if (!(i_469762379 < colontmp__469762378)) break Label3;
-            i_1140851363 = i_469762379;
+          if (!(i_469762383 < colontmp__469762382)) break Label3;
+            i_1140851363 = i_469762383;
             moveDom_1140851347(HEX5BHEX5D_1174405823(dest_1140851348, i_1140851363), HEX5BHEX5D_1174405823(src_1140851349, i_1140851363));
-            i_469762379 += 1;
+            i_469762383 += 1;
           }
       } while (false);
     } while (false);
@@ -4124,11 +4125,11 @@ function HEX5BHEX5DHEX3D_1174405827(x_1174405828, idx_1174405829, y_1174405830) 
 function applyPatch_1140851364(kxi_1140851365) {
     Label1: do {
       var i_1140851370 = 0;
-      var i_469762372 = 0;
+      var i_469762376 = 0;
       Label2: do {
           Label3: while (true) {
-          if (!(i_469762372 < kxi_1140851365.patchLen)) break Label3;
-            i_1140851370 = i_469762372;
+          if (!(i_469762376 < kxi_1140851365.patchLen)) break Label3;
+            i_1140851370 = i_469762376;
             var p_1140851371 = nimCopy(null, kxi_1140851365.patches[i_1140851370], NTI1140850694);
             switch (p_1140851371.k) {
             case 0:
@@ -4181,21 +4182,21 @@ function applyPatch_1140851364(kxi_1140851365) {
               
               break;
             }
-            i_469762372 += 1;
+            i_469762376 += 1;
           }
       } while (false);
     } while (false);
     kxi_1140851365.patchLen = 0;
     Label4: do {
       var i_1140851402 = 0;
-      var i_469762375 = 0;
+      var i_469762379 = 0;
       Label5: do {
           Label6: while (true) {
-          if (!(i_469762375 < kxi_1140851365.patchLenV)) break Label6;
-            i_1140851402 = i_469762375;
+          if (!(i_469762379 < kxi_1140851365.patchLenV)) break Label6;
+            i_1140851402 = i_469762379;
             var p_1140851403 = nimCopy(null, kxi_1140851365.patchesV[i_1140851402], NTI1140850695);
             HEX5BHEX5DHEX3D_1174405827(p_1140851403.parent, p_1140851403.pos, p_1140851403.newChild);
-            i_469762375 += 1;
+            i_469762379 += 1;
           }
       } while (false);
     } while (false);
@@ -4365,13 +4366,13 @@ function tree_1174405894(kind_1174405895, kids_1174405896) {
     result_1174405897 = newVNode_1174405891(kind_1174405895);
     Label1: do {
       var k_1174405909 = null;
-      var i_469762383 = 0;
+      var i_469762387 = 0;
       Label2: do {
           Label3: while (true) {
-          if (!(i_469762383 < (kids_1174405896).length)) break Label3;
-            k_1174405909 = kids_1174405896[i_469762383];
+          if (!(i_469762387 < (kids_1174405896).length)) break Label3;
+            k_1174405909 = kids_1174405896[i_469762387];
             add_1174405831(result_1174405897, k_1174405909);
-            i_469762383 += 1;
+            i_469762387 += 1;
           }
       } while (false);
     } while (false);
@@ -4396,18 +4397,18 @@ function setAttr_1241514285(s_1241514286, a_1241514287, value_1241514288) {
           s_1241514286.push("");
           Label3: do {
             var j_1241514330 = 0;
-            var colontmp__469762387 = 0;
-            var colontmp__469762388 = 0;
-            colontmp__469762387 = (s_1241514286.length - 1);
-            colontmp__469762388 = (i_1241514289 + 3);
-            var res_469762390 = colontmp__469762387;
+            var colontmp__469762391 = 0;
+            var colontmp__469762392 = 0;
+            colontmp__469762391 = (s_1241514286.length - 1);
+            colontmp__469762392 = (i_1241514289 + 3);
+            var res_469762394 = colontmp__469762391;
             Label4: do {
                 Label5: while (true) {
-                if (!(colontmp__469762388 <= res_469762390)) break Label5;
-                  j_1241514330 = res_469762390;
+                if (!(colontmp__469762392 <= res_469762394)) break Label5;
+                  j_1241514330 = res_469762394;
                   s_1241514286[j_1241514330] = s_1241514286[(j_1241514330 - 2)];
                   s_1241514286[(j_1241514330 - 1)] = s_1241514286[(j_1241514330 - 3)];
-                  res_469762390 -= 2;
+                  res_469762394 -= 2;
                 }
             } while (false);
           } while (false);
@@ -4451,18 +4452,18 @@ function text_1174405949(s_1174405950) {
 
 }
 
-function createdom_452985876_469762188() {
-  var result_469762189 = null;
+function createdom_452985754_469762192() {
+  var result_469762193 = null;
 
-    var tmp_469762220 = tree_1174405894(44, []);
-    var tmp_469762221 = tree_1174405894(32, []);
-    tmp_469762221.id = toJSStr(id_452985904_469762063);
-    tmp_469762221.style = style_1241514444(160, toJSStr(align_452985908_469762112));
-    add_1174405831(tmp_469762221, text_1174405949(toJSStr(localtext_452985905_469762069)));
-    add_1174405831(tmp_469762220, tmp_469762221);
-    result_469762189 = tmp_469762220;
+    var tmp_469762224 = tree_1174405894(44, []);
+    var tmp_469762225 = tree_1174405894(32, []);
+    tmp_469762225.id = toJSStr(id_452985782_469762063);
+    tmp_469762225.style = style_1241514444(160, toJSStr(align_452985786_469762112));
+    add_1174405831(tmp_469762225, text_1174405949(toJSStr(localtext_452985783_469762069)));
+    add_1174405831(tmp_469762224, tmp_469762225);
+    result_469762193 = tmp_469762224;
 
-  return result_469762189;
+  return result_469762193;
 
 }
 
@@ -4472,18 +4473,18 @@ function isAnimatedCode_1308622862(el_1308622863) {
   BeforeRet: do {
     Label1: do {
       var node_1308622884 = null;
-      var i_469762394 = 0;
-      var L_469762395 = (el_1308622863.attributes).length;
+      var i_469762398 = 0;
+      var L_469762399 = (el_1308622863.attributes).length;
       Label2: do {
           Label3: while (true) {
-          if (!(i_469762394 < L_469762395)) break Label3;
-            node_1308622884 = el_1308622863.attributes[i_469762394];
+          if (!(i_469762398 < L_469762399)) break Label3;
+            node_1308622884 = el_1308622863.attributes[i_469762398];
             if ((node_1308622884.nodeName == "data-line-numbers")) {
             result_1308622864 = true;
             break BeforeRet;
             }
             
-            i_469762394 += 1;
+            i_469762398 += 1;
           }
       } while (false);
     } while (false);
@@ -4613,19 +4614,19 @@ function getFragmentIndex_1308622903(el_1308622904) {
   BeforeRet: do {
     Label1: do {
       var node_1308622909 = null;
-      var i_469762398 = 0;
-      var L_469762399 = (el_1308622904.attributes).length;
+      var i_469762402 = 0;
+      var L_469762403 = (el_1308622904.attributes).length;
       Label2: do {
           Label3: while (true) {
-          if (!(i_469762398 < L_469762399)) break Label3;
-            node_1308622909 = el_1308622904.attributes[i_469762398];
+          if (!(i_469762402 < L_469762403)) break Label3;
+            node_1308622909 = el_1308622904.attributes[i_469762402];
             if ((node_1308622909.nodeName == "data-fragment-index-nimib")) {
             var fragmentIndex_1308622910 = nsuParseInt(cstrToNimstr(node_1308622909.nodeValue));
             result_1308622905 = fragmentIndex_1308622910;
             break BeforeRet;
             }
             
-            i_469762398 += 1;
+            i_469762402 += 1;
           }
       } while (false);
     } while (false);
@@ -4636,41 +4637,41 @@ function getFragmentIndex_1308622903(el_1308622904) {
 
 }
 
-function typewriterlocal_452985877_469762173() {
+function typewriterlocal_452985755_469762177() {
     var Temporary1;
 
-    rawEcho(makeNimstrLit("Typing "), HEX24_318767107(fragindex_452985906_469762100));
-    var el_452985912_469762174 = document.getElementById(toJSStr(id_452985904_469762063));
-    if ((i_452985910_469762171[0] < (localtext_452985905_469762069).length)) {
-    if (null != (Temporary1 = toJSStr(nimCharToStr(localtext_452985905_469762069[i_452985910_469762171[0]])), Temporary1)) { if (null == el_452985912_469762174.innerHTML) el_452985912_469762174.innerHTML = Temporary1; else el_452985912_469762174.innerHTML += Temporary1; };
-    i_452985910_469762171[0] += 1;
-    timeout_452985911_469762172[0] = setTimeout(typewriterlocal_452985877_469762173, speed_452985907_469762106);
+    rawEcho(makeNimstrLit("Typing "), HEX24_318767107(fragindex_452985784_469762100));
+    var el_452985791_469762178 = document.getElementById(toJSStr(id_452985782_469762063));
+    if ((i_452985789_469762175[0] < (localtext_452985783_469762069).length)) {
+    if (null != (Temporary1 = toJSStr(nimCharToStr(localtext_452985783_469762069[i_452985789_469762175[0]])), Temporary1)) { if (null == el_452985791_469762178.innerHTML) el_452985791_469762178.innerHTML = Temporary1; else el_452985791_469762178.innerHTML += Temporary1; };
+    i_452985789_469762175[0] += 1;
+    timeout_452985790_469762176[0] = setTimeout(typewriterlocal_452985755_469762177, speed_452985785_469762106);
     }
     
 
   
 }
 
-function lambda_452985882_469762236(event_452985913_469762237) {
+function lambda_452985760_469762240(event_452985792_469762241) {
     
-function lambda_452985883_469762238(event_452985913_469762239) {
-        if (!(isAnimatedCode_1308622862(event_452985913_469762239.fragment))) {
-        var index_452985914_469762240 = getFragmentIndex_1308622903(event_452985913_469762239.fragment);
-        if ((fragindex_452985906_469762100 == index_452985914_469762240)) {
-        var el_452985912_469762241 = document.getElementById(toJSStr(id_452985904_469762063));
-        el_452985912_469762241.innerHTML = "";
-        i_452985910_469762171[0] = 0;
-        rawEcho(makeNimstrLit("Starting "), HEX24_318767107(fragindex_452985906_469762100));
-        typewriterlocal_452985877_469762173();
+function lambda_452985761_469762242(event_452985792_469762243) {
+        if (!(isAnimatedCode_1308622862(event_452985792_469762243.fragment))) {
+        var index_452985793_469762244 = getFragmentIndex_1308622903(event_452985792_469762243.fragment);
+        if ((fragindex_452985784_469762100 == index_452985793_469762244)) {
+        var el_452985791_469762245 = document.getElementById(toJSStr(id_452985782_469762063));
+        el_452985791_469762245.innerHTML = "";
+        i_452985789_469762175[0] = 0;
+        rawEcho(makeNimstrLit("Starting "), HEX24_318767107(fragindex_452985784_469762100));
+        typewriterlocal_452985755_469762177();
         }
         else {
-          var el_452985912_469762242 = document.getElementById(toJSStr(id_452985904_469762063));
-          i_452985910_469762171[0] = (localtext_452985905_469762069).length;
-          if (!((timeout_452985911_469762172[0] == null))) {
-          clearTimeout(timeout_452985911_469762172[0]);
+          var el_452985791_469762246 = document.getElementById(toJSStr(id_452985782_469762063));
+          i_452985789_469762175[0] = (localtext_452985783_469762069).length;
+          if (!((timeout_452985790_469762176[0] == null))) {
+          clearTimeout(timeout_452985790_469762176[0]);
           }
           
-          el_452985912_469762242.innerHTML = toJSStr(localtext_452985905_469762069);
+          el_452985791_469762246.innerHTML = toJSStr(localtext_452985783_469762069);
         }
         
         }
@@ -4679,10 +4680,10 @@ function lambda_452985883_469762238(event_452985913_469762239) {
       
     }
     
-function lambda_452985884_469762246(event_452985913_469762247) {
-        if (!(isAnimatedCode_1308622862(event_452985913_469762247.fragment))) {
-        var index_452985914_469762248 = getFragmentIndex_1308622903(event_452985913_469762247.fragment);
-        if ((fragindex_452985906_469762100 == index_452985914_469762248)) {
+function lambda_452985762_469762250(event_452985792_469762251) {
+        if (!(isAnimatedCode_1308622862(event_452985792_469762251.fragment))) {
+        var index_452985793_469762252 = getFragmentIndex_1308622903(event_452985792_469762251.fragment);
+        if ((fragindex_452985784_469762100 == index_452985793_469762252)) {
         }
         
         }
@@ -4691,20 +4692,20 @@ function lambda_452985884_469762246(event_452985913_469762247) {
       
     }
 
-    rawEcho(makeNimstrLit("Loading "), HEX24_318767107(fragindex_452985906_469762100));
-    Reveal.on("fragmentshown", lambda_452985883_469762238);
-    Reveal.on("fragmenthidden", lambda_452985884_469762246);
+    rawEcho(makeNimstrLit("Loading "), HEX24_318767107(fragindex_452985784_469762100));
+    Reveal.on("fragmentshown", lambda_452985761_469762242);
+    Reveal.on("fragmenthidden", lambda_452985762_469762250);
 
   
 }
-setRenderer_1140851796(createdom_452985876_469762188, toJSStr(rootid_452985903_469762057), null);
-window.addEventListener("load", lambda_452985882_469762236, false);
+setRenderer_1140851796(createdom_452985754_469762192, toJSStr(rootid_452985781_469762057), postrendercallback_452985787_469762168[0]);
+window.addEventListener("load", lambda_452985760_469762240, false);
 </script>
       </div>
   
       </section>
-      <section>
-      <section>
+      <section >
+      <section >
       <h2 class="r-fit-text"> <p>Fragments (animations)</p> </h2>
       <div class="fragment semi-fade-out" data-fragment-index="11" data-fragment-index-nimib="11"> 
   
@@ -4746,7 +4747,7 @@ window.addEventListener("load", lambda_452985882_469762236, false);
       </div>
   
       </section>
-      <section>
+      <section >
       <h3>You can do pretty complex animations:</h3>
       <div class="fragment fade-out" data-fragment-index="15" data-fragment-index-nimib="15"> 
   
@@ -4773,7 +4774,7 @@ window.addEventListener("load", lambda_452985882_469762236, false);
       </div>
   
       </section>
-      <section>
+      <section >
       <h3>Using a for loop you can automate tedious repetition</h3>
       <div class="fragment highlight-current-blue" data-fragment-index="17" data-fragment-index-nimib="17"> 
   
@@ -4801,20 +4802,20 @@ window.addEventListener("load", lambda_452985882_469762236, false);
       </div>
   
       </section>
-      <section data-auto-animate>
+      <section data-auto-animate >
       <h2>Automatic animation</h2>
       <ul>
 <li>One element</li>
 </ul>
       </section>
-      <section data-auto-animate>
+      <section data-auto-animate >
       <h2>Automatic animation</h2>
       <ul>
 <li>One element</li>
 <li>Two elements</li>
 </ul>
       </section>
-      <section data-auto-animate>
+      <section data-auto-animate >
       <h2>Automatic animation</h2>
       <ul>
 <li>One element</li>
@@ -4822,7 +4823,7 @@ window.addEventListener("load", lambda_452985882_469762236, false);
 <li>Three elements</li>
 </ul>
       </section>
-      <section>
+      <section >
       <h2>Fragment list</h2>
       <div class="fragment fade-in" data-fragment-index="22" data-fragment-index-nimib="22"> 
   
@@ -4841,14 +4842,14 @@ window.addEventListener("load", lambda_452985882_469762236, false);
   
       </section>
       </section>
-      <section>
+      <section >
       <h1>Math ➕</h1>
 <p>You can show off all your fancy equations ⚛
 $$ e^{\pi i} = -1 $$
 $$ \int_0^{\infty} \frac{1}{1 + e^x} dx$$</p>
       </section>
-      <section>
-      <section>
+      <section >
+      <section >
       <h1>Images 🖼️</h1>
 <p>You can have the code generating an image in the slides and then load the image. This way it's always up to date!</p>
       <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers="|1-1,|2-5,|6-9,|10-11,|12-12"><span class="hljs-keyword">import</span> numericalnim, ggplotnim, std/[sequtils, math]
@@ -4865,7 +4866,7 @@ $$ \int_0^{\infty} \frac{1}{1 + e^x} dx$$</p>
 df = df.gather([<span class="hljs-string">&quot;exact&quot;</span>, <span class="hljs-string">&quot;spline&quot;</span>], value=<span class="hljs-string">&quot;y&quot;</span>, key=<span class="hljs-string">&quot;type&quot;</span>)</code></pre>
 
       </section>
-      <section>
+      <section >
       <h3>Now let's load the image we just created!</h3>
       <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>ggplot(df, aes(<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>, color=<span class="hljs-string">&quot;type&quot;</span>)) +
   geom_line() +
@@ -4878,6 +4879,20 @@ df = df.gather([<span class="hljs-string">&quot;exact&quot;</span>, <span class=
 </figure>
       </div>
   
+      </section>
+      </section>
+      <section >
+      <section data-background-color="#f1b434" >
+      <p>You can have different backgrounds</p>
+      </section>
+      <section data-background-image="https://images.freeimages.com/images/large-previews/3d0/london-1452422.jpg" >
+      <p>Image background</p>
+      </section>
+      <section data-background-video="https://user-images.githubusercontent.com/5092565/178597724-16287a00-5c31-4500-83d8-e07160a36369.mp4" >
+      <p>Video background</p>
+      </section>
+      <section data-background-iframe="https://pietroppeter.github.io/nimib/" data-background-interactive >
+      <p>Iframe background</p>
       </section>
       </section>
     </div>
