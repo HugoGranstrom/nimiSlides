@@ -39,7 +39,7 @@ type
     iframeBackground*: string
     iframeInteractive*: bool
 
-proc slideOptions*(autoAnimate, iframeInteractive = false, colorBackground, gradientBackground, imageBackground, videoBackground, iframeBackground: string = ""): SlideOptions =
+proc slideOptions*(autoAnimate, iframeInteractive = false, colorBackground, imageBackground, videoBackground, iframeBackground: string = ""): SlideOptions =
   SlideOptions(
     autoAnimate: autoAnimate, iframeInteractive: iframeInteractive, colorBackground: colorBackground,
     imageBackground: imageBackground, videoBackground: videoBackground,

@@ -23,7 +23,9 @@ lots of flexibility so you can tailor it to your liking.
   - [Big Text](#big-text)
   - [Hiding code output](#hiding-code-output)
   - [Themes](#themes)
-  - [Auto-animation](#automatic-animation)
+  - [Slide Options](#slide-options)
+    - [Auto-animation](#automatic-animation)
+    - [Backgrounds](#backgrounds)
   - [Typewriter](#typewriter)
   - [Speaker View](#speaker-view)
   - [Local Reveal.js installation](#use-local-revealjs-installation)
@@ -201,19 +203,49 @@ setSlidesTheme(White)
 Available themes are: `Black`, `Beige`, `Blood`, `League`, `Moon`, `Night`, `Serif`, `Simple`, `Sky`, `Solarized`, `White`.
 The same site as above can be view with `White` theme here: https://hugogranstrom.com/nimiSlides/index_white.html
 
-## Automatic animation
+## Slide options
+There are some settings that has to be assigned to a slide to work, like a background image. Below are the available settings.
+
+### Automatic animation
 Reveal.js has support for [auto-animation](https://revealjs.com/auto-animate/) which when possible, smoothly animates the transition between slides. Here is an example where the second list element will be smoothly added after the first one:
 ```nim
 slide:
-  slide(autoAnimate=true):
+  slide(slideOptions(autoAnimate=true)):
     nbText: """
 - One element
 """
-  slide(autoAnimate=true):
+  slide(slideOptions(autoAnimate=true)):
     nbText: """
 - One element
-- Two elements    
+- Two elements
 """
+```
+
+### Backgrounds
+There are multiple [background types](https://revealjs.com/backgrounds/) available:
+- A single color:
+```nim
+slide:
+  slide(slideOptions(colorBackground="#f1b434")):
+    nbText: "Yellow background"
+```
+- Image background:
+```nim
+slide:
+  slide(slideOptions(imageBackground="path/to/image/or/url")):
+    discard
+```
+- Video background:
+```nim
+slide:
+  slide(slideOptions(videoBackground="path/to/video/or/url")):
+    discard
+```
+- Iframe background:
+```nim
+slide:
+  slide(slideOptions(iframeBackground="url/to/website", iframeInteractive=true)):
+    discard
 ```
 
 ## Typewriter
