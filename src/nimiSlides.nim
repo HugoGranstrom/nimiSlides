@@ -31,6 +31,21 @@ type
   NimiSlidesConfig* = object
     localReveal*: string
 
+  SlideOptions* = object
+    autoAnimate*: bool
+    colorBackground*: string
+    imageBackground*: string
+    videoBackground*: string
+    iframeBackground*: string
+    iframeInteractive*: bool
+
+proc slideOptions*(autoAnimate, iframeInteractive = false, colorBackground, gradientBackground, imageBackground, videoBackground, iframeBackground: string = ""): SlideOptions =
+  SlideOptions(
+    autoAnimate: autoAnimate, iframeInteractive: iframeInteractive, colorBackground: colorBackground,
+    imageBackground: imageBackground, videoBackground: videoBackground,
+    iframeBackground: iframeBackground
+  )
+
 const document = """
 <!DOCTYPE html>
 <html>
@@ -162,11 +177,22 @@ proc revealTheme*(doc: var NbDoc) =
 
 var currentFragment: int
 
-template slide*(autoAnimate: untyped, body: untyped): untyped =
-  if autoAnimate:
-    nbRawHtml: "<section data-auto-animate>"
-  else:
-    nbRawHtml: "<section>"
+template slide*(options: untyped, body: untyped): untyped =
+  var attributes: string
+  if options.autoAnimate:
+    attributes.add "data-auto-animate "
+  if options.colorBackground.len > 0:
+    attributes.add """data-background-color="$1" """ % [options.colorBackground]
+  elif options.imageBackground.len > 0:
+    attributes.add """data-background-image="$1" """ % [options.imageBackground]
+  elif options.videoBackground.len > 0:
+    attributes.add """data-background-video="$1" """ % [options.videoBackground]
+  elif options.iframeBackground.len > 0:
+    attributes.add """data-background-iframe="$1" """ % [options.iframeBackground]
+    if options.iframeInteractive:
+      attributes.add "data-background-interactive "
+
+  nbRawHtml: "<section $1>" % [attributes]
   when declaredInScope(CountVarNimiSlide):
     when CountVarNimiSlide < 2:
       static: inc CountVarNimiSlide
@@ -181,7 +207,7 @@ template slide*(autoAnimate: untyped, body: untyped): untyped =
   nbRawHtml: "</section>"
 
 template slide*(body: untyped) =
-  slide(autoAnimate=false):
+  slide(slideOptions()):
     body
 
 template fragmentStartBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], indexOffset: int, incrementCounter: bool) =
@@ -295,6 +321,47 @@ template fragmentList*(list: seq[string], animation: varargs[seq[FragmentAnimati
 
 template fragmentList*(list: seq[string], animation: FragmentAnimation) =
   fragmentList(list, @[@[animation]])
+
+template orderedList*(p: string, body: untyped) =
+  fragmentFadeIn:
+    nbRawHtml: "<li>"
+    nbText: p
+    nbRawHtml: "<ol>"
+    body
+    nbRawHtml: "</ol></li>"
+
+template orderedList*(body: untyped) =
+  orderedList("", body)
+
+template unorderedList*(p: string, body: untyped) =
+  fragmentFadeIn:
+    nbRawHtml: "<li>"
+    nbText: p
+    nbRawHtml: "<ul>"
+    body
+    nbRawHtml: "</ul></li>"
+
+template unorderedList*(body: untyped) =
+  unorderedList("", body)
+
+template listItem*(animation: seq[FragmentAnimation], body: untyped) =
+  var classString: string
+  for an in animation:
+    classString &= $an & " "
+  nbRawHtml: """<li class="fragment $1" data-fragment-index="$2" data-fragment-index-nimib="$2">""" % [classString, $currentFragment]
+  currentFragment += 1
+  body
+  nbRawHtml: "</li>"
+template listItem*(animation: FragmentAnimation, body: untyped) =
+  listItem(@[animation], body)
+
+template listItem*(body: untyped) =
+  listItem(fadeIn, body)
+
+template fragmentList*(body: untyped) =
+  nbRawHtml: """<ul style="list-style-type: none">"""
+  body
+  nbRawHtml: "</ul>"
   
 
 proc toHSlice*(h: HSlice[int, int]): HSlice[int, int] = h
