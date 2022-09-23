@@ -11,6 +11,17 @@
   - `iframeInteractive` - make the iframe interactive.
 - Add `showSlideNumber` template to enable showing the current slide number.
 - Add `useScrollWheel` template to enable stepping through the slides with the scroll wheel.
+- `columns` template to create equally wide columns:
+```nim
+slide:
+  columns:
+    column:
+      nbText: "Left column"
+    column:
+      nbText: "Right column"
+```
+- `footer` template to a footer to every slide. The input should be HTML.
+  - The footer will be shown on all slides except those with image-, video- or iframe-backgrounds.
 - Experimental features - the API for these are not yet stable and might change in the future:
   - `fragmentThen` - Allows the construction of fragments like `growThenShrink` by `fragmentThen(grows, shrinks)`. The second animations happens at the same time as the next animation, reducing the number of clicks needed.
   - `align` template to simply align its content like this: `align("left"):`
