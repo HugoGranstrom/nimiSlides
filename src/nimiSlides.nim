@@ -70,8 +70,8 @@ const main = hlHtml"""
     {{&.}}
     {{/blocks}}
   </div>
-  <div id="reveal-footer" style="position: absolute; right: 1%; bottom: 0%;">
-    {{revealFooter}}
+  <div id="reveal-footer" style="position: absolute; text-align: center; width: 100%; bottom: 0%; visibility: hidden">
+    {{&revealFooter}}
   </div>
 </div>
 {{> revealJS }}
@@ -489,3 +489,24 @@ template columns*(body: untyped) =
 
 template footer*(text: string) =
   nb.context["revealFooter"] = text
+  nbJsFromCode:
+    import nimiSlides/revealFFI
+    import std / [dom, jsconsole]
+    echo "Before"
+    onRevealReady:
+      echo "Doing something!"
+      let deck = Reveal.getRevealElement()
+      let footer = getElementById("reveal-footer").cloneNode(true)
+      footer.style.setProperty("visibility", "visible")
+      deck.appendChild(footer)
+      Reveal.on("slidechanged", proc (event: RevealEvent) =
+        echo "slidechanged!"
+        let currentSlide = event.currentSlide
+        console.log currentSlide
+        for node in currentSlide.attributes:
+          # hide footer if fullscreen content is shown
+          if node.nodeName in ["data-background-video".cstring, "data-background-iframe".string, "data-background-image".string]:
+            footer.style.setProperty("visibility", "hidden")
+            return
+        footer.style.setProperty("visibility", "visible")
+      )

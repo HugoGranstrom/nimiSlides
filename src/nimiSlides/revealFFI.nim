@@ -6,7 +6,7 @@ when defined(js):
     RevealEvent* = ref object of JsObject
       indexh*: cint
       indexv*: cint
-      previousSlide*, currentSlide*: JsObject
+      previousSlide*, currentSlide*: Element
       fragment*: Element
 
   var Reveal* {.importjs, nodecl.}: RevealType
@@ -29,3 +29,20 @@ when defined(js):
     window.addEventListener("load", proc (event: Event) =
       Reveal.on(revealEvent, listener)
     )
+  
+  proc isReady*(reveal: RevealType): bool {.importjs: "#.isReady()".}
+
+  template onRevealReady*(body: untyped) =
+    window.addEventListener("load", proc (event: Event) =
+      # if reveal already is ready, then run the code directly as the event won't trigger anymore.
+      if Reveal.isReady():
+        body
+      else:
+        window.addEventListener("load", proc (e: Event) =
+          Reveal.on("ready", proc (event: RevealEvent) =
+            body
+          )
+        )
+    )
+
+  proc getRevealElement*(reveal: RevealType): Element {.importjs: "#.getRevealElement()".}
