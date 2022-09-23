@@ -290,6 +290,8 @@ nb.useLocalReveal("revealjsfolder")
 
 ## Misc. Configuration
 - `useScrollWheel()`, this enables stepping forward in the presentation using the scroll-wheel.
+- `showSlideNumber()`, this enables the current slide number being shown in the corner.
+- `footer("html here")`, this will create a footer at the bottom of every slide. It is styled using HTML, so to create a link, use `<a></a>`. 
 
 # Roadmap 🗺
 - [X] Make available `fragments` (https://revealjs.com/fragments/)
