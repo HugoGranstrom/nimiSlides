@@ -63,12 +63,15 @@ const head = """
 </head>
 """
 
-const main = """
+const main = hlHtml"""
 <div class="reveal">
   <div class="slides">
     {{#blocks}}
     {{&.}}
     {{/blocks}}
+  </div>
+  <div id="reveal-footer" style="position: absolute; right: 1%; bottom: 0%;">
+    {{revealFooter}}
   </div>
 </div>
 {{> revealJS }}
@@ -483,3 +486,6 @@ template columns*(body: untyped) =
   nbRawHtml: hlHtml"""<div style="display: grid; grid-auto-flow: column;">"""
   body
   nbRawHtml: "</div>"
+
+template footer*(text: string) =
+  nb.context["revealFooter"] = text
