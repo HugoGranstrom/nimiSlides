@@ -473,3 +473,13 @@ template align*(text: string, body: untyped) =
 """ % text
   body
   nbRawHtml: "</div>"
+
+template columns*(body: untyped) =
+  template column(bodyInner: untyped) =
+    nbRawHtml: "<div>"
+    bodyInner
+    nbRawHtml: "</div>"
+
+  nbRawHtml: hlHtml"""<div style="display: grid; grid-auto-flow: column;">"""
+  body
+  nbRawHtml: "</div>"
