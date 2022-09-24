@@ -479,13 +479,14 @@ template align*(text: string, body: untyped) =
   nbRawHtml: "</div>"
 
 template columns*(body: untyped) =
-  template column(bodyInner: untyped) =
-    nbRawHtml: "<div>"
-    bodyInner
-    nbRawHtml: "</div>"
-
-  nbRawHtml: hlHtml"""<div style="display: grid; grid-auto-flow: column;">"""
+  nbRawHtml: """<div style="display: grid; grid-auto-flow: column;">"""
   body
+  nbRawHtml: "</div>"
+
+template column*(bodyInner: untyped) =
+  ## column should always be used inside a `columns` block
+  nbRawHtml: "<div>"
+  bodyInner
   nbRawHtml: "</div>"
 
 template footer*(text: string, rawHtml = false) =

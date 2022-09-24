@@ -152,6 +152,24 @@ slide:
 
   slide(slideOptions(iframeBackground="https://pietroppeter.github.io/nimib/", iframeInteractive=true)):
     nbText: "Iframe background"
+
+slide:
+  slide:
+    nbText: "2 Columns"
+    columns:
+      column:
+        nbText: "Left"
+      column:
+        nbText: "Right"
+  slide:
+    nbText: "3 Columns"
+    columns:
+      column:
+        nbText: "Left"
+      column:
+        nbText: "Middle"
+      column:
+        nbText: "Right"
   
 
 
