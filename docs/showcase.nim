@@ -7,9 +7,10 @@ setSlidesTheme(Moon)
 
 useScrollWheel()
 showSlideNumber()
+footer("You can have a footer. It's handy for [links](https://github.com/HugoGranstrom/nimiSlides)")
 
 slide:
-  bigText: "Welcome to [nimiSlides](https://github.com/HugoGranstrom/nimiSlides)! 🛷"
+  bigText: "Welcome to [nimiSlides](https://github.com/HugoGranstrom/nimiSlides)! 🛷" 
   nbText: "These slides will show you what this [nimib](https://github.com/pietroppeter/nimib) theme is capable of."
   speakerNote "This is a note"
 
