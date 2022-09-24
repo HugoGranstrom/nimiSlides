@@ -3,6 +3,7 @@ export os
 import nimib
 import nimib/capture
 import toml_serialization
+import markdown
 
 type
   FragmentAnimation* = enum
@@ -487,8 +488,12 @@ template columns*(body: untyped) =
   body
   nbRawHtml: "</div>"
 
-template footer*(text: string) =
-  nb.context["revealFooter"] = text
+template footer*(text: string, rawHtml = false) =
+  if rawHtml:
+    nb.context["revealFooter"] = text
+  else:
+    nb.context["revealFooter"] = markdown(text, config=initGfmConfig()).dup(removeSuffix)
+
   nbJsFromCode:
     import nimiSlides/revealFFI
     import std / [dom, jsconsole]
