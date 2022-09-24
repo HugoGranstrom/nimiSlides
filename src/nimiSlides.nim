@@ -64,7 +64,7 @@ const head = """
 </head>
 """
 
-const main = hlHtml"""
+const main = """
 <div class="reveal">
   <div class="slides">
     {{#blocks}}
