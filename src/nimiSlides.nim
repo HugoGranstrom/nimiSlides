@@ -71,9 +71,11 @@ const main = """
     {{&.}}
     {{/blocks}}
   </div>
-  <div id="reveal-footer" style="position: absolute; text-align: center; width: 100%; bottom: 0%; visibility: hidden">
+  {{#revealFooter}}
+  <div id="reveal-footer" style="position: absolute; text-align: center; width: 100%; bottom: 0%; visibility: hidden; opacity: {{footerOpacity}}; font-size: {{footerFontSize}}px">
     {{&revealFooter}}
   </div>
+  {{/revealFooter}}
 </div>
 {{> revealJS }}
 <script>
@@ -489,7 +491,9 @@ template column*(bodyInner: untyped) =
   bodyInner
   nbRawHtml: "</div>"
 
-template footer*(text: string, rawHtml = false) =
+template footer*(text: string, fontSize: int = 20, opacity: range[0.0 .. 1.0] = 0.6, rawHtml = false) =
+  nb.context["footerFontSize"] = fontSize
+  nb.context["footerOpacity"] = opacity
   if rawHtml:
     nb.context["revealFooter"] = text
   else:

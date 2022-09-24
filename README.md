@@ -291,7 +291,7 @@ nb.useLocalReveal("revealjsfolder")
 ## Misc. Configuration
 - `useScrollWheel()`, this enables stepping forward in the presentation using the scroll-wheel.
 - `showSlideNumber()`, this enables the current slide number being shown in the corner.
-- `footer(text: string, rawHtml=false)`, this will create a footer at the bottom of every slide. By default the text is treated as markdown, but if `rawHtml=true` it will inline the text as raw HTML.
+- `footer(text: string, fontSize=16, opacity=0.6, rawHtml=false)`, this will create a footer at the bottom of every slide. By default the text is treated as markdown, but if `rawHtml=true` it will inline the text as raw HTML.
 
 # Roadmap 🗺
 - [X] Make available `fragments` (https://revealjs.com/fragments/)
