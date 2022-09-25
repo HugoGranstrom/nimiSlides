@@ -155,14 +155,14 @@ slide:
 
 slide:
   slide:
-    nbText: "2 Columns"
+    nbText: "## 2 Columns"
     columns:
       column:
         nbText: "Left"
       column:
         nbText: "Right"
   slide:
-    nbText: "3 Columns"
+    nbText: "## 3 Columns"
     columns:
       column:
         nbText: "Left"
@@ -170,6 +170,21 @@ slide:
         nbText: "Middle"
       column:
         nbText: "Right"
+
+slide:
+  nbText: "## Incremental lists"
+  align("left"):
+    orderedList:
+      listItem(@[fadeInThenSemiOut, highlightCurrentGreen]):
+        nbText: "First"
+      listItem(@[fadeInThenSemiOut, highlightCurrentGreen]):
+        nbText: "Second"
+      unorderedList:
+        listItem(@[fadeInThenSemiOut, highlightCurrentGreen]):
+          nbText: "You can nest them as well"
+        orderedList:
+          listItem(@[fadeInThenSemiOut, highlightCurrentGreen]):
+            nbText: "And mix ordered and unordered lists"
   
 
 

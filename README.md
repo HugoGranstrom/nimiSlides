@@ -176,6 +176,22 @@ slide:
 ```
 Here the three strings will be reveal one after another when a key is pressed.
 
+If you want nested lists or more control over then list you can use `orderedList`, `unorderedList` and `listItem`:
+```nim
+orderedList:
+  listItem:
+    nbText: "First"
+  listItem:
+    nbText: "Second"
+  unorderedList:
+    listItem:
+      nbText: "You can nest them as well"
+    orderedList:
+      listItem:
+        nbText: "And mix ordered and unordered lists"
+```
+`listItem` accepts as argument `FragmentAnimation` or `seq[FragmentAnimation]`. By default it uses `fadeInThenSemiOut`.
+
 ## Big Text
 If you have a short snippet of text you want to show as big as possible, use `bigText` instead of `nbText`:
 ```nim

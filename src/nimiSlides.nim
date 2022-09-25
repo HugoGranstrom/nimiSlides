@@ -328,46 +328,31 @@ template fragmentList*(list: seq[string], animation: varargs[seq[FragmentAnimati
 template fragmentList*(list: seq[string], animation: FragmentAnimation) =
   fragmentList(list, @[@[animation]])
 
-template orderedList*(p: string, body: untyped) =
-  fragmentFadeIn:
-    nbRawHtml: "<li>"
-    nbText: p
-    nbRawHtml: "<ol>"
-    body
-    nbRawHtml: "</ol></li>"
-
 template orderedList*(body: untyped) =
-  orderedList("", body)
-
-template unorderedList*(p: string, body: untyped) =
-  fragmentFadeIn:
-    nbRawHtml: "<li>"
-    nbText: p
-    nbRawHtml: "<ul>"
-    body
-    nbRawHtml: "</ul></li>"
+  nbRawHtml: "<ol>"
+  body
+  nbRawHtml: "</ol>"
 
 template unorderedList*(body: untyped) =
-  unorderedList("", body)
+  nbRawHtml: "<ul>"
+  body
+  nbRawHtml: "</ul>"
 
 template listItem*(animation: seq[FragmentAnimation], body: untyped) =
   var classString: string
   for an in animation:
     classString &= $an & " "
-  nbRawHtml: """<li class="fragment $1" data-fragment-index="$2" data-fragment-index-nimib="$2">""" % [classString, $currentFragment]
-  currentFragment += 1
-  body
-  nbRawHtml: "</li>"
+  fadeInNext:
+    nbRawHtml: """<li class="fragment $1" data-fragment-index="$2" data-fragment-index-nimib="$2">""" % [classString, $currentFragment]
+    currentFragment += 1
+    body
+    nbRawHtml: "</li>"
+
 template listItem*(animation: FragmentAnimation, body: untyped) =
   listItem(@[animation], body)
 
 template listItem*(body: untyped) =
-  listItem(fadeIn, body)
-
-template fragmentList*(body: untyped) =
-  nbRawHtml: """<ul style="list-style-type: none">"""
-  body
-  nbRawHtml: "</ul>"
+  listItem(fadeInThenSemiOut, body)
   
 
 proc toHSlice*(h: HSlice[int, int]): HSlice[int, int] = h
@@ -408,6 +393,31 @@ template animateCode*(lines: varargs[HSlice[int, int], toHSlice], body: untyped)
     s.add @[line]
   animateCode(s):
     body
+
+template newAnimateCodeBlock*(cmd: untyped, impl: untyped) =
+  template `cmd`*(lines: varargs[seq[HSlice[int, int]]], body: untyped) =
+    newNbCodeBlock(cmd.astToStr, body):
+      var linesString: string
+      if lines.len > 0:
+        linesString &= "|"
+      for lineBundle in lines:
+        for line in lineBundle:
+          linesString &= $line.a & "-" & $line.b & ","
+        linesString &= "|"
+      if lines.len > 0:
+        linesString = linesString[0 .. ^3]
+      nb.blk.context["highlightLines"] = linesString
+    impl(body)
+
+  template `cmd`*(lines: varargs[HSlice[int, int], toHSlice], body: untyped) =
+    var s: seq[seq[HSlice[int, int]]]
+    for line in lines:
+      s.add @[line]
+    `cmd`(s):
+      body
+
+  nb.partials[cmd.astToStr] = nb.partials["animateCode"]
+  nb.renderPlans[cmd.astToStr] = nb.renderPlans["animateCode"]
 
 template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") =
   let localText = textMessage
