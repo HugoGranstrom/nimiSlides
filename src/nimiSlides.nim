@@ -40,7 +40,7 @@ type
     iframeBackground*: string
     iframeInteractive*: bool
 
-proc slideOptions*(autoAnimate, iframeInteractive = false, colorBackground, imageBackground, videoBackground, iframeBackground: string = ""): SlideOptions =
+proc slideOptions*(autoAnimate = false, iframeInteractive = true, colorBackground, imageBackground, videoBackground, iframeBackground: string = ""): SlideOptions =
   SlideOptions(
     autoAnimate: autoAnimate, iframeInteractive: iframeInteractive, colorBackground: colorBackground,
     imageBackground: imageBackground, videoBackground: videoBackground,
@@ -481,7 +481,7 @@ template speakerNote*(text: string) =
 <aside class="notes">
   $1
 </aside>
-""" % [text]
+""" % [markdown(text)]
 
 template align*(text: string, body: untyped) =
   nbRawHtml: """
