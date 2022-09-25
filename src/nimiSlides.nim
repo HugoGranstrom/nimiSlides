@@ -61,6 +61,11 @@ const head = """
 <head>
   <meta content="text/html; charset=utf-8" http-equiv="content-type">
   {{> revealCSS }}
+  {{#nb_style}}
+  <style>
+  {{{ nb_style }}}
+  </style>
+  {{/nb_style}}
 </head>
 """
 
@@ -172,6 +177,8 @@ proc revealTheme*(doc: var NbDoc) =
   doc.renderPlans["bigText"] = doc.renderPlans["nbText"]
 
   doc.context["slidesTheme"] = "black"
+  doc.context["nb_style"] = ""
+
 
   try:
     let slidesConfig = Toml.decode(doc.rawCfg, NimiSlidesConfig, "nimislides")
@@ -180,6 +187,9 @@ proc revealTheme*(doc: var NbDoc) =
       doc.useLocalReveal(slidesConfig.localReveal)
   except TomlError:
     discard # if it doesn't exists, just let it be
+
+proc addStyle*(doc: NbDoc, style: string) =
+  doc.context["nb_style"] = doc.context["nb_style"].vString & "\n" & style
 
 var currentFragment: int
 
