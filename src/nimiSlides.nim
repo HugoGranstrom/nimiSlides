@@ -552,20 +552,25 @@ template footer*(text: string, fontSize: int = 20, opacity: range[0.0 .. 1.0] = 
         footer.style.setProperty("visibility", "visible")
       )
 
-template cornerImage*(image: string, corner: Corner, size: int = 100) =
+template cornerImage*(image: string, corner: Corner, size: int = 100, animate = true, verticalPadding: int = 2, horizontalPadding: int = 1) =
   block:
     let vertical =
       if corner in [LowerLeft, LowerRight]:
-        "bottom: 0%;"
+        "bottom: $1%;" % [$verticalPadding]
       else:
-        "top: 0%;"
+        "top: $1%;" % [$verticalPadding]
     let horizontal =
       if corner in [UpperLeft, LowerLeft]:
-        "left: 0%;"
+        "left: $1%;" % [$horizontalPadding]
       else:
-        "right: 0%;"
+        "right: 1%;" % [$horizontalPadding]
+    let animateString =
+      if animate:
+        "transition: all 0.2s ease-out;"
+      else:
+        ""
     let id = "cornerImage-" & $nb.newId()
-    let html = &"""<img src="$1" id="$2" style="transition: all 0.2s ease-out; opacity: 0%; position: fixed; max-width: $3px; margin: 0px; $4 $5"/>""" % [image, id, $size, vertical, horizontal]
+    let html = &"""<img src="$1" id="$2" style="opacity: 0%; position: fixed; width: $3px; height: auto; margin: 0px; $4 $5 $6"/>""" % [image, id, $size, vertical, horizontal, animateString]
     let currentSlideNr = currentSlideNumber
     nbJsFromCode(id, currentSlideNr, html):
       import std / dom
