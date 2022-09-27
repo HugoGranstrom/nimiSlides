@@ -144,17 +144,6 @@ proc useLocalReveal*(nb: var NbDoc, path: string) =
 template setSlidesTheme*(theme: SlidesTheme) =
   nb.context["slidesTheme"] = ($theme).toLower
 
-template nimConfTheme*() =
-  setSlidesTheme(Black)
-  nb.addStyle: """
-:root {
-  --r-heading-color: #ffe220;
-  --r-link-color: #ffe220;
-  --r-selection-color: #ffe220;
-  --r-link-color-dark: darken(#ffe220 , 15%)
-}
-"""
-
 template useScrollWheel*() =
   ## Enable using the scroll-wheel to step forward in slides.
   nb.context["useScrollWheel"] = true
@@ -557,7 +546,7 @@ template footer*(text: string, fontSize: int = 20, opacity: range[0.0 .. 1.0] = 
         footer.style.setProperty("visibility", "visible")
       )
 
-template cornerImage*(image: string, corner: Corner, size: int) =
+template cornerImage*(image: string, corner: Corner, size: int = 100) =
   block:
     let vertical =
       if corner in [LowerLeft, LowerRight]:

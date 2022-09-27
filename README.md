@@ -308,6 +308,7 @@ nb.useLocalReveal("revealjsfolder")
 - `useScrollWheel()`, this enables stepping forward in the presentation using the scroll-wheel.
 - `showSlideNumber()`, this enables the current slide number being shown in the corner.
 - `footer(text: string, fontSize=16, opacity=0.6, rawHtml=false)`, this will create a footer at the bottom of every slide. By default the text is treated as markdown, but if `rawHtml=true` it will inline the text as raw HTML.
+- `cornerImage(image: string, corner: Corner, size: int = 100)` allows you to place an image in the corners: `UpperLeft, UpperRight, LowerLeft, LowerRight`.
 
 # Roadmap 🗺
 - [X] Make available `fragments` (https://revealjs.com/fragments/)
@@ -323,7 +324,7 @@ nb.useLocalReveal("revealjsfolder")
 - [X] Presenter mode note (https://revealjs.com/speaker-view/)
 - [ ] Auto-slide (https://revealjs.com/auto-slide/)
 - [x] Fit text (https://revealjs.com/layout/#fit-text)
-- [ ] Backgrounds
+- [x] Backgrounds
 - [ ] Transitions (https://revealjs.com/transitions/)
 - [X] Automatic animations
 - [X] Typewriter effect

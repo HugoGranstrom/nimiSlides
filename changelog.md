@@ -24,6 +24,7 @@ slide:
   - The footer will be shown on all slides except those with image-, video- or iframe-backgrounds.
 - Support for making lists that incrementally reveal the list items are supported using the templates `orderedList`, `unorderedList` and `listItem`.
 - `addStyle` allows you to add CSS to the document.
+- `cornerImage(image: string, corner: Corner, size: int = 100)` allows you to place an image in the corners: `UpperLeft, UpperRight, LowerLeft, LowerRight`.
 - Experimental features - the API for these are not yet stable and might change in the future:
   - `fragmentThen` - Allows the construction of fragments like `growThenShrink` by `fragmentThen(grows, shrinks)`. The second animations happens at the same time as the next animation, reducing the number of clicks needed.
   - `align` template to simply align its content like this: `align("left"):`

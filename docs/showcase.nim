@@ -185,6 +185,13 @@ slide:
         orderedList:
           listItem(@[fadeInThenSemiOut, highlightCurrentGreen]):
             nbText: "And mix ordered and unordered lists"
+
+slide:
+  nbText: "## Corner images"
+  cornerImage("https://hugogranstrom.com/images/avatar.png", LowerLeft, 100)
+  cornerImage("https://hugogranstrom.com/images/avatar.png", LowerRight, 100)
+  cornerImage("https://hugogranstrom.com/images/avatar.png", UpperLeft, 100)
+  cornerImage("https://hugogranstrom.com/images/avatar.png", UpperRight, 100)
   
 
 
