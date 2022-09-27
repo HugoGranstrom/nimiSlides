@@ -29,6 +29,9 @@ type
   SlidesTheme* = enum
     Black, Beige, Blood, League, Moon, Night, Serif, Simple, Sky, Solarized, White
 
+  Corner* = enum
+    UpperLeft, UpperRight, LowerLeft, LowerRight
+
   NimiSlidesConfig* = object
     localReveal*: string
 
@@ -191,10 +194,12 @@ proc revealTheme*(doc: var NbDoc) =
 proc addStyle*(doc: NbDoc, style: string) =
   doc.context["nb_style"] = doc.context["nb_style"].vString & "\n" & style
 
-var currentFragment: int
+var currentFragment, currentSlideNumber: int
 
 template slide*(options: untyped, body: untyped): untyped =
+  currentSlideNumber += 1
   var attributes: string
+  attributes.add """data-nimib-slide-number="$1" """ % [$currentSlideNumber]
   if options.autoAnimate:
     attributes.add "data-auto-animate "
   if options.colorBackground.len > 0:
@@ -540,3 +545,40 @@ template footer*(text: string, fontSize: int = 20, opacity: range[0.0 .. 1.0] = 
             return
         footer.style.setProperty("visibility", "visible")
       )
+
+template cornerImage*(image: string, corner: Corner, size: int) =
+  block:
+    let vertical =
+      if corner in [LowerLeft, LowerRight]:
+        "bottom: 0%;"
+      else:
+        "top: 0%;"
+    let horizontal =
+      if corner in [UpperLeft, LowerLeft]:
+        "left: 0%;"
+      else:
+        "right: 0%;"
+    let id = "cornerImage-" & $nb.newId()
+    let html = &"""<img src="$1" id="$2" style="visibility: hidden; position: fixed; max-width: $3px; margin: 0px; $4 $5"/>""" % [image, id, $size, vertical, horizontal]
+    let currentSlideNr = currentSlideNumber
+    nbJsFromCode(id, currentSlideNr, html):
+      import std / dom
+      import nimiSlides/revealFFI
+
+      onRevealReady:
+        let img = stringToElement(html)
+        let deck = Reveal.getRevealElement()
+        deck.appendChild(img)
+        # If image is on the first slide, the slidechanged event won't trigger so we have to check it manually.
+        let currentSlide = Reveal.getCurrentSlide()
+        let slideNr = currentSlide.getSlideNumber()
+        if currentSlideNr == slideNr:
+          img.style.setProperty("visibility", "visible")
+        Reveal.on("slidechanged", proc (event: RevealEvent) =
+          let slideNr = event.currentSlide.getSlideNumber()
+          echo "Slide nr: ", slideNr, " ", currentSlideNr
+          if currentSlideNr == slideNr:
+            img.style.setProperty("visibility", "visible")
+          else:
+            img.style.setProperty("visibility", "hidden")
+        )

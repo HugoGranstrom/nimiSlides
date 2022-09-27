@@ -24,6 +24,14 @@ when defined(js):
         return fragmentIndex
     raise newException(ValueError, "Element doesn't have a data-fragment-index field")
 
+  proc getSlideNumber*(el: Element): int =
+    for node in el.attributes:
+      # use custom attribute as reveal changes data-fragment-index from what we gave it
+      if node.nodeName == "data-nimib-slide-number".cstring:
+        let fragmentIndex = ($node.nodeValue).parseInt
+        return fragmentIndex
+    raise newException(ValueError, "Element doesn't have a data-fragment-index field")
+
   proc on*(reveal: RevealType, event: cstring, listener: proc (event: RevealEvent)) {.importjs: "#.on(#, #)".}
   template onReveal*(revealEvent: cstring, listener: proc (event: RevealEvent)) =
     window.addEventListener("load", proc (event: Event) =
@@ -38,11 +46,14 @@ when defined(js):
       if Reveal.isReady():
         body
       else:
-        window.addEventListener("load", proc (e: Event) =
-          Reveal.on("ready", proc (event: RevealEvent) =
-            body
-          )
+        Reveal.on("ready", proc (event: RevealEvent) =
+          body
         )
     )
 
   proc getRevealElement*(reveal: RevealType): Element {.importjs: "#.getRevealElement()".}
+  proc getCurrentSlide*(reveal: RevealType): Element {.importjs: "#.getCurrentSlide()".}
+  proc stringToElement*(html: string): Element =
+    let temp = document.createElement("template")
+    temp.innerHtml = html.strip()
+    return temp.content.firstChild.Element
