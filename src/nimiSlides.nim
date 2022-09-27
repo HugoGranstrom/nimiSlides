@@ -3,6 +3,7 @@ export os
 import nimib
 import nimib/capture
 import toml_serialization
+import markdown
 
 type
   FragmentAnimation* = enum
@@ -28,8 +29,26 @@ type
   SlidesTheme* = enum
     Black, Beige, Blood, League, Moon, Night, Serif, Simple, Sky, Solarized, White
 
+  Corner* = enum
+    UpperLeft, UpperRight, LowerLeft, LowerRight
+
   NimiSlidesConfig* = object
     localReveal*: string
+
+  SlideOptions* = object
+    autoAnimate*: bool
+    colorBackground*: string
+    imageBackground*: string
+    videoBackground*: string
+    iframeBackground*: string
+    iframeInteractive*: bool
+
+proc slideOptions*(autoAnimate = false, iframeInteractive = true, colorBackground, imageBackground, videoBackground, iframeBackground: string = ""): SlideOptions =
+  SlideOptions(
+    autoAnimate: autoAnimate, iframeInteractive: iframeInteractive, colorBackground: colorBackground,
+    imageBackground: imageBackground, videoBackground: videoBackground,
+    iframeBackground: iframeBackground
+  )
 
 const document = """
 <!DOCTYPE html>
@@ -45,6 +64,11 @@ const head = """
 <head>
   <meta content="text/html; charset=utf-8" http-equiv="content-type">
   {{> revealCSS }}
+  {{#nb_style}}
+  <style>
+  {{{ nb_style }}}
+  </style>
+  {{/nb_style}}
 </head>
 """
 
@@ -55,6 +79,11 @@ const main = """
     {{&.}}
     {{/blocks}}
   </div>
+  {{#revealFooter}}
+  <div id="reveal-footer" style="position: absolute; text-align: center; width: 100%; bottom: 0%; visibility: hidden; opacity: {{footerOpacity}}; font-size: {{footerFontSize}}px">
+    {{&revealFooter}}
+  </div>
+  {{/revealFooter}}
 </div>
 {{> revealJS }}
 <script>
@@ -151,6 +180,8 @@ proc revealTheme*(doc: var NbDoc) =
   doc.renderPlans["bigText"] = doc.renderPlans["nbText"]
 
   doc.context["slidesTheme"] = "black"
+  doc.context["nb_style"] = ""
+
 
   try:
     let slidesConfig = Toml.decode(doc.rawCfg, NimiSlidesConfig, "nimislides")
@@ -160,13 +191,29 @@ proc revealTheme*(doc: var NbDoc) =
   except TomlError:
     discard # if it doesn't exists, just let it be
 
-var currentFragment: int
+proc addStyle*(doc: NbDoc, style: string) =
+  doc.context["nb_style"] = doc.context["nb_style"].vString & "\n" & style
 
-template slide*(autoAnimate: untyped, body: untyped): untyped =
-  if autoAnimate:
-    nbRawOutput: "<section data-auto-animate>"
-  else:
-    nbRawOutput: "<section>"
+var currentFragment, currentSlideNumber: int
+
+template slide*(options: untyped, body: untyped): untyped =
+  currentSlideNumber += 1
+  var attributes: string
+  attributes.add """data-nimib-slide-number="$1" """ % [$currentSlideNumber]
+  if options.autoAnimate:
+    attributes.add "data-auto-animate "
+  if options.colorBackground.len > 0:
+    attributes.add """data-background-color="$1" """ % [options.colorBackground]
+  elif options.imageBackground.len > 0:
+    attributes.add """data-background-image="$1" """ % [options.imageBackground]
+  elif options.videoBackground.len > 0:
+    attributes.add """data-background-video="$1" """ % [options.videoBackground]
+  elif options.iframeBackground.len > 0:
+    attributes.add """data-background-iframe="$1" """ % [options.iframeBackground]
+    if options.iframeInteractive:
+      attributes.add "data-background-interactive "
+
+  nbRawHtml: "<section $1>" % [attributes]
   when declaredInScope(CountVarNimiSlide):
     when CountVarNimiSlide < 2:
       static: inc CountVarNimiSlide
@@ -178,19 +225,20 @@ template slide*(autoAnimate: untyped, body: untyped): untyped =
     var CountVarNimiSlide {.inject, compileTime.} = 1 # we just entered the first level
     body
     static: dec CountVarNimiSlide
-  nbRawOutput: "</section>"
+  nbRawHtml: "</section>"
 
 template slide*(body: untyped) =
-  slide(autoAnimate=false):
+  slide(slideOptions()):
     body
 
-template fragmentStartBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]]) =
+template fragmentStartBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], indexOffset: int, incrementCounter: bool) =
   newNbSlimBlock("fragmentStart"):
     for level in animations:
       var frag: Table[string, string]
       frag["classStr"] = join(level, " ") # eg. fade-in highlight-blue
-      frag["fragIndex"] = $currentFragment
-      currentFragment += 1
+      frag["fragIndex"] = $(currentFragment + indexOffset)
+      if incrementCounter:
+        currentFragment += 1
       fragments.add frag
 
 template fragmentEndBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], startBlock: NbBlock) =
@@ -206,7 +254,7 @@ template fragmentEndBlock(fragments: seq[Table[string, string]], animations: ope
   assert nb.blk != startBlock
   startBlock.context["fragments"] = fragments # set for start block
 
-template fragmentCore*(animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], body: untyped) =
+template fragmentCore*(animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], indexOffset: untyped, incrementCounter: untyped, body: untyped) =
   ## Creates a fragment of the content of body. Nesting works.
   ## animations: each seq in animations are animations that are to be applied at the same time. The first seq's animations
   ##             are applied on the first button click, and the second seq's animations on the second click etc.
@@ -218,10 +266,13 @@ template fragmentCore*(animations: openArray[seq[FragmentAnimation]], endAnimati
   ## `fragment(@[@[fadeIn]], @[@[fadeOut]]): block` will first fadeIn the entire block and perform eventual animations in nested fragments. Once
   ## all of those are finished, it will run fadeOut on the entire block and its subfragments.
   var fragments: seq[Table[string, string]]
-  fragmentStartBlock(fragments, animations, endAnimations)
+  fragmentStartBlock(fragments, animations, endAnimations, indexOffset, incrementCounter)
   var startBlock = nb.blk # this *should* be the block created by fragmentStartBlock
   body
   fragmentEndBlock(fragments, animations, endAnimations, startBlock)
+
+template fragmentCore*(animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], body: untyped) =
+  fragmentCore(animations, endAnimations, 0, true, body)
 
 template fragment*(animations: varargs[seq[FragmentAnimation]] = @[@[fadeIn]], body: untyped): untyped =
   ## Creates a fragment of the content of body. Nesting works.
@@ -263,6 +314,27 @@ template fragmentEnd*(endAnimation: FragmentAnimation, body: untyped) =
   fragmentCore(newSeq[seq[FragmentAnimation]](), @[@[endAnimation]]):
     body
 
+template fragmentThen*(an1, an2: seq[FragmentAnimation], body: untyped) =
+  fragmentCore(@[an2], newSeq[seq[FragmentAnimation]](), 1, false): # trigger these on the next animation, but don't increment the counter.
+    fragmentCore(@[an1], newSeq[seq[FragmentAnimation]]()):
+      body
+
+template fragmentThen*(an1, an2: FragmentAnimation, body: untyped) =
+  fragmentThen(@[an1], @[an2]):
+    body
+
+template fragmentNext*(an: FragmentAnimation, body: untyped) =
+  fragmentCore(@[@[an]], newSeq[seq[FragmentAnimation]](), 0, false):
+    body
+
+template fragmentNext*(an: seq[FragmentAnimation], body: untyped) =
+  fragmentCore(@[an], newSeq[seq[FragmentAnimation]](), 0, false):
+    body
+
+template fadeInNext*(body: untyped) =
+  fragmentNext(fadeIn):
+    body
+
 template fragmentList*(list: seq[string], animation: varargs[seq[FragmentAnimation]]) =
   for s in list:
     fragment(animation):
@@ -270,10 +342,42 @@ template fragmentList*(list: seq[string], animation: varargs[seq[FragmentAnimati
 
 template fragmentList*(list: seq[string], animation: FragmentAnimation) =
   fragmentList(list, @[@[animation]])
+
+template orderedList*(body: untyped) =
+  nbRawHtml: "<ol>"
+  body
+  nbRawHtml: "</ol>"
+
+template unorderedList*(body: untyped) =
+  nbRawHtml: "<ul>"
+  body
+  nbRawHtml: "</ul>"
+
+template listItem*(animation: seq[FragmentAnimation], body: untyped) =
+  var classString: string
+  for an in animation:
+    classString &= $an & " "
+  fadeInNext:
+    nbRawHtml: """<li class="fragment $1" data-fragment-index="$2" data-fragment-index-nimib="$2">""" % [classString, $currentFragment]
+    currentFragment += 1
+    body
+    nbRawHtml: "</li>"
+
+template listItem*(animation: FragmentAnimation, body: untyped) =
+  listItem(@[animation], body)
+
+template listItem*(body: untyped) =
+  listItem(fadeInThenSemiOut, body)
   
 
 proc toHSlice*(h: HSlice[int, int]): HSlice[int, int] = h
 proc toHSlice*(h: int): HSlice[int, int] = h .. h
+
+template animateCode*(lines: string, body: untyped) =
+  newNbCodeBlock("animateCode", body):
+    nb.blk.context["highlightLines"] = lines
+    captureStdout(nb.blk.output):
+      body
 
 template animateCode*(lines: varargs[seq[HSlice[int, int]]], body: untyped) =
   ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
@@ -311,6 +415,31 @@ template animateCode*(lines: varargs[HSlice[int, int], toHSlice], body: untyped)
   animateCode(s):
     body
 
+template newAnimateCodeBlock*(cmd: untyped, impl: untyped) =
+  template `cmd`*(lines: varargs[seq[HSlice[int, int]]], body: untyped) =
+    newNbCodeBlock(cmd.astToStr, body):
+      var linesString: string
+      if lines.len > 0:
+        linesString &= "|"
+      for lineBundle in lines:
+        for line in lineBundle:
+          linesString &= $line.a & "-" & $line.b & ","
+        linesString &= "|"
+      if lines.len > 0:
+        linesString = linesString[0 .. ^3]
+      nb.blk.context["highlightLines"] = linesString
+    impl(body)
+
+  template `cmd`*(lines: varargs[HSlice[int, int], toHSlice], body: untyped) =
+    var s: seq[seq[HSlice[int, int]]]
+    for line in lines:
+      s.add @[line]
+    `cmd`(s):
+      body
+
+  nb.partials[cmd.astToStr] = nb.partials["animateCode"]
+  nb.renderPlans[cmd.astToStr] = nb.renderPlans["animateCode"]
+
 template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") =
   let localText = textMessage
   let speed = typeSpeed
@@ -333,7 +462,8 @@ template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") 
           inc i
           timeout = setTimeout(typewriterLocal, speed)
       karaxHtml:
-        p(id = id, style=style(textAlign, align.kstring))
+        p(id = id, style=style(textAlign, align.kstring)):
+          text localText.cstring
       
       window.addEventListener("load", proc (event: Event) =
         echo "Loading ", fragIndex
@@ -368,8 +498,98 @@ template bigText*(text: string) =
     nb.blk.output = text
 
 template speakerNote*(text: string) =
-  nbRawOutput: """
+  nbRawHtml: """
 <aside class="notes">
   $1
 </aside>
-""" % [text]
+""" % [markdown(text)]
+
+template align*(text: string, body: untyped) =
+  nbRawHtml: """
+<div style="text-align: $1;">
+""" % text
+  body
+  nbRawHtml: "</div>"
+
+template columns*(body: untyped) =
+  nbRawHtml: """<div style="display: grid; grid-auto-flow: column;">"""
+  body
+  nbRawHtml: "</div>"
+
+template column*(bodyInner: untyped) =
+  ## column should always be used inside a `columns` block
+  nbRawHtml: "<div>"
+  bodyInner
+  nbRawHtml: "</div>"
+
+template footer*(text: string, fontSize: int = 20, opacity: range[0.0 .. 1.0] = 0.6, rawHtml = false) =
+  nb.context["footerFontSize"] = fontSize
+  nb.context["footerOpacity"] = opacity
+  if rawHtml:
+    nb.context["revealFooter"] = text
+  else:
+    nb.context["revealFooter"] = markdown(text, config=initGfmConfig()).dup(removeSuffix)
+
+  nbJsFromCode:
+    import nimiSlides/revealFFI
+    import std / [dom, jsconsole]
+    echo "Before"
+    onRevealReady:
+      echo "Doing something!"
+      let deck = Reveal.getRevealElement()
+      let footer = getElementById("reveal-footer").cloneNode(true)
+      footer.style.setProperty("visibility", "visible")
+      deck.appendChild(footer)
+      Reveal.on("slidechanged", proc (event: RevealEvent) =
+        echo "slidechanged!"
+        let currentSlide = event.currentSlide
+        console.log currentSlide
+        for node in currentSlide.attributes:
+          # hide footer if fullscreen content is shown
+          if node.nodeName in ["data-background-video".cstring, "data-background-iframe".string, "data-background-image".string]:
+            footer.style.setProperty("visibility", "hidden")
+            return
+        footer.style.setProperty("visibility", "visible")
+      )
+
+template cornerImage*(image: string, corner: Corner, size: int = 100, animate = true, verticalPadding: int = 2, horizontalPadding: int = 1) =
+  block:
+    let vertical =
+      if corner in [LowerLeft, LowerRight]:
+        "bottom: $1%;" % [$verticalPadding]
+      else:
+        "top: $1%;" % [$verticalPadding]
+    let horizontal =
+      if corner in [UpperLeft, LowerLeft]:
+        "left: $1%;" % [$horizontalPadding]
+      else:
+        "right: 1%;" % [$horizontalPadding]
+    let animateString =
+      if animate:
+        "transition: all 0.2s ease-out;"
+      else:
+        ""
+    let id = "cornerImage-" & $nb.newId()
+    let html = &"""<img src="$1" id="$2" style="opacity: 0%; position: fixed; width: $3px; height: auto; margin: 0px; $4 $5 $6"/>""" % [image, id, $size, vertical, horizontal, animateString]
+    let currentSlideNr = currentSlideNumber
+    nbJsFromCode(id, currentSlideNr, html):
+      import std / dom
+      import nimiSlides/revealFFI
+
+      onRevealReady:
+        let img = stringToElement(html)
+        let deck = Reveal.getRevealElement()
+        deck.appendChild(img)
+        # If image is on the first slide, the slidechanged event won't trigger so we have to check it manually.
+        let currentSlide = Reveal.getCurrentSlide()
+        let slideNr = currentSlide.getSlideNumber()
+        if currentSlideNr == slideNr:
+          img.style.setProperty("opacity", "100%")
+        Reveal.on("slidechanged", proc (event: RevealEvent) =
+          let slideNr = event.currentSlide.getSlideNumber()
+          echo "Slide nr: ", slideNr, " ", currentSlideNr
+          if currentSlideNr == slideNr:
+            img.style.setProperty("opacity", "100%")
+          else:
+            img.style.setProperty("opacity", "0%")
+        )

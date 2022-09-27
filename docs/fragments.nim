@@ -52,6 +52,9 @@ slide:
 slide:
   let codeAnimations = [@[fadeIn], @[grows], @[shrinks, semiFadeOut]] # you can save animations for easy reuse
   nbText: "### Let's make some animations to showcase code blocks one after another:"
+  fragmentThen(fadeIn, semiFadeOut):
+    nbCode:
+      let bla = "This will fadeIn and then semiFadeOut at the same time as the next block appears"
   fragment(codeAnimations):
     nbCode:
       let s = """This code block will fadeIn,

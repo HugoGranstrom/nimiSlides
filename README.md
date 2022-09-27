@@ -23,10 +23,13 @@ lots of flexibility so you can tailor it to your liking.
   - [Big Text](#big-text)
   - [Hiding code output](#hiding-code-output)
   - [Themes](#themes)
-  - [Auto-animation](#automatic-animation)
+  - [Slide Options](#slide-options)
+    - [Auto-animation](#automatic-animation)
+    - [Backgrounds](#backgrounds)
   - [Typewriter](#typewriter)
   - [Speaker View](#speaker-view)
   - [Local Reveal.js installation](#use-local-revealjs-installation)
+  - [Misc. Config](#misc-configuration)
 - [Roadmap](#roadmap-🗺)
 
 # API
@@ -173,6 +176,22 @@ slide:
 ```
 Here the three strings will be reveal one after another when a key is pressed.
 
+If you want nested lists or more control over then list you can use `orderedList`, `unorderedList` and `listItem`:
+```nim
+orderedList:
+  listItem:
+    nbText: "First"
+  listItem:
+    nbText: "Second"
+  unorderedList:
+    listItem:
+      nbText: "You can nest them as well"
+    orderedList:
+      listItem:
+        nbText: "And mix ordered and unordered lists"
+```
+`listItem` accepts as argument `FragmentAnimation` or `seq[FragmentAnimation]`. By default it uses `fadeInThenSemiOut`.
+
 ## Big Text
 If you have a short snippet of text you want to show as big as possible, use `bigText` instead of `nbText`:
 ```nim
@@ -200,19 +219,49 @@ setSlidesTheme(White)
 Available themes are: `Black`, `Beige`, `Blood`, `League`, `Moon`, `Night`, `Serif`, `Simple`, `Sky`, `Solarized`, `White`.
 The same site as above can be view with `White` theme here: https://hugogranstrom.com/nimiSlides/index_white.html
 
-## Automatic animation
+## Slide options
+There are some settings that has to be assigned to a slide to work, like a background image. Below are the available settings.
+
+### Automatic animation
 Reveal.js has support for [auto-animation](https://revealjs.com/auto-animate/) which when possible, smoothly animates the transition between slides. Here is an example where the second list element will be smoothly added after the first one:
 ```nim
 slide:
-  slide(autoAnimate=true):
+  slide(slideOptions(autoAnimate=true)):
     nbText: """
 - One element
 """
-  slide(autoAnimate=true):
+  slide(slideOptions(autoAnimate=true)):
     nbText: """
 - One element
-- Two elements    
+- Two elements
 """
+```
+
+### Backgrounds
+There are multiple [background types](https://revealjs.com/backgrounds/) available:
+- A single color:
+```nim
+slide:
+  slide(slideOptions(colorBackground="#f1b434")):
+    nbText: "Yellow background"
+```
+- Image background:
+```nim
+slide:
+  slide(slideOptions(imageBackground="path/to/image/or/url")):
+    discard
+```
+- Video background:
+```nim
+slide:
+  slide(slideOptions(videoBackground="path/to/video/or/url")):
+    discard
+```
+- Iframe background:
+```nim
+slide:
+  slide(slideOptions(iframeBackground="url/to/website", iframeInteractive=true)):
+    discard
 ```
 
 ## Typewriter
@@ -255,6 +304,12 @@ Then in your presentation `.nim` file add this line:
 nb.useLocalReveal("revealjsfolder")
 ```
 
+## Misc. Configuration
+- `useScrollWheel()`, this enables stepping forward in the presentation using the scroll-wheel.
+- `showSlideNumber()`, this enables the current slide number being shown in the corner.
+- `footer(text: string, fontSize=16, opacity=0.6, rawHtml=false)`, this will create a footer at the bottom of every slide. By default the text is treated as markdown, but if `rawHtml=true` it will inline the text as raw HTML.
+- `cornerImage(image: string, corner: Corner, size: int = 100)` allows you to place an image in the corners: `UpperLeft, UpperRight, LowerLeft, LowerRight`.
+
 # Roadmap 🗺
 - [X] Make available `fragments` (https://revealjs.com/fragments/)
   - [x] Make it work with default options
@@ -269,7 +324,7 @@ nb.useLocalReveal("revealjsfolder")
 - [X] Presenter mode note (https://revealjs.com/speaker-view/)
 - [ ] Auto-slide (https://revealjs.com/auto-slide/)
 - [x] Fit text (https://revealjs.com/layout/#fit-text)
-- [ ] Backgrounds
+- [x] Backgrounds
 - [ ] Transitions (https://revealjs.com/transitions/)
 - [X] Automatic animations
 - [X] Typewriter effect

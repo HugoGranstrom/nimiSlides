@@ -6,7 +6,7 @@ when defined(js):
     RevealEvent* = ref object of JsObject
       indexh*: cint
       indexv*: cint
-      previousSlide*, currentSlide*: JsObject
+      previousSlide*, currentSlide*: Element
       fragment*: Element
 
   var Reveal* {.importjs, nodecl.}: RevealType
@@ -24,4 +24,36 @@ when defined(js):
         return fragmentIndex
     raise newException(ValueError, "Element doesn't have a data-fragment-index field")
 
+  proc getSlideNumber*(el: Element): int =
+    for node in el.attributes:
+      # use custom attribute as reveal changes data-fragment-index from what we gave it
+      if node.nodeName == "data-nimib-slide-number".cstring:
+        let fragmentIndex = ($node.nodeValue).parseInt
+        return fragmentIndex
+    raise newException(ValueError, "Element doesn't have a data-fragment-index field")
+
   proc on*(reveal: RevealType, event: cstring, listener: proc (event: RevealEvent)) {.importjs: "#.on(#, #)".}
+  template onReveal*(revealEvent: cstring, listener: proc (event: RevealEvent)) =
+    window.addEventListener("load", proc (event: Event) =
+      Reveal.on(revealEvent, listener)
+    )
+  
+  proc isReady*(reveal: RevealType): bool {.importjs: "#.isReady()".}
+
+  template onRevealReady*(body: untyped) =
+    window.addEventListener("load", proc (event: Event) =
+      # if reveal already is ready, then run the code directly as the event won't trigger anymore.
+      if Reveal.isReady():
+        body
+      else:
+        Reveal.on("ready", proc (event: RevealEvent) =
+          body
+        )
+    )
+
+  proc getRevealElement*(reveal: RevealType): Element {.importjs: "#.getRevealElement()".}
+  proc getCurrentSlide*(reveal: RevealType): Element {.importjs: "#.getCurrentSlide()".}
+  proc stringToElement*(html: string): Element =
+    let temp = document.createElement("template")
+    temp.innerHtml = html.strip()
+    return temp.content.firstChild.Element

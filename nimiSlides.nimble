@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1"
+version       = "0.2"
 author        = "Hugo Granström"
 description   = "Reveal.js theme for nimib"
 license       = "MIT"
@@ -9,7 +9,7 @@ srcDir        = "src"
 # Dependencies
 
 requires "nim >= 1.4.0"
-requires "nimib >= 0.3.0"
+requires "nimib >= 0.3.1"
 requires "toml_serialization >= 0.2.0"
 
 import os

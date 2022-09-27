@@ -7,9 +7,10 @@ setSlidesTheme(Moon)
 
 useScrollWheel()
 showSlideNumber()
+footer("You can have a footer. It's handy for [links](https://github.com/HugoGranstrom/nimiSlides)")
 
 slide:
-  bigText: "Welcome to [nimiSlides](https://github.com/HugoGranstrom/nimiSlides)! 🛷"
+  bigText: "Welcome to [nimiSlides](https://github.com/HugoGranstrom/nimiSlides)! 🛷" 
   nbText: "These slides will show you what this [nimib](https://github.com/pietroppeter/nimib) theme is capable of."
   speakerNote "This is a note"
 
@@ -73,18 +74,18 @@ slide:
       fragment(highlightCurrentBlue):
         nbText: text
   
-  slide(autoAnimate=true):
+  slide(slideOptions(autoAnimate=true)):
     nbText: "## Automatic animation"
     nbText: """
 - One element
 """
-  slide(autoAnimate=true):
+  slide(slideOptions(autoAnimate=true)):
     nbText: "## Automatic animation"
     nbText: """
 - One element
 - Two elements    
 """
-  slide(autoAnimate=true):
+  slide(slideOptions(autoAnimate=true)):
     nbText: "## Automatic animation"
     nbText: """
 - One element
@@ -139,6 +140,58 @@ You can have the code generating an image in the slides and then load the image.
     fragment(fadeUp):
       nbImage("images/splineComp.png")      
 
+slide:
+  slide(slideOptions(colorBackground="#f1b434")):
+    nbText: "You can have different backgrounds"
+
+  slide(slideOptions(imageBackground="https://images.freeimages.com/images/large-previews/3d0/london-1452422.jpg")):
+    nbText: "Image background"
+
+  slide(slideOptions(videoBackground="https://user-images.githubusercontent.com/5092565/178597724-16287a00-5c31-4500-83d8-e07160a36369.mp4")):
+    nbText: "Video background"
+
+  slide(slideOptions(iframeBackground="https://pietroppeter.github.io/nimib/", iframeInteractive=true)):
+    nbText: "Iframe background"
+
+slide:
+  slide:
+    nbText: "## 2 Columns"
+    columns:
+      column:
+        nbText: "Left"
+      column:
+        nbText: "Right"
+  slide:
+    nbText: "## 3 Columns"
+    columns:
+      column:
+        nbText: "Left"
+      column:
+        nbText: "Middle"
+      column:
+        nbText: "Right"
+
+slide:
+  nbText: "## Incremental lists"
+  align("left"):
+    orderedList:
+      listItem(@[fadeInThenSemiOut, highlightCurrentGreen]):
+        nbText: "First"
+      listItem(@[fadeInThenSemiOut, highlightCurrentGreen]):
+        nbText: "Second"
+      unorderedList:
+        listItem(@[fadeInThenSemiOut, highlightCurrentGreen]):
+          nbText: "You can nest them as well"
+        orderedList:
+          listItem(@[fadeInThenSemiOut, highlightCurrentGreen]):
+            nbText: "And mix ordered and unordered lists"
+
+slide:
+  nbText: "## Corner images"
+  cornerImage("https://hugogranstrom.com/images/avatar.png", LowerLeft, 100)
+  cornerImage("https://hugogranstrom.com/images/avatar.png", LowerRight, 100)
+  cornerImage("https://hugogranstrom.com/images/avatar.png", UpperLeft, 100)
+  cornerImage("https://hugogranstrom.com/images/avatar.png", UpperRight, 100)
   
 
 
