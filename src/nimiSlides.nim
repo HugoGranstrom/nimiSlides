@@ -373,6 +373,12 @@ template listItem*(body: untyped) =
 proc toHSlice*(h: HSlice[int, int]): HSlice[int, int] = h
 proc toHSlice*(h: int): HSlice[int, int] = h .. h
 
+template animateCode*(lines: string, body: untyped) =
+  newNbCodeBlock("animateCode", body):
+    nb.blk.context["highlightLines"] = lines
+    captureStdout(nb.blk.output):
+      body
+
 template animateCode*(lines: varargs[seq[HSlice[int, int]]], body: untyped) =
   ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
   ## lines: Specify which lines to highlight and in which order. (Must be specified as a seq[HSlice])
