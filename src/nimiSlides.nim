@@ -144,6 +144,17 @@ proc useLocalReveal*(nb: var NbDoc, path: string) =
 template setSlidesTheme*(theme: SlidesTheme) =
   nb.context["slidesTheme"] = ($theme).toLower
 
+template nimConfTheme*() =
+  setSlidesTheme(Black)
+  nb.addStyle: """
+:root {
+  --r-heading-color: #ffe220;
+  --r-link-color: #ffe220;
+  --r-selection-color: #ffe220;
+  --r-link-color-dark: darken(#ffe220 , 15%)
+}
+"""
+
 template useScrollWheel*() =
   ## Enable using the scroll-wheel to step forward in slides.
   nb.context["useScrollWheel"] = true
@@ -559,7 +570,7 @@ template cornerImage*(image: string, corner: Corner, size: int) =
       else:
         "right: 0%;"
     let id = "cornerImage-" & $nb.newId()
-    let html = &"""<img src="$1" id="$2" style="visibility: hidden; position: fixed; max-width: $3px; margin: 0px; $4 $5"/>""" % [image, id, $size, vertical, horizontal]
+    let html = &"""<img src="$1" id="$2" style="transition: all 0.2s ease-out; opacity: 0%; position: fixed; max-width: $3px; margin: 0px; $4 $5"/>""" % [image, id, $size, vertical, horizontal]
     let currentSlideNr = currentSlideNumber
     nbJsFromCode(id, currentSlideNr, html):
       import std / dom
@@ -573,12 +584,12 @@ template cornerImage*(image: string, corner: Corner, size: int) =
         let currentSlide = Reveal.getCurrentSlide()
         let slideNr = currentSlide.getSlideNumber()
         if currentSlideNr == slideNr:
-          img.style.setProperty("visibility", "visible")
+          img.style.setProperty("opacity", "100%")
         Reveal.on("slidechanged", proc (event: RevealEvent) =
           let slideNr = event.currentSlide.getSlideNumber()
           echo "Slide nr: ", slideNr, " ", currentSlideNr
           if currentSlideNr == slideNr:
-            img.style.setProperty("visibility", "visible")
+            img.style.setProperty("opacity", "100%")
           else:
-            img.style.setProperty("visibility", "hidden")
+            img.style.setProperty("opacity", "0%")
         )
