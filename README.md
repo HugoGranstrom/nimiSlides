@@ -8,6 +8,9 @@ An example can be found in `docs/` folder and the generated slides can be seen h
 
 A showcase of all nimiSlides' features can be found here: https://hugogranstrom.com/nimiSlides/showcase.html
 
+# NimConf 2022
+At NimConf 2022, I did a presentation on nimiSlides which can be viewed [here](https://www.youtube.com/watch?v=Sf1TndCcIlU&list=PLxLdEZg8DRwSQQaK0UVRd1DaetVc3lIwr&index=7). The slides from the talk can be viewed at [https://hugogranstrom.com/nimiSlides/nimconf2022.html](https://hugogranstrom.com/nimiSlides/nimconf2022.html).
+
 # Our goal 🥇
 
 Our goal is to provide the easiest way to create a slideshow in Nim, about Nim. And this while also providing
