@@ -42,6 +42,10 @@ import nimib
 import nimiSlides
 
 nbInit(theme = revealTheme)
+
+# Your slides here
+
+nbSave()
 ```
 
 Reveal.js has two directions which you can add slides in. To the right and down.
