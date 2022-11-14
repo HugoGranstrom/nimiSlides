@@ -530,9 +530,11 @@ template footer*(text: string, fontSize: int = 20, opacity: range[0.0 .. 1.0] = 
   else:
     nb.context["revealFooter"] = markdown(text, config=initGfmConfig()).dup(removeSuffix)
 
-  nbJsFromCode:
+  nbJsFromCodeGlobal:
     import nimiSlides/revealFFI
     import std / [dom, jsconsole]
+
+  nbJsFromCode:
     echo "Before"
     onRevealReady:
       echo "Doing something!"
@@ -572,10 +574,12 @@ template cornerImage*(image: string, corner: Corner, size: int = 100, animate = 
     let id = "cornerImage-" & $nb.newId()
     let html = &"""<img src="$1" id="$2" style="opacity: 0%; position: fixed; width: $3px; height: auto; margin: 0px; $4 $5 $6"/>""" % [image, id, $size, vertical, horizontal, animateString]
     let currentSlideNr = currentSlideNumber
-    nbJsFromCode(id, currentSlideNr, html):
+    
+    nbJsFromCodeGlobal:
       import std / dom
       import nimiSlides/revealFFI
 
+    nbJsFromCodeInBlock(id, currentSlideNr, html):
       onRevealReady:
         let img = stringToElement(html)
         let deck = Reveal.getRevealElement()
