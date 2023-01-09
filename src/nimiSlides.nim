@@ -512,7 +512,12 @@ template align*(text: string, body: untyped) =
   nbRawHtml: "</div>"
 
 template columns*(body: untyped) =
-  nbRawHtml: """<div style="display: grid; grid-auto-flow: column;">"""
+  nbRawHtml: """<div style="display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); overflow-wrap: break-word;">"""
+  body
+  nbRawHtml: "</div>"
+
+template adaptiveColumns*(body: untyped) =
+  nbRawHtml: """<div style="display: grid; grid-auto-flow: column; overflow-wrap: break-word;">"""
   body
   nbRawHtml: "</div>"
 

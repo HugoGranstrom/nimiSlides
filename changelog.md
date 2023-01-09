@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.2.2
+- `columns` now create equally sized columns, no matter the content. (A empty column takes up as much width as one full of content).
+- `adaptiveColumns` has the behavior of the old `columns` where columns only are as big as their content needs.
+
+## v0.2.1
+- Fix compatibility with nimib v0.3.3.
+
 ## v0.2
 - Update to use nimib v0.3.1.
 - `slide` now accepts a `SlideOptions` created through `slideOptions` proc instead of a bool. It has the following fields:

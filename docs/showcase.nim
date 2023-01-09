@@ -171,6 +171,19 @@ slide:
       column:
         nbText: "Right"
 
+  slide:
+    nbText: "### columns vs adaptiveColumns"
+    columns:
+      column:
+        nbText: "Using `columns`, all columns will have the same width..."
+      column:
+        nbText: "... regardless of their content."
+    adaptiveColumns:
+      column:
+        nbText: "Using `adaptiveColumns`, a columns will only take the space it needs..."
+      column:
+        nbText: "... like this."
+
 slide:
   nbText: "## Incremental lists"
   align("left"):
