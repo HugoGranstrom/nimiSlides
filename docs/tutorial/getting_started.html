@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/reveal.min.css" integrity="sha512-vFD6wFRj2whK8/X/dMgxJHinKfGlwMYtN+yRCxvxvmOgIiMIlgrFb5iOuCoqwCID+Qcq2/gY8DpmNHcAjfHWxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/theme/moon.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/plugin/highlight/monokai.min.css" integrity="sha512-z8wQkuDRFwCBfoj7KOiu1MECaRVoXx6rZQWL21x0BsVVH7JkqCp1Otf39qve6CrCycOOL5o9vgfII5Smds23rg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-nimib-slide-number="1" >
+      <section data-nimib-slide-number="2" >
+      <h2>Getting started with nimiSlides</h2>
+      </section>
+      <section data-nimib-slide-number="3" >
+      <h2>Create a slide</h2>
+<ul>
+<li>A slide is created using the <code>slide</code> template</li>
+<li>The slide content is put inside it</li>
+</ul>
+<pre><code class="language-nim">slide:
+  nbText: &quot;This is a slide&quot;
+</code></pre>
+<p>This will create the next slide (press <code>&lt;Space&gt;</code> to continue):</p>
+      </section>
+      <section data-nimib-slide-number="4" >
+      <p>This is a slide</p>
+      </section>
+      </section>
+      <section data-nimib-slide-number="5" >
+      <section data-nimib-slide-number="6" >
+      <h2>Show text</h2>
+<ul>
+<li><code>nbText</code> takes a <strong>Markdown</strong>-formatted string and outputs pretty text.</li>
+</ul>
+      </section>
+      <section data-nimib-slide-number="7" >
+      <h2>Text example</h2>
+      <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>nbText: <span class="hljs-string">&quot;&quot;&quot;
+### This is a header
+You can have *italic* and **bold** text or why not ***both***?
+- Lists work as well
+- Banana
+- Apple
+&quot;&quot;&quot;</span></code></pre>
+      <h3>This is a header</h3>
+<p>You can have <em>italic</em> and <strong>bold</strong> text or why not <em><strong>both</strong></em>?</p>
+<ul>
+<li>Lists work as well</li>
+<li>Banana</li>
+<li>Apple</li>
+</ul>
+      </section>
+      </section>
+      <section data-nimib-slide-number="8" >
+      <section data-nimib-slide-number="9" >
+      <h2>Code blocks</h2>
+<ul>
+<li>nimiSlides allows you to show the source code of a code block and its outputs.</li>
+<li>The template <code>nbCode</code> is used by:</li>
+</ul>
+      <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>nbCode:
+  <span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>
+  <span class="hljs-keyword">echo</span> a + <span class="hljs-number">2</span></code></pre>
+      <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>
+<span class="hljs-keyword">echo</span> a + <span class="hljs-number">2</span></code></pre><pre style="width: 100%;"><samp class="hljs">3</samp></pre>
+      </section>
+      </section>
+      <section data-nimib-slide-number="10" >
+      <section data-nimib-slide-number="11" data-auto-animate >
+      <h2>Images</h2>
+<ul>
+<li>Images can be displayed using <code>nbImage</code></li>
+<li>Works for both URL links and relative links.</li>
+</ul>
+      </section>
+      <section data-nimib-slide-number="12" data-auto-animate >
+      <h2>Images</h2>
+      <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>nbImage(<span class="hljs-string">&quot;https://github.com/nim-lang/assets/raw/master/Art/logo-crown.png&quot;</span>)</code></pre>
+      <figure>
+<img src="https://github.com/nim-lang/assets/raw/master/Art/logo-crown.png" alt="">
+<figcaption></figcaption>
+</figure>
+      </section>
+      </section>
+      <section data-nimib-slide-number="13" >
+      <section data-nimib-slide-number="14" >
+      <h2>Layout</h2>
+<ul>
+<li>nimiSlides has two kinds of column containers built-in:
+<ul>
+<li><code>columns</code>: Every column is the same size.</li>
+<li><code>adaptiveColumns</code>: each column only takes as much space as its content requries.</li>
+</ul>
+</li>
+<li>A column is created by placing a <code>column</code> inside one of the containers mentioned above.</li>
+</ul>
+      </section>
+      <section data-nimib-slide-number="15" >
+      <h2>Equal columns</h2>
+      <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>columns:
+  column:
+    nbText: <span class="hljs-string">&quot;Short&quot;</span>
+  column:
+    nbText: <span class="hljs-string">&quot;Looooooooooooooooooong&quot;</span>
+  column:
+    nbText: <span class="hljs-string">&quot;Mediuuuum&quot;</span></code></pre>
+      <div style="display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); overflow-wrap: break-word;">
+      <div>
+      <p>Short</p>
+      </div>
+      <div>
+      <p>Looooooooooooooooooong</p>
+      </div>
+      <div>
+      <p>Mediuuuum</p>
+      </div>
+      </div>
+      </section>
+      <section data-nimib-slide-number="16" >
+      <h2>Adaptive columns</h2>
+      <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>adaptiveColumns:
+  column:
+    nbText: <span class="hljs-string">&quot;Short&quot;</span>
+  column:
+    nbText: <span class="hljs-string">&quot;Looooooooooooooooooong&quot;</span>
+  column:
+    nbText: <span class="hljs-string">&quot;Mediuuuum&quot;</span></code></pre>
+      <div style="display: grid; grid-auto-flow: column; overflow-wrap: break-word;">
+      <div>
+      <p>Short</p>
+      </div>
+      <div>
+      <p>Looooooooooooooooooong</p>
+      </div>
+      <div>
+      <p>Mediuuuum</p>
+      </div>
+      </div>
+      </section>
+      </section>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/reveal.js" integrity="sha512-+Dy2HJZ3Z1DWerDhqFE7AH2HTfnbq8RC1pKOashfMwx1s01fjPUebWoHqrRedU1yFimkexmzJJRilKxjs7lz8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/plugin/highlight/highlight.min.js" integrity="sha512-U3fPDUX5bMrn1wnYqjaK44MFA9E6MKS+zPAg9WPAGF5XhReBeDj3FGaA831CjueG+YJxYA3WaO/m33kMIoOs/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/plugin/notes/notes.min.js" integrity="sha512-v2co+5nr0bgHekutTzF5jAB0UAjM95dpCF7VVw7WsFCjfxonbQo8Vwl487tNYl0iHWHHGV4o5xKBp5ifyhJkWg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    Reveal.initialize({
+      plugins: [ 
+        RevealHighlight,
+        RevealNotes,
+      ],
+    });
+  </script>
+  </body>
+</html>

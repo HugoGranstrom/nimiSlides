@@ -17,6 +17,7 @@ Our goal is to provide the easiest way to create a slideshow in Nim, about Nim. 
 lots of flexibility so you can tailor it to your liking.
 
 # Table of contents
+- [Tutorials](#tutorials)
 - [API](#api)
   - [Animate Code](#animate-code)
   - [Fragments (animations)](#fragments-animations)
@@ -34,6 +35,9 @@ lots of flexibility so you can tailor it to your liking.
   - [Local Reveal.js installation](#use-local-revealjs-installation)
   - [Misc. Config](#misc-configuration)
 - [Roadmap](#roadmap-🗺)
+
+# Tutorials
+- [Getting started with nimiSlides](https://hugogranstrom.com/nimiSlides/tutorial/getting_started.html)
 
 # API
 These lines are needed at the top of your nim files:
