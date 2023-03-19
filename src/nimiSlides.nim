@@ -196,24 +196,25 @@ proc addStyle*(doc: NbDoc, style: string) =
 
 var currentFragment, currentSlideNumber: int
 
+proc slideOptionsToAttributes*(options: SlideOptions): string =
+  result.add """data-nimib-slide-number="$1" """ % [$currentSlideNumber]
+  if options.autoAnimate:
+    result.add "data-auto-animate "
+  if options.colorBackground.len > 0:
+    result.add """data-background-color="$1" """ % [options.colorBackground]
+  elif options.imageBackground.len > 0:
+    result.add """data-background-image="$1" """ % [options.imageBackground]
+  elif options.videoBackground.len > 0:
+    result.add """data-background-video="$1" """ % [options.videoBackground]
+  elif options.iframeBackground.len > 0:
+    result.add """data-background-iframe="$1" """ % [options.iframeBackground]
+    if options.iframeInteractive:
+      result.add "data-background-interactive "
+
 template slide*(options: untyped, body: untyped): untyped =
   currentSlideNumber += 1
-  var attributes: string
-  attributes.add """data-nimib-slide-number="$1" """ % [$currentSlideNumber]
-  if options.autoAnimate:
-    attributes.add "data-auto-animate "
-  if options.colorBackground.len > 0:
-    attributes.add """data-background-color="$1" """ % [options.colorBackground]
-  elif options.imageBackground.len > 0:
-    attributes.add """data-background-image="$1" """ % [options.imageBackground]
-  elif options.videoBackground.len > 0:
-    attributes.add """data-background-video="$1" """ % [options.videoBackground]
-  elif options.iframeBackground.len > 0:
-    attributes.add """data-background-iframe="$1" """ % [options.iframeBackground]
-    if options.iframeInteractive:
-      attributes.add "data-background-interactive "
 
-  nbRawHtml: "<section $1>" % [attributes]
+  nbRawHtml: "<section $1>" % [slideOptionsToAttributes(options)]
   when declaredInScope(CountVarNimiSlide):
     when CountVarNimiSlide < 2:
       static: inc CountVarNimiSlide
