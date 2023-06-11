@@ -23,3 +23,8 @@ task buildDocs, "build all .nim files in docs/":
             if "index" in path:
                 let buildCommand = "nim r -d:themeWhite " & path
                 exec buildCommand
+
+task docs, "Generate automatic docs":
+    exec "nim doc --project --index:on --git.url:https://github.com/HugoGranstrom/nimiSlides --git.commit:master --outdir:docs/docs src/nimiSlides.nim"
+    exec "echo \"<meta http-equiv=\\\"Refresh\\\" content=\\\"0; url='theindex.html'\\\" />\" >> docs/docs/index.html"
+
