@@ -16,6 +16,7 @@ jobs:
       - name: Generate
         run: |
           nimble install -y
+          nimble docsDeps
           nimble buildDocs
           nimble docs
       - name: Deploy
