@@ -3,7 +3,7 @@ name: Generate nimiSlides docs
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   gen:
