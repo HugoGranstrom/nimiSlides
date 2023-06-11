@@ -5,3 +5,5 @@ reveal.js-master/
 x_*
 *.html
 docs/docs
+docs/images
+docs/*.png
