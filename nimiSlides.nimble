@@ -14,6 +14,9 @@ requires "toml_serialization >= 0.2.0"
 
 import os
 
+task docsDeps, "install dependencies required to build docs":
+    exec "nimble -y install ggplotnim karax"
+
 task buildDocs, "build all .nim files in docs/":
     for (kind, path) in walkDir("docs/"):
         if path.endsWith(".nim"):
