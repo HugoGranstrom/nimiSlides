@@ -2,3 +2,6 @@ nimcache/
 nimblecache/
 htmldocs/
 reveal.js-master/
+x_*
+*.html
+docs/docs
