@@ -15,10 +15,10 @@ requires "toml_serialization >= 0.2.0"
 import os
 
 task docsDeps, "install dependencies required to build docs":
-    exec "nimble -y install ggplotnim@0.5.6 karax numericalnim"
+    exec "nimble -y install ggplotnim@0.5.6 karax numericalnim nimitheme"
 
-task buildDocs, "build all .nim files in docs/":
-    for (kind, path) in walkDir("docs/"):
+task buildDocs, "build all .nim files in docsrc/":
+    for path in walkDirRec("docsrc/"):
         if path.endsWith(".nim"):
             echo "Building: " & path
             let buildCommand = "nim r " & path
@@ -29,5 +29,5 @@ task buildDocs, "build all .nim files in docs/":
 
 task docs, "Generate automatic docs":
     exec "nim doc --project --index:on --git.url:https://github.com/HugoGranstrom/nimiSlides --git.commit:master --outdir:docs/docs src/nimiSlides.nim"
-    exec "echo \"<meta http-equiv=\\\"Refresh\\\" content=\\\"0; url='theindex.html'\\\" />\" >> docs/docs/index.html"
+    #exec "echo \"<meta http-equiv=\\\"Refresh\\\" content=\\\"0; url='theindex.html'\\\" />\" >> docs/docs/index.html"
 
