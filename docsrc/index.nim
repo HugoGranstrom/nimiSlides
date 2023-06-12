@@ -1,6 +1,9 @@
-import nimib, nimitheme
+import nimib, nimitheme, nimiSlides
+import ./utils/embeddedReveal
 
-nbInit(useGithubMarkdown)
+nbInit()
+initEmbeddedSlides()
+nb.useGithubMarkdown()
 
 nbText: hlMd"""
 # Documentation - nimiSlides
@@ -11,6 +14,26 @@ All procs and templates are documented in the [API Reference](./docs/nimiSlides.
 ## Tutorials
 
 """
+
+embeddedSlides:
+  slide:
+    nbText: "Hello"
+    fragment:
+      nbText: "Fade in"
+  slide:
+    fragment(highlightCurrentBlue):
+      nbText: "blue"
+    nbText: "Goodbye"
+
+embeddedSlides:
+  slide:
+    nbText: "Hello2"
+    fragment(highlightCurrentRed):
+      nbText: "red"
+  slide:
+    nbText: "Goodbye2"
+    fragment:
+      nbText: "Fade in2"
 
 # TODO:
 # List tutorials

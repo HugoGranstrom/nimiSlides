@@ -194,7 +194,7 @@ proc revealTheme*(doc: var NbDoc) =
 proc addStyle*(doc: NbDoc, style: string) =
   doc.context["nb_style"] = doc.context["nb_style"].vString & "\n" & style
 
-var currentFragment, currentSlideNumber: int
+var currentFragment*, currentSlideNumber*: int
 
 proc slideOptionsToAttributes*(options: SlideOptions): string =
   result.add """data-nimib-slide-number="$1" """ % [$currentSlideNumber]
