@@ -38,7 +38,9 @@ template embeddedSlides*(body: untyped) =
   <div class="reveal" id="$1" style="height: 500px;">
     <div class="slides">
 """ % [id]
+
   body
+
   nbRawHtml: hlHtml"""
     </div>
   </div>
@@ -51,3 +53,8 @@ template embeddedSlides*(body: untyped) =
   </script>
 """ % [id]
   
+template codeAndSlides*(body: untyped) =
+  nbCodeSkip:
+    body
+  embeddedSlides:
+    body

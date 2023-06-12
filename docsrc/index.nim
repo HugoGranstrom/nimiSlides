@@ -2,37 +2,26 @@ import nimib, nimiSlides, nimiBook
 import ./utils/embeddedReveal
 
 nbInit(theme = useNimibook)
-initEmbeddedSlides()
 
 nbText: hlMd"""
 # Documentation - nimiSlides
+nimiSlides is Reveal.js theme for nimib which enables you to make beautiful slideshows just by writing Nim code.
 
 ## API Reference
 All procs and templates are documented in the [API Reference](./docs/nimiSlides.html). For easier CTRL-F see [the index](./docs/theindex.html).
 
 ## Tutorials
+See the tutorials section in the sidebar to the left. If you are new to nimiSlides, [getting started](./tutorials/getting_started.html) is a good place to start.
 
+## Examples
+Here is a list of slideshows along with links to their source code.
+- [Showcase](./showcase.html) ([source code](https://github.com/HugoGranstrom/nimiSlides/blob/main/docsrc/showcase.nim)) 
+  Showcases many of the features of nimiSlides.
+- [NimConf 2022 nimiSlides](./nimconf2022.html) ([source code](https://github.com/HugoGranstrom/nimiSlides/blob/main/docsrc/nimconf2022.nim)) 
+  The slides from my 2022 NimConf talk about nimiSlides.
+- [NimConf 2022 nimib](https://pietroppeter.github.io/nimconf22-nimib/) ([source code](https://github.com/pietroppeter/nimconf22-nimib)) 
+  The slides from the 2022 NimConf talk about nimib.
 """
-
-embeddedSlides:
-  slide:
-    nbText: "Hello"
-    fragment:
-      nbText: "Fade in"
-  slide:
-    fragment(highlightCurrentBlue):
-      nbText: "blue"
-    nbText: "Goodbye"
-
-embeddedSlides:
-  slide:
-    nbText: "Hello2"
-    fragment(highlightCurrentRed):
-      nbText: "red"
-  slide:
-    nbText: "Goodbye2"
-    fragment:
-      nbText: "Fade in2"
 
 # TODO:
 # List tutorials
