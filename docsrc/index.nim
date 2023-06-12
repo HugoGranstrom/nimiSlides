@@ -1,9 +1,9 @@
-import nimib, nimitheme, nimiSlides
+import nimib, nimitheme, nimiSlides, nimiBook
 import ./utils/embeddedReveal
 
-nbInit()
+nbInit(theme = useNimibook)
 initEmbeddedSlides()
-nb.useGithubMarkdown()
+#nb.useGithubMarkdown()
 
 nbText: hlMd"""
 # Documentation - nimiSlides
