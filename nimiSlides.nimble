@@ -10,12 +10,11 @@ srcDir        = "src"
 
 requires "nim >= 1.4.0"
 requires "nimib >= 0.3.3"
-requires "toml_serialization >= 0.2.0"
 
 import os
 
 task docsDeps, "install dependencies required to build docs":
-    exec "nimble -y install ggplotnim@0.5.6 karax numericalnim nimitheme"
+    exec "nimble -y install ggplotnim@0.5.6 karax numericalnim nimibook"
 
 task buildDocs, "build all .nim files in docsrc/":
     for (kind, path) in walkDir("docsrc/"):
@@ -34,5 +33,4 @@ task buildBook, "Builds the nimiBook docs":
 
 task docs, "Generate automatic docs":
     exec "nim doc --project --index:on --git.url:https://github.com/HugoGranstrom/nimiSlides --git.commit:master --outdir:docs/docs src/nimiSlides.nim"
-    #exec "echo \"<meta http-equiv=\\\"Refresh\\\" content=\\\"0; url='theindex.html'\\\" />\" >> docs/docs/index.html"
 

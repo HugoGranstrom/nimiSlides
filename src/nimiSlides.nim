@@ -1,7 +1,7 @@
 import std/[strutils, strformat, sequtils, os]
 export os
 import nimib
-import nimib/capture
+import nimib/[capture, config]
 import toml_serialization
 import markdown
 
@@ -184,7 +184,7 @@ proc revealTheme*(doc: var NbDoc) =
 
 
   try:
-    let slidesConfig = Toml.decode(doc.rawCfg, NimiSlidesConfig, "nimislides")
+    let slidesConfig = loadTomlSection(doc.rawCfg, "nimislides", NimiSlidesConfig)
     if slidesConfig.localReveal != "":
       echo "Using local Reveal.js installation specified in nimib.toml "
       doc.useLocalReveal(slidesConfig.localReveal)
