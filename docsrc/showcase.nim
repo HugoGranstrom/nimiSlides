@@ -3,7 +3,12 @@ import nimiSlides
 
 nbInit(theme = revealTheme)
 nb.useLatex()
-setSlidesTheme(Moon)
+
+when defined(themeWhite):
+  nb.filename = "./showcase_white.html"
+  setSlidesTheme(White)
+else:
+  setSlidesTheme(Moon)
 
 useScrollWheel()
 showSlideNumber()

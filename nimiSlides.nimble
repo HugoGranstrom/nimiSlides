@@ -18,14 +18,19 @@ task docsDeps, "install dependencies required to build docs":
     exec "nimble -y install ggplotnim@0.5.6 karax numericalnim nimitheme"
 
 task buildDocs, "build all .nim files in docsrc/":
-    for path in walkDirRec("docsrc/"):
+    for (kind, path) in walkDir("docsrc/"):
         if path.endsWith(".nim"):
+            if "index" in path: continue 
             echo "Building: " & path
             let buildCommand = "nim r " & path
             exec buildCommand
-            if "index" in path:
+            if "showcase" in path:
                 let buildCommand = "nim r -d:themeWhite " & path
                 exec buildCommand
+
+task buildBook, "Builds the nimiBook docs":
+    selfExec(" r -d:release nbook.nim init")
+    selfExec(" r -d:release nbook.nim build")
 
 task docs, "Generate automatic docs":
     exec "nim doc --project --index:on --git.url:https://github.com/HugoGranstrom/nimiSlides --git.commit:master --outdir:docs/docs src/nimiSlides.nim"
