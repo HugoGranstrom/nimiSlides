@@ -29,7 +29,7 @@ task buildDocs, "build all .nim files in docsrc/":
 
 task buildBook, "Builds the nimiBook docs":
     selfExec(" r -d:release nbook.nim init")
-    selfExec(" r -d:release nbook.nim build")
+    selfExec(" r -d:release -d:nimibMaxProcesses=1 nbook.nim build")
 
 task docs, "Generate automatic docs":
     exec "nim doc --project --index:on --git.url:https://github.com/HugoGranstrom/nimiSlides --git.commit:master --outdir:docs/docs src/nimiSlides.nim"
