@@ -1,0 +1,22 @@
+name: Generate nimiSlides docs
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  gen:
+    name: Validate PR
+    runs-on: ubuntu-latest  
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: iffy/install-nim@v4
+      - name: Generate
+        run: |
+          nimble install -y
+          nimble docsDeps
+          nimble docs
+          nimble buildDocs
+          nimble buildBook
