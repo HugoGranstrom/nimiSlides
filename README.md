@@ -37,7 +37,7 @@ lots of flexibility so you can tailor it to your liking.
 - [Roadmap](#roadmap-🗺)
 
 # Tutorials & Learning Material
-- [API Reference](https://hugogranstrom.com/nimiSlides/docs)
+- [API Reference](https://hugogranstrom.com/nimiSlides/docs/nimiSlides.html)
 - [Getting started with nimiSlides](https://hugogranstrom.com/nimiSlides/tutorial/getting_started.html)
 
 # API
