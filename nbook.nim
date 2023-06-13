@@ -8,7 +8,7 @@ var book = initBookWithToc:
     entry("Text Formatting", "text_formatting.nim")
     entry("Images & Media", "images_media.nim")
     entry("Layout", "layout.nim")
-    section("Fragments (Animations)", "fragments/index.html"):
+    section("Fragments (Animations)", "fragments/index.nim"):
       entry("Basics of Fragments", "basics.nim")
       entry("Animated Lists", "lists.nim")
       entry("List of Fragments", "list_fragments.nim")
