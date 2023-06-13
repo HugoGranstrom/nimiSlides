@@ -49,7 +49,7 @@ template embeddedSlides*(body: untyped) =
   currentSlideNumber = 0
   let id = "revealId" & $nb.newId()
   nbRawHtml: hlHtmlF"""
-  <div class="reveal" id="$1" style="height: 500px;">
+  <div class="reveal" id="$1" style="height: 400px;">
     <div class="slides">
 """ % [id]
 

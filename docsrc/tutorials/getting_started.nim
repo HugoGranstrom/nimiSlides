@@ -83,7 +83,9 @@ Tip: if you are using VSCodium/VSCode you can install my extension `NimiBoost` w
 nbCodeSkip:
   nbText: hlMd"""
 Now *you* will be **able** to see the formatting!  
+"""
 
+nbText: hlMd"""
 ## Images
 The second most common element of a presentation are images. They are added using `nbImage`:
 """
@@ -93,6 +95,6 @@ codeAndSlides:
     nbImage("https://raw.githubusercontent.com/pietroppeter/nimib/main/assets/nimib-nimconf-thumbnail.png")
 
 nbText: hlMd"""
-Now you are ready to start creating your own slideshows in Nim! If you want to learn about more features look at the available tutorials in the sidebar to the left.
+Now you are ready to start creating your own slideshows in Nim! If you want to learn about more features, look at the available tutorials in the sidebar to the left.
 """
 nbSave
