@@ -21,6 +21,9 @@ Here is a list of slideshows along with links to their source code.
   The slides from my 2022 NimConf talk about nimiSlides.
 - [NimConf 2022 nimib](https://pietroppeter.github.io/nimconf22-nimib/) ([source code](https://github.com/pietroppeter/nimconf22-nimib)) 
   The slides from the 2022 NimConf talk about nimib.
+
+## Reveal.js
+As nimiSlides generates Reveal.js slideshows, it's worth having a look at the [Reveal.js documentation](https://revealjs.com/).
 """
 
 # TODO:
