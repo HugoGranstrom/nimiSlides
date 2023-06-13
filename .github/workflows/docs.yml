@@ -17,8 +17,9 @@ jobs:
         run: |
           nimble install -y
           nimble docsDeps
-          nimble buildDocs
           nimble docs
+          nimble buildDocs
+          nimble buildBook
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

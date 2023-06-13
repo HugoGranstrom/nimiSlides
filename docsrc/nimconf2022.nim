@@ -700,7 +700,7 @@ slide:
     nbText: "## Loops ♻️ + Generate images 🖼️"
     nbCodeDontRunAnimate(1, 2, 3, 4..7, 9, 10, 11):
       for n in [50, 100, 1000, 10000]:
-        let filename = &"gauss-{n}.png"
+        let filename = &"images/gauss-{n}.png"
         let samples = newSeqWith[float](n, gauss(0.0, 1.0))
         let df = toDf(samples)
         ggplot(df, aes("samples")) +
@@ -713,7 +713,7 @@ slide:
 
 slide:
   for n in [50, 100, 1000, 10000]:
-    let filename = &"gauss-{n}.png"
+    let filename = &"images/gauss-{n}.png"
     let samples = newSeqWith[float](n, gauss(0.0, 1.0))
     let df = toDf(samples)
     ggplot(df, aes("samples")) +

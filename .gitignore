@@ -7,3 +7,5 @@ x_*
 docs/docs
 docs/images
 docs/*.png
+docs/assets
+docs/book.json
