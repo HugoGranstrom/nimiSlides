@@ -2,7 +2,6 @@ import std/[strutils, strformat, sequtils, os]
 export os
 import nimib
 import nimib/[capture, config]
-import toml_serialization
 import markdown
 
 type
