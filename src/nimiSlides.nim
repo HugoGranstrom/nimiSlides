@@ -187,7 +187,7 @@ proc revealTheme*(doc: var NbDoc) =
     if slidesConfig.localReveal != "":
       echo "Using local Reveal.js installation specified in nimib.toml "
       doc.useLocalReveal(slidesConfig.localReveal)
-  except TomlError:
+  except:
     discard # if it doesn't exists, just let it be
 
 proc addStyle*(doc: NbDoc, style: string) =
