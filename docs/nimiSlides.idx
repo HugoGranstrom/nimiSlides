@@ -43,6 +43,8 @@ useScrollWheel	nimiSlides.html#useScrollWheel.t	nimiSlides: useScrollWheel()
 showSlideNumber	nimiSlides.html#showSlideNumber.t	nimiSlides: showSlideNumber()	
 revealTheme	nimiSlides.html#revealTheme,NbDoc	nimiSlides: revealTheme(doc: var NbDoc)	
 addStyle	nimiSlides.html#addStyle,NbDoc,string	nimiSlides: addStyle(doc: NbDoc; style: string)	
+currentFragment	nimiSlides.html#currentFragment	nimiSlides: currentFragment	
+currentSlideNumber	nimiSlides.html#currentSlideNumber	nimiSlides: currentSlideNumber	
 slideOptionsToAttributes	nimiSlides.html#slideOptionsToAttributes,SlideOptions	nimiSlides: slideOptionsToAttributes(options: SlideOptions): string	
 slide	nimiSlides.html#slide.t,untyped,untyped	nimiSlides: slide(options: untyped; body: untyped): untyped	
 slide	nimiSlides.html#slide.t,untyped	nimiSlides: slide(body: untyped)	

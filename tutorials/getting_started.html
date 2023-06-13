@@ -1,0 +1,341 @@
+<!DOCTYPE HTML>
+<html lang="en-us" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using nimibook -->
+        <meta charset="UTF-8">
+        <title>Getting Started - NimiSlides</title>
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="NimiSlides Documentation">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐳</text></svg>">
+        <link rel="stylesheet" href="../assets/css/variables.css">
+        <link rel="stylesheet" href="../assets/css/general.css">
+        <link rel="stylesheet" href="../assets/css/chrome.css">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../assets/FontAwesome/css/font-awesome.min.css">
+
+        <!-- Highlight.js Stylesheets - I could use nimib native highlight but let's keep it for styling... -->
+        <link rel="stylesheet" href="../assets/css/highlight.css">
+        <link rel="stylesheet" href="../assets/css/tomorrow-night.css">
+        <link rel="stylesheet" href="../assets/css/ayu-highlight.css">
+
+        <!-- Custom theme stylesheets - why the "../"? -->
+
+
+        
+
+            <script src="https://cdn.jsdelivr.net/gh/pietroppeter/nimib@main/assets/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+        
+        <!-- plausible analytics (new in nimibook) -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "..//assets";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                                <ol class="chapter">
+                <li class="chapter-item expanded ">
+                  <a href="../index.html" tabindex="0">
+                      Documentation
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../tutorials/index.html" tabindex="0">
+                    <strong aria-hidden="true">1.</strong> Tutorials
+                  </a></li>
+                  <li>
+                  <ol class="section">
+                <li class="chapter-item expanded ">
+                  <a href="../tutorials/getting_started.html" class="active" tabindex="0">
+                    <strong aria-hidden="true">1.1.</strong> Getting Started
+                  </a></li>
+                </ol>
+<!-- I could use also an unescaped context value -->
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                    </div>
+
+                    <h1 class="menu-title">NimiSlides</h1>
+
+                    <div class="right-buttons">
+                        <a href="https://github.com/HugoGranstrom/nimiSlides" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/reveal.js" integrity="sha512-+Dy2HJZ3Z1DWerDhqFE7AH2HTfnbq8RC1pKOashfMwx1s01fjPUebWoHqrRedU1yFimkexmzJJRilKxjs7lz8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/plugin/highlight/highlight.min.js" integrity="sha512-U3fPDUX5bMrn1wnYqjaK44MFA9E6MKS+zPAg9WPAGF5XhReBeDj3FGaA831CjueG+YJxYA3WaO/m33kMIoOs/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.1/plugin/math/math.min.js" integrity="sha512-8eviRBLZHoiXLqXeMl5XurkjNEGizTI8DHbSUoGxkYFd4RslHpIYTEQmLYtWUemc5FfMYOkPDFUcQKefPLjF7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/reveal.min.css" integrity="sha512-vFD6wFRj2whK8/X/dMgxJHinKfGlwMYtN+yRCxvxvmOgIiMIlgrFb5iOuCoqwCID+Qcq2/gY8DpmNHcAjfHWxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/theme/black.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.2.0/plugin/highlight/monokai.min.css" integrity="sha512-z8wQkuDRFwCBfoj7KOiu1MECaRVoXx6rZQWL21x0BsVVH7JkqCp1Otf39qve6CrCycOOL5o9vgfII5Smds23rg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                        <h1>Getting Started</h1>
+<h2>Installation</h2>
+<p>To get started with nimiSlides you have to install it. This is done the easiest using nimble:</p>
+<pre><code class="language-console">nimble install nimislides
+</code></pre>
+<p>Now that nimiSlides is installed we can create a Nim file, e.g., <code>slideshow.nim</code>, with the basic structure:</p>
+<pre><code class="language-nim">import nimib, nimiSlides
+
+nbInit(theme = revealTheme)
+
+# Your slides here
+
+nbSave()
+</code></pre>
+<p>The comment <code># Your slides here</code> shows where we will put the code that generates out slides. All examples in the following tutorials will only show the code that goes here and not the boilerplate around it.</p>
+<h2>The slides API</h2>
+<p>The <code>slide</code> template is the core of nimiSlides. It delimits which content will be shown on each slide.
+The basic syntax is that you put all the content you want in a slide inside a <code>slide:</code>:</p>
+                        <pre><code class="nohighlight hljs nim">slide:
+  nbText: <span class="hljs-string">&quot;# 1&quot;</span>
+slide:
+  nbText: <span class="hljs-string">&quot;# 2&quot;</span></code></pre>
+                          <div class="reveal" id="revealId0" style="height: 500px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <h1>1</h1>
+                        </section>
+                        <section data-nimib-slide-number="2" >
+                        <h1>2</h1>
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId0 = new Reveal(document.getElementById("revealId0"), {
+      embedded: true,
+      keyboardCondition: 'focused'
+    })
+    deck_revealId0.initialize()
+  </script>
+                        <p>Above you can see a code snippet that generates two slides, one with the text &quot;1&quot; and a second one with the text &quot;2&quot;. You can step forward in the slideshow if you focus on it using either <code>&lt;Enter&gt;</code>, the arrow keys or pressing the arrows in the slideshow (Using the arrow keys won't work here because that will step forward to the next chapter in the tutorial, but you can try it out in for example the <a href="../showcase.html">showcase slideshow</a>).</p>
+<p>It doesn't stop here though, because you can create 2D-slideshows! Insane, right?! And it isn't hard to do either. All you have to do is to add another level of the <code>slide</code> template:</p>
+                        <pre><code class="nohighlight hljs nim">slide:
+  slide:
+    nbText: <span class="hljs-string">&quot;# 1.1&quot;</span>
+  slide:
+    nbText: <span class="hljs-string">&quot;# 1.2&quot;</span>
+
+slide:
+  slide:
+    nbText: <span class="hljs-string">&quot;# 2.1&quot;</span>
+  slide:
+    nbText: <span class="hljs-string">&quot;# 2.2&quot;</span></code></pre>
+                          <div class="reveal" id="revealId1" style="height: 500px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <section data-nimib-slide-number="2" >
+                        <h1>1.1</h1>
+                        </section>
+                        <section data-nimib-slide-number="3" >
+                        <h1>1.2</h1>
+                        </section>
+                        </section>
+                        <section data-nimib-slide-number="4" >
+                        <section data-nimib-slide-number="5" >
+                        <h1>2.1</h1>
+                        </section>
+                        <section data-nimib-slide-number="6" >
+                        <h1>2.2</h1>
+                        </section>
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId1 = new Reveal(document.getElementById("revealId1"), {
+      embedded: true,
+      keyboardCondition: 'focused'
+    })
+    deck_revealId1.initialize()
+  </script>
+                        <p>If you are observant, you will see that the transitions are different between <code>1.1 -&gt; 1.2</code> (downward motion) and <code>1.2 -&gt; 2.1</code> (right motion). To get a better overview of this, focus on the slideshow and press <code>&lt;ESC&gt;</code>. This will zoom out to overview mode and allow you to view all the slides and their relative position to each other. We can see that there are two columns with two rows each. The outermost <code>slide</code> always creates a new column while the innermost <code>slide</code> creates a new row.</p>
+<p>If we compare this to the previous example, we only had a single <code>slide</code>. If we press <code>&lt;ESC&gt;</code> in that slideshow, we can see that the slides are aligned in columns with one row each in that case. These are the two main ways of creating slides, either you use only one level of <code>slide</code> and get a 1D-slideshow or you use two levels and get a 2D-slideshow. The advantage of a 2D-slideshow is that you can structure your slides easier. You can for example create one column for each topic of your presentation, that way you will be able to jump around much quicker when you are in overview mode.</p>
+<h2>Adding text to you slides</h2>
+<p>Now you know how to create you slides, now you just have to fill them with content. The most basic thing to add to a slide is text. As you saw in the previous examples this can be accomplished using <code>nbText</code>. It accepts a string of markdown, so you can format you text using for example headers and <em>emphasis</em>:</p>
+                        <pre><code class="nohighlight hljs nim">slide:
+  nbText: <span class="hljs-string">&quot;&quot;&quot;
+# This is a header
+## This is a smaller header
+This is normal text!
+&quot;&quot;&quot;</span>
+
+slide:
+  nbText: <span class="hljs-string">&quot;&quot;&quot;
+You can *emphasize* text in **different** ways.
+- Lists works as well
+- And links: [nimiSlides](https://github.com/HugoGranstrom/nimiSlides)
+&quot;&quot;&quot;</span></code></pre>
+                          <div class="reveal" id="revealId2" style="height: 500px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <h1>This is a header</h1>
+<h2>This is a smaller header</h2>
+<p>This is normal text!</p>
+                        </section>
+                        <section data-nimib-slide-number="2" >
+                        <p>You can <em>emphasize</em> text in <strong>different</strong> ways.</p>
+<ul>
+<li>Lists works as well</li>
+<li>And links: <a href="https://github.com/HugoGranstrom/nimiSlides">nimiSlides</a></li>
+</ul>
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId2 = new Reveal(document.getElementById("revealId2"), {
+      embedded: true,
+      keyboardCondition: 'focused'
+    })
+    deck_revealId2.initialize()
+  </script>
+                        <p>Tip: if you are using VSCodium/VSCode you can install my extension <code>NimiBoost</code> which allows you to get code highlighting of your markdown by adding <code>hlMd</code> in front of the string:</p>
+                        <pre><code class="nohighlight hljs nim">nbText: <span class="hljs-string">hlMd&quot;&quot;&quot;
+Now *you* will be **able** to see the formatting!  
+
+## Images
+The second most common element of a presentation are images. They are added using `nbImage`:
+&quot;&quot;&quot;</span></code></pre>
+                        <pre><code class="nohighlight hljs nim">slide:
+  nbImage(<span class="hljs-string">&quot;https://raw.githubusercontent.com/pietroppeter/nimib/main/assets/nimib-nimconf-thumbnail.png&quot;</span>)</code></pre>
+                          <div class="reveal" id="revealId3" style="height: 500px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <figure>
+<img src="https://raw.githubusercontent.com/pietroppeter/nimib/main/assets/nimib-nimconf-thumbnail.png" alt="">
+<figcaption></figcaption>
+</figure>
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId3 = new Reveal(document.getElementById("revealId3"), {
+      embedded: true,
+      keyboardCondition: 'focused'
+    })
+    deck_revealId3.initialize()
+  </script>
+                        <p>Now you are ready to start creating your own slideshows in Nim! If you want to learn about more features look at the available tutorials in the sidebar to the left.</p>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../tutorials/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../tutorials/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+
+
+
+        <script src="../assets/js/clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../assets/js/book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

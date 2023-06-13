@@ -15146,7 +15146,7 @@ slideAutoAnimate:
       
       <h2>Loops ♻️ + Generate images 🖼️</h2>
       <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers="|1-1,|2-2,|3-3,|4-7,|9-9,|10-10,|11-11"><span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> [<span class="hljs-number">50</span>, <span class="hljs-number">100</span>, <span class="hljs-number">1000</span>, <span class="hljs-number">10000</span>]:
-  <span class="hljs-keyword">let</span> filename = &amp;<span class="hljs-string">&quot;gauss-{n}.png&quot;</span>
+  <span class="hljs-keyword">let</span> filename = &amp;<span class="hljs-string">&quot;images/gauss-{n}.png&quot;</span>
   <span class="hljs-keyword">let</span> samples = newSeqWith[<span class="hljs-built_in">float</span>](n, gauss(<span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span>))
   <span class="hljs-keyword">let</span> df = toDf(samples)
   ggplot(df, aes(<span class="hljs-string">&quot;samples&quot;</span>)) +
@@ -15163,28 +15163,28 @@ slideAutoAnimate:
       <section data-nimib-slide-number="88" >
       <h2>Gauss Samples (N = 50)</h2>
       <figure>
-<img src="gauss-50.png" alt="">
+<img src="images/gauss-50.png" alt="">
 <figcaption></figcaption>
 </figure>
       </section>
       <section data-nimib-slide-number="89" >
       <h2>Gauss Samples (N = 100)</h2>
       <figure>
-<img src="gauss-100.png" alt="">
+<img src="images/gauss-100.png" alt="">
 <figcaption></figcaption>
 </figure>
       </section>
       <section data-nimib-slide-number="90" >
       <h2>Gauss Samples (N = 1000)</h2>
       <figure>
-<img src="gauss-1000.png" alt="">
+<img src="images/gauss-1000.png" alt="">
 <figcaption></figcaption>
 </figure>
       </section>
       <section data-nimib-slide-number="91" >
       <h2>Gauss Samples (N = 10000)</h2>
       <figure>
-<img src="gauss-10000.png" alt="">
+<img src="images/gauss-10000.png" alt="">
 <figcaption></figcaption>
 </figure>
       </section>

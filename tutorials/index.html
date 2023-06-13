@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using nimibook -->
         <meta charset="UTF-8">
-        <title>Documentation - NimiSlides</title>
+        <title>Tutorials - NimiSlides</title>
 
         <!-- Custom HTML head -->
 
@@ -13,17 +13,17 @@
         <meta name="theme-color" content="#ffffff" />
 
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐳</text></svg>">
-        <link rel="stylesheet" href="./assets/css/variables.css">
-        <link rel="stylesheet" href="./assets/css/general.css">
-        <link rel="stylesheet" href="./assets/css/chrome.css">
+        <link rel="stylesheet" href="../assets/css/variables.css">
+        <link rel="stylesheet" href="../assets/css/general.css">
+        <link rel="stylesheet" href="../assets/css/chrome.css">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="./assets/FontAwesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../assets/FontAwesome/css/font-awesome.min.css">
 
         <!-- Highlight.js Stylesheets - I could use nimib native highlight but let's keep it for styling... -->
-        <link rel="stylesheet" href="./assets/css/highlight.css">
-        <link rel="stylesheet" href="./assets/css/tomorrow-night.css">
-        <link rel="stylesheet" href="./assets/css/ayu-highlight.css">
+        <link rel="stylesheet" href="../assets/css/highlight.css">
+        <link rel="stylesheet" href="../assets/css/tomorrow-night.css">
+        <link rel="stylesheet" href="../assets/css/ayu-highlight.css">
 
         <!-- Custom theme stylesheets - why the "../"? -->
 
@@ -39,7 +39,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = ".//assets";
+            var path_to_root = "..//assets";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -87,17 +87,17 @@
             <div class="sidebar-scrollbox">
                                 <ol class="chapter">
                 <li class="chapter-item expanded ">
-                  <a href="./index.html" class="active" tabindex="0">
+                  <a href="../index.html" tabindex="0">
                       Documentation
                   </a></li>
                 <li class="chapter-item expanded ">
-                  <a href="./tutorials/index.html" tabindex="0">
+                  <a href="../tutorials/index.html" class="active" tabindex="0">
                     <strong aria-hidden="true">1.</strong> Tutorials
                   </a></li>
                   <li>
                   <ol class="section">
                 <li class="chapter-item expanded ">
-                  <a href="./tutorials/getting_started.html" tabindex="0">
+                  <a href="../tutorials/getting_started.html" tabindex="0">
                     <strong aria-hidden="true">1.1.</strong> Getting Started
                   </a></li>
                 </ol>
@@ -149,30 +149,17 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1>Documentation - nimiSlides</h1>
-<p>nimiSlides is Reveal.js theme for nimib which enables you to make beautiful slideshows just by writing Nim code.</p>
-<h2>API Reference</h2>
-<p>All procs and templates are documented in the <a href="./docs/nimiSlides.html">API Reference</a>. For easier CTRL-F see <a href="./docs/theindex.html">the index</a>.</p>
-<h2>Tutorials</h2>
-<p>See the tutorials section in the sidebar to the left. If you are new to nimiSlides, <a href="./tutorials/getting_started.html">getting started</a> is a good place to start.</p>
-<h2>Examples</h2>
-<p>Here is a list of slideshows along with links to their source code.</p>
-<ul>
-<li><a href="./showcase.html">Showcase</a> (<a href="https://github.com/HugoGranstrom/nimiSlides/blob/main/docsrc/showcase.nim">source code</a>)
-Showcases many of the features of nimiSlides.</li>
-<li><a href="./nimconf2022.html">NimConf 2022 nimiSlides</a> (<a href="https://github.com/HugoGranstrom/nimiSlides/blob/main/docsrc/nimconf2022.nim">source code</a>)
-The slides from my 2022 NimConf talk about nimiSlides.</li>
-<li><a href="https://pietroppeter.github.io/nimconf22-nimib/">NimConf 2022 nimib</a> (<a href="https://github.com/pietroppeter/nimconf22-nimib">source code</a>)
-The slides from the 2022 NimConf talk about nimib.</li>
-</ul>
-<h2>Reveal.js</h2>
-<p>As nimiSlides generates Reveal.js slideshows, it's worth having a look at the <a href="https://revealjs.com/">Reveal.js documentation</a>.</p>
+                        <h1>Tutorials</h1>
+<p>This section contains tutorials covering the features of nimiSlides.</p>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
-                            <a rel="next" href="./tutorials/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../tutorials/getting_started.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -182,8 +169,11 @@ The slides from the 2022 NimConf talk about nimib.</li>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
-                    <a rel="next" href="./tutorials/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../tutorials/getting_started.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
@@ -196,8 +186,8 @@ The slides from the 2022 NimConf talk about nimib.</li>
 
 
 
-        <script src="./assets/js/clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="./assets/js/book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../assets/js/clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../assets/js/book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
 
