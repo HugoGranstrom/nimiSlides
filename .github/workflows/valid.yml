@@ -13,10 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: iffy/install-nim@v4
-      - name: Generate
+      - name: Install deps
         run: |
           nimble install -y
           nimble docsDeps
-          nimble docs
-          nimble buildDocs
-          nimble buildBook
+      - name: Build compiler-docs
+        run: nimble docs
+      - name: Build slideshows
+        run:  nimble buildDocs
+      - name: Build book
+        run:  nimble buildBook
