@@ -12,15 +12,18 @@ var book = initBookWithToc:
       entry("Basics of Fragments", "basics.nim")
       entry("Animated Lists", "lists.nim")
       entry("List of Fragments", "list_fragments.nim")
-      entry("End Fragments", "end_fragments.nim")
+      entry("End-Fragments", "end_fragments.nim")
       entry("Advanced Fragments", "advanced_fragments.nim")
-    entry("Slide Options", "slide_options.nim")
-    entry("Backgrounds", "backgrounds.nim")
+    section("Slide Options", "slide_options.nim"):
+      entry("Auto-Animate", "auto_animate.nim")
+      entry("Backgrounds", "backgrounds.nim")
     entry("Themes", "themes.nim")
     entry("Speaker View", "speaker.nim")
     entry("Local Reveal.js installation", "local_reveal.nim")
+    entry("Inline HTML", "inline_html.nim")
     entry("Misc", "misc.nim")
 
+  entry("Automation", "automation.nim") # better name needed. For loops, if-statements
   entry("Gotchas", "gotchas.nim")
 
 nimibookCli(book)

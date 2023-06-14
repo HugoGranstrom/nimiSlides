@@ -7,6 +7,8 @@ nbText: hlMd"""
 # Documentation - nimiSlides
 nimiSlides is Reveal.js theme for nimib which enables you to make beautiful slideshows just by writing Nim code.
 
+nimiSlides is a [nimib](https://github.com/pietroppeter/nimib) library. Check out [nimib's documentation](https://pietroppeter.github.io/nimib/) as well.
+
 ## API Reference
 All procs and templates are documented in the [API Reference](./docs/nimiSlides.html). For easier CTRL-F see [the index](./docs/theindex.html).
 
