@@ -497,6 +497,9 @@ template bigText*(text: string) =
   newNbSlimBlock("bigText"):
     nb.blk.output = text
 
+template fitImage*(src: string) =
+  nbRawHtml: hlHtml"""<img data-src="$1" class="r-stretch">""" % [src]
+
 template speakerNote*(text: string) =
   nbRawHtml: """
 <aside class="notes">
