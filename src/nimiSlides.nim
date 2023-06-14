@@ -231,6 +231,10 @@ template slide*(body: untyped) =
   slide(slideOptions()):
     body
 
+template slideAutoAnimate*(body: untyped) =
+  slide(slideOptions(autoAnimate=true)):
+    body
+
 template fragmentStartBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], indexOffset: int, incrementCounter: bool) =
   newNbSlimBlock("fragmentStart"):
     for level in animations:
