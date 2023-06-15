@@ -53,6 +53,15 @@ nbText: hlMd"""
 As we can see, the `adaptiveColumns` made the "Short text" column smaller because it didn't need more space.
 This allowed the looong text to fit in one line.
 
+## Vertical Centering
+By default, all content is centered both horizontally and vertically.
+The vertical (up-down) centering can be globally disabled for all slides by calling:
+"""
+
+nbCode:
+  disableVerticalCentering()
+
+nbText: hlMd"""
 ## Text alignment
 See `align` in [Text Formatting](./text_formatting.html)
 """

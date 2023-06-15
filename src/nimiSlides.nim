@@ -100,6 +100,9 @@ const main = """
     {{#showSlideNumber}}
     slideNumber: 'c/t',
     {{/showSlideNumber}}
+    {{#disableCentering}}
+    center: false,
+    {{/disableCentering}}
   });
 {{> customJS}}
 </script>
@@ -149,6 +152,9 @@ template useScrollWheel*() =
 
 template showSlideNumber*() =
   nb.context["showSlideNumber"] = true
+
+template disableVerticalCentering*() =
+  nb.context["disableCentering"] = true
 
 proc revealTheme*(doc: var NbDoc) =
   doc.partials["document"] = document
