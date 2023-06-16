@@ -41,12 +41,14 @@ type
     videoBackground*: string
     iframeBackground*: string
     iframeInteractive*: bool
+    gradientBackground*: string
 
-proc slideOptions*(autoAnimate = false, iframeInteractive = true, colorBackground, imageBackground, videoBackground, iframeBackground: string = ""): SlideOptions =
+proc slideOptions*(autoAnimate = false, iframeInteractive = true, colorBackground, imageBackground, videoBackground, iframeBackground, gradientBackground: string = ""): SlideOptions =
   SlideOptions(
     autoAnimate: autoAnimate, iframeInteractive: iframeInteractive, colorBackground: colorBackground,
     imageBackground: imageBackground, videoBackground: videoBackground,
-    iframeBackground: iframeBackground
+    iframeBackground: iframeBackground,
+    gradientBackground: gradientBackground,
   )
 
 const document = """
@@ -210,6 +212,8 @@ proc slideOptionsToAttributes*(options: SlideOptions): string =
     result.add """data-background-iframe="$1" """ % [options.iframeBackground]
     if options.iframeInteractive:
       result.add "data-background-interactive "
+  elif options.gradientBackground.len > 0:
+    result.add """data-background-gradient="$1" """ % [options.gradientBackground]
 
 template slide*(options: untyped, body: untyped): untyped =
   currentSlideNumber += 1
