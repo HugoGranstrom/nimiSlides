@@ -21,6 +21,7 @@ var book = initBookWithToc:
     entry("Speaker View", "speaker.nim")
     entry("Local Reveal.js installation", "local_reveal.nim")
     entry("Inline HTML", "inline_html.nim")
+    entry("Print / PDF Export", "pdf_export.nim")
     entry("Misc", "misc.nim")
 
   entry("Automation", "automation.nim") # better name needed. For loops, if-statements
