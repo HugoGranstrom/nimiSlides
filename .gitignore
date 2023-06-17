@@ -9,3 +9,4 @@ docs/images
 docs/*.png
 docs/assets
 docs/book.json
+docs/reveal*

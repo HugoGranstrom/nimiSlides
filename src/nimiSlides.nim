@@ -124,7 +124,7 @@ const revealJS = """
 """
 
 proc useLocalReveal*(nb: var NbDoc, path: string) =
-  let path = nb.srcDirRel.string / path
+  let path = nb.homeDir.string / path
   let themeString = "{{{slidesTheme}}}"
   nb.partials["revealCSS"] = fmt"""
 <link rel="stylesheet" href="{path}/dist/reveal.css"/>
