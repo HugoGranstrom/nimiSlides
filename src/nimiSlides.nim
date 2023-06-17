@@ -26,7 +26,7 @@ type
     highlightCurrentBlue = "highlight-current-blue"
 
   SlidesTheme* = enum
-    Black, Beige, Blood, League, Moon, Night, Serif, Simple, Sky, Solarized, White
+    Black, Beige, Blood, Dracula, League, Moon, Night, Serif, Simple, Sky, Solarized, White
 
   Corner* = enum
     UpperLeft, UpperRight, LowerLeft, LowerRight
