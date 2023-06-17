@@ -24,6 +24,27 @@ codeAndSlides:
     nbText: "Yellow Background!"
 
 nbText: hlMd"""
+## Gradient Color Background
+The color gradient is specified by passing a valid CSS color (e.g. `linear-gradient`, `radial-gradient`, `conic-gradient`)
+to the `gradientBackground` parameter of `slideOptions`:
+"""
+
+codeAndSlides:
+  slide(slideOptions(gradientBackground="linear-gradient(to bottom, #F1B434, black)")):
+    nbText: "Linear"
+
+  slide(slideOptions(gradientBackground="radial-gradient(#F1B434, black)")):
+    nbText: "Radial"
+
+  slide(slideOptions(gradientBackground="conic-gradient(#F1B434, black)")):
+    nbText: "Conic"
+
+
+
+
+
+
+nbText: hlMd"""
 ## Image Background
 The image is specified by passing a link
 to the `imageBackground` parameter of `slideOptions`:
