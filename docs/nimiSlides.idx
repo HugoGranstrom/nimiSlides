@@ -20,6 +20,7 @@ FragmentAnimation	nimiSlides.html#FragmentAnimation	nimiSlides: FragmentAnimatio
 Black	nimiSlides.html#Black	SlidesTheme.Black	
 Beige	nimiSlides.html#Beige	SlidesTheme.Beige	
 Blood	nimiSlides.html#Blood	SlidesTheme.Blood	
+Dracula	nimiSlides.html#Dracula	SlidesTheme.Dracula	
 League	nimiSlides.html#League	SlidesTheme.League	
 Moon	nimiSlides.html#Moon	SlidesTheme.Moon	
 Night	nimiSlides.html#Night	SlidesTheme.Night	
@@ -36,7 +37,7 @@ LowerRight	nimiSlides.html#LowerRight	Corner.LowerRight
 Corner	nimiSlides.html#Corner	nimiSlides: Corner	
 NimiSlidesConfig	nimiSlides.html#NimiSlidesConfig	nimiSlides: NimiSlidesConfig	
 SlideOptions	nimiSlides.html#SlideOptions	nimiSlides: SlideOptions	
-slideOptions	nimiSlides.html#slideOptions,string,string,string,string	nimiSlides: slideOptions(autoAnimate = false; iframeInteractive = true; colorBackground,\n    imageBackground, videoBackground, iframeBackground: string = &quot;&quot;): SlideOptions	
+slideOptions	nimiSlides.html#slideOptions,string,string,string,string,string	nimiSlides: slideOptions(autoAnimate = false; iframeInteractive = true; colorBackground,\n    imageBackground, videoBackground, iframeBackground, gradientBackground: string = &quot;&quot;): SlideOptions	
 useLocalReveal	nimiSlides.html#useLocalReveal,NbDoc,string	nimiSlides: useLocalReveal(nb: var NbDoc; path: string)	
 setSlidesTheme	nimiSlides.html#setSlidesTheme.t,SlidesTheme	nimiSlides: setSlidesTheme(theme: SlidesTheme)	
 useScrollWheel	nimiSlides.html#useScrollWheel.t	nimiSlides: useScrollWheel()	
