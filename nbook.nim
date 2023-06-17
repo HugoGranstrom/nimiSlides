@@ -17,7 +17,7 @@ var book = initBookWithToc:
     section("Slide Options", "slide_options.nim"):
       entry("Auto-Animate", "auto_animate.nim")
       entry("Backgrounds", "backgrounds.nim")
-    entry("Themes", "themes.nim")
+    entry("Themes & CSS", "themes.nim")
     entry("Speaker View", "speaker.nim")
     entry("Local Reveal.js installation", "local_reveal.nim")
     entry("Inline HTML", "inline_html.nim")
