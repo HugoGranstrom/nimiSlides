@@ -1,5 +1,4 @@
-import nimib, nimiSlides, nimiBook
-import ./utils/embeddedReveal
+import nimib, nimiBook
 
 nbInit(theme = useNimibook)
 

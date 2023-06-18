@@ -1,8 +1,6 @@
 import nimib, nimibook, nimiSlides
-import ../../utils/embeddedReveal
 
 nbInit(theme = useNimibook)
-initEmbeddedSlides()
 
 nbText: hlMd"""
 # Fragments (Animations)
