@@ -24,7 +24,7 @@ var book = initBookWithToc:
     entry("Print / PDF Export", "pdf_export.nim")
     entry("Misc", "misc.nim")
 
-  entry("Automation", "automation.nim") # better name needed. For loops, if-statements
+  entry("Automation", "automation.nim")
   entry("Gotchas", "gotchas.nim")
 
 nimibookCli(book)
