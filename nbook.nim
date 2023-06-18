@@ -10,8 +10,8 @@ var book = initBookWithToc:
     entry("Layout", "layout.nim")
     section("Fragments (Animations)", "fragments/index.nim"):
       entry("Basics of Fragments", "basics.nim")
-      entry("Animated Lists", "lists.nim")
       entry("List of Fragments", "list_fragments.nim")
+      entry("Animated Lists", "lists.nim")
       entry("End-Fragments", "end_fragments.nim")
       entry("Advanced Fragments", "advanced_fragments.nim")
     section("Slide Options", "slide_options.nim"):
