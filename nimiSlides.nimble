@@ -29,8 +29,8 @@ task buildDocs, "build all .nim files in docsrc/":
 
 task buildBook, "Builds the nimiBook docs":
     selfExec(" r -d:release nbook.nim init")
-    selfExec(" r -d:release nbook.nim build")
+    selfExec(" r -d:release -f -d:nimibMaxProcesses=1 -d:nimibParallelBuild=false nbook.nim build")
 
 task docs, "Generate automatic docs":
-    exec "nim doc --project --index:on --git.url:https://github.com/HugoGranstrom/nimiSlides --git.commit:master --outdir:docs/docs src/nimiSlides.nim"
+    exec "nim doc --project --index:on --git.url:https://github.com/HugoGranstrom/nimiSlides --git.commit:main --outdir:docs/docs src/nimiSlides.nim"
 

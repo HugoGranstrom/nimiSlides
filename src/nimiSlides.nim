@@ -102,6 +102,9 @@ const main = """
     {{#showSlideNumber}}
     slideNumber: 'c/t',
     {{/showSlideNumber}}
+    {{#disableCentering}}
+    center: false,
+    {{/disableCentering}}
   });
 {{> customJS}}
 </script>
@@ -124,7 +127,7 @@ const revealJS = """
 """
 
 proc useLocalReveal*(nb: var NbDoc, path: string) =
-  let path = nb.srcDirRel.string / path
+  let path = nb.homeDir.string / path
   let themeString = "{{{slidesTheme}}}"
   nb.partials["revealCSS"] = fmt"""
 <link rel="stylesheet" href="{path}/dist/reveal.css"/>
@@ -152,6 +155,9 @@ template useScrollWheel*() =
 
 template showSlideNumber*() =
   nb.context["showSlideNumber"] = true
+
+template disableVerticalCentering*() =
+  nb.context["disableCentering"] = true
 
 proc revealTheme*(doc: var NbDoc) =
   doc.partials["document"] = document
@@ -190,7 +196,7 @@ proc revealTheme*(doc: var NbDoc) =
     if slidesConfig.localReveal != "":
       echo "Using local Reveal.js installation specified in nimib.toml "
       doc.useLocalReveal(slidesConfig.localReveal)
-  except:
+  except CatchableError:
     discard # if it doesn't exists, just let it be
 
 proc addStyle*(doc: NbDoc, style: string) =
@@ -236,9 +242,18 @@ template slide*(body: untyped) =
   slide(slideOptions()):
     body
 
+template slideAutoAnimate*(body: untyped) =
+  slide(slideOptions(autoAnimate=true)):
+    body
+
 template fragmentStartBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], indexOffset: int, incrementCounter: bool) =
   newNbSlimBlock("fragmentStart"):
     for level in animations:
+      if level.len > 1 and fadeIn in level:
+        var frag: Table[string, string]
+        frag["classStr"] = ""
+        frag["fragIndex"] = $(currentFragment + indexOffset)
+        fragments.add frag
       var frag: Table[string, string]
       frag["classStr"] = join(level, " ") # eg. fade-in highlight-blue
       frag["fragIndex"] = $(currentFragment + indexOffset)
@@ -501,6 +516,9 @@ template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") 
 template bigText*(text: string) =
   newNbSlimBlock("bigText"):
     nb.blk.output = text
+
+template fitImage*(src: string) =
+  nbRawHtml: hlHtml"""<img data-src="$1" class="r-stretch">""" % [src]
 
 template speakerNote*(text: string) =
   nbRawHtml: """

@@ -1,5 +1,4 @@
-import nimib, nimiSlides, nimiBook
-import ./utils/embeddedReveal
+import nimib, nimiBook
 
 nbInit(theme = useNimibook)
 
@@ -7,11 +6,15 @@ nbText: hlMd"""
 # Documentation - nimiSlides
 nimiSlides is Reveal.js theme for nimib which enables you to make beautiful slideshows just by writing Nim code.
 
+nimiSlides is a [nimib](https://github.com/pietroppeter/nimib) library. Check out [nimib's documentation](https://pietroppeter.github.io/nimib/) as well.
+
 ## API Reference
 All procs and templates are documented in the [API Reference](./docs/nimiSlides.html). For easier CTRL-F see [the index](./docs/theindex.html).
 
 ## Tutorials
-See the tutorials section in the sidebar to the left. If you are new to nimiSlides, [getting started](./tutorials/getting_started.html) is a good place to start.
+See the [tutorials](./tutorials/index.html) section in the sidebar to the left. If you are new to nimiSlides, [getting started](./tutorials/getting_started.html) is a good place to start.
+The [tutorials](./tutorials/index.html) page provides a table showing which features (procs/template names) are covered in each tutorial. It's a handy place to CTRL-F to see if there are any tutorials for a specific feature.
+
 
 ## Examples
 Here is a list of slideshows along with links to their source code.
