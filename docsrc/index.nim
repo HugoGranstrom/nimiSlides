@@ -14,7 +14,7 @@ All procs and templates are documented in the [API Reference](./docs/nimiSlides.
 
 ## Tutorials
 See the [tutorials](./tutorials/index.html) section in the sidebar to the left. If you are new to nimiSlides, [getting started](./tutorials/getting_started.html) is a good place to start.
-The [tutorials](./tutorials/index.html) page provides a table showing which features (procs/template names) are cover in each tutorial. It's a handy place to CTRL-F to see if there are any tutorials for a specific feature.
+The [tutorials](./tutorials/index.html) page provides a table showing which features (procs/template names) are covered in each tutorial. It's a handy place to CTRL-F to see if there are any tutorials for a specific feature.
 
 
 ## Examples
