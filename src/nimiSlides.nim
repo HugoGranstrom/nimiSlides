@@ -249,6 +249,11 @@ template slideAutoAnimate*(body: untyped) =
 template fragmentStartBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], indexOffset: int, incrementCounter: bool) =
   newNbSlimBlock("fragmentStart"):
     for level in animations:
+      if level.len > 1 and fadeIn in level:
+        var frag: Table[string, string]
+        frag["classStr"] = ""
+        frag["fragIndex"] = $(currentFragment + indexOffset)
+        fragments.add frag
       var frag: Table[string, string]
       frag["classStr"] = join(level, " ") # eg. fade-in highlight-blue
       frag["fragIndex"] = $(currentFragment + indexOffset)
