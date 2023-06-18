@@ -1,0 +1,733 @@
+<!DOCTYPE HTML>
+<html lang="en-us" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using nimibook -->
+        <meta charset="UTF-8">
+        <title>List of Fragments - NimiSlides</title>
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="NimiSlides Documentation">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐳</text></svg>">
+        <link rel="stylesheet" href="../../assets/css/variables.css">
+        <link rel="stylesheet" href="../../assets/css/general.css">
+        <link rel="stylesheet" href="../../assets/css/chrome.css">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../assets/FontAwesome/css/font-awesome.min.css">
+
+        <!-- Highlight.js Stylesheets - I could use nimib native highlight but let's keep it for styling... -->
+        <link rel="stylesheet" href="../../assets/css/highlight.css">
+        <link rel="stylesheet" href="../../assets/css/tomorrow-night.css">
+        <link rel="stylesheet" href="../../assets/css/ayu-highlight.css">
+
+        <!-- Custom theme stylesheets - why the "../"? -->
+
+
+        
+
+        
+        <!-- plausible analytics (new in nimibook) -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../..//assets";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                                <ol class="chapter">
+                <li class="chapter-item expanded ">
+                  <a href="../../index.html" tabindex="0">
+                      Documentation
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/index.html" tabindex="0">
+                    <strong aria-hidden="true">1.</strong> Tutorials
+                  </a></li>
+                  <li>
+                  <ol class="section">
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/getting_started.html" tabindex="0">
+                    <strong aria-hidden="true">1.1.</strong> Getting Started
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/code_block.html" tabindex="0">
+                    <strong aria-hidden="true">1.2.</strong> Code Blocks
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/text_formatting.html" tabindex="0">
+                    <strong aria-hidden="true">1.3.</strong> Text Formatting
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/images_media.html" tabindex="0">
+                    <strong aria-hidden="true">1.4.</strong> Images & Media
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/layout.html" tabindex="0">
+                    <strong aria-hidden="true">1.5.</strong> Layout
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/fragments/index.html" tabindex="0">
+                    <strong aria-hidden="true">1.6.</strong> Fragments (Animations)
+                  </a></li>
+                  <li>
+                  <ol class="section">
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/fragments/basics.html" tabindex="0">
+                    <strong aria-hidden="true">1.6.1.</strong> Basics of Fragments
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/fragments/list_fragments.html" class="active" tabindex="0">
+                    <strong aria-hidden="true">1.6.2.</strong> List of Fragments
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/fragments/lists.html" tabindex="0">
+                    <strong aria-hidden="true">1.6.3.</strong> Animated Lists
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/fragments/end_fragments.html" tabindex="0">
+                    <strong aria-hidden="true">1.6.4.</strong> End-Fragments
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/fragments/advanced_fragments.html" tabindex="0">
+                    <strong aria-hidden="true">1.6.5.</strong> Advanced Fragments
+                  </a></li>
+                  </ol>
+                  </li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/slide_options.html" tabindex="0">
+                    <strong aria-hidden="true">1.7.</strong> Slide Options
+                  </a></li>
+                  <li>
+                  <ol class="section">
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/auto_animate.html" tabindex="0">
+                    <strong aria-hidden="true">1.7.1.</strong> Auto-Animate
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/backgrounds.html" tabindex="0">
+                    <strong aria-hidden="true">1.7.2.</strong> Backgrounds
+                  </a></li>
+                  </ol>
+                  </li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/themes.html" tabindex="0">
+                    <strong aria-hidden="true">1.8.</strong> Themes & CSS
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/speaker.html" tabindex="0">
+                    <strong aria-hidden="true">1.9.</strong> Speaker View
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/local_reveal.html" tabindex="0">
+                    <strong aria-hidden="true">1.10.</strong> Local Reveal.js installation
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/inline_html.html" tabindex="0">
+                    <strong aria-hidden="true">1.11.</strong> Inline HTML
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/pdf_export.html" tabindex="0">
+                    <strong aria-hidden="true">1.12.</strong> Print / PDF Export
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../tutorials/misc.html" tabindex="0">
+                    <strong aria-hidden="true">1.13.</strong> Misc
+                  </a></li>
+                  </ol>
+                  </li>
+                <li class="chapter-item expanded ">
+                  <a href="../../automation.html" tabindex="0">
+                    <strong aria-hidden="true">2.</strong> Automation
+                  </a></li>
+                <li class="chapter-item expanded ">
+                  <a href="../../gotchas.html" tabindex="0">
+                    <strong aria-hidden="true">3.</strong> Gotchas
+                  </a></li>
+                </ol>
+<!-- I could use also an unescaped context value -->
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                    </div>
+
+                    <h1 class="menu-title">NimiSlides</h1>
+
+                    <div class="right-buttons">
+                        <a href="https://github.com/HugoGranstrom/nimiSlides" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css" integrity="sha512-USp+nLNMZ1hR0Ll/LpYDxIq47Ypcm3KfjIleOnyFrB1N5KfHLXjfPQD1wQlhv7kVHRRgPvNVtendDS72LyHviA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css" integrity="sha512-z8wQkuDRFwCBfoj7KOiu1MECaRVoXx6rZQWL21x0BsVVH7JkqCp1Otf39qve6CrCycOOL5o9vgfII5Smds23rg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.js" integrity="sha512-9dFFU5pcR8K4bvw4ng6mLMW5IjslYbA57amHEMtHn3TT9RkKivsDabKffqjUUJ4pCaojAyH05T1OESld199Gcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js" integrity="sha512-RCedMo/DOyawQOh4zYtqEHTZAfgrrVQctN3LVCX5kELGsN52TOdwZ8inRY0l9Mo4vtyDFn6oOAgRUilWXgb+wA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js" integrity="sha512-MZ7Ehjbh2soaeCZJGaw6vBNAa7+eunl0SUmRPNESchLlboH73lHLEeUa6pZJ2Pcui4NcpDFatr6M+VlcmaH1QA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js" integrity="sha512-skPZpuRwuUAnF9iEEFBXc4zJaucKcHUDgY1wDBTv0ILy82C2gn8MJsbcinzj2u8r/iZjD/78HRgw2/n//poOhQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                        <style>
+table tbody tr:nth-child(2n) {
+  background: 0;
+}
+</style>
+                        <h1>List of Fragments</h1>
+<p>This document lists and shows all the fragments (animations) available in nimiSlides.</p>
+                        <h2><code>fadeIn</code></h2>
+                          <div class="reveal" id="revealId0" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment fade-in" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>fadeIn</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId0 = new Reveal(document.getElementById("revealId0"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId0.initialize()
+  </script>
+                        <h2><code>fadeOut</code></h2>
+                          <div class="reveal" id="revealId1" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment fade-out" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>fadeOut</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId1 = new Reveal(document.getElementById("revealId1"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId1.initialize()
+  </script>
+                        <h2><code>fadeUp</code></h2>
+                          <div class="reveal" id="revealId2" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment fade-up" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>fadeUp</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId2 = new Reveal(document.getElementById("revealId2"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId2.initialize()
+  </script>
+                        <h2><code>fadeDown</code></h2>
+                          <div class="reveal" id="revealId3" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment fade-down" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>fadeDown</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId3 = new Reveal(document.getElementById("revealId3"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId3.initialize()
+  </script>
+                        <h2><code>fadeLeft</code></h2>
+                          <div class="reveal" id="revealId4" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment fade-left" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>fadeLeft</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId4 = new Reveal(document.getElementById("revealId4"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId4.initialize()
+  </script>
+                        <h2><code>fadeRight</code></h2>
+                          <div class="reveal" id="revealId5" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment fade-right" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>fadeRight</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId5 = new Reveal(document.getElementById("revealId5"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId5.initialize()
+  </script>
+                        <h2><code>fadeInThenOut</code></h2>
+                          <div class="reveal" id="revealId6" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment fade-in-then-out" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>fadeInThenOut</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId6 = new Reveal(document.getElementById("revealId6"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId6.initialize()
+  </script>
+                        <h2><code>fadeInThenSemiOut</code></h2>
+                          <div class="reveal" id="revealId7" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment fade-in-then-semi-out" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>fadeInThenSemiOut</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId7 = new Reveal(document.getElementById("revealId7"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId7.initialize()
+  </script>
+                        <h2><code>grows</code></h2>
+                          <div class="reveal" id="revealId8" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment grow" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>grows</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId8 = new Reveal(document.getElementById("revealId8"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId8.initialize()
+  </script>
+                        <h2><code>semiFadeOut</code></h2>
+                          <div class="reveal" id="revealId9" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment semi-fade-out" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>semiFadeOut</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId9 = new Reveal(document.getElementById("revealId9"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId9.initialize()
+  </script>
+                        <h2><code>shrinks</code></h2>
+                          <div class="reveal" id="revealId10" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment shrink" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>shrinks</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId10 = new Reveal(document.getElementById("revealId10"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId10.initialize()
+  </script>
+                        <h2><code>strike</code></h2>
+                          <div class="reveal" id="revealId11" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment strike" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>strike</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId11 = new Reveal(document.getElementById("revealId11"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId11.initialize()
+  </script>
+                        <h2><code>highlightRed</code></h2>
+                          <div class="reveal" id="revealId12" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment highlight-red" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>highlightRed</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId12 = new Reveal(document.getElementById("revealId12"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId12.initialize()
+  </script>
+                        <h2><code>highlightGreen</code></h2>
+                          <div class="reveal" id="revealId13" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment highlight-green" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>highlightGreen</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId13 = new Reveal(document.getElementById("revealId13"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId13.initialize()
+  </script>
+                        <h2><code>highlightBlue</code></h2>
+                          <div class="reveal" id="revealId14" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment highlight-blue" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>highlightBlue</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId14 = new Reveal(document.getElementById("revealId14"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId14.initialize()
+  </script>
+                        <h2><code>highlightCurrentRed</code></h2>
+                          <div class="reveal" id="revealId15" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment highlight-current-red" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>highlightCurrentRed</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId15 = new Reveal(document.getElementById("revealId15"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId15.initialize()
+  </script>
+                        <h2><code>highlightCurrentGreen</code></h2>
+                          <div class="reveal" id="revealId16" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment highlight-current-green" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>highlightCurrentGreen</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId16 = new Reveal(document.getElementById("revealId16"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId16.initialize()
+  </script>
+                        <h2><code>highlightCurrentBlue</code></h2>
+                          <div class="reveal" id="revealId17" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div class="fragment highlight-current-blue" data-fragment-index="0" data-fragment-index-nimib="0"> 
+  
+                        <p>highlightCurrentBlue</p>
+                        </div>
+  
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId17 = new Reveal(document.getElementById("revealId17"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId17.initialize()
+  </script>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../tutorials/fragments/basics.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../../tutorials/fragments/lists.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../tutorials/fragments/basics.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../../tutorials/fragments/lists.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+
+
+
+        <script src="../../assets/js/clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../assets/js/book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

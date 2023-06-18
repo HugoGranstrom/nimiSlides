@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using nimibook -->
         <meta charset="UTF-8">
-        <title>Tutorials - NimiSlides</title>
+        <title>Layout - NimiSlides</title>
 
         <!-- Custom HTML head -->
 
@@ -29,9 +29,6 @@
 
 
         
-
-            <script src="https://cdn.jsdelivr.net/gh/pietroppeter/nimib@main/assets/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
 
         
         <!-- plausible analytics (new in nimibook) -->
@@ -91,7 +88,7 @@
                       Documentation
                   </a></li>
                 <li class="chapter-item expanded ">
-                  <a href="../tutorials/index.html" class="active" tabindex="0">
+                  <a href="../tutorials/index.html" tabindex="0">
                     <strong aria-hidden="true">1.</strong> Tutorials
                   </a></li>
                   <li>
@@ -113,7 +110,7 @@
                     <strong aria-hidden="true">1.4.</strong> Images & Media
                   </a></li>
                 <li class="chapter-item expanded ">
-                  <a href="../tutorials/layout.html" tabindex="0">
+                  <a href="../tutorials/layout.html" class="active" tabindex="0">
                     <strong aria-hidden="true">1.5.</strong> Layout
                   </a></li>
                 <li class="chapter-item expanded ">
@@ -243,98 +240,148 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1>Tutorials</h1>
-<p>This section contains tutorials covering the features of nimiSlides.
-Below is a table with all the features that each of the tutorials cover.</p>
-                        <table>
-<thead>
-<tr>
-<th>Tutorial</th>
-<th>Keywords</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="getting_started.html">Getting Started</a></td>
-<td><code>slide</code>, <code>nbText</code>, <code>nbImage</code></td>
-</tr>
-<tr>
-<td><a href="code_block.html">Code Blocks</a></td>
-<td><code>nbCode</code>, <code>nbCodeInBlock</code>, <code>nbClearOutput</code>, <code>animateCode</code></td>
-</tr>
-<tr>
-<td><a href="text_formatting.html">Text Formatting</a></td>
-<td><code>nbText</code>, <code>useLatex</code>, <code>bigText</code>, <code>align</code></td>
-</tr>
-<tr>
-<td><a href="images_media.html">Images &amp; Media</a></td>
-<td><code>nbImage</code>, <code>fitImage</code></td>
-</tr>
-<tr>
-<td><a href="layout.html">Layout</a></td>
-<td><code>columns</code>, <code>adaptiveColumns</code>, <code>column</code>, <code>disableVerticalCentering</code></td>
-</tr>
-<tr>
-<td><a href="fragments/basics.html">Basics of Fragments</a></td>
-<td><code>fragment</code>, <code>fragmentFadeIn</code></td>
-</tr>
-<tr>
-<td><a href="fragments/lists.html">Animated Lists</a></td>
-<td><code>orderedList</code>, <code>unorderedList</code>, <code>listItem</code></td>
-</tr>
-<tr>
-<td><a href="fragments/end_fragments.html">End-Fragments</a></td>
-<td><code>fragmentEnd</code></td>
-</tr>
-<tr>
-<td><a href="fragments/advanced_fragments.html">Advanced Fragments</a></td>
-<td><code>fragmentNext</code>, <code>fragmentThen</code></td>
-</tr>
-<tr>
-<td><a href="slide_options.html">Slide Options</a></td>
-<td><code>slideOptions</code></td>
-</tr>
-<tr>
-<td><a href="auto_animate.html">Auto-Animate</a></td>
-<td><code>slideOptions</code>, <code>autoAnimate</code>, <code>slideAutoAnimate</code></td>
-</tr>
-<tr>
-<td><a href="backgrounds.html">Backgrounds</a></td>
-<td><code>slideOptions</code>, <code>colorBackground</code>, <code>gradientBackground</code>, <code>imageBackground</code>, <code>videoBackground</code>, <code>iframeBackground</code></td>
-</tr>
-<tr>
-<td><a href="themes.html">Themes &amp; CSS</a></td>
-<td><code>setSlidesTheme</code>, <code>addStyle</code></td>
-</tr>
-<tr>
-<td><a href="speaker.html">Speaker View</a></td>
-<td><code>speakerNote</code></td>
-</tr>
-<tr>
-<td><a href="local_reveal.html">Local Reveal.js installation</a></td>
-<td><code>localReveal</code>, <code>useLocalReveal</code></td>
-</tr>
-<tr>
-<td><a href="inline_html.html">Inline HTML</a></td>
-<td><code>nbRawHtml</code></td>
-</tr>
-<tr>
-<td><a href="pdf_export.html">Print / PDF Export</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="misc.html">Misc</a></td>
-<td><code>typewriter</code>, <code>cornerImage</code>, <code>footer</code>, <code>useScrollWheel</code>, <code>showSlideNumber</code></td>
-</tr></tbody></table>
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css" integrity="sha512-USp+nLNMZ1hR0Ll/LpYDxIq47Ypcm3KfjIleOnyFrB1N5KfHLXjfPQD1wQlhv7kVHRRgPvNVtendDS72LyHviA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css" integrity="sha512-z8wQkuDRFwCBfoj7KOiu1MECaRVoXx6rZQWL21x0BsVVH7JkqCp1Otf39qve6CrCycOOL5o9vgfII5Smds23rg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.js" integrity="sha512-9dFFU5pcR8K4bvw4ng6mLMW5IjslYbA57amHEMtHn3TT9RkKivsDabKffqjUUJ4pCaojAyH05T1OESld199Gcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js" integrity="sha512-RCedMo/DOyawQOh4zYtqEHTZAfgrrVQctN3LVCX5kELGsN52TOdwZ8inRY0l9Mo4vtyDFn6oOAgRUilWXgb+wA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js" integrity="sha512-MZ7Ehjbh2soaeCZJGaw6vBNAa7+eunl0SUmRPNESchLlboH73lHLEeUa6pZJ2Pcui4NcpDFatr6M+VlcmaH1QA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js" integrity="sha512-skPZpuRwuUAnF9iEEFBXc4zJaucKcHUDgY1wDBTv0ILy82C2gn8MJsbcinzj2u8r/iZjD/78HRgw2/n//poOhQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                        <style>
+table tbody tr:nth-child(2n) {
+  background: 0;
+}
+</style>
+                        <h1>Layout</h1>
+<p>Controlling the layout of a slide can be done using a simple column-based system.
+It works by creating a <code>columns</code> or <code>adaptiveColumns</code> environment and then all <code>column</code>
+inside them will be in their own column.</p>
+                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide:
+  nbText: <span class="hljs-string">&quot;## 2 Columns&quot;</span>
+  columns:
+    column:
+      nbText: <span class="hljs-string">&quot;Left&quot;</span>
+    column:
+      nbText: <span class="hljs-string">&quot;Right&quot;</span>
+slide:
+  nbText: <span class="hljs-string">&quot;## 3 Columns&quot;</span>
+  adaptiveColumns:
+    column:
+      nbText: <span class="hljs-string">&quot;Left&quot;</span>
+    column:
+      nbText: <span class="hljs-string">&quot;Middle&quot;</span>
+    column:
+      nbText: <span class="hljs-string">&quot;Right&quot;</span></code></pre>
+                          <div class="reveal" id="revealId0" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <h2>2 Columns</h2>
+                        <div style="display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); overflow-wrap: break-word;">
+                        <div>
+                        <p>Left</p>
+                        </div>
+                        <div>
+                        <p>Right</p>
+                        </div>
+                        </div>
+                        </section>
+                        <section data-nimib-slide-number="2" >
+                        <h2>3 Columns</h2>
+                        <div style="display: grid; grid-auto-flow: column; overflow-wrap: break-word;">
+                        <div>
+                        <p>Left</p>
+                        </div>
+                        <div>
+                        <p>Middle</p>
+                        </div>
+                        <div>
+                        <p>Right</p>
+                        </div>
+                        </div>
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId0 = new Reveal(document.getElementById("revealId0"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId0.initialize()
+  </script>
+                        <p>The difference between the two environments is that
+<code>columns</code> creates columns of equal size while <code>adaptiveColumns</code> only makes each column as big
+as it needs. See the difference in this example:</p>
+                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide:
+  nbText: <span class="hljs-string">&quot;### columns vs adaptiveColumns&quot;</span>
+  columns:
+    column:
+      nbText: <span class="hljs-string">&quot;Short text&quot;</span>
+    column:
+      nbText: <span class="hljs-string">&quot;Looooooooooooooooong text&quot;</span>
+  adaptiveColumns:
+    column:
+      nbText: <span class="hljs-string">&quot;Short text&quot;</span>
+    column:
+      nbText: <span class="hljs-string">&quot;Looooooooooooooooong text&quot;</span></code></pre>
+                          <div class="reveal" id="revealId1" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <h3>columns vs adaptiveColumns</h3>
+                        <div style="display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); overflow-wrap: break-word;">
+                        <div>
+                        <p>Short text</p>
+                        </div>
+                        <div>
+                        <p>Looooooooooooooooong text</p>
+                        </div>
+                        </div>
+                        <div style="display: grid; grid-auto-flow: column; overflow-wrap: break-word;">
+                        <div>
+                        <p>Short text</p>
+                        </div>
+                        <div>
+                        <p>Looooooooooooooooong text</p>
+                        </div>
+                        </div>
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId1 = new Reveal(document.getElementById("revealId1"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId1.initialize()
+  </script>
+                        <p>As we can see, the <code>adaptiveColumns</code> made the &quot;Short text&quot; column smaller because it didn't need more space.
+This allowed the looong text to fit in one line.</p>
+<h2>Vertical Centering</h2>
+<p>By default, all content is centered both horizontally and vertically.
+The vertical (up-down) centering can be globally disabled for all slides by calling:</p>
+                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>disableVerticalCentering()</code></pre>
+                        <h2>Text alignment</h2>
+<p>See <code>align</code> in <a href="./text_formatting.html">Text Formatting</a></p>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../tutorials/images_media.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../tutorials/getting_started.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../tutorials/fragments/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -344,11 +391,11 @@ Below is a table with all the features that each of the tutorials cover.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../tutorials/images_media.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../tutorials/getting_started.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../tutorials/fragments/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

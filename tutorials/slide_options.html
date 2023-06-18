@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using nimibook -->
         <meta charset="UTF-8">
-        <title>Tutorials - NimiSlides</title>
+        <title>Slide Options - NimiSlides</title>
 
         <!-- Custom HTML head -->
 
@@ -29,9 +29,6 @@
 
 
         
-
-            <script src="https://cdn.jsdelivr.net/gh/pietroppeter/nimib@main/assets/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
 
         
         <!-- plausible analytics (new in nimibook) -->
@@ -91,7 +88,7 @@
                       Documentation
                   </a></li>
                 <li class="chapter-item expanded ">
-                  <a href="../tutorials/index.html" class="active" tabindex="0">
+                  <a href="../tutorials/index.html" tabindex="0">
                     <strong aria-hidden="true">1.</strong> Tutorials
                   </a></li>
                   <li>
@@ -145,7 +142,7 @@
                   </ol>
                   </li>
                 <li class="chapter-item expanded ">
-                  <a href="../tutorials/slide_options.html" tabindex="0">
+                  <a href="../tutorials/slide_options.html" class="active" tabindex="0">
                     <strong aria-hidden="true">1.7.</strong> Slide Options
                   </a></li>
                   <li>
@@ -243,98 +240,84 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1>Tutorials</h1>
-<p>This section contains tutorials covering the features of nimiSlides.
-Below is a table with all the features that each of the tutorials cover.</p>
-                        <table>
-<thead>
-<tr>
-<th>Tutorial</th>
-<th>Keywords</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="getting_started.html">Getting Started</a></td>
-<td><code>slide</code>, <code>nbText</code>, <code>nbImage</code></td>
-</tr>
-<tr>
-<td><a href="code_block.html">Code Blocks</a></td>
-<td><code>nbCode</code>, <code>nbCodeInBlock</code>, <code>nbClearOutput</code>, <code>animateCode</code></td>
-</tr>
-<tr>
-<td><a href="text_formatting.html">Text Formatting</a></td>
-<td><code>nbText</code>, <code>useLatex</code>, <code>bigText</code>, <code>align</code></td>
-</tr>
-<tr>
-<td><a href="images_media.html">Images &amp; Media</a></td>
-<td><code>nbImage</code>, <code>fitImage</code></td>
-</tr>
-<tr>
-<td><a href="layout.html">Layout</a></td>
-<td><code>columns</code>, <code>adaptiveColumns</code>, <code>column</code>, <code>disableVerticalCentering</code></td>
-</tr>
-<tr>
-<td><a href="fragments/basics.html">Basics of Fragments</a></td>
-<td><code>fragment</code>, <code>fragmentFadeIn</code></td>
-</tr>
-<tr>
-<td><a href="fragments/lists.html">Animated Lists</a></td>
-<td><code>orderedList</code>, <code>unorderedList</code>, <code>listItem</code></td>
-</tr>
-<tr>
-<td><a href="fragments/end_fragments.html">End-Fragments</a></td>
-<td><code>fragmentEnd</code></td>
-</tr>
-<tr>
-<td><a href="fragments/advanced_fragments.html">Advanced Fragments</a></td>
-<td><code>fragmentNext</code>, <code>fragmentThen</code></td>
-</tr>
-<tr>
-<td><a href="slide_options.html">Slide Options</a></td>
-<td><code>slideOptions</code></td>
-</tr>
-<tr>
-<td><a href="auto_animate.html">Auto-Animate</a></td>
-<td><code>slideOptions</code>, <code>autoAnimate</code>, <code>slideAutoAnimate</code></td>
-</tr>
-<tr>
-<td><a href="backgrounds.html">Backgrounds</a></td>
-<td><code>slideOptions</code>, <code>colorBackground</code>, <code>gradientBackground</code>, <code>imageBackground</code>, <code>videoBackground</code>, <code>iframeBackground</code></td>
-</tr>
-<tr>
-<td><a href="themes.html">Themes &amp; CSS</a></td>
-<td><code>setSlidesTheme</code>, <code>addStyle</code></td>
-</tr>
-<tr>
-<td><a href="speaker.html">Speaker View</a></td>
-<td><code>speakerNote</code></td>
-</tr>
-<tr>
-<td><a href="local_reveal.html">Local Reveal.js installation</a></td>
-<td><code>localReveal</code>, <code>useLocalReveal</code></td>
-</tr>
-<tr>
-<td><a href="inline_html.html">Inline HTML</a></td>
-<td><code>nbRawHtml</code></td>
-</tr>
-<tr>
-<td><a href="pdf_export.html">Print / PDF Export</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="misc.html">Misc</a></td>
-<td><code>typewriter</code>, <code>cornerImage</code>, <code>footer</code>, <code>useScrollWheel</code>, <code>showSlideNumber</code></td>
-</tr></tbody></table>
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css" integrity="sha512-USp+nLNMZ1hR0Ll/LpYDxIq47Ypcm3KfjIleOnyFrB1N5KfHLXjfPQD1wQlhv7kVHRRgPvNVtendDS72LyHviA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css" integrity="sha512-z8wQkuDRFwCBfoj7KOiu1MECaRVoXx6rZQWL21x0BsVVH7JkqCp1Otf39qve6CrCycOOL5o9vgfII5Smds23rg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.js" integrity="sha512-9dFFU5pcR8K4bvw4ng6mLMW5IjslYbA57amHEMtHn3TT9RkKivsDabKffqjUUJ4pCaojAyH05T1OESld199Gcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js" integrity="sha512-RCedMo/DOyawQOh4zYtqEHTZAfgrrVQctN3LVCX5kELGsN52TOdwZ8inRY0l9Mo4vtyDFn6oOAgRUilWXgb+wA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js" integrity="sha512-MZ7Ehjbh2soaeCZJGaw6vBNAa7+eunl0SUmRPNESchLlboH73lHLEeUa6pZJ2Pcui4NcpDFatr6M+VlcmaH1QA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js" integrity="sha512-skPZpuRwuUAnF9iEEFBXc4zJaucKcHUDgY1wDBTv0ILy82C2gn8MJsbcinzj2u8r/iZjD/78HRgw2/n//poOhQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                        <style>
+table tbody tr:nth-child(2n) {
+  background: 0;
+}
+</style>
+                        <h1>Slide Options</h1>
+<p>The <code>slide</code> template can accept a <code>SlideOptions</code> object with some options.
+The options are related to <a href="./auto_animate.html">auto-animation</a> and <a href="./backgrounds.html">backgrounds</a>,
+see their respective tutorials for more details.</p>
+<p>A <code>SlideOptions</code> is created using the proc <code>slideOptions</code>:</p>
+                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide(slideOptions(colorBackground=<span class="hljs-string">&quot;#F1B434&quot;</span>)):
+  nbText: <span class="hljs-string">&quot;Yellow background!&quot;</span></code></pre>
+                          <div class="reveal" id="revealId0" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" data-background-color="#F1B434" >
+                        <p>Yellow background!</p>
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId0 = new Reveal(document.getElementById("revealId0"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId0.initialize()
+  </script>
+                        <p>If you want to reuse the same <code>SlideOptions</code> for multiple slides,
+save it in a variable to reduce boilerplate:</p>
+                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers><span class="hljs-keyword">let</span> sOp = slideOptions(colorBackground=<span class="hljs-string">&quot;green&quot;</span>)
+slide(sOp):
+  nbText: <span class="hljs-string">&quot;Green 1&quot;</span>
+slide(sOp):
+  nbText: <span class="hljs-string">&quot;Green 2&quot;</span></code></pre>
+                          <div class="reveal" id="revealId1" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" data-background-color="green" >
+                        <p>Green 1</p>
+                        </section>
+                        <section data-nimib-slide-number="2" data-background-color="green" >
+                        <p>Green 2</p>
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId1 = new Reveal(document.getElementById("revealId1"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId1.initialize()
+  </script>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../tutorials/fragments/advanced_fragments.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../tutorials/getting_started.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../tutorials/auto_animate.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -344,11 +327,11 @@ Below is a table with all the features that each of the tutorials cover.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../tutorials/fragments/advanced_fragments.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../tutorials/getting_started.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../tutorials/auto_animate.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using nimibook -->
         <meta charset="UTF-8">
-        <title>Tutorials - NimiSlides</title>
+        <title>Misc - NimiSlides</title>
 
         <!-- Custom HTML head -->
 
@@ -91,7 +91,7 @@
                       Documentation
                   </a></li>
                 <li class="chapter-item expanded ">
-                  <a href="../tutorials/index.html" class="active" tabindex="0">
+                  <a href="../tutorials/index.html" tabindex="0">
                     <strong aria-hidden="true">1.</strong> Tutorials
                   </a></li>
                   <li>
@@ -181,7 +181,7 @@
                     <strong aria-hidden="true">1.12.</strong> Print / PDF Export
                   </a></li>
                 <li class="chapter-item expanded ">
-                  <a href="../tutorials/misc.html" tabindex="0">
+                  <a href="../tutorials/misc.html" class="active" tabindex="0">
                     <strong aria-hidden="true">1.13.</strong> Misc
                   </a></li>
                   </ol>
@@ -243,98 +243,37 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1>Tutorials</h1>
-<p>This section contains tutorials covering the features of nimiSlides.
-Below is a table with all the features that each of the tutorials cover.</p>
-                        <table>
-<thead>
-<tr>
-<th>Tutorial</th>
-<th>Keywords</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="getting_started.html">Getting Started</a></td>
-<td><code>slide</code>, <code>nbText</code>, <code>nbImage</code></td>
-</tr>
-<tr>
-<td><a href="code_block.html">Code Blocks</a></td>
-<td><code>nbCode</code>, <code>nbCodeInBlock</code>, <code>nbClearOutput</code>, <code>animateCode</code></td>
-</tr>
-<tr>
-<td><a href="text_formatting.html">Text Formatting</a></td>
-<td><code>nbText</code>, <code>useLatex</code>, <code>bigText</code>, <code>align</code></td>
-</tr>
-<tr>
-<td><a href="images_media.html">Images &amp; Media</a></td>
-<td><code>nbImage</code>, <code>fitImage</code></td>
-</tr>
-<tr>
-<td><a href="layout.html">Layout</a></td>
-<td><code>columns</code>, <code>adaptiveColumns</code>, <code>column</code>, <code>disableVerticalCentering</code></td>
-</tr>
-<tr>
-<td><a href="fragments/basics.html">Basics of Fragments</a></td>
-<td><code>fragment</code>, <code>fragmentFadeIn</code></td>
-</tr>
-<tr>
-<td><a href="fragments/lists.html">Animated Lists</a></td>
-<td><code>orderedList</code>, <code>unorderedList</code>, <code>listItem</code></td>
-</tr>
-<tr>
-<td><a href="fragments/end_fragments.html">End-Fragments</a></td>
-<td><code>fragmentEnd</code></td>
-</tr>
-<tr>
-<td><a href="fragments/advanced_fragments.html">Advanced Fragments</a></td>
-<td><code>fragmentNext</code>, <code>fragmentThen</code></td>
-</tr>
-<tr>
-<td><a href="slide_options.html">Slide Options</a></td>
-<td><code>slideOptions</code></td>
-</tr>
-<tr>
-<td><a href="auto_animate.html">Auto-Animate</a></td>
-<td><code>slideOptions</code>, <code>autoAnimate</code>, <code>slideAutoAnimate</code></td>
-</tr>
-<tr>
-<td><a href="backgrounds.html">Backgrounds</a></td>
-<td><code>slideOptions</code>, <code>colorBackground</code>, <code>gradientBackground</code>, <code>imageBackground</code>, <code>videoBackground</code>, <code>iframeBackground</code></td>
-</tr>
-<tr>
-<td><a href="themes.html">Themes &amp; CSS</a></td>
-<td><code>setSlidesTheme</code>, <code>addStyle</code></td>
-</tr>
-<tr>
-<td><a href="speaker.html">Speaker View</a></td>
-<td><code>speakerNote</code></td>
-</tr>
-<tr>
-<td><a href="local_reveal.html">Local Reveal.js installation</a></td>
-<td><code>localReveal</code>, <code>useLocalReveal</code></td>
-</tr>
-<tr>
-<td><a href="inline_html.html">Inline HTML</a></td>
-<td><code>nbRawHtml</code></td>
-</tr>
-<tr>
-<td><a href="pdf_export.html">Print / PDF Export</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="misc.html">Misc</a></td>
-<td><code>typewriter</code>, <code>cornerImage</code>, <code>footer</code>, <code>useScrollWheel</code>, <code>showSlideNumber</code></td>
-</tr></tbody></table>
+                        <h2>Misc</h2>
+<p>This tutorial goes over a few features which doesn't have their own tutorial.
+They can be previewed in the <a href="../miscSlides.html">accompanying slides</a>.</p>
+                        <h2>Typewriter</h2>
+<p>The typewriter effect takes a text and writes it one character at a time.
+The <code>typeSpeed</code> (default: 50) specifies the number of milliseconds between typing each letter (i.e. a high number means slow typing).
+The <code>alignment</code> (default: center) specifies how to align the text (left, center, right).</p>
+                        <pre><code class="nohighlight hljs nim">typewriter(<span class="hljs-string">&quot;Hello there! This text is typed one character at a time.&quot;</span>,
+           alignment=<span class="hljs-string">&quot;center&quot;</span>, typeSpeed=<span class="hljs-number">50</span>)</code></pre>
+                        <h2>Corner Image</h2>
+<p>An image can be put in any of the four corners using <code>cornerImage</code>.
+The corners are specified using either of <code>UpperLeft, UpperRight, LowerLeft, LowerRight</code>.</p>
+                        <pre><code class="nohighlight hljs nim">cornerImage(<span class="hljs-string">&quot;image.png&quot;</span>, <span class="hljs-type">UpperRight</span>)</code></pre>
+                        <h2>Footer</h2>
+<p>A footer that will be displayed at the bottom of each slide can be created using <code>footer</code>,
+which accepts a markdown-formatted string:</p>
+                        <pre><code class="nohighlight hljs nim">footer(<span class="hljs-string">&quot;This is a *markdown*-**formatted** ***footer***&quot;</span>)</code></pre>
+                        <h2>Use scroll wheel to change slides</h2>
+<p>By running <code>useScrollWheel()</code>, the ability to change slides using the scroll wheel will be activated.
+Try this out in the <a href="../miscSlides.html">accompanying slides</a>.</p>
+<h2>Slide Numbers</h2>
+<p>To activate slide numbers in the lower right of the screen, run <code>showSlideNumber()</code>.</p>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../tutorials/pdf_export.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../tutorials/getting_started.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../automation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -344,11 +283,11 @@ Below is a table with all the features that each of the tutorials cover.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../tutorials/pdf_export.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../tutorials/getting_started.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../automation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

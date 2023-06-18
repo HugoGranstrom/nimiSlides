@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using nimibook -->
         <meta charset="UTF-8">
-        <title>Tutorials - NimiSlides</title>
+        <title>Text Formatting - NimiSlides</title>
 
         <!-- Custom HTML head -->
 
@@ -28,10 +28,9 @@
         <!-- Custom theme stylesheets - why the "../"? -->
 
 
-        
-
-            <script src="https://cdn.jsdelivr.net/gh/pietroppeter/nimib@main/assets/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous" onload="renderMathInElement(document.body,{delimiters:[{left: '$$', right: '$$', display: true},{left: '$', right: '$', display: false}]});"></script>
 
         
         <!-- plausible analytics (new in nimibook) -->
@@ -91,7 +90,7 @@
                       Documentation
                   </a></li>
                 <li class="chapter-item expanded ">
-                  <a href="../tutorials/index.html" class="active" tabindex="0">
+                  <a href="../tutorials/index.html" tabindex="0">
                     <strong aria-hidden="true">1.</strong> Tutorials
                   </a></li>
                   <li>
@@ -105,7 +104,7 @@
                     <strong aria-hidden="true">1.2.</strong> Code Blocks
                   </a></li>
                 <li class="chapter-item expanded ">
-                  <a href="../tutorials/text_formatting.html" tabindex="0">
+                  <a href="../tutorials/text_formatting.html" class="active" tabindex="0">
                     <strong aria-hidden="true">1.3.</strong> Text Formatting
                   </a></li>
                 <li class="chapter-item expanded ">
@@ -243,98 +242,168 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1>Tutorials</h1>
-<p>This section contains tutorials covering the features of nimiSlides.
-Below is a table with all the features that each of the tutorials cover.</p>
-                        <table>
-<thead>
-<tr>
-<th>Tutorial</th>
-<th>Keywords</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="getting_started.html">Getting Started</a></td>
-<td><code>slide</code>, <code>nbText</code>, <code>nbImage</code></td>
-</tr>
-<tr>
-<td><a href="code_block.html">Code Blocks</a></td>
-<td><code>nbCode</code>, <code>nbCodeInBlock</code>, <code>nbClearOutput</code>, <code>animateCode</code></td>
-</tr>
-<tr>
-<td><a href="text_formatting.html">Text Formatting</a></td>
-<td><code>nbText</code>, <code>useLatex</code>, <code>bigText</code>, <code>align</code></td>
-</tr>
-<tr>
-<td><a href="images_media.html">Images &amp; Media</a></td>
-<td><code>nbImage</code>, <code>fitImage</code></td>
-</tr>
-<tr>
-<td><a href="layout.html">Layout</a></td>
-<td><code>columns</code>, <code>adaptiveColumns</code>, <code>column</code>, <code>disableVerticalCentering</code></td>
-</tr>
-<tr>
-<td><a href="fragments/basics.html">Basics of Fragments</a></td>
-<td><code>fragment</code>, <code>fragmentFadeIn</code></td>
-</tr>
-<tr>
-<td><a href="fragments/lists.html">Animated Lists</a></td>
-<td><code>orderedList</code>, <code>unorderedList</code>, <code>listItem</code></td>
-</tr>
-<tr>
-<td><a href="fragments/end_fragments.html">End-Fragments</a></td>
-<td><code>fragmentEnd</code></td>
-</tr>
-<tr>
-<td><a href="fragments/advanced_fragments.html">Advanced Fragments</a></td>
-<td><code>fragmentNext</code>, <code>fragmentThen</code></td>
-</tr>
-<tr>
-<td><a href="slide_options.html">Slide Options</a></td>
-<td><code>slideOptions</code></td>
-</tr>
-<tr>
-<td><a href="auto_animate.html">Auto-Animate</a></td>
-<td><code>slideOptions</code>, <code>autoAnimate</code>, <code>slideAutoAnimate</code></td>
-</tr>
-<tr>
-<td><a href="backgrounds.html">Backgrounds</a></td>
-<td><code>slideOptions</code>, <code>colorBackground</code>, <code>gradientBackground</code>, <code>imageBackground</code>, <code>videoBackground</code>, <code>iframeBackground</code></td>
-</tr>
-<tr>
-<td><a href="themes.html">Themes &amp; CSS</a></td>
-<td><code>setSlidesTheme</code>, <code>addStyle</code></td>
-</tr>
-<tr>
-<td><a href="speaker.html">Speaker View</a></td>
-<td><code>speakerNote</code></td>
-</tr>
-<tr>
-<td><a href="local_reveal.html">Local Reveal.js installation</a></td>
-<td><code>localReveal</code>, <code>useLocalReveal</code></td>
-</tr>
-<tr>
-<td><a href="inline_html.html">Inline HTML</a></td>
-<td><code>nbRawHtml</code></td>
-</tr>
-<tr>
-<td><a href="pdf_export.html">Print / PDF Export</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="misc.html">Misc</a></td>
-<td><code>typewriter</code>, <code>cornerImage</code>, <code>footer</code>, <code>useScrollWheel</code>, <code>showSlideNumber</code></td>
-</tr></tbody></table>
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css" integrity="sha512-USp+nLNMZ1hR0Ll/LpYDxIq47Ypcm3KfjIleOnyFrB1N5KfHLXjfPQD1wQlhv7kVHRRgPvNVtendDS72LyHviA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css" integrity="sha512-z8wQkuDRFwCBfoj7KOiu1MECaRVoXx6rZQWL21x0BsVVH7JkqCp1Otf39qve6CrCycOOL5o9vgfII5Smds23rg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.js" integrity="sha512-9dFFU5pcR8K4bvw4ng6mLMW5IjslYbA57amHEMtHn3TT9RkKivsDabKffqjUUJ4pCaojAyH05T1OESld199Gcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js" integrity="sha512-RCedMo/DOyawQOh4zYtqEHTZAfgrrVQctN3LVCX5kELGsN52TOdwZ8inRY0l9Mo4vtyDFn6oOAgRUilWXgb+wA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js" integrity="sha512-MZ7Ehjbh2soaeCZJGaw6vBNAa7+eunl0SUmRPNESchLlboH73lHLEeUa6pZJ2Pcui4NcpDFatr6M+VlcmaH1QA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js" integrity="sha512-skPZpuRwuUAnF9iEEFBXc4zJaucKcHUDgY1wDBTv0ILy82C2gn8MJsbcinzj2u8r/iZjD/78HRgw2/n//poOhQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                        <style>
+table tbody tr:nth-child(2n) {
+  background: 0;
+}
+</style>
+                        <h1>Text Formatting</h1>
+<p>Text can be shown using the <code>nbText</code> template which accepts a string of markdown-formatted text.
+This means that you can <em>emphasize</em> and <strong>bold</strong> text as well as make <a href="#">links</a> easily.</p>
+                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide:
+  nbText: <span class="hljs-string">&quot;&quot;&quot;
+# This is a header
+## A smaller header
+Here is some *text* formatted using **markdown**!    
+&quot;&quot;&quot;</span></code></pre>
+                          <div class="reveal" id="revealId0" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <h1>This is a header</h1>
+<h2>A smaller header</h2>
+<p>Here is some <em>text</em> formatted using <strong>markdown</strong>!</p>
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId0 = new Reveal(document.getElementById("revealId0"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId0.initialize()
+  </script>
+                        <h2>Latex Equations</h2>
+<p>You can also write equations in Latex if you enclose them in <code>$</code> or <code>$$</code>. For this to work, you must activate Latex support using <code>nb.useLatex()</code></p>
+                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>nb.useLatex()
+slide:
+  nbText: <span class="hljs-string">&quot;&quot;&quot;
+## Equation
+Eulers identity:
+$$ e ^ {\pi i} = -1 $$ 
+&quot;&quot;&quot;</span>
+
+slide:
+  nbText: <span class="hljs-string">&quot;&quot;&quot;
+## Inline equation
+Eulers identity: $e ^ {\pi i} = -1$    
+&quot;&quot;&quot;</span></code></pre>
+                          <div class="reveal" id="revealId1" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <h2>Equation</h2>
+<p>Eulers identity:
+$$ e ^ {\pi i} = -1 $$</p>
+                        </section>
+                        <section data-nimib-slide-number="2" >
+                        <h2>Inline equation</h2>
+<p>Eulers identity: $e ^ {\pi i} = -1$</p>
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId1 = new Reveal(document.getElementById("revealId1"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId1.initialize()
+  </script>
+                        <h2>Big Text</h2>
+<p>Reveal.js has support for making a given text as big as it can fit on a slide.
+This will make the text as big as possible while still fitting on a single line.
+This way you don't have to worry about finding the right header size for the text to fit.
+This can be accessed in nimiSlides using the <code>bigText</code> template:</p>
+                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide:
+  nbText: <span class="hljs-string">&quot;# Normal header that will overflow&quot;</span>
+slide:
+  bigText: <span class="hljs-string">&quot;Big text that will not overflow&quot;</span></code></pre>
+                          <div class="reveal" id="revealId2" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <h1>Normal header that will overflow</h1>
+                        </section>
+                        <section data-nimib-slide-number="2" >
+                        <h2 class="r-fit-text"> <p>Big text that will not overflow</p> </h2>
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId2 = new Reveal(document.getElementById("revealId2"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId2.initialize()
+  </script>
+                        <h2>Align Text</h2>
+<p>By default, everything is centered both horizontally and vertically.
+But sometimes you might want align the text horizontally. For this you can use the <code>align</code> template.
+It will align its content according to the inputted alignment.</p>
+                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide:
+  align(<span class="hljs-string">&quot;left&quot;</span>):
+    nbText: <span class="hljs-string">&quot;Left&quot;</span>
+  align(<span class="hljs-string">&quot;center&quot;</span>):
+    nbText: <span class="hljs-string">&quot;Center&quot;</span>
+  align(<span class="hljs-string">&quot;right&quot;</span>):
+    nbText: <span class="hljs-string">&quot;Right&quot;</span></code></pre>
+                          <div class="reveal" id="revealId3" style="height: 400px;">
+    <div class="slides">
+                        <section data-nimib-slide-number="1" >
+                        <div style="text-align: left;">
+                        <p>Left</p>
+                        </div>
+                        <div style="text-align: center;">
+                        <p>Center</p>
+                        </div>
+                        <div style="text-align: right;">
+                        <p>Right</p>
+                        </div>
+                        </section>
+                            </div>
+  </div>
+  <script>
+    let deck_revealId3 = new Reveal(document.getElementById("revealId3"), {
+      embedded: true,
+      keyboardCondition: 'focused',
+      plugins: [
+        RevealHighlight,
+        RevealNotes,
+        RevealMath.KaTeX
+      ]
+    })
+    deck_revealId3.initialize()
+  </script>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../tutorials/code_block.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../tutorials/getting_started.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../tutorials/images_media.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -344,11 +413,11 @@ Below is a table with all the features that each of the tutorials cover.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../tutorials/code_block.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../tutorials/getting_started.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../tutorials/images_media.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

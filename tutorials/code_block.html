@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using nimibook -->
         <meta charset="UTF-8">
-        <title>Getting Started - NimiSlides</title>
+        <title>Code Blocks - NimiSlides</title>
 
         <!-- Custom HTML head -->
 
@@ -94,11 +94,11 @@
                   <li>
                   <ol class="section">
                 <li class="chapter-item expanded ">
-                  <a href="../tutorials/getting_started.html" class="active" tabindex="0">
+                  <a href="../tutorials/getting_started.html" tabindex="0">
                     <strong aria-hidden="true">1.1.</strong> Getting Started
                   </a></li>
                 <li class="chapter-item expanded ">
-                  <a href="../tutorials/code_block.html" tabindex="0">
+                  <a href="../tutorials/code_block.html" class="active" tabindex="0">
                     <strong aria-hidden="true">1.2.</strong> Code Blocks
                   </a></li>
                 <li class="chapter-item expanded ">
@@ -254,35 +254,34 @@ table tbody tr:nth-child(2n) {
   background: 0;
 }
 </style>
-                        <h1>Getting Started</h1>
-<h2>Installation</h2>
-<p>To get started with nimiSlides you have to install it. This is done the easiest using nimble:</p>
-<pre><code class="language-console">nimble install nimislides
-</code></pre>
-<p>Now that nimiSlides is installed we can create a Nim file, e.g., <code>slideshow.nim</code>, with the basic structure:</p>
-<pre><code class="language-nim">import nimib, nimiSlides
-
-nbInit(theme = revealTheme)
-
-# Your slides here
-
-nbSave()
-</code></pre>
-<p>The comment <code># Your slides here</code> shows where we will put the code that generates out slides. All examples in the following tutorials will only show the code that goes here and not the boilerplate around it.</p>
-<h2>The slides API</h2>
-<p>The <code>slide</code> template is the core of nimiSlides. It delimits which content will be shown on each slide.
-The basic syntax is that you put all the content you want in a slide inside a <code>slide:</code>:</p>
+                        <h1>Code Blocks</h1>
+<p>The perhaps biggest reason why you are using nimiSlides is that you want to show off some Nim code.
+Showing a code block and optionally its printed output is done using the <code>nbCode</code> or <code>nbCodeInBlock</code> templates.
+The difference is that <code>nbCode</code> does not open a new scope, and as such variables defined in a <code>nbCode</code> block can be accessed in later blocks.
+<code>nbCodeInBlock</code> on the other hand opens a new block and the variables defined there can't be accessed outside it.
+This is important because <code>nbCodeInBlock</code> will allow us to reuse the same variable name multiple times.
+Here's an example where both are used:</p>
                         <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide:
-  nbText: <span class="hljs-string">&quot;# 1&quot;</span>
+  nbCode:
+    <span class="hljs-keyword">let</span> x = <span class="hljs-number">1</span>
+    <span class="hljs-keyword">let</span> y = <span class="hljs-number">2</span>
+    <span class="hljs-keyword">echo</span> x + y
 slide:
-  nbText: <span class="hljs-string">&quot;# 2&quot;</span></code></pre>
+  nbCodeInBlock:
+    <span class="hljs-keyword">let</span> a = <span class="hljs-number">10</span>
+    <span class="hljs-comment"># note that x is from the previous nbCode block:</span>
+    <span class="hljs-keyword">echo</span> a + x</code></pre>
                           <div class="reveal" id="revealId0" style="height: 400px;">
     <div class="slides">
                         <section data-nimib-slide-number="1" >
-                        <h1>1</h1>
+                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers><span class="hljs-keyword">let</span> x = <span class="hljs-number">1</span>
+<span class="hljs-keyword">let</span> y = <span class="hljs-number">2</span>
+<span class="hljs-keyword">echo</span> x + y</code></pre><pre style="width: 100%;"><samp class="hljs">3</samp></pre>
                         </section>
                         <section data-nimib-slide-number="2" >
-                        <h1>2</h1>
+                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers><span class="hljs-keyword">let</span> a = <span class="hljs-number">10</span>
+<span class="hljs-comment"># note that x is from the previous nbCode block:</span>
+<span class="hljs-keyword">echo</span> a + x</code></pre><pre style="width: 100%;"><samp class="hljs">11</samp></pre>
                         </section>
                             </div>
   </div>
@@ -298,36 +297,22 @@ slide:
     })
     deck_revealId0.initialize()
   </script>
-                        <p>Above you can see a code snippet that generates two slides, one with the text &quot;1&quot; and a second one with the text &quot;2&quot;. You can step forward in the slideshow if you focus on it using either <code>&lt;Enter&gt;</code>, the arrow keys or pressing the arrows in the slideshow (Using the arrow keys won't work here because that will step forward to the next chapter in the tutorial, but you can try it out in for example the <a href="../showcase.html">showcase slideshow</a>).</p>
-<p>It doesn't stop here though, because you can create 2D-slideshows! Insane, right?! And it isn't hard to do either. All you have to do is to add another level of the <code>slide</code> template:</p>
+                        <p>We can see that both the code and the echo'd <code>3</code> is shown on the first slide.
+And on the second slide we can see that we access <code>x</code> because it was defined in a <code>nbCode</code> block.</p>
+<p>But what if we don't want to show the output? Either because it is too long or just irrelevant.
+Then we can use <code>nbClearOutput()</code> directly after the call to <code>nbCode/nbCodeInBlock</code>:</p>
                         <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide:
-  slide:
-    nbText: <span class="hljs-string">&quot;# 1.1&quot;</span>
-  slide:
-    nbText: <span class="hljs-string">&quot;# 1.2&quot;</span>
-
-slide:
-  slide:
-    nbText: <span class="hljs-string">&quot;# 2.1&quot;</span>
-  slide:
-    nbText: <span class="hljs-string">&quot;# 2.2&quot;</span></code></pre>
+  nbCodeInBlock:
+    <span class="hljs-keyword">let</span> x = <span class="hljs-number">1</span>
+    <span class="hljs-keyword">let</span> y = <span class="hljs-number">2</span>
+    <span class="hljs-keyword">echo</span> x + y
+  nbClearOutput()</code></pre>
                           <div class="reveal" id="revealId1" style="height: 400px;">
     <div class="slides">
                         <section data-nimib-slide-number="1" >
-                        <section data-nimib-slide-number="2" >
-                        <h1>1.1</h1>
-                        </section>
-                        <section data-nimib-slide-number="3" >
-                        <h1>1.2</h1>
-                        </section>
-                        </section>
-                        <section data-nimib-slide-number="4" >
-                        <section data-nimib-slide-number="5" >
-                        <h1>2.1</h1>
-                        </section>
-                        <section data-nimib-slide-number="6" >
-                        <h1>2.2</h1>
-                        </section>
+                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers><span class="hljs-keyword">let</span> x = <span class="hljs-number">1</span>
+<span class="hljs-keyword">let</span> y = <span class="hljs-number">2</span>
+<span class="hljs-keyword">echo</span> x + y</code></pre>
                         </section>
                             </div>
   </div>
@@ -343,36 +328,29 @@ slide:
     })
     deck_revealId1.initialize()
   </script>
-                        <p>If you are observant, you will see that the transitions are different between <code>1.1 -&gt; 1.2</code> (downward motion) and <code>1.2 -&gt; 2.1</code> (right motion). To get a better overview of this, focus on the slideshow and press <code>&lt;ESC&gt;</code>. This will zoom out to overview mode and allow you to view all the slides and their relative position to each other. We can see that there are two columns with two rows each. The outermost <code>slide</code> always creates a new column while the innermost <code>slide</code> creates a new row.</p>
-<p>If we compare this to the previous example, we only had a single <code>slide</code>. If we press <code>&lt;ESC&gt;</code> in that slideshow, we can see that the slides are aligned in columns with one row each in that case. These are the two main ways of creating slides, either you use only one level of <code>slide</code> and get a 1D-slideshow or you use two levels and get a 2D-slideshow. The advantage of a 2D-slideshow is that you can structure your slides easier. You can for example create one column for each topic of your presentation, that way you will be able to jump around much quicker when you are in overview mode.</p>
-<h2>Adding text to you slides</h2>
-<p>Now you know how to create you slides, now you just have to fill them with content. The most basic thing to add to a slide is text. As you saw in the previous examples this can be accomplished using <code>nbText</code>. It accepts a string of markdown, so you can format you text using for example headers and <em>emphasis</em>:</p>
+                        <p>Poof! The output is gone!</p>
+<h2>Animated Code Blocks</h2>
+<p>One cool feature of Reveal.js is the animated code blocks.
+It allows you to create a code block like the ones we have created above, but highlight specific lines.
+This is done using the <code>animateCode</code> template by providing which lines to highlight and in which order.
+The lines can be specified either as a slice <code>x..y</code> or a single line number <code>x</code>.
+Note that the first line has line number 1 (and not 0).</p>
                         <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide:
-  nbText: <span class="hljs-string">&quot;&quot;&quot;
-# This is a header
-## This is a smaller header
-This is normal text!
-&quot;&quot;&quot;</span>
-
-slide:
-  nbText: <span class="hljs-string">&quot;&quot;&quot;
-You can *emphasize* text in **different** ways.
-- Lists works as well
-- And links: [nimiSlides](https://github.com/HugoGranstrom/nimiSlides)
-&quot;&quot;&quot;</span></code></pre>
+  animateCode(<span class="hljs-number">1</span>, <span class="hljs-number">2.</span>.<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">3.</span>.<span class="hljs-number">4</span>):
+    <span class="hljs-keyword">let</span> x1 = <span class="hljs-number">1</span>
+    <span class="hljs-keyword">let</span> x2 = <span class="hljs-number">2</span>
+    <span class="hljs-keyword">let</span> x3 = <span class="hljs-number">3</span>
+    <span class="hljs-keyword">let</span> x4 = <span class="hljs-number">4</span>
+    <span class="hljs-keyword">let</span> x5 = <span class="hljs-number">5</span></code></pre>
                           <div class="reveal" id="revealId2" style="height: 400px;">
     <div class="slides">
                         <section data-nimib-slide-number="1" >
-                        <h1>This is a header</h1>
-<h2>This is a smaller header</h2>
-<p>This is normal text!</p>
-                        </section>
-                        <section data-nimib-slide-number="2" >
-                        <p>You can <em>emphasize</em> text in <strong>different</strong> ways.</p>
-<ul>
-<li>Lists works as well</li>
-<li>And links: <a href="https://github.com/HugoGranstrom/nimiSlides">nimiSlides</a></li>
-</ul>
+                        <pre style="width: 100%;"><code class="nim hljs" data-noescape data-line-numbers="|1-1,|2-3,|5-5,|3-4"><span class="hljs-keyword">let</span> x1 = <span class="hljs-number">1</span>
+<span class="hljs-keyword">let</span> x2 = <span class="hljs-number">2</span>
+<span class="hljs-keyword">let</span> x3 = <span class="hljs-number">3</span>
+<span class="hljs-keyword">let</span> x4 = <span class="hljs-number">4</span>
+<span class="hljs-keyword">let</span> x5 = <span class="hljs-number">5</span></code></pre>
+
                         </section>
                             </div>
   </div>
@@ -388,21 +366,47 @@ You can *emphasize* text in **different** ways.
     })
     deck_revealId2.initialize()
   </script>
-                        <p>Tip: if you are using VSCodium/VSCode you can install my extension <code>NimiBoost</code> which allows you to get code highlighting of your markdown by adding <code>hlMd</code> in front of the string:</p>
-                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>nbText: <span class="hljs-string">hlMd&quot;&quot;&quot;
-Now *you* will be **able** to see the formatting!  
-&quot;&quot;&quot;</span></code></pre>
-                        <h2>Images</h2>
-<p>The second most common element of a presentation are images. They are added using <code>nbImage</code>:</p>
+                        <p>As you can see, first line 1 is highlighted, then lines 2 through 3, then line 5 and lastly line 3 through 4. Neat!
+Note that there exists no <code>animateCodeInBlock</code> currently, but you can always wrap your <code>animateCode</code> inside a <code>block:</code> to get the same effect.
+The animated code block is also useful if you have a very long code snippet that you want to show as it will auto-scroll for you:</p>
                         <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide:
-  nbImage(<span class="hljs-string">&quot;https://raw.githubusercontent.com/pietroppeter/nimib/main/assets/nimib-nimconf-thumbnail.png&quot;</span>)</code></pre>
+  animateCode(<span class="hljs-number">1</span>, <span class="hljs-number">16</span>, <span class="hljs-number">5</span>, <span class="hljs-number">13</span>, <span class="hljs-number">1</span>):
+    <span class="hljs-keyword">let</span> y1 = <span class="hljs-number">1</span>
+    <span class="hljs-keyword">let</span> y2 = <span class="hljs-number">2</span>
+    <span class="hljs-keyword">let</span> y3 = <span class="hljs-number">3</span>
+    <span class="hljs-keyword">let</span> y4 = <span class="hljs-number">4</span>
+    <span class="hljs-keyword">let</span> y5 = <span class="hljs-number">5</span>
+    <span class="hljs-keyword">let</span> y6 = <span class="hljs-number">6</span>
+    <span class="hljs-keyword">let</span> y7 = <span class="hljs-number">7</span>
+    <span class="hljs-keyword">let</span> y8 = <span class="hljs-number">8</span>
+    <span class="hljs-keyword">let</span> y9 = <span class="hljs-number">9</span>
+    <span class="hljs-keyword">let</span> y10 = <span class="hljs-number">10</span>
+    <span class="hljs-keyword">let</span> y11 = <span class="hljs-number">11</span>
+    <span class="hljs-keyword">let</span> y12 = <span class="hljs-number">12</span>
+    <span class="hljs-keyword">let</span> y13 = <span class="hljs-number">13</span>
+    <span class="hljs-keyword">let</span> y14 = <span class="hljs-number">14</span>
+    <span class="hljs-keyword">let</span> y15 = <span class="hljs-number">15</span>
+    <span class="hljs-keyword">let</span> y16 = <span class="hljs-number">16</span></code></pre>
                           <div class="reveal" id="revealId3" style="height: 400px;">
     <div class="slides">
                         <section data-nimib-slide-number="1" >
-                        <figure>
-<img src="https://raw.githubusercontent.com/pietroppeter/nimib/main/assets/nimib-nimconf-thumbnail.png" alt="">
-<figcaption></figcaption>
-</figure>
+                        <pre style="width: 100%;"><code class="nim hljs" data-noescape data-line-numbers="|1-1,|16-16,|5-5,|13-13,|1-1"><span class="hljs-keyword">let</span> y1 = <span class="hljs-number">1</span>
+<span class="hljs-keyword">let</span> y2 = <span class="hljs-number">2</span>
+<span class="hljs-keyword">let</span> y3 = <span class="hljs-number">3</span>
+<span class="hljs-keyword">let</span> y4 = <span class="hljs-number">4</span>
+<span class="hljs-keyword">let</span> y5 = <span class="hljs-number">5</span>
+<span class="hljs-keyword">let</span> y6 = <span class="hljs-number">6</span>
+<span class="hljs-keyword">let</span> y7 = <span class="hljs-number">7</span>
+<span class="hljs-keyword">let</span> y8 = <span class="hljs-number">8</span>
+<span class="hljs-keyword">let</span> y9 = <span class="hljs-number">9</span>
+<span class="hljs-keyword">let</span> y10 = <span class="hljs-number">10</span>
+<span class="hljs-keyword">let</span> y11 = <span class="hljs-number">11</span>
+<span class="hljs-keyword">let</span> y12 = <span class="hljs-number">12</span>
+<span class="hljs-keyword">let</span> y13 = <span class="hljs-number">13</span>
+<span class="hljs-keyword">let</span> y14 = <span class="hljs-number">14</span>
+<span class="hljs-keyword">let</span> y15 = <span class="hljs-number">15</span>
+<span class="hljs-keyword">let</span> y16 = <span class="hljs-number">16</span></code></pre>
+
                         </section>
                             </div>
   </div>
@@ -418,16 +422,15 @@ Now *you* will be **able** to see the formatting!
     })
     deck_revealId3.initialize()
   </script>
-                        <p>Now you are ready to start creating your own slideshows in Nim! If you want to learn about more features, look at the available tutorials in the sidebar to the left.</p>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../tutorials/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../tutorials/getting_started.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../tutorials/code_block.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../tutorials/text_formatting.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -437,11 +440,11 @@ Now *you* will be **able** to see the formatting!
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../tutorials/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../tutorials/getting_started.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../tutorials/code_block.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../tutorials/text_formatting.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

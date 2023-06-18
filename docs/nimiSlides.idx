@@ -42,6 +42,7 @@ useLocalReveal	nimiSlides.html#useLocalReveal,NbDoc,string	nimiSlides: useLocalR
 setSlidesTheme	nimiSlides.html#setSlidesTheme.t,SlidesTheme	nimiSlides: setSlidesTheme(theme: SlidesTheme)	
 useScrollWheel	nimiSlides.html#useScrollWheel.t	nimiSlides: useScrollWheel()	
 showSlideNumber	nimiSlides.html#showSlideNumber.t	nimiSlides: showSlideNumber()	
+disableVerticalCentering	nimiSlides.html#disableVerticalCentering.t	nimiSlides: disableVerticalCentering()	
 revealTheme	nimiSlides.html#revealTheme,NbDoc	nimiSlides: revealTheme(doc: var NbDoc)	
 addStyle	nimiSlides.html#addStyle,NbDoc,string	nimiSlides: addStyle(doc: NbDoc; style: string)	
 currentFragment	nimiSlides.html#currentFragment	nimiSlides: currentFragment	
@@ -49,6 +50,7 @@ currentSlideNumber	nimiSlides.html#currentSlideNumber	nimiSlides: currentSlideNu
 slideOptionsToAttributes	nimiSlides.html#slideOptionsToAttributes,SlideOptions	nimiSlides: slideOptionsToAttributes(options: SlideOptions): string	
 slide	nimiSlides.html#slide.t,untyped,untyped	nimiSlides: slide(options: untyped; body: untyped): untyped	
 slide	nimiSlides.html#slide.t,untyped	nimiSlides: slide(body: untyped)	
+slideAutoAnimate	nimiSlides.html#slideAutoAnimate.t,untyped	nimiSlides: slideAutoAnimate(body: untyped)	
 fragmentCore	nimiSlides.html#fragmentCore.t,openArray[seq[FragmentAnimation]],openArray[seq[FragmentAnimation]],untyped,untyped,untyped	nimiSlides: fragmentCore(animations: openArray[seq[FragmentAnimation]];\n             endAnimations: openArray[seq[FragmentAnimation]];\n             indexOffset: untyped; incrementCounter: untyped; body: untyped)	
 fragmentCore	nimiSlides.html#fragmentCore.t,openArray[seq[FragmentAnimation]],openArray[seq[FragmentAnimation]],untyped	nimiSlides: fragmentCore(animations: openArray[seq[FragmentAnimation]];\n             endAnimations: openArray[seq[FragmentAnimation]]; body: untyped)	
 fragment	nimiSlides.html#fragment.t,varargs[seq[FragmentAnimation]],untyped	nimiSlides: fragment(animations: varargs[seq[FragmentAnimation]] = @[@[fadeIn]];\n         body: untyped): untyped	
@@ -79,6 +81,7 @@ animateCode	nimiSlides.html#animateCode.t,varargs[HSlice[int,int],toHSlice],unty
 newAnimateCodeBlock	nimiSlides.html#newAnimateCodeBlock.t,untyped,untyped	nimiSlides: newAnimateCodeBlock(cmd: untyped; impl: untyped)	
 typewriter	nimiSlides.html#typewriter.t,string,int,string	nimiSlides: typewriter(textMessage: string; typeSpeed = 50; alignment = &quot;center&quot;)	
 bigText	nimiSlides.html#bigText.t,string	nimiSlides: bigText(text: string)	
+fitImage	nimiSlides.html#fitImage.t,string	nimiSlides: fitImage(src: string)	
 speakerNote	nimiSlides.html#speakerNote.t,string	nimiSlides: speakerNote(text: string)	
 align	nimiSlides.html#align.t,string,untyped	nimiSlides: align(text: string; body: untyped)	
 columns	nimiSlides.html#columns.t,untyped	nimiSlides: columns(body: untyped)	
