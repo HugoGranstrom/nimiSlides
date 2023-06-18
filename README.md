@@ -21,4 +21,7 @@ lots of flexibility so you can tailor it to your liking.
 - [ ] Auto-slide (https://revealjs.com/auto-slide/)
 - [ ] Transitions (https://revealjs.com/transitions/)
 - [ ] Custom fragments (https://revealjs.com/fragments/#custom-fragments-4.5.0)
+- [ ] Make things more customizable
+  - [ ] Add support for setting configuration yourself (https://revealjs.com/config/)
+  - [ ] Use less `nbRawHtml` and more nimib blocks
 
