@@ -2,7 +2,7 @@ import nimibook
 
 var book = initBookWithToc:
   entry("Documentation", "index.nim", numbered = false)
-  section("Tutorials", "tutorials/index.md"):
+  section("Tutorials", "tutorials/index.nim"):
     entry("Getting Started", "getting_started.nim")
     entry("Code Blocks", "code_block.nim")
     entry("Text Formatting", "text_formatting.nim")

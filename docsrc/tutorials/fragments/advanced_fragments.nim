@@ -69,7 +69,7 @@ codeAndSlides:
       nbText: "Shows on third step"
 
 nbText: hlMd"""
-I hope you understand what `fragmentNext` does now. It reduces the amount of click you have to do to go through your slides.
+I hope you understand what `fragmentThen` does now. It reduces the amount of click you have to do to go through your slides.
 `fragmentThen` can also accept two `seq`s with the fragments to run at the two steps:
 """
 
