@@ -15,7 +15,7 @@ lots of flexibility so you can tailor it to your liking.
 - [Documentation](https://hugogranstrom.com/nimiSlides)
 
 # NimConf 2022 👑
-At NimConf 2022, I did a presentation on nimiSlides which can be viewed [here](https://www.youtube.com/watch?v=Sf1TndCcIlU&list=PLxLdEZg8DRwSQQaK0UVRd1DaetVc3lIwr&index=7). The slides from the talk can be viewed at [https://hugogranstrom.com/nimiSlides/nimconf2022.html](https://hugogranstrom.com/nimiSlides/nimconf2022.html).
+At NimConf 2022, I did a presentation on nimiSlides which can be viewed [here](https://www.youtube.com/watch?v=Sf1TndCcIlU&list=PLxLdEZg8DRwSQQaK0UVRd1DaetVc3lIwr&index=7). The slides from the talk can be viewed at [https://hugogranstrom.com/nimiSlides/nimconf2022.html](https://hugogranstrom.com/nimiSlides/nimconf2022.html) ([source code](https://github.com/HugoGranstrom/nimiSlides/blob/main/docsrc/nimconf2022.nim)).
 
 # Roadmap 🗺
 - [ ] Auto-slide (https://revealjs.com/auto-slide/)
