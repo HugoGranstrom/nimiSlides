@@ -420,6 +420,16 @@ template animateCode*(lines: string, body: untyped) =
       body
 
 template animateCode*(lines: varargs[set[range[0..65535]], toSet], body: untyped) =
+  ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
+  ## lines: Specify which lines to highlight and in which order. The lines can be specified using either:
+  ## - An `int` (highlight single line)
+  ## - A slice `x..y` (highlight a range of consequative lines)
+  ## - A set {x, y..z} (highlight any combination of lines)
+  ## Ex: 
+  ## ```nim
+  ## animateCode(1, 2..3, {4, 6}): body
+  ## ```
+  ## This will first highlight line 1, then lines 2 and 3, and lastly line 4 and 6.
   newNbCodeBlock("animateCode", body):
     var linesString: string
     if lines.len > 0:
