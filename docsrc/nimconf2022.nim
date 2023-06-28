@@ -639,7 +639,7 @@ slide:
     nbText: "## Using Templates"
   nimConfAutoSlide:
     nbText: "## Using Templates"
-    nbCodeDontRunAnimate([@[1..1, 3..3, 6..6]]):
+    nbCodeDontRunAnimate({1, 3, 6}):
       slide(slideOptions(autoAnimate=true)):
         nbText: "## Animate header"
       slide(slideOptions(autoAnimate=true)):

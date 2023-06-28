@@ -444,66 +444,25 @@ template animateCode*(lines: varargs[set[range[0..65535]], toSet], body: untyped
     captureStdout(nb.blk.output):
       body
 
-#[ template animateCode*(lines: varargs[seq[HSlice[int, int]]], body: untyped) =
-  ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
-  ## lines: Specify which lines to highlight and in which order. (Must be specified as a seq[HSlice])
-  ## Ex: 
-  ## ```nim
-  ## animateCode(@[1..1], @[3..4, 6..6]): body
-  ## ```
-  ## This will first highlight line 1, then lines 3, 4 and 6.
-  newNbCodeBlock("animateCode", body):
-    var linesString: string
-    if lines.len > 0:
-      linesString &= "|"
-    for lineBundle in lines:
-      for line in lineBundle:
-        linesString &= $line.a & "-" & $line.b & ","
-      linesString &= "|"
-    if lines.len > 0:
-      linesString = linesString[0 .. ^3]
-    nb.blk.context["highlightLines"] = linesString
-    captureStdout(nb.blk.output):
-      body
-
-template animateCode*(lines: varargs[HSlice[int, int], toHSlice], body: untyped) =
-  ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
-  ## lines: Specify which lines to highlight and in which order. (Must be specified as a HSlice)
-  ## Ex: 
-  ## ```nim
-  ## animateCode(1..1, 2..3, 5..5, 4..4): body
-  ## ```
-  ## This will first highlight line 1, then lines 2 and 3, then line 5 and last line 4.
-  var s: seq[seq[HSlice[int, int]]]
-  for line in lines:
-    s.add @[line]
-  animateCode(s):
-    body ]#
-
 template newAnimateCodeBlock*(cmd: untyped, impl: untyped) =
-  template `cmd`*(lines: varargs[seq[HSlice[int, int]]], body: untyped) =
-    newNbCodeBlock(cmd.astToStr, body):
+  const cmdStr = astToStr(cmd)
+
+  template `cmd`*(lines: varargs[set[range[0..65535]], toSet], body: untyped) =
+    newNbCodeBlock(cmdStr, body):
       var linesString: string
       if lines.len > 0:
         linesString &= "|"
       for lineBundle in lines:
         for line in lineBundle:
-          linesString &= $line.a & "-" & $line.b & ","
+          linesString &= $line & ","
         linesString &= "|"
       if lines.len > 0:
         linesString = linesString[0 .. ^3]
       nb.blk.context["highlightLines"] = linesString
     impl(body)
 
-  template `cmd`*(lines: varargs[HSlice[int, int], toHSlice], body: untyped) =
-    var s: seq[seq[HSlice[int, int]]]
-    for line in lines:
-      s.add @[line]
-    `cmd`(s):
-      body
-
-  nb.partials[cmd.astToStr] = nb.partials["animateCode"]
-  nb.renderPlans[cmd.astToStr] = nb.renderPlans["animateCode"]
+  nb.partials[cmdStr] = nb.partials["animateCode"]
+  nb.renderPlans[cmdStr] = nb.renderPlans["animateCode"]
 
 template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") =
   let localText = textMessage
