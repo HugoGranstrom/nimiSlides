@@ -159,6 +159,9 @@ template showSlideNumber*() =
 template disableVerticalCentering*() =
   nb.context["disableCentering"] = true
 
+proc addStyle*(doc: NbDoc, style: string) =
+  doc.context["nb_style"] = doc.context["nb_style"].vString & "\n" & style
+
 proc revealTheme*(doc: var NbDoc) =
   doc.partials["document"] = document
   doc.partials["head"] = head
@@ -190,6 +193,15 @@ proc revealTheme*(doc: var NbDoc) =
   doc.context["slidesTheme"] = "black"
   doc.context["nb_style"] = ""
 
+  doc.addStyle: """
+    .nimislides-li {
+      position: relative;
+    }
+
+    .nimislides-li::before {
+      position: absolute;
+    }
+  """
 
   try:
     let slidesConfig = loadTomlSection(doc.rawCfg, "nimislides", NimiSlidesConfig)
@@ -198,9 +210,6 @@ proc revealTheme*(doc: var NbDoc) =
       doc.useLocalReveal(slidesConfig.localReveal)
   except CatchableError:
     discard # if it doesn't exists, just let it be
-
-proc addStyle*(doc: NbDoc, style: string) =
-  doc.context["nb_style"] = doc.context["nb_style"].vString & "\n" & style
 
 var currentFragment*, currentSlideNumber*: int
 
@@ -378,7 +387,7 @@ template listItem*(animation: seq[FragmentAnimation], body: untyped) =
   for an in animation:
     classString &= $an & " "
   fadeInNext:
-    nbRawHtml: """<li class="fragment $1" data-fragment-index="$2" data-fragment-index-nimib="$2">""" % [classString, $currentFragment]
+    nbRawHtml: """<li class="fragment $1 nimislides-li" data-fragment-index="$2" data-fragment-index-nimib="$2">""" % [classString, $currentFragment]
     currentFragment += 1
     body
     nbRawHtml: "</li>"
@@ -393,27 +402,41 @@ template listItem*(body: untyped) =
 proc toHSlice*(h: HSlice[int, int]): HSlice[int, int] = h
 proc toHSlice*(h: int): HSlice[int, int] = h .. h
 
+
+proc toSet*(x: set[range[0..65535]]): set[range[0..65535]] = x
+proc toSet*(x: int): set[range[0..65535]] = {x}
+proc toSet*(x: Slice[int]): set[range[0..65535]] =
+  for y in x:
+    result.incl y
+proc toSet*(x: seq[Slice[int]]): set[range[0..65535]] =
+  for s in x:
+    result.incl s.toSet()
+
+
 template animateCode*(lines: string, body: untyped) =
   newNbCodeBlock("animateCode", body):
     nb.blk.context["highlightLines"] = lines
     captureStdout(nb.blk.output):
       body
 
-template animateCode*(lines: varargs[seq[HSlice[int, int]]], body: untyped) =
+template animateCode*(lines: varargs[set[range[0..65535]], toSet], body: untyped) =
   ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
-  ## lines: Specify which lines to highlight and in which order. (Must be specified as a seq[HSlice])
+  ## lines: Specify which lines to highlight and in which order. The lines can be specified using either:
+  ## - An `int` (highlight single line)
+  ## - A slice `x..y` (highlight a range of consequative lines)
+  ## - A set {x, y..z} (highlight any combination of lines)
   ## Ex: 
   ## ```nim
-  ## animateCode(@[1..1], @[3..4, 6..6]): body
+  ## animateCode(1, 2..3, {4, 6}): body
   ## ```
-  ## This will first highlight line 1, then lines 3, 4 and 6.
+  ## This will first highlight line 1, then lines 2 and 3, and lastly line 4 and 6.
   newNbCodeBlock("animateCode", body):
     var linesString: string
     if lines.len > 0:
       linesString &= "|"
     for lineBundle in lines:
       for line in lineBundle:
-        linesString &= $line.a & "-" & $line.b & ","
+        linesString &= $line & ","
       linesString &= "|"
     if lines.len > 0:
       linesString = linesString[0 .. ^3]
@@ -421,44 +444,25 @@ template animateCode*(lines: varargs[seq[HSlice[int, int]]], body: untyped) =
     captureStdout(nb.blk.output):
       body
 
-template animateCode*(lines: varargs[HSlice[int, int], toHSlice], body: untyped) =
-  ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
-  ## lines: Specify which lines to highlight and in which order. (Must be specified as a HSlice)
-  ## Ex: 
-  ## ```nim
-  ## animateCode(1..1, 2..3, 5..5, 4..4): body
-  ## ```
-  ## This will first highlight line 1, then lines 2 and 3, then line 5 and last line 4.
-  var s: seq[seq[HSlice[int, int]]]
-  for line in lines:
-    s.add @[line]
-  animateCode(s):
-    body
-
 template newAnimateCodeBlock*(cmd: untyped, impl: untyped) =
-  template `cmd`*(lines: varargs[seq[HSlice[int, int]]], body: untyped) =
-    newNbCodeBlock(cmd.astToStr, body):
+  const cmdStr = astToStr(cmd)
+
+  template `cmd`*(lines: varargs[set[range[0..65535]], toSet], body: untyped) =
+    newNbCodeBlock(cmdStr, body):
       var linesString: string
       if lines.len > 0:
         linesString &= "|"
       for lineBundle in lines:
         for line in lineBundle:
-          linesString &= $line.a & "-" & $line.b & ","
+          linesString &= $line & ","
         linesString &= "|"
       if lines.len > 0:
         linesString = linesString[0 .. ^3]
       nb.blk.context["highlightLines"] = linesString
     impl(body)
 
-  template `cmd`*(lines: varargs[HSlice[int, int], toHSlice], body: untyped) =
-    var s: seq[seq[HSlice[int, int]]]
-    for line in lines:
-      s.add @[line]
-    `cmd`(s):
-      body
-
-  nb.partials[cmd.astToStr] = nb.partials["animateCode"]
-  nb.renderPlans[cmd.astToStr] = nb.renderPlans["animateCode"]
+  nb.partials[cmdStr] = nb.partials["animateCode"]
+  nb.renderPlans[cmdStr] = nb.renderPlans["animateCode"]
 
 template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") =
   let localText = textMessage

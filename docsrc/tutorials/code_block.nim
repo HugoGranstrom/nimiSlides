@@ -50,14 +50,14 @@ Poof! The output is gone!
 One cool feature of Reveal.js is the animated code blocks.
 It allows you to create a code block like the ones we have created above, but highlight specific lines.
 This is done using the `animateCode` template by providing which lines to highlight and in which order.
-The lines can be specified either as a slice `x..y` or a single line number `x`.
+The lines can be specified either as a slice `x..y`, a single line number `x`, or a set of lines `{x, y}`.
 Note that the first line has line number 1 (and not 0).
 """
 
 
 codeAndSlides:
   slide:
-    animateCode(1, 2..3, 5, 3..4):
+    animateCode(1, 2..3, 5, {2, 4}):
       let x1 = 1
       let x2 = 2
       let x3 = 3
@@ -65,7 +65,7 @@ codeAndSlides:
       let x5 = 5
 
 nbText: hlMd"""
-As you can see, first line 1 is highlighted, then lines 2 through 3, then line 5 and lastly line 3 through 4. Neat!
+As you can see, first line 1 is highlighted, then lines 2 through 3, then line 5 and lastly line 2 through 4. Neat!
 Note that there exists no `animateCodeInBlock` currently, but you can always wrap your `animateCode` inside a `block:` to get the same effect.
 The animated code block is also useful if you have a very long code snippet that you want to show as it will auto-scroll for you:
 """
