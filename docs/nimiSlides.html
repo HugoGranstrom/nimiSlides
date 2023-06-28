@@ -177,6 +177,17 @@ window.addEventListener('DOMContentLoaded', main);
     title="toHSlice(h: int): HSlice[int, int]">toHSlice(h: int): HSlice[int, int]</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">toSet
+      <li><a class="reference" href="#toSet%2Cint"
+    title="toSet(x: int): set[range[0 .. 65535]]">toSet(x: int): set[range[0 .. 65535]]</a></li>
+  <li><a class="reference" href="#toSet%2Cseq%5BSlice%5Bint%5D%5D"
+    title="toSet(x: seq[Slice[int]]): set[range[0 .. 65535]]">toSet(x: seq[Slice[int]]): set[range[0 .. 65535]]</a></li>
+  <li><a class="reference" href="#toSet%2Cset%5Brange%5B%5D%5D"
+    title="toSet(x: set[range[0 .. 65535]]): set[range[0 .. 65535]]">toSet(x: set[range[0 .. 65535]]): set[range[0 .. 65535]]</a></li>
+  <li><a class="reference" href="#toSet%2CSlice%5Bint%5D"
+    title="toSet(x: Slice[int]): set[range[0 .. 65535]]">toSet(x: Slice[int]): set[range[0 .. 65535]]</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">useLocalReveal
       <li><a class="reference" href="#useLocalReveal%2CNbDoc%2Cstring"
     title="useLocalReveal(nb: var NbDoc; path: string)">useLocalReveal(nb: var NbDoc; path: string)</a></li>
@@ -201,10 +212,8 @@ window.addEventListener('DOMContentLoaded', main);
   <ul class="simple nested-toc-section">animateCode
       <li><a class="reference" href="#animateCode.t%2Cstring%2Cuntyped"
     title="animateCode(lines: string; body: untyped)">animateCode(lines: string; body: untyped)</a></li>
-  <li><a class="reference" href="#animateCode.t%2Cvarargs%5BHSlice%5Bint%2Cint%5D%2CtoHSlice%5D%2Cuntyped"
-    title="animateCode(lines: varargs[HSlice[int, int], toHSlice]; body: untyped)">animateCode(lines: varargs[HSlice[int, int], toHSlice]; body: untyped)</a></li>
-  <li><a class="reference" href="#animateCode.t%2Cvarargs%5Bseq%5BHSlice%5Bint%2Cint%5D%5D%5D%2Cuntyped"
-    title="animateCode(lines: varargs[seq[HSlice[int, int]]]; body: untyped)">animateCode(lines: varargs[seq[HSlice[int, int]]]; body: untyped)</a></li>
+  <li><a class="reference" href="#animateCode.t%2Cvarargs%5Bset%5Brange%5B%5D%5D%2CtoSet%5D%2Cuntyped"
+    title="animateCode(lines: varargs[set[range[0 .. 65535]], toSet]; body: untyped)">animateCode(lines: varargs[set[range[0 .. 65535]], toSet]; body: untyped)</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">bigText
@@ -486,9 +495,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L205"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L214"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L205" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L214" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -498,9 +507,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L205"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L214"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L205" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L214" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -516,22 +525,22 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L202"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L162"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L202" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L162" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
 <div id="revealTheme,NbDoc">
-<dt><pre><span class="Keyword">proc</span> <a href="#revealTheme%2CNbDoc"><span class="Identifier">revealTheme</span></a><span class="Other">(</span><span class="Identifier">doc</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">NbDoc</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span>
-    <span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">]</span></span>.}</pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#revealTheme%2CNbDoc"><span class="Identifier">revealTheme</span></a><span class="Other">(</span><span class="Identifier">doc</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">NbDoc</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span>
+    <span class="Identifier">RootEffect</span><span class="Other">,</span> <span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L162"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L165"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L162" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L165" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -556,9 +565,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L207"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L216"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L207" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L216" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -568,9 +577,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L393"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L402"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L393" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L402" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -580,9 +589,58 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L394"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L403"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L394" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L403" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+</div>
+<div id="toSet,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#toSet%2Cint"><span class="Identifier">toSet</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">set</span><span class="Other">[</span><span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="DecNumber">65535</span><span class="Other">]</span><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L407"
+class="link-seesrc" target="_blank">Source</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L407" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+</div>
+<div id="toSet,seq[Slice[int]]">
+<dt><pre><span class="Keyword">proc</span> <a href="#toSet%2Cseq%5BSlice%5Bint%5D%5D"><span class="Identifier">toSet</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Slice</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">set</span><span class="Other">[</span><span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="DecNumber">65535</span><span class="Other">]</span><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L411"
+class="link-seesrc" target="_blank">Source</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L411" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+</div>
+<div id="toSet,set[range[]]">
+<dt><pre><span class="Keyword">proc</span> <a href="#toSet%2Cset%5Brange%5B%5D%5D"><span class="Identifier">toSet</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">set</span><span class="Other">[</span><span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="DecNumber">65535</span><span class="Other">]</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">set</span><span class="Other">[</span><span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="DecNumber">65535</span><span class="Other">]</span><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L406"
+class="link-seesrc" target="_blank">Source</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L406" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+</div>
+<div id="toSet,Slice[int]">
+<dt><pre><span class="Keyword">proc</span> <a href="#toSet%2CSlice%5Bint%5D"><span class="Identifier">toSet</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">Slice</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">set</span><span class="Other">[</span><span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="DecNumber">65535</span><span class="Other">]</span><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L408"
+class="link-seesrc" target="_blank">Source</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L408" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -610,9 +668,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L542"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L546"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L542" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L546" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -622,9 +680,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L530"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L534"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L530" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L534" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -634,39 +692,29 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L396"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L416"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L396" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L416" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
-<div id="animateCode.t,varargs[HSlice[int,int],toHSlice],untyped">
-<dt><pre><span class="Keyword">template</span> <a href="#animateCode.t%2Cvarargs%5BHSlice%5Bint%2Cint%5D%2CtoHSlice%5D%2Cuntyped"><span class="Identifier">animateCode</span></a><span class="Other">(</span><span class="Identifier">lines</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">HSlice</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">,</span> <span class="Identifier">int</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toHSlice</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
+<div id="animateCode.t,varargs[set[range[]],toSet],untyped">
+<dt><pre><span class="Keyword">template</span> <a href="#animateCode.t%2Cvarargs%5Bset%5Brange%5B%5D%5D%2CtoSet%5D%2Cuntyped"><span class="Identifier">animateCode</span></a><span class="Other">(</span><span class="Identifier">lines</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">set</span><span class="Other">[</span><span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="DecNumber">65535</span><span class="Other">]</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toSet</span><span class="Other">]</span><span class="Other">;</span>
+                     <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
 <dd>
 
-<p>Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in <tt class="docutils literal"><span class="pre"><span class="Identifier">lines</span></span></tt>. lines: Specify which lines to highlight and in which order. (Must be specified as a HSlice) Ex:</p>
-<p><pre class="listing"><span class="Identifier">animateCode</span><span class="Punctuation">(</span><span class="FloatNumber">1.</span><span class="Operator">.</span><span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="FloatNumber">2.</span><span class="Operator">.</span><span class="DecNumber">3</span><span class="Punctuation">,</span> <span class="FloatNumber">5.</span><span class="Operator">.</span><span class="DecNumber">5</span><span class="Punctuation">,</span> <span class="FloatNumber">4.</span><span class="Operator">.</span><span class="DecNumber">4</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">body</span>
-</pre> This will first highlight line 1, then lines 2 and 3, then line 5 and last line 4.</p>
+Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in <tt class="docutils literal"><span class="pre"><span class="Identifier">lines</span></span></tt>. lines: Specify which lines to highlight and in which order. The lines can be specified using either:<ul class="simple"><li>An <tt class="docutils literal"><span class="pre"><span class="Identifier">int</span></span></tt> (highlight single line)</li>
+<li>A slice <tt class="docutils literal"><span class="pre"><span class="Identifier">x</span><span class="Operator">..</span><span class="Identifier">y</span></span></tt> (highlight a range of consequative lines)</li>
+<li>A set {x, y..z} (highlight any combination of lines)</li>
+</ul>
+<p>Ex:</p>
+<p><pre class="listing"><span class="Identifier">animateCode</span><span class="Punctuation">(</span><span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="FloatNumber">2.</span><span class="Operator">.</span><span class="DecNumber">3</span><span class="Punctuation">,</span> <span class="Punctuation">{</span><span class="DecNumber">4</span><span class="Punctuation">,</span> <span class="DecNumber">6</span><span class="Punctuation">}</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">body</span>
+</pre> This will first highlight line 1, then lines 2 and 3, and lastly line 4 and 6.</p>
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L424"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L422"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L424" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="animateCode.t,varargs[seq[HSlice[int,int]]],untyped">
-<dt><pre><span class="Keyword">template</span> <a href="#animateCode.t%2Cvarargs%5Bseq%5BHSlice%5Bint%2Cint%5D%5D%5D%2Cuntyped"><span class="Identifier">animateCode</span></a><span class="Other">(</span><span class="Identifier">lines</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">HSlice</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">,</span> <span class="Identifier">int</span><span class="Other">]</span><span class="Other">]</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
-<dd>
-
-<p>Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in <tt class="docutils literal"><span class="pre"><span class="Identifier">lines</span></span></tt>. lines: Specify which lines to highlight and in which order. (Must be specified as a seq[HSlice]) Ex:</p>
-<p><pre class="listing"><span class="Identifier">animateCode</span><span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="FloatNumber">1.</span><span class="Operator">.</span><span class="DecNumber">1</span><span class="Punctuation">]</span><span class="Punctuation">,</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="FloatNumber">3.</span><span class="Operator">.</span><span class="DecNumber">4</span><span class="Punctuation">,</span> <span class="FloatNumber">6.</span><span class="Operator">.</span><span class="DecNumber">6</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">body</span>
-</pre> This will first highlight line 1, then lines 3, 4 and 6.</p>
-
-&nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L402"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L402" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L422" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -676,9 +724,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L516"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L520"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L516" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L520" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -688,9 +736,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 column should always be used inside a <tt class="docutils literal"><span class="pre"><span class="Identifier">columns</span></span></tt> block
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L547"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L551"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L547" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L551" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -700,9 +748,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L537"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L541"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L537" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L541" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -714,9 +762,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L585"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L589"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L585" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L589" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -738,9 +786,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L354"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L363"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L354" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L363" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -750,9 +798,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L520"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L524"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L520" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L524" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -763,9 +811,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L553"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L557"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L553" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L557" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -775,9 +823,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 fragment(animation) is shorthand for fragment(@[animation])
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L308"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L317"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L308" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L317" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -792,9 +840,9 @@ Creates a fragment of the content of body. Nesting works.<dl class="docutils"><d
 <p>Example: <tt class="docutils literal"><span class="pre"><span class="Identifier">fragment</span><span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="Identifier">fadeIn</span><span class="Punctuation">,</span> <span class="Identifier">highlightBlue</span><span class="Punctuation">]</span><span class="Punctuation">,</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="Identifier">shrinks</span><span class="Punctuation">,</span> <span class="Identifier">semiFadeOut</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Keyword">block</span></span></tt> will at the first click of a button fadeIn and highlightBlue the content of the block. At the second click the same content will shrink and semiFadeOut. This code is also equivilent with <tt class="docutils literal"><span class="pre"><span class="Identifier">fragment</span><span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="Identifier">fadeIn</span><span class="Punctuation">,</span> <span class="Identifier">highlightBlue</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">fragment</span><span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="Identifier">shrinks</span><span class="Punctuation">,</span> <span class="Identifier">semiFadeOut</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Keyword">block</span></span></tt>.</p>
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L297"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L306"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L297" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L306" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -804,9 +852,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L313"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L322"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L313" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L322" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -823,9 +871,9 @@ Creates a fragment of the content of body. Nesting works.<dl class="docutils"><d
 <p>endAnimations: animations that should be applied AT THE END of block. Example: <tt class="docutils literal"><span class="pre"><span class="Identifier">fragment</span><span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="Identifier">fadeIn</span><span class="Punctuation">,</span> <span class="Identifier">highlightBlue</span><span class="Punctuation">]</span><span class="Punctuation">,</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="Identifier">shrinks</span><span class="Punctuation">,</span> <span class="Identifier">semiFadeOut</span><span class="Punctuation">]</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Keyword">block</span></span></tt> will at the first click of a button fadeIn and highlightBlue the content of the block. At the second click the same content will shrink and semiFadeOut. This code is also equivilent with <tt class="docutils literal"><span class="pre"><span class="Identifier">fragment</span><span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="Identifier">fadeIn</span><span class="Punctuation">,</span> <span class="Identifier">highlightBlue</span><span class="Punctuation">]</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">fragment</span><span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="Identifier">shrinks</span><span class="Punctuation">,</span> <span class="Identifier">semiFadeOut</span><span class="Punctuation">]</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Keyword">block</span></span></tt>. <tt class="docutils literal"><span class="pre"><span class="Identifier">fragment</span><span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="Identifier">fadeIn</span><span class="Punctuation">]</span><span class="Punctuation">]</span><span class="Punctuation">,</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="Identifier">fadeOut</span><span class="Punctuation">]</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Keyword">block</span></span></tt> will first fadeIn the entire block and perform eventual animations in nested fragments. Once all of those are finished, it will run fadeOut on the entire block and its subfragments.</p>
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L277"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L286"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L277" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L286" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -837,125 +885,14 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L294"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L303"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L294" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L303" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
 <div id="fragmentEnd.t,FragmentAnimation,untyped">
 <dt><pre><span class="Keyword">template</span> <a href="#fragmentEnd.t%2CFragmentAnimation%2Cuntyped"><span class="Identifier">fragmentEnd</span></a><span class="Other">(</span><span class="Identifier">endAnimation</span><span class="Other">:</span> <a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L333"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L333" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="fragmentEnd.t,varargs[seq[FragmentAnimation]],untyped">
-<dt><pre><span class="Keyword">template</span> <a href="#fragmentEnd.t%2Cvarargs%5Bseq%5BFragmentAnimation%5D%5D%2Cuntyped"><span class="Identifier">fragmentEnd</span></a><span class="Other">(</span><span class="Identifier">endAnimation</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">]</span><span class="Other">]</span><span class="Other">;</span>
-                     <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L329"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L329" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="fragmentFadeIn.t,FragmentAnimation,untyped">
-<dt><pre><span class="Keyword">template</span> <a href="#fragmentFadeIn.t%2CFragmentAnimation%2Cuntyped"><span class="Identifier">fragmentFadeIn</span></a><span class="Other">(</span><span class="Identifier">animation</span><span class="Other">:</span> <a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L317"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L317" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="fragmentFadeIn.t,varargs[seq[FragmentAnimation]],untyped">
-<dt><pre><span class="Keyword">template</span> <a href="#fragmentFadeIn.t%2Cvarargs%5Bseq%5BFragmentAnimation%5D%5D%2Cuntyped"><span class="Identifier">fragmentFadeIn</span></a><span class="Other">(</span><span class="Identifier">animation</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">]</span><span class="Other">]</span><span class="Other">;</span>
-                        <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L321"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L321" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="fragmentFadeIn.t,untyped">
-<dt><pre><span class="Keyword">template</span> <a href="#fragmentFadeIn.t%2Cuntyped"><span class="Identifier">fragmentFadeIn</span></a><span class="Other">(</span><span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L325"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L325" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="fragmentList.t,seq[string],FragmentAnimation">
-<dt><pre><span class="Keyword">template</span> <a href="#fragmentList.t%2Cseq%5Bstring%5D%2CFragmentAnimation"><span class="Identifier">fragmentList</span></a><span class="Other">(</span><span class="Identifier">list</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">animation</span><span class="Other">:</span> <a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">)</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L363"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L363" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="fragmentList.t,seq[string],varargs[seq[FragmentAnimation]]">
-<dt><pre><span class="Keyword">template</span> <a href="#fragmentList.t%2Cseq%5Bstring%5D%2Cvarargs%5Bseq%5BFragmentAnimation%5D%5D"><span class="Identifier">fragmentList</span></a><span class="Other">(</span><span class="Identifier">list</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span>
-                      <span class="Identifier">animation</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">]</span><span class="Other">]</span><span class="Other">)</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L358"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L358" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="fragmentNext.t,FragmentAnimation,untyped">
-<dt><pre><span class="Keyword">template</span> <a href="#fragmentNext.t%2CFragmentAnimation%2Cuntyped"><span class="Identifier">fragmentNext</span></a><span class="Other">(</span><span class="Identifier">an</span><span class="Other">:</span> <a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L346"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L346" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="fragmentNext.t,seq[FragmentAnimation],untyped">
-<dt><pre><span class="Keyword">template</span> <a href="#fragmentNext.t%2Cseq%5BFragmentAnimation%5D%2Cuntyped"><span class="Identifier">fragmentNext</span></a><span class="Other">(</span><span class="Identifier">an</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L350"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L350" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="fragmentThen.t,FragmentAnimation,FragmentAnimation,untyped">
-<dt><pre><span class="Keyword">template</span> <a href="#fragmentThen.t%2CFragmentAnimation%2CFragmentAnimation%2Cuntyped"><span class="Identifier">fragmentThen</span></a><span class="Other">(</span><span class="Identifier">an1</span><span class="Other">,</span> <span class="Identifier">an2</span><span class="Other">:</span> <a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
 <dd>
 
 
@@ -966,15 +903,126 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
+<div id="fragmentEnd.t,varargs[seq[FragmentAnimation]],untyped">
+<dt><pre><span class="Keyword">template</span> <a href="#fragmentEnd.t%2Cvarargs%5Bseq%5BFragmentAnimation%5D%5D%2Cuntyped"><span class="Identifier">fragmentEnd</span></a><span class="Other">(</span><span class="Identifier">endAnimation</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">]</span><span class="Other">]</span><span class="Other">;</span>
+                     <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L338"
+class="link-seesrc" target="_blank">Source</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L338" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+</div>
+<div id="fragmentFadeIn.t,FragmentAnimation,untyped">
+<dt><pre><span class="Keyword">template</span> <a href="#fragmentFadeIn.t%2CFragmentAnimation%2Cuntyped"><span class="Identifier">fragmentFadeIn</span></a><span class="Other">(</span><span class="Identifier">animation</span><span class="Other">:</span> <a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L326"
+class="link-seesrc" target="_blank">Source</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L326" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+</div>
+<div id="fragmentFadeIn.t,varargs[seq[FragmentAnimation]],untyped">
+<dt><pre><span class="Keyword">template</span> <a href="#fragmentFadeIn.t%2Cvarargs%5Bseq%5BFragmentAnimation%5D%5D%2Cuntyped"><span class="Identifier">fragmentFadeIn</span></a><span class="Other">(</span><span class="Identifier">animation</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">]</span><span class="Other">]</span><span class="Other">;</span>
+                        <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L330"
+class="link-seesrc" target="_blank">Source</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L330" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+</div>
+<div id="fragmentFadeIn.t,untyped">
+<dt><pre><span class="Keyword">template</span> <a href="#fragmentFadeIn.t%2Cuntyped"><span class="Identifier">fragmentFadeIn</span></a><span class="Other">(</span><span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L334"
+class="link-seesrc" target="_blank">Source</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L334" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+</div>
+<div id="fragmentList.t,seq[string],FragmentAnimation">
+<dt><pre><span class="Keyword">template</span> <a href="#fragmentList.t%2Cseq%5Bstring%5D%2CFragmentAnimation"><span class="Identifier">fragmentList</span></a><span class="Other">(</span><span class="Identifier">list</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">animation</span><span class="Other">:</span> <a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">)</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L372"
+class="link-seesrc" target="_blank">Source</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L372" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+</div>
+<div id="fragmentList.t,seq[string],varargs[seq[FragmentAnimation]]">
+<dt><pre><span class="Keyword">template</span> <a href="#fragmentList.t%2Cseq%5Bstring%5D%2Cvarargs%5Bseq%5BFragmentAnimation%5D%5D"><span class="Identifier">fragmentList</span></a><span class="Other">(</span><span class="Identifier">list</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span>
+                      <span class="Identifier">animation</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">]</span><span class="Other">]</span><span class="Other">)</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L367"
+class="link-seesrc" target="_blank">Source</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L367" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+</div>
+<div id="fragmentNext.t,FragmentAnimation,untyped">
+<dt><pre><span class="Keyword">template</span> <a href="#fragmentNext.t%2CFragmentAnimation%2Cuntyped"><span class="Identifier">fragmentNext</span></a><span class="Other">(</span><span class="Identifier">an</span><span class="Other">:</span> <a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L355"
+class="link-seesrc" target="_blank">Source</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L355" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+</div>
+<div id="fragmentNext.t,seq[FragmentAnimation],untyped">
+<dt><pre><span class="Keyword">template</span> <a href="#fragmentNext.t%2Cseq%5BFragmentAnimation%5D%2Cuntyped"><span class="Identifier">fragmentNext</span></a><span class="Other">(</span><span class="Identifier">an</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L359"
+class="link-seesrc" target="_blank">Source</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L359" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+</div>
+<div id="fragmentThen.t,FragmentAnimation,FragmentAnimation,untyped">
+<dt><pre><span class="Keyword">template</span> <a href="#fragmentThen.t%2CFragmentAnimation%2CFragmentAnimation%2Cuntyped"><span class="Identifier">fragmentThen</span></a><span class="Other">(</span><span class="Identifier">an1</span><span class="Other">,</span> <span class="Identifier">an2</span><span class="Other">:</span> <a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L351"
+class="link-seesrc" target="_blank">Source</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L351" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+</div>
 <div id="fragmentThen.t,seq[FragmentAnimation],seq[FragmentAnimation],untyped">
 <dt><pre><span class="Keyword">template</span> <a href="#fragmentThen.t%2Cseq%5BFragmentAnimation%5D%2Cseq%5BFragmentAnimation%5D%2Cuntyped"><span class="Identifier">fragmentThen</span></a><span class="Other">(</span><span class="Identifier">an1</span><span class="Other">,</span> <span class="Identifier">an2</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="nimiSlides.html#FragmentAnimation"><span class="Identifier">FragmentAnimation</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L337"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L346"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L337" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L346" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -984,9 +1032,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L386"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L395"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L386" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L395" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -996,9 +1044,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L376"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L385"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L376" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L385" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -1008,9 +1056,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L389"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L398"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L389" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L398" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -1020,9 +1068,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L438"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L447"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L438" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L447" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -1032,9 +1080,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L366"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L375"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L366" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L375" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -1068,9 +1116,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L241"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L250"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L241" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L250" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -1080,9 +1128,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L224"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L233"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L224" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L233" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -1092,9 +1140,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L245"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L254"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L245" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L254" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -1104,9 +1152,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L523"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L527"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L523" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L527" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -1116,9 +1164,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L463"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L467"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L463" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L467" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -1128,9 +1176,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L371"
+href="https://github.com/HugoGranstrom/nimiSlides/tree/main/src/nimiSlides.nim#L380"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L371" class="link-seesrc" target="_blank" >Edit</a>
+&nbsp;&nbsp;<a href="https://github.com/HugoGranstrom/nimiSlides/edit/devel/src/nimiSlides.nim#L380" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 </div>
@@ -1156,7 +1204,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2023-06-18 21:19:08 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2023-06-28 21:05:24 UTC</small>
       </div>
     </div>
   </div>

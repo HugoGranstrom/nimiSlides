@@ -43,8 +43,8 @@ setSlidesTheme	nimiSlides.html#setSlidesTheme.t,SlidesTheme	nimiSlides: setSlide
 useScrollWheel	nimiSlides.html#useScrollWheel.t	nimiSlides: useScrollWheel()	
 showSlideNumber	nimiSlides.html#showSlideNumber.t	nimiSlides: showSlideNumber()	
 disableVerticalCentering	nimiSlides.html#disableVerticalCentering.t	nimiSlides: disableVerticalCentering()	
-revealTheme	nimiSlides.html#revealTheme,NbDoc	nimiSlides: revealTheme(doc: var NbDoc)	
 addStyle	nimiSlides.html#addStyle,NbDoc,string	nimiSlides: addStyle(doc: NbDoc; style: string)	
+revealTheme	nimiSlides.html#revealTheme,NbDoc	nimiSlides: revealTheme(doc: var NbDoc)	
 currentFragment	nimiSlides.html#currentFragment	nimiSlides: currentFragment	
 currentSlideNumber	nimiSlides.html#currentSlideNumber	nimiSlides: currentSlideNumber	
 slideOptionsToAttributes	nimiSlides.html#slideOptionsToAttributes,SlideOptions	nimiSlides: slideOptionsToAttributes(options: SlideOptions): string	
@@ -75,9 +75,12 @@ listItem	nimiSlides.html#listItem.t,FragmentAnimation,untyped	nimiSlides: listIt
 listItem	nimiSlides.html#listItem.t,untyped	nimiSlides: listItem(body: untyped)	
 toHSlice	nimiSlides.html#toHSlice,HSlice[int,int]	nimiSlides: toHSlice(h: HSlice[int, int]): HSlice[int, int]	
 toHSlice	nimiSlides.html#toHSlice,int	nimiSlides: toHSlice(h: int): HSlice[int, int]	
+toSet	nimiSlides.html#toSet,set[range[]]	nimiSlides: toSet(x: set[range[0 .. 65535]]): set[range[0 .. 65535]]	
+toSet	nimiSlides.html#toSet,int	nimiSlides: toSet(x: int): set[range[0 .. 65535]]	
+toSet	nimiSlides.html#toSet,Slice[int]	nimiSlides: toSet(x: Slice[int]): set[range[0 .. 65535]]	
+toSet	nimiSlides.html#toSet,seq[Slice[int]]	nimiSlides: toSet(x: seq[Slice[int]]): set[range[0 .. 65535]]	
 animateCode	nimiSlides.html#animateCode.t,string,untyped	nimiSlides: animateCode(lines: string; body: untyped)	
-animateCode	nimiSlides.html#animateCode.t,varargs[seq[HSlice[int,int]]],untyped	nimiSlides: animateCode(lines: varargs[seq[HSlice[int, int]]]; body: untyped)	
-animateCode	nimiSlides.html#animateCode.t,varargs[HSlice[int,int],toHSlice],untyped	nimiSlides: animateCode(lines: varargs[HSlice[int, int], toHSlice]; body: untyped)	
+animateCode	nimiSlides.html#animateCode.t,varargs[set[range[]],toSet],untyped	nimiSlides: animateCode(lines: varargs[set[range[0 .. 65535]], toSet]; body: untyped)	
 newAnimateCodeBlock	nimiSlides.html#newAnimateCodeBlock.t,untyped,untyped	nimiSlides: newAnimateCodeBlock(cmd: untyped; impl: untyped)	
 typewriter	nimiSlides.html#typewriter.t,string,int,string	nimiSlides: typewriter(textMessage: string; typeSpeed = 50; alignment = &quot;center&quot;)	
 bigText	nimiSlides.html#bigText.t,string	nimiSlides: bigText(text: string)	

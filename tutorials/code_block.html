@@ -333,10 +333,10 @@ Then we can use <code>nbClearOutput()</code> directly after the call to <code>nb
 <p>One cool feature of Reveal.js is the animated code blocks.
 It allows you to create a code block like the ones we have created above, but highlight specific lines.
 This is done using the <code>animateCode</code> template by providing which lines to highlight and in which order.
-The lines can be specified either as a slice <code>x..y</code> or a single line number <code>x</code>.
+The lines can be specified either as a slice <code>x..y</code>, a single line number <code>x</code>, or a set of lines <code>{x, y}</code>.
 Note that the first line has line number 1 (and not 0).</p>
                         <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide:
-  animateCode(<span class="hljs-number">1</span>, <span class="hljs-number">2.</span>.<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">3.</span>.<span class="hljs-number">4</span>):
+  animateCode(<span class="hljs-number">1</span>, <span class="hljs-number">2.</span>.<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, {<span class="hljs-number">2</span>, <span class="hljs-number">4</span>}):
     <span class="hljs-keyword">let</span> x1 = <span class="hljs-number">1</span>
     <span class="hljs-keyword">let</span> x2 = <span class="hljs-number">2</span>
     <span class="hljs-keyword">let</span> x3 = <span class="hljs-number">3</span>
@@ -345,7 +345,7 @@ Note that the first line has line number 1 (and not 0).</p>
                           <div class="reveal" id="revealId2" style="height: 400px;">
     <div class="slides">
                         <section data-nimib-slide-number="1" >
-                        <pre style="width: 100%;"><code class="nim hljs" data-noescape data-line-numbers="|1-1,|2-3,|5-5,|3-4"><span class="hljs-keyword">let</span> x1 = <span class="hljs-number">1</span>
+                        <pre style="width: 100%;"><code class="nim hljs" data-noescape data-line-numbers="|1,|2,3,|5,|2,4"><span class="hljs-keyword">let</span> x1 = <span class="hljs-number">1</span>
 <span class="hljs-keyword">let</span> x2 = <span class="hljs-number">2</span>
 <span class="hljs-keyword">let</span> x3 = <span class="hljs-number">3</span>
 <span class="hljs-keyword">let</span> x4 = <span class="hljs-number">4</span>
@@ -366,7 +366,7 @@ Note that the first line has line number 1 (and not 0).</p>
     })
     deck_revealId2.initialize()
   </script>
-                        <p>As you can see, first line 1 is highlighted, then lines 2 through 3, then line 5 and lastly line 3 through 4. Neat!
+                        <p>As you can see, first line 1 is highlighted, then lines 2 through 3, then line 5 and lastly line 2 through 4. Neat!
 Note that there exists no <code>animateCodeInBlock</code> currently, but you can always wrap your <code>animateCode</code> inside a <code>block:</code> to get the same effect.
 The animated code block is also useful if you have a very long code snippet that you want to show as it will auto-scroll for you:</p>
                         <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide:
@@ -390,7 +390,7 @@ The animated code block is also useful if you have a very long code snippet that
                           <div class="reveal" id="revealId3" style="height: 400px;">
     <div class="slides">
                         <section data-nimib-slide-number="1" >
-                        <pre style="width: 100%;"><code class="nim hljs" data-noescape data-line-numbers="|1-1,|16-16,|5-5,|13-13,|1-1"><span class="hljs-keyword">let</span> y1 = <span class="hljs-number">1</span>
+                        <pre style="width: 100%;"><code class="nim hljs" data-noescape data-line-numbers="|1,|16,|5,|13,|1"><span class="hljs-keyword">let</span> y1 = <span class="hljs-number">1</span>
 <span class="hljs-keyword">let</span> y2 = <span class="hljs-number">2</span>
 <span class="hljs-keyword">let</span> y3 = <span class="hljs-number">3</span>
 <span class="hljs-keyword">let</span> y4 = <span class="hljs-number">4</span>
