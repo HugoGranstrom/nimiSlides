@@ -159,6 +159,9 @@ template showSlideNumber*() =
 template disableVerticalCentering*() =
   nb.context["disableCentering"] = true
 
+proc addStyle*(doc: NbDoc, style: string) =
+  doc.context["nb_style"] = doc.context["nb_style"].vString & "\n" & style
+
 proc revealTheme*(doc: var NbDoc) =
   doc.partials["document"] = document
   doc.partials["head"] = head
@@ -190,6 +193,15 @@ proc revealTheme*(doc: var NbDoc) =
   doc.context["slidesTheme"] = "black"
   doc.context["nb_style"] = ""
 
+  doc.addStyle: """
+    .nimislides-li {
+      position: relative;
+    }
+
+    .nimislides-li::before {
+      position: absolute;
+    }
+  """
 
   try:
     let slidesConfig = loadTomlSection(doc.rawCfg, "nimislides", NimiSlidesConfig)
@@ -198,9 +210,6 @@ proc revealTheme*(doc: var NbDoc) =
       doc.useLocalReveal(slidesConfig.localReveal)
   except CatchableError:
     discard # if it doesn't exists, just let it be
-
-proc addStyle*(doc: NbDoc, style: string) =
-  doc.context["nb_style"] = doc.context["nb_style"].vString & "\n" & style
 
 var currentFragment*, currentSlideNumber*: int
 
@@ -378,7 +387,7 @@ template listItem*(animation: seq[FragmentAnimation], body: untyped) =
   for an in animation:
     classString &= $an & " "
   fadeInNext:
-    nbRawHtml: """<li class="fragment $1" data-fragment-index="$2" data-fragment-index-nimib="$2">""" % [classString, $currentFragment]
+    nbRawHtml: """<li class="fragment $1 nimislides-li" data-fragment-index="$2" data-fragment-index-nimib="$2">""" % [classString, $currentFragment]
     currentFragment += 1
     body
     nbRawHtml: "</li>"
