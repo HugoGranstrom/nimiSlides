@@ -393,13 +393,39 @@ template listItem*(body: untyped) =
 proc toHSlice*(h: HSlice[int, int]): HSlice[int, int] = h
 proc toHSlice*(h: int): HSlice[int, int] = h .. h
 
+
+proc toSet*(x: set[range[0..65535]]): set[range[0..65535]] = x
+proc toSet*(x: int): set[range[0..65535]] = {x}
+proc toSet*(x: Slice[int]): set[range[0..65535]] =
+  for y in x:
+    result.incl y
+proc toSet*(x: seq[Slice[int]]): set[range[0..65535]] =
+  for s in x:
+    result.incl s.toSet()
+
+
 template animateCode*(lines: string, body: untyped) =
   newNbCodeBlock("animateCode", body):
     nb.blk.context["highlightLines"] = lines
     captureStdout(nb.blk.output):
       body
 
-template animateCode*(lines: varargs[seq[HSlice[int, int]]], body: untyped) =
+template animateCode*(lines: varargs[set[range[0..65535]], toSet], body: untyped) =
+  newNbCodeBlock("animateCode", body):
+    var linesString: string
+    if lines.len > 0:
+      linesString &= "|"
+    for lineBundle in lines:
+      for line in lineBundle:
+        linesString &= $line & ","
+      linesString &= "|"
+    if lines.len > 0:
+      linesString = linesString[0 .. ^3]
+    nb.blk.context["highlightLines"] = linesString
+    captureStdout(nb.blk.output):
+      body
+
+#[ template animateCode*(lines: varargs[seq[HSlice[int, int]]], body: untyped) =
   ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
   ## lines: Specify which lines to highlight and in which order. (Must be specified as a seq[HSlice])
   ## Ex: 
@@ -433,7 +459,7 @@ template animateCode*(lines: varargs[HSlice[int, int], toHSlice], body: untyped)
   for line in lines:
     s.add @[line]
   animateCode(s):
-    body
+    body ]#
 
 template newAnimateCodeBlock*(cmd: untyped, impl: untyped) =
   template `cmd`*(lines: varargs[seq[HSlice[int, int]]], body: untyped) =
