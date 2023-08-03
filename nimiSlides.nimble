@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.2.3"
+version       = "0.2.4"
 author        = "Hugo Granström"
 description   = "Reveal.js theme for nimib"
 license       = "MIT"
