@@ -14,7 +14,7 @@ requires "nimib >= 0.3.9"
 import os
 
 task docsDeps, "install dependencies required to build docs":
-    exec "nimble -y install ggplotnim@0.5.6 karax numericalnim nimibook"
+    exec "nimble -y install ggplotnim@0.5.6 karax numericalnim nimibook@#head"
 
 task buildDocs, "build all .nim files in docsrc/":
     for path in ["showcase.nim", "nimconf2022.nim", "miscSlides.nim", "index_old.nim", "fragments.nim"]:
