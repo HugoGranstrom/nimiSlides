@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         nim:
-          - 'binary:1.6.x'
+          - '1.6.x'
           - 'binary:stable'
           - 'devel'
       fail-fast: false
