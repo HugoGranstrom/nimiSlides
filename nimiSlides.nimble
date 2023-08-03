@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.2.3"
+version       = "0.2.4"
 author        = "Hugo Granström"
 description   = "Reveal.js theme for nimib"
 license       = "MIT"
@@ -14,7 +14,7 @@ requires "nimib >= 0.3.9"
 import os
 
 task docsDeps, "install dependencies required to build docs":
-    exec "nimble -y install ggplotnim@0.5.6 karax numericalnim nimibook@#head"
+    exec "nimble -y install ggplotnim@0.5.6 karax numericalnim nimibook"
 
 task buildDocs, "build all .nim files in docsrc/":
     for path in ["showcase.nim", "nimconf2022.nim", "miscSlides.nim", "index_old.nim", "fragments.nim"]:
