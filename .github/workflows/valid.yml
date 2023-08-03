@@ -1,4 +1,4 @@
-name: Generate nimiSlides docs
+name: Tests
 
 on:
   pull_request:
