@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: iffy/install-nim@v4
         with:
-          version: ${{ matrix.version }}
+          version: ${{ matrix.nim }}
       - name: Install deps
         run: |
           nimble install -y
