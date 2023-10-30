@@ -541,13 +541,13 @@ template align*(text: string, body: untyped) =
   body
   nbRawHtml: "</div>"
 
-template columns*(body: untyped) =
-  nbRawHtml: """<div style="display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); overflow-wrap: break-word;">"""
+template columns*(columnGap: float = 0.0, body: untyped) =
+  nbRawHtml: fmt"""<div style="display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); overflow-wrap: break-word; column-gap: {columnGap}em;">"""
   body
   nbRawHtml: "</div>"
 
-template adaptiveColumns*(body: untyped) =
-  nbRawHtml: """<div style="display: grid; grid-auto-flow: column; overflow-wrap: break-word;">"""
+template adaptiveColumns*(columnGap: float = 0.0, body: untyped) =
+  nbRawHtml: fmt"""<div style="display: grid; grid-auto-flow: column; overflow-wrap: break-word; {columnGap}em;">"""
   body
   nbRawHtml: "</div>"
 
