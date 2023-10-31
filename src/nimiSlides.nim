@@ -541,15 +541,24 @@ template align*(text: string, body: untyped) =
   body
   nbRawHtml: "</div>"
 
-template columns*(columnGap: float = 0.0, body: untyped) =
-  nbRawHtml: fmt"""<div style="display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); overflow-wrap: break-word; column-gap: {columnGap}em;">"""
+#templates can't have default args and untyped args at the same time
+#so we use overloading to get the same effect
+
+template columns*(columnGap: float, body: untyped) =
+  #tempted to use fmt"", but strformat doesn't support template args in the format string
+  nbRawHtml: """<div style="display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); overflow-wrap: break-word; column-gap: """ & $columnGap & """em;">"""
+  body
+
+template columns*(body: untyped) =
+  columns(0.0,body)
+
+template adaptiveColumns*(columnGap: float, body: untyped) =
+  nbRawHtml: """<div style="display: grid; grid-auto-flow: column; overflow-wrap: break-word;""" & $columnGap & """em;">"""
   body
   nbRawHtml: "</div>"
 
-template adaptiveColumns*(columnGap: float = 0.0, body: untyped) =
-  nbRawHtml: fmt"""<div style="display: grid; grid-auto-flow: column; overflow-wrap: break-word; {columnGap}em;">"""
-  body
-  nbRawHtml: "</div>"
+template adaptiveColumns*(body: untyped) =
+  adaptiveColumns(0.0,body)
 
 template column*(bodyInner: untyped) =
   ## column should always be used inside a `columns` block
