@@ -107,6 +107,9 @@ const main = """
     {{#disableCentering}}
     center: false,
     {{/disableCentering}}
+    {{#useScrollView}}
+    view: 'scroll',
+    {{/useScrollView}}
   });
 {{> customJS}}
 </script>
@@ -160,6 +163,9 @@ template showSlideNumber*() =
 
 template disableVerticalCentering*() =
   nb.context["disableCentering"] = true
+
+template useScrollView*() =
+  nb.context["useScrollView"] = true
 
 proc addStyle*(doc: NbDoc, style: string) =
   doc.context["nb_style"] = doc.context["nb_style"].vString & "\n" & style
