@@ -39,70 +39,72 @@ nim	Corner	nimiSlides.html#Corner	enum Corner		31
 nim	NimiSlidesConfig	nimiSlides.html#NimiSlidesConfig	object NimiSlidesConfig		34
 nim	SlideOptions	nimiSlides.html#SlideOptions	object SlideOptions		37
 nim	slideOptions	nimiSlides.html#slideOptions,string,string,string,string,string	proc slideOptions(autoAnimate = false; iframeInteractive = true; colorBackground,\n    imageBackground, videoBackground, iframeBackground, gradientBackground: string = ""): SlideOptions		46
-nim	useLocalReveal	nimiSlides.html#useLocalReveal,NbDoc,string	proc useLocalReveal(nb: var NbDoc; path: string)		129
-nim	setSlidesTheme	nimiSlides.html#setSlidesTheme.t,SlidesTheme	template setSlidesTheme(theme: SlidesTheme)		149
-nim	useScrollWheel	nimiSlides.html#useScrollWheel.t	template useScrollWheel()		152
-nim	showSlideNumber	nimiSlides.html#showSlideNumber.t	template showSlideNumber()		156
-nim	disableVerticalCentering	nimiSlides.html#disableVerticalCentering.t	template disableVerticalCentering()		159
-nim	addStyle	nimiSlides.html#addStyle,NbDoc,string	proc addStyle(doc: NbDoc; style: string)		162
-nim	revealTheme	nimiSlides.html#revealTheme,NbDoc	proc revealTheme(doc: var NbDoc)		165
-nim	currentFragment	nimiSlides.html#currentFragment	var currentFragment		214
-nim	currentSlideNumber	nimiSlides.html#currentSlideNumber	var currentSlideNumber		214
-nim	slideOptionsToAttributes	nimiSlides.html#slideOptionsToAttributes,SlideOptions	proc slideOptionsToAttributes(options: SlideOptions): string		216
-nim	slide	nimiSlides.html#slide.t,untyped,untyped	template slide(options: untyped; body: untyped): untyped		233
-nim	slide	nimiSlides.html#slide.t,untyped	template slide(body: untyped)		250
-nim	slideAutoAnimate	nimiSlides.html#slideAutoAnimate.t,untyped	template slideAutoAnimate(body: untyped)		254
-nim	fragmentCore	nimiSlides.html#fragmentCore.t,openArray[seq[FragmentAnimation]],openArray[seq[FragmentAnimation]],untyped,untyped,untyped	template fragmentCore(animations: openArray[seq[FragmentAnimation]];\n             endAnimations: openArray[seq[FragmentAnimation]];\n             indexOffset: untyped; incrementCounter: untyped; body: untyped)		286
-nim	fragmentCore	nimiSlides.html#fragmentCore.t,openArray[seq[FragmentAnimation]],openArray[seq[FragmentAnimation]],untyped	template fragmentCore(animations: openArray[seq[FragmentAnimation]];\n             endAnimations: openArray[seq[FragmentAnimation]]; body: untyped)		303
-nim	fragment	nimiSlides.html#fragment.t,varargs[seq[FragmentAnimation]],untyped	template fragment(animations: varargs[seq[FragmentAnimation]] = @[@[fadeIn]];\n         body: untyped): untyped		306
-nim	fragment	nimiSlides.html#fragment.t,FragmentAnimation,untyped	template fragment(animation: FragmentAnimation; body: untyped)		317
-nim	fragment	nimiSlides.html#fragment.t,untyped	template fragment(body: untyped)		322
-nim	fragmentFadeIn	nimiSlides.html#fragmentFadeIn.t,FragmentAnimation,untyped	template fragmentFadeIn(animation: FragmentAnimation; body: untyped)		326
-nim	fragmentFadeIn	nimiSlides.html#fragmentFadeIn.t,varargs[seq[FragmentAnimation]],untyped	template fragmentFadeIn(animation: varargs[seq[FragmentAnimation]]; body: untyped)		330
-nim	fragmentFadeIn	nimiSlides.html#fragmentFadeIn.t,untyped	template fragmentFadeIn(body: untyped)		334
-nim	fragmentEnd	nimiSlides.html#fragmentEnd.t,varargs[seq[FragmentAnimation]],untyped	template fragmentEnd(endAnimation: varargs[seq[FragmentAnimation]]; body: untyped)		338
-nim	fragmentEnd	nimiSlides.html#fragmentEnd.t,FragmentAnimation,untyped	template fragmentEnd(endAnimation: FragmentAnimation; body: untyped)		342
-nim	fragmentThen	nimiSlides.html#fragmentThen.t,seq[FragmentAnimation],seq[FragmentAnimation],untyped	template fragmentThen(an1, an2: seq[FragmentAnimation]; body: untyped)		346
-nim	fragmentThen	nimiSlides.html#fragmentThen.t,FragmentAnimation,FragmentAnimation,untyped	template fragmentThen(an1, an2: FragmentAnimation; body: untyped)		351
-nim	fragmentNext	nimiSlides.html#fragmentNext.t,FragmentAnimation,untyped	template fragmentNext(an: FragmentAnimation; body: untyped)		355
-nim	fragmentNext	nimiSlides.html#fragmentNext.t,seq[FragmentAnimation],untyped	template fragmentNext(an: seq[FragmentAnimation]; body: untyped)		359
-nim	fadeInNext	nimiSlides.html#fadeInNext.t,untyped	template fadeInNext(body: untyped)		363
-nim	fragmentList	nimiSlides.html#fragmentList.t,seq[string],varargs[seq[FragmentAnimation]]	template fragmentList(list: seq[string]; animation: varargs[seq[FragmentAnimation]])		367
-nim	fragmentList	nimiSlides.html#fragmentList.t,seq[string],FragmentAnimation	template fragmentList(list: seq[string]; animation: FragmentAnimation)		372
-nim	orderedList	nimiSlides.html#orderedList.t,untyped	template orderedList(body: untyped)		375
-nim	unorderedList	nimiSlides.html#unorderedList.t,untyped	template unorderedList(body: untyped)		380
-nim	listItem	nimiSlides.html#listItem.t,seq[FragmentAnimation],untyped	template listItem(animation: seq[FragmentAnimation]; body: untyped)		385
-nim	listItem	nimiSlides.html#listItem.t,FragmentAnimation,untyped	template listItem(animation: FragmentAnimation; body: untyped)		395
-nim	listItem	nimiSlides.html#listItem.t,untyped	template listItem(body: untyped)		398
-nim	toHSlice	nimiSlides.html#toHSlice,HSlice[int,int]	proc toHSlice(h: HSlice[int, int]): HSlice[int, int]		402
-nim	toHSlice	nimiSlides.html#toHSlice,int	proc toHSlice(h: int): HSlice[int, int]		403
-nim	toSet	nimiSlides.html#toSet,set[range[]]	proc toSet(x: set[range[0 .. 65535]]): set[range[0 .. 65535]]		406
-nim	toSet	nimiSlides.html#toSet,int	proc toSet(x: int): set[range[0 .. 65535]]		407
-nim	toSet	nimiSlides.html#toSet,Slice[int]	proc toSet(x: Slice[int]): set[range[0 .. 65535]]		408
-nim	toSet	nimiSlides.html#toSet,seq[Slice[int]]	proc toSet(x: seq[Slice[int]]): set[range[0 .. 65535]]		411
-nim	toSet	nimiSlides.html#toSet,set[range[]]_2	proc toSet(x: set[range[0 .. 255]]): set[range[0 .. 65535]]		414
-nim	animateCode	nimiSlides.html#animateCode.t,string,untyped	template animateCode(lines: string; body: untyped)		419
-nim	animateCode	nimiSlides.html#animateCode.t,varargs[set[range[]],toSet],untyped	template animateCode(lines: varargs[set[range[0 .. 65535]], toSet]; body: untyped)		425
-nim	newAnimateCodeBlock	nimiSlides.html#newAnimateCodeBlock.t,untyped,untyped	template newAnimateCodeBlock(cmd: untyped; impl: untyped)		450
-nim	typewriter	nimiSlides.html#typewriter.t,string,int,string	template typewriter(textMessage: string; typeSpeed = 50; alignment = "center")		470
-nim	bigText	nimiSlides.html#bigText.t,string	template bigText(text: string)		523
-nim	fitImage	nimiSlides.html#fitImage.t,string	template fitImage(src: string)		527
-nim	speakerNote	nimiSlides.html#speakerNote.t,string	template speakerNote(text: string)		530
-nim	align	nimiSlides.html#align.t,string,untyped	template align(text: string; body: untyped)		537
-nim	columns	nimiSlides.html#columns.t,untyped	template columns(body: untyped)		544
-nim	adaptiveColumns	nimiSlides.html#adaptiveColumns.t,untyped	template adaptiveColumns(body: untyped)		549
-nim	column	nimiSlides.html#column.t,untyped	template column(bodyInner: untyped)		554
-nim	footer	nimiSlides.html#footer.t,string,int,range[]	template footer(text: string; fontSize: int = 20; opacity: range[0.0 .. 1.0] = 0.6;\n       rawHtml = false)		560
-nim	cornerImage	nimiSlides.html#cornerImage.t,string,Corner,int,int,int	template cornerImage(image: string; corner: Corner; size: int = 100; animate = true;\n            verticalPadding: int = 2; horizontalPadding: int = 1)		592
-nimgrp	toset	nimiSlides.html#toSet-procs-all	proc		406
-nimgrp	tohslice	nimiSlides.html#toHSlice-procs-all	proc		402
-nimgrp	slide	nimiSlides.html#slide-templates-all	template		233
-nimgrp	fragmentthen	nimiSlides.html#fragmentThen-templates-all	template		346
-nimgrp	fragmentfadein	nimiSlides.html#fragmentFadeIn-templates-all	template		326
-nimgrp	animatecode	nimiSlides.html#animateCode-templates-all	template		419
-nimgrp	fragmentend	nimiSlides.html#fragmentEnd-templates-all	template		338
-nimgrp	listitem	nimiSlides.html#listItem-templates-all	template		385
-nimgrp	fragment	nimiSlides.html#fragment-templates-all	template		306
-nimgrp	fragmentlist	nimiSlides.html#fragmentList-templates-all	template		367
-nimgrp	fragmentnext	nimiSlides.html#fragmentNext-templates-all	template		355
-nimgrp	fragmentcore	nimiSlides.html#fragmentCore-templates-all	template		286
+nim	reveal_version	nimiSlides.html#reveal_version	const reveal_version		54
+nim	useLocalReveal	nimiSlides.html#useLocalReveal,NbDoc,string	proc useLocalReveal(nb: var NbDoc; path: string)		134
+nim	setSlidesTheme	nimiSlides.html#setSlidesTheme.t,SlidesTheme	template setSlidesTheme(theme: SlidesTheme)		154
+nim	useScrollWheel	nimiSlides.html#useScrollWheel.t	template useScrollWheel()		157
+nim	showSlideNumber	nimiSlides.html#showSlideNumber.t	template showSlideNumber()		161
+nim	disableVerticalCentering	nimiSlides.html#disableVerticalCentering.t	template disableVerticalCentering()		164
+nim	useScrollView	nimiSlides.html#useScrollView.t	template useScrollView()		167
+nim	addStyle	nimiSlides.html#addStyle,NbDoc,string	proc addStyle(doc: NbDoc; style: string)		170
+nim	revealTheme	nimiSlides.html#revealTheme,NbDoc	proc revealTheme(doc: var NbDoc)		173
+nim	currentFragment	nimiSlides.html#currentFragment	var currentFragment		213
+nim	currentSlideNumber	nimiSlides.html#currentSlideNumber	var currentSlideNumber		213
+nim	slideOptionsToAttributes	nimiSlides.html#slideOptionsToAttributes,SlideOptions	proc slideOptionsToAttributes(options: SlideOptions): string		215
+nim	slide	nimiSlides.html#slide.t,untyped,untyped	template slide(options: untyped; body: untyped): untyped		232
+nim	slide	nimiSlides.html#slide.t,untyped	template slide(body: untyped)		249
+nim	slideAutoAnimate	nimiSlides.html#slideAutoAnimate.t,untyped	template slideAutoAnimate(body: untyped)		253
+nim	fragmentCore	nimiSlides.html#fragmentCore.t,openArray[seq[FragmentAnimation]],openArray[seq[FragmentAnimation]],untyped,untyped,untyped	template fragmentCore(animations: openArray[seq[FragmentAnimation]];\n             endAnimations: openArray[seq[FragmentAnimation]];\n             indexOffset: untyped; incrementCounter: untyped; body: untyped)		285
+nim	fragmentCore	nimiSlides.html#fragmentCore.t,openArray[seq[FragmentAnimation]],openArray[seq[FragmentAnimation]],untyped	template fragmentCore(animations: openArray[seq[FragmentAnimation]];\n             endAnimations: openArray[seq[FragmentAnimation]]; body: untyped)		302
+nim	fragment	nimiSlides.html#fragment.t,varargs[seq[FragmentAnimation]],untyped	template fragment(animations: varargs[seq[FragmentAnimation]] = @[@[fadeIn]];\n         body: untyped): untyped		305
+nim	fragment	nimiSlides.html#fragment.t,FragmentAnimation,untyped	template fragment(animation: FragmentAnimation; body: untyped)		316
+nim	fragment	nimiSlides.html#fragment.t,untyped	template fragment(body: untyped)		321
+nim	fragmentFadeIn	nimiSlides.html#fragmentFadeIn.t,FragmentAnimation,untyped	template fragmentFadeIn(animation: FragmentAnimation; body: untyped)		325
+nim	fragmentFadeIn	nimiSlides.html#fragmentFadeIn.t,varargs[seq[FragmentAnimation]],untyped	template fragmentFadeIn(animation: varargs[seq[FragmentAnimation]]; body: untyped)		329
+nim	fragmentFadeIn	nimiSlides.html#fragmentFadeIn.t,untyped	template fragmentFadeIn(body: untyped)		333
+nim	fragmentEnd	nimiSlides.html#fragmentEnd.t,varargs[seq[FragmentAnimation]],untyped	template fragmentEnd(endAnimation: varargs[seq[FragmentAnimation]]; body: untyped)		337
+nim	fragmentEnd	nimiSlides.html#fragmentEnd.t,FragmentAnimation,untyped	template fragmentEnd(endAnimation: FragmentAnimation; body: untyped)		341
+nim	fragmentThen	nimiSlides.html#fragmentThen.t,seq[FragmentAnimation],seq[FragmentAnimation],untyped	template fragmentThen(an1, an2: seq[FragmentAnimation]; body: untyped)		345
+nim	fragmentThen	nimiSlides.html#fragmentThen.t,FragmentAnimation,FragmentAnimation,untyped	template fragmentThen(an1, an2: FragmentAnimation; body: untyped)		350
+nim	fragmentNext	nimiSlides.html#fragmentNext.t,FragmentAnimation,untyped	template fragmentNext(an: FragmentAnimation; body: untyped)		354
+nim	fragmentNext	nimiSlides.html#fragmentNext.t,seq[FragmentAnimation],untyped	template fragmentNext(an: seq[FragmentAnimation]; body: untyped)		358
+nim	fadeInNext	nimiSlides.html#fadeInNext.t,untyped	template fadeInNext(body: untyped)		362
+nim	fragmentList	nimiSlides.html#fragmentList.t,seq[string],varargs[seq[FragmentAnimation]]	template fragmentList(list: seq[string]; animation: varargs[seq[FragmentAnimation]])		366
+nim	fragmentList	nimiSlides.html#fragmentList.t,seq[string],FragmentAnimation	template fragmentList(list: seq[string]; animation: FragmentAnimation)		371
+nim	orderedList	nimiSlides.html#orderedList.t,untyped	template orderedList(body: untyped)		374
+nim	unorderedList	nimiSlides.html#unorderedList.t,untyped	template unorderedList(body: untyped)		379
+nim	listItem	nimiSlides.html#listItem.t,seq[FragmentAnimation],untyped	template listItem(animation: seq[FragmentAnimation]; body: untyped)		384
+nim	listItem	nimiSlides.html#listItem.t,FragmentAnimation,untyped	template listItem(animation: FragmentAnimation; body: untyped)		394
+nim	listItem	nimiSlides.html#listItem.t,untyped	template listItem(body: untyped)		397
+nim	toHSlice	nimiSlides.html#toHSlice,HSlice[int,int]	proc toHSlice(h: HSlice[int, int]): HSlice[int, int]		401
+nim	toHSlice	nimiSlides.html#toHSlice,int	proc toHSlice(h: int): HSlice[int, int]		402
+nim	toSet	nimiSlides.html#toSet,set[range[]]	proc toSet(x: set[range[0 .. 65535]]): set[range[0 .. 65535]]		405
+nim	toSet	nimiSlides.html#toSet,int	proc toSet(x: int): set[range[0 .. 65535]]		406
+nim	toSet	nimiSlides.html#toSet,Slice[int]	proc toSet(x: Slice[int]): set[range[0 .. 65535]]		407
+nim	toSet	nimiSlides.html#toSet,seq[Slice[int]]	proc toSet(x: seq[Slice[int]]): set[range[0 .. 65535]]		410
+nim	toSet	nimiSlides.html#toSet,set[range[]]_2	proc toSet(x: set[range[0 .. 255]]): set[range[0 .. 65535]]		413
+nim	animateCode	nimiSlides.html#animateCode.t,string,untyped	template animateCode(lines: string; body: untyped)		418
+nim	animateCode	nimiSlides.html#animateCode.t,varargs[set[range[]],toSet],untyped	template animateCode(lines: varargs[set[range[0 .. 65535]], toSet]; body: untyped)		424
+nim	newAnimateCodeBlock	nimiSlides.html#newAnimateCodeBlock.t,untyped,untyped	template newAnimateCodeBlock(cmd: untyped; impl: untyped)		449
+nim	typewriter	nimiSlides.html#typewriter.t,string,int,string	template typewriter(textMessage: string; typeSpeed = 50; alignment = "center")		469
+nim	bigText	nimiSlides.html#bigText.t,string	template bigText(text: string)		522
+nim	fitImage	nimiSlides.html#fitImage.t,string	template fitImage(src: string)		526
+nim	speakerNote	nimiSlides.html#speakerNote.t,string	template speakerNote(text: string)		529
+nim	align	nimiSlides.html#align.t,string,untyped	template align(text: string; body: untyped)		536
+nim	columns	nimiSlides.html#columns.t,untyped	template columns(body: untyped)		543
+nim	adaptiveColumns	nimiSlides.html#adaptiveColumns.t,untyped	template adaptiveColumns(body: untyped)		548
+nim	column	nimiSlides.html#column.t,untyped	template column(bodyInner: untyped)		553
+nim	footer	nimiSlides.html#footer.t,string,int,range[]	template footer(text: string; fontSize: int = 20; opacity: range[0.0 .. 1.0] = 0.6;\n       rawHtml = false)		559
+nim	cornerImage	nimiSlides.html#cornerImage.t,string,Corner,int,int,int	template cornerImage(image: string; corner: Corner; size: int = 100; animate = true;\n            verticalPadding: int = 2; horizontalPadding: int = 1)		591
+nimgrp	toset	nimiSlides.html#toSet-procs-all	proc		405
+nimgrp	tohslice	nimiSlides.html#toHSlice-procs-all	proc		401
+nimgrp	slide	nimiSlides.html#slide-templates-all	template		232
+nimgrp	fragmentthen	nimiSlides.html#fragmentThen-templates-all	template		345
+nimgrp	fragmentfadein	nimiSlides.html#fragmentFadeIn-templates-all	template		325
+nimgrp	animatecode	nimiSlides.html#animateCode-templates-all	template		418
+nimgrp	fragmentend	nimiSlides.html#fragmentEnd-templates-all	template		337
+nimgrp	listitem	nimiSlides.html#listItem-templates-all	template		384
+nimgrp	fragment	nimiSlides.html#fragment-templates-all	template		305
+nimgrp	fragmentlist	nimiSlides.html#fragmentList-templates-all	template		366
+nimgrp	fragmentnext	nimiSlides.html#fragmentNext-templates-all	template		354
+nimgrp	fragmentcore	nimiSlides.html#fragmentCore-templates-all	template		285
