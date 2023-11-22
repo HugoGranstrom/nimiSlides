@@ -550,7 +550,7 @@ template columns*(columnGap: float, body: untyped) =
   body
 
 template columns*(body: untyped) =
-  columns(0.0,body)
+  columns(1.0,body)
 
 template adaptiveColumns*(columnGap: float, body: untyped) =
   nbRawHtml: """<div style="display: grid; grid-auto-flow: column; overflow-wrap: break-word;""" & $columnGap & """em;">"""
@@ -558,7 +558,7 @@ template adaptiveColumns*(columnGap: float, body: untyped) =
   nbRawHtml: "</div>"
 
 template adaptiveColumns*(body: untyped) =
-  adaptiveColumns(0.0,body)
+  adaptiveColumns(1.0,body)
 
 template column*(bodyInner: untyped) =
   ## column should always be used inside a `columns` block
