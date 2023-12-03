@@ -554,7 +554,7 @@ template columns*(body: untyped) =
   columns(1.0,body)
 
 template adaptiveColumns*(columnGap: float, body: untyped) =
-  nbRawHtml: """<div style="display: grid; grid-auto-flow: column; overflow-wrap: break-word;""" & $columnGap & """em;">"""
+  nbRawHtml: """<div style="display: grid; grid-auto-flow: column; overflow-wrap: break-word; column-gap; """ & $columnGap & """em;">"""
   body
   nbRawHtml: "</div>"
 
