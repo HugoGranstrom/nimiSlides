@@ -546,7 +546,8 @@ template align*(text: string, body: untyped) =
 
 template columns*(columnGap: float, body: untyped) =
   #tempted to use fmt"", but strformat doesn't support template args in the format string
-  nbRawHtml: """<div style="display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); overflow-wrap: break-word; column-gap: """ & $columnGap & """em;">"""
+  nbRawHtml: """<div style="display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); overflow-wrap: break-word; column-gap: $1 em;">
+  """ % columnGap
   body
   nbRawHtml: "</div>"
 
@@ -554,7 +555,8 @@ template columns*(body: untyped) =
   columns(1.0,body)
 
 template adaptiveColumns*(columnGap: float, body: untyped) =
-  nbRawHtml: """<div style="display: grid; grid-auto-flow: column; overflow-wrap: break-word; column-gap; """ & $columnGap & """em;">"""
+  nbRawHtml: """<div style="display: grid; grid-auto-flow: column; overflow-wrap: break-word; column-gap; $1 em;">
+  """ % columnGap
   body
   nbRawHtml: "</div>"
 
