@@ -1,3 +1,4 @@
+import std/[strutils]
 import nimib
 import ./[conversions]
 
@@ -25,3 +26,13 @@ template showFrom*(slideNr: int, body: untyped) =
 template showUntil*(slideNr: int, body: untyped) =
   if autoAnimateCounter <= slideNr:
     body
+
+template showText*(text: seq[(set[range[0..255]], string)]) =
+  var result = ""
+  for i, (indices, txt) in text:
+    if indices == {} or autoAnimateCounter in indices:
+      result &= "<span data-id=\"autoAnimateId-$1\">" % [$i]  & txt & "</span>"
+  nbText: result
+
+
+  

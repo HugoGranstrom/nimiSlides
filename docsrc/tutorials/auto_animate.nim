@@ -11,6 +11,26 @@ For example when adding a new piece of text to a slide, step-by-step:
 """
 
 codeAndSlides:
+  autoAnimateSlides(5):
+    showUntil(3):
+      nbText: "1, 2, 3"
+    nbText: "Always"
+    showFrom(3):
+      nbText: "3, 4, 5"
+    showAt(4):
+      fitImage("https://github.com/nim-lang/assets/raw/master/Art/logo-crown.png")
+
+codeAndSlides:
+  autoAnimateSlides(5):
+    showText(@[
+      ({}, "Hello"),
+      ({2, 5}, " world"),
+      ({3, 4}, " Hugo"),
+      ({4, 5}, ", lord of the world")
+    ])
+
+
+codeAndSlides:
   slide(slideOptions(autoAnimate=true)):
     nbText: """
 # Only title first    
