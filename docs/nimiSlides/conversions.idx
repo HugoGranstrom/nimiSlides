@@ -1,0 +1,10 @@
+nimTitle	conversions	nimiSlides/conversions.html	module src/nimiSlides/conversions		0
+nim	toHSlice	nimiSlides/conversions.html#toHSlice,HSlice[int,int]	proc toHSlice(h: HSlice[int, int]): HSlice[int, int]		1
+nim	toHSlice	nimiSlides/conversions.html#toHSlice,int	proc toHSlice(h: int): HSlice[int, int]		2
+nim	toSet	nimiSlides/conversions.html#toSet,set[range[]]	proc toSet(x: set[range[0 .. 65535]]): set[range[0 .. 65535]]		5
+nim	toSet	nimiSlides/conversions.html#toSet,int	proc toSet(x: int): set[range[0 .. 65535]]		6
+nim	toSet	nimiSlides/conversions.html#toSet,Slice[int]	proc toSet(x: Slice[int]): set[range[0 .. 65535]]		7
+nim	toSet	nimiSlides/conversions.html#toSet,seq[Slice[int]]	proc toSet(x: seq[Slice[int]]): set[range[0 .. 65535]]		10
+nim	toSet	nimiSlides/conversions.html#toSet,set[range[]]_2	proc toSet(x: set[range[0 .. 255]]): set[range[0 .. 65535]]		13
+nimgrp	toset	nimiSlides/conversions.html#toSet-procs-all	proc		5
+nimgrp	tohslice	nimiSlides/conversions.html#toHSlice-procs-all	proc		1

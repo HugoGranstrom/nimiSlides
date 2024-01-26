@@ -1,0 +1,6 @@
+nimTitle	autoAnimation	nimiSlides/autoAnimation.html	module src/nimiSlides/autoAnimation		0
+nim	autoAnimateSlides	nimiSlides/autoAnimation.html#autoAnimateSlides.t,int,untyped	template autoAnimateSlides(nSlides: int; body: untyped)		5
+nim	showAt	nimiSlides/autoAnimation.html#showAt.t,varargs[set[range[]],toSet],untyped	template showAt(slideNrs: varargs[set[range[0 .. 65535]], toSet]; body: untyped)		10
+nim	showFrom	nimiSlides/autoAnimation.html#showFrom.t,int,untyped	template showFrom(slideNr: int; body: untyped)		22
+nim	showUntil	nimiSlides/autoAnimation.html#showUntil.t,int,untyped	template showUntil(slideNr: int; body: untyped)		26
+nim	showText	nimiSlides/autoAnimation.html#showText.t,seq[]	template showText(text: seq[(set[range[0 .. 255]], string)])		30
