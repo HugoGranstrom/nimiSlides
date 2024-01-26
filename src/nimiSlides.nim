@@ -54,7 +54,7 @@ proc slideOptions*(autoAnimate = false, iframeInteractive = true, colorBackgroun
     gradientBackground: gradientBackground,
   )
 
-const reveal_version* = "5.0.2"
+const reveal_version* = "5.0.4"
 
 const document = """
 <!DOCTYPE html>
