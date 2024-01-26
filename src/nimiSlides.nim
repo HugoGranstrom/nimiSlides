@@ -4,6 +4,9 @@ import nimib
 import nimib/[capture, config]
 import markdown
 
+import nimiSlides/[autoAnimation, conversions]
+export autoAnimation, conversions
+
 type
   FragmentAnimation* = enum
     fadeIn = "fade-in" # the default
@@ -51,7 +54,7 @@ proc slideOptions*(autoAnimate = false, iframeInteractive = true, colorBackgroun
     gradientBackground: gradientBackground,
   )
 
-const reveal_version* = "5.0.2"
+const reveal_version* = "5.0.4"
 
 const document = """
 <!DOCTYPE html>
@@ -396,24 +399,6 @@ template listItem*(animation: FragmentAnimation, body: untyped) =
 
 template listItem*(body: untyped) =
   listItem(fadeInThenSemiOut, body)
-  
-
-proc toHSlice*(h: HSlice[int, int]): HSlice[int, int] = h
-proc toHSlice*(h: int): HSlice[int, int] = h .. h
-
-
-proc toSet*(x: set[range[0..65535]]): set[range[0..65535]] = x
-proc toSet*(x: int): set[range[0..65535]] = {x}
-proc toSet*(x: Slice[int]): set[range[0..65535]] =
-  for y in x:
-    result.incl y
-proc toSet*(x: seq[Slice[int]]): set[range[0..65535]] =
-  for s in x:
-    result.incl s.toSet()
-proc toSet*(x: set[range[0..255]]): set[range[0..65535]] =
-  for y in x:
-    result.incl y
-
 
 template animateCode*(lines: string, body: untyped) =
   newNbCodeBlock("animateCode", body):
