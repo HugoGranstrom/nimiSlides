@@ -84,18 +84,22 @@ nim	bigText	nimiSlides.html#bigText.t,string	template bigText(text: string)		507
 nim	fitImage	nimiSlides.html#fitImage.t,string	template fitImage(src: string)		511
 nim	speakerNote	nimiSlides.html#speakerNote.t,string	template speakerNote(text: string)		514
 nim	align	nimiSlides.html#align.t,string,untyped	template align(text: string; body: untyped)		521
-nim	columns	nimiSlides.html#columns.t,untyped	template columns(body: untyped)		528
-nim	adaptiveColumns	nimiSlides.html#adaptiveColumns.t,untyped	template adaptiveColumns(body: untyped)		533
-nim	column	nimiSlides.html#column.t,untyped	template column(bodyInner: untyped)		538
-nim	footer	nimiSlides.html#footer.t,string,int,range[]	template footer(text: string; fontSize: int = 20; opacity: range[0.0 .. 1.0] = 0.6;\n       rawHtml = false)		544
-nim	cornerImage	nimiSlides.html#cornerImage.t,string,Corner,int,int,int	template cornerImage(image: string; corner: Corner; size: int = 100; animate = true;\n            verticalPadding: int = 2; horizontalPadding: int = 1)		576
+nim	columns	nimiSlides.html#columns.t,float,untyped	template columns(columnGap: float; body: untyped)		531
+nim	columns	nimiSlides.html#columns.t,untyped	template columns(body: untyped)		538
+nim	adaptiveColumns	nimiSlides.html#adaptiveColumns.t,float,untyped	template adaptiveColumns(columnGap: float; body: untyped)		541
+nim	adaptiveColumns	nimiSlides.html#adaptiveColumns.t,untyped	template adaptiveColumns(body: untyped)		547
+nim	column	nimiSlides.html#column.t,untyped	template column(bodyInner: untyped)		550
+nim	footer	nimiSlides.html#footer.t,string,int,range[]	template footer(text: string; fontSize: int = 20; opacity: range[0.0 .. 1.0] = 0.6;\n       rawHtml = false)		556
+nim	cornerImage	nimiSlides.html#cornerImage.t,string,Corner,int,int,int	template cornerImage(image: string; corner: Corner; size: int = 100; animate = true;\n            verticalPadding: int = 2; horizontalPadding: int = 1)		588
 nimgrp	slide	nimiSlides.html#slide-templates-all	template		235
 nimgrp	fragmentthen	nimiSlides.html#fragmentThen-templates-all	template		348
 nimgrp	fragmentfadein	nimiSlides.html#fragmentFadeIn-templates-all	template		328
+nimgrp	adaptivecolumns	nimiSlides.html#adaptiveColumns-templates-all	template		541
 nimgrp	animatecode	nimiSlides.html#animateCode-templates-all	template		403
 nimgrp	fragmentend	nimiSlides.html#fragmentEnd-templates-all	template		340
 nimgrp	listitem	nimiSlides.html#listItem-templates-all	template		387
 nimgrp	fragment	nimiSlides.html#fragment-templates-all	template		308
 nimgrp	fragmentlist	nimiSlides.html#fragmentList-templates-all	template		369
 nimgrp	fragmentnext	nimiSlides.html#fragmentNext-templates-all	template		357
+nimgrp	columns	nimiSlides.html#columns-templates-all	template		531
 nimgrp	fragmentcore	nimiSlides.html#fragmentCore-templates-all	template		288
