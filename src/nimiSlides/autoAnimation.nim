@@ -27,7 +27,7 @@ template showUntil*(slideNr: int, body: untyped) =
   if autoAnimateCounter <= slideNr:
     body
 
-template showText*(text: seq[(set[range[0..255]], string)]) =
+template showText*(text: seq[(set[range[0..255]] or set[range[0..65535]], string)]) =
   var result = ""
   for i, (indices, txt) in text:
     if indices == {} or autoAnimateCounter in indices:
