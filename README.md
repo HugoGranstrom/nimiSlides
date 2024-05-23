@@ -25,3 +25,4 @@ At NimConf 2022, I did a presentation on nimiSlides which can be viewed [here](h
   - [ ] Add support for setting configuration yourself (https://revealjs.com/config/)
   - [ ] Use less `nbRawHtml` and more nimib blocks
 
+
