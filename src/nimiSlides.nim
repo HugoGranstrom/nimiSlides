@@ -31,6 +31,18 @@ type
   SlidesTheme* = enum
     Black, Beige, Blood, Dracula, League, Moon, Night, Serif, Simple, Sky, Solarized, White
 
+  SlideTransition* {.pure.} = enum
+    none = "none"
+    slide = "slide" # default
+    fade = "fade"
+    convex = "convex"
+    concave = "concave"
+    zoom = "zoom"
+
+  SlideTransitionSpeed* {.pure.} = enum
+    fast = "fast"
+    slow = "slow"
+
   Corner* = enum
     UpperLeft, UpperRight, LowerLeft, LowerRight
 
@@ -38,6 +50,9 @@ type
     localReveal*: string
 
   SlideOptions* = object
+    transition*: SlideTransition
+    outTransition*: SlideTransition
+    transitionSpeed*: SlideTransitionSpeed
     autoAnimate*: bool
     colorBackground*: string
     imageBackground*: string
@@ -46,12 +61,12 @@ type
     iframeInteractive*: bool
     gradientBackground*: string
 
-proc slideOptions*(autoAnimate = false, iframeInteractive = true, colorBackground, imageBackground, videoBackground, iframeBackground, gradientBackground: string = ""): SlideOptions =
+proc slideOptions*(autoAnimate = false, iframeInteractive = true, colorBackground, imageBackground, videoBackground, iframeBackground, gradientBackground: string = "", transition = SlideTransition.slide, outTransition = transition, transitionSpeed = SlideTransitionSpeed.fast ): SlideOptions =
   SlideOptions(
     autoAnimate: autoAnimate, iframeInteractive: iframeInteractive, colorBackground: colorBackground,
     imageBackground: imageBackground, videoBackground: videoBackground,
     iframeBackground: iframeBackground,
-    gradientBackground: gradientBackground,
+    gradientBackground: gradientBackground, transition: transition, outTransition: outTransition, transitionSpeed: transitionSpeed
   )
 
 const reveal_version* = "5.0.4"
@@ -217,6 +232,8 @@ var currentFragment*, currentSlideNumber*: int
 
 proc slideOptionsToAttributes*(options: SlideOptions): string =
   result.add """data-nimib-slide-number="$1" """ % [$currentSlideNumber]
+  result.add """data-transition="$1-in $2-out" """ % [$options.transition, $options.outTransition]
+  result.add """data-transition-speed="$1" """ % [$options.transitionSpeed]
   if options.autoAnimate:
     result.add "data-auto-animate "
   if options.colorBackground.len > 0:
@@ -510,6 +527,13 @@ template bigText*(text: string) =
 
 template fitImage*(src: string) =
   nbRawHtml: hlHtml"""<img data-src="$1" class="r-stretch">""" % [src]
+
+template fitVideo*(src: string) =
+  nbRawHtml: """
+<video controls class="r-stretch">
+<source src="$1" type="video/mp4">
+<source src="$1" type="video/webm">
+</video>""" % [src]
 
 template speakerNote*(text: string) =
   nbRawHtml: """
