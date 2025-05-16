@@ -238,8 +238,6 @@ func nimiSlidesNbCodeOutputPartial*(blk: JsonNode, nb: Nb): string =
   else:
     ""
 
-
-
 newNbBlock(NbAnimateCode of NbCode):
   highlightedLines: seq[seq[int]]
   toHtml:
@@ -264,6 +262,39 @@ func highlightedLinesToString*(lines: seq[seq[int]]): string =
 func nimiSlidesAnimateCodeSourcePartial*(blk: JsonNode, nb: Nb): string =
   let highlightedLinesString = blk{"highlightedLines"}.to(seq[seq[int]]).highlightedLinesToString()
   result = nimiSlidesNbCodeSourcePartial(blk, nb).replace("data-line-numbers", &"data-line-numbers=\"{highlightedLinesString}\"")
+
+newNbBlock(NbSlide of NbContainer):
+  options: SlideOptions
+  slideNumber: int
+  toHtml:
+    withNewLines:
+      nb.renderPartial("slideStart", jsonutils.toJson(blk))
+      nbContainerToHtml(blk, nb)
+      nb.renderPartial("slideEnd", jsonutils.toJson(blk))
+
+proc slideOptionsToAttributes*(options: SlideOptions, slideNumber: int): string =
+  result.add """data-nimib-slide-number="$1" """ % [$slideNumber]
+  if options.autoAnimate:
+    result.add "data-auto-animate "
+  if options.colorBackground.len > 0:
+    result.add """data-background-color="$1" """ % [options.colorBackground]
+  elif options.imageBackground.len > 0:
+    result.add """data-background-image="$1" """ % [options.imageBackground]
+  elif options.videoBackground.len > 0:
+    result.add """data-background-video="$1" """ % [options.videoBackground]
+  elif options.iframeBackground.len > 0:
+    result.add """data-background-iframe="$1" """ % [options.iframeBackground]
+    if options.iframeInteractive:
+      result.add "data-background-interactive "
+  elif options.gradientBackground.len > 0:
+    result.add """data-background-gradient="$1" """ % [options.gradientBackground]
+
+func nimiSlidesSlideStartPartial*(blk: JsonNode, nb: Nb): string =
+  let optionsStr = blk{"options"}.to(SlideOptions).slideOptionsToAttributes(blk{"slideNumber"}.getInt)
+  result = &"<section {optionsStr}>"
+
+func nimiSlidesSlideEndPartial*(blk: JsonNode, nb: Nb): string =
+  "</section>"
 
 proc useLocalReveal*(nb: var Nb, path: string) =
   nb.doc.context["local_reveal_path"] = %path
@@ -303,9 +334,9 @@ proc revealTheme*(nb: var Nb) =
   nb.backend.partials["revealCSS"] = revealCSSToHtml
   nb.backend.partials["revealJS"] = revealJSToHtml
 
-  #[ nb.backend.partials["animateCode"] = "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers=\"{{&highlightLines}}\">{{&codeHighlighted}}</code></pre>\n" & nb.backend.partials["nbCodeOutput"]
-  #doc.renderPlans["animateCode"] = doc.renderPlans["nbCode"]
-
+  nb.backend.partials["slideStart"] = nimiSlidesSlideStartPartial
+  nb.backend.partials["slideEnd"] = nimiSlidesSlideEndPartial
+  #[
   nb.backend.partials["fragmentStart"] = """
 {{#fragments}}
 <div class="fragment {{&classStr}}" data-fragment-index="{{&fragIndex}}" data-fragment-index-nimib="{{&fragIndex}}"> 
@@ -335,39 +366,24 @@ proc revealTheme*(nb: var Nb) =
 
 var currentFragment*, currentSlideNumber*: int
 
-proc slideOptionsToAttributes*(options: SlideOptions): string =
-  result.add """data-nimib-slide-number="$1" """ % [$currentSlideNumber]
-  if options.autoAnimate:
-    result.add "data-auto-animate "
-  if options.colorBackground.len > 0:
-    result.add """data-background-color="$1" """ % [options.colorBackground]
-  elif options.imageBackground.len > 0:
-    result.add """data-background-image="$1" """ % [options.imageBackground]
-  elif options.videoBackground.len > 0:
-    result.add """data-background-video="$1" """ % [options.videoBackground]
-  elif options.iframeBackground.len > 0:
-    result.add """data-background-iframe="$1" """ % [options.iframeBackground]
-    if options.iframeInteractive:
-      result.add "data-background-interactive "
-  elif options.gradientBackground.len > 0:
-    result.add """data-background-gradient="$1" """ % [options.gradientBackground]
-
-template slide*(options: untyped, body: untyped): untyped =
+template slide*(toptions: untyped, body: untyped): untyped =
   currentSlideNumber += 1
-
-  nbRawHtml: "<section $1>" % [slideOptionsToAttributes(options)]
+  let blk = newNbSlide(slideNumber=currentSlideNumber, options=toptions)
+  
   when declaredInScope(CountVarNimiSlide):
     when CountVarNimiSlide < 2:
       static: inc CountVarNimiSlide
-      body
+      nb.withContainer(blk):
+        body
       static: dec CountVarNimiSlide
     else:
       {.error: "You can only nest slides once!".}
   else:
     var CountVarNimiSlide {.inject, compileTime.} = 1 # we just entered the first level
-    body
+    nb.withContainer(blk):
+      body
     static: dec CountVarNimiSlide
-  nbRawHtml: "</section>"
+  nb.add blk
 
 template slide*(body: untyped) =
   slide(slideOptions()):
