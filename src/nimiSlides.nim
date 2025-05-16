@@ -324,6 +324,13 @@ func nimiSlidesFragmentStartPartial*(blk: JsonNode, nb: Nb): string =
 func nimiSlidesFragmentEndPartial*(blk: JsonNode, nb: Nb): string =
   "</div>\n".repeat(blk{"fragments"}.len)
 
+newNbBlock(NbBigText of NbText):
+  toHtml:
+    withNewlines:
+      "<h2 class=\"r-fit-text\">"
+      nb.renderPartial("nbText", jsonutils.toJson(blk))
+      "</h2>"
+
 proc useLocalReveal*(nb: var Nb, path: string) =
   nb.doc.context["local_reveal_path"] = %path
   nb.backend.partials["revealCSS"] = localRevealCss
@@ -367,9 +374,6 @@ proc revealTheme*(nb: var Nb) =
 
   nb.backend.partials["fragmentStart"] = nimiSlidesFragmentStartPartial
   nb.backend.partials["fragmentEnd"] = nimiSlidesFragmentEndPartial
-  #[
-  nb.backend.partials["bigText"] = """<h2 class="r-fit-text"> {{&outputToHtml}} </h2>""" ]#
-  #doc.renderPlans["bigText"] = doc.renderPlans["nbText"]
 
   nb.doc.context["slidesTheme"] = %"black"
   nb.doc.context["nb_style"] = %""
@@ -679,9 +683,9 @@ template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") 
                 discard
         ))
 
-template bigText*(text: string) =
-  newNbSlimBlock("bigText"):
-    nb.blk.output = text
+template bigText*(ttext: string) =
+  let blk = newNbBigText(text=ttext)
+  nb.add blk
 
 template fitImage*(src: string) =
   nbRawHtml: hlHtml"""<img data-src="$1" class="r-stretch">""" % [src]
