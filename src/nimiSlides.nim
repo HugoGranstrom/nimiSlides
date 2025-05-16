@@ -28,6 +28,10 @@ type
     highlightCurrentGreen = "highlight-current-green"
     highlightCurrentBlue = "highlight-current-blue"
 
+  FragmentItem* = object
+    classStr: string
+    fragIndex: int
+
   SlidesTheme* = enum
     Black, Beige, Blood, Dracula, League, Moon, Night, Serif, Simple, Sky, Solarized, White
 
@@ -296,6 +300,30 @@ func nimiSlidesSlideStartPartial*(blk: JsonNode, nb: Nb): string =
 func nimiSlidesSlideEndPartial*(blk: JsonNode, nb: Nb): string =
   "</section>"
 
+newNbBlock(NbFragment of NbContainer):
+  fragments: seq[FragmentItem]
+  toHtml:
+    withNewLines:
+      nb.renderPartial("fragmentStart", jsonutils.toJson(blk))
+      nbContainerToHtml(blk, nb)
+      nb.renderPartial("fragmentEnd", jsonutils.toJson(blk))
+
+func nimiSlidesFragmentStartPartial*(blk: JsonNode, nb: Nb): string =
+  if blk{"fragments"}.len > 0:
+    result = ""
+    for fragment in blk{"fragments"}:
+      let classStr = fragment{"classStr"}.getStr
+      let fragIndex = fragment{"fragIndex"}.getInt
+      result &= hlHtmlF"""
+      <div class="fragment {classStr}" data-fragment-index="{fragIndex}" data-fragment-index-nimib="{fragIndex}">
+      """
+      result &= "\n"
+  else:
+    result = ""
+
+func nimiSlidesFragmentEndPartial*(blk: JsonNode, nb: Nb): string =
+  "</div>\n".repeat(blk{"fragments"}.len)
+
 proc useLocalReveal*(nb: var Nb, path: string) =
   nb.doc.context["local_reveal_path"] = %path
   nb.backend.partials["revealCSS"] = localRevealCss
@@ -336,19 +364,10 @@ proc revealTheme*(nb: var Nb) =
 
   nb.backend.partials["slideStart"] = nimiSlidesSlideStartPartial
   nb.backend.partials["slideEnd"] = nimiSlidesSlideEndPartial
+
+  nb.backend.partials["fragmentStart"] = nimiSlidesFragmentStartPartial
+  nb.backend.partials["fragmentEnd"] = nimiSlidesFragmentEndPartial
   #[
-  nb.backend.partials["fragmentStart"] = """
-{{#fragments}}
-<div class="fragment {{&classStr}}" data-fragment-index="{{&fragIndex}}" data-fragment-index-nimib="{{&fragIndex}}"> 
-{{/fragments}}
-  """
-
-  nb.backend.partials["fragmentEnd"] = """
-{{#fragments}}
-</div>
-{{/fragments}}
-  """
-
   nb.backend.partials["bigText"] = """<h2 class="r-fit-text"> {{&outputToHtml}} </h2>""" ]#
   #doc.renderPlans["bigText"] = doc.renderPlans["nbText"]
 
@@ -393,6 +412,23 @@ template slideAutoAnimate*(body: untyped) =
   slide(slideOptions(autoAnimate=true)):
     body
 
+template fragmentCoreOld*(animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], indexOffset: untyped, incrementCounter: untyped, body: untyped) =
+  ## Creates a fragment of the content of body. Nesting works.
+  ## animations: each seq in animations are animations that are to be applied at the same time. The first seq's animations
+  ##             are applied on the first button click, and the second seq's animations on the second click etc.
+  ## endAnimations: animations that should be applied AT THE END of block. 
+  ## Example: 
+  ## `fragment(@[@[fadeIn, highlightBlue], @[shrinks, semiFadeOut]]): block` will at the first click of a button fadeIn and highlightBlue
+  ## the content of the block. At the second click the same content will shrink and semiFadeOut. This code is also equivilent with
+  ## `fragment(@[@[fadeIn, highlightBlue]]): fragment(@[@[shrinks, semiFadeOut]]): block`.
+  ## `fragment(@[@[fadeIn]], @[@[fadeOut]]): block` will first fadeIn the entire block and perform eventual animations in nested fragments. Once
+  ## all of those are finished, it will run fadeOut on the entire block and its subfragments.
+  var fragments: seq[Table[string, string]]
+  fragmentStartBlock(fragments, animations, endAnimations, indexOffset, incrementCounter)
+  var startBlock = nb.blk # this *should* be the block created by fragmentStartBlock
+  body
+  fragmentEndBlock(fragments, animations, endAnimations, startBlock)
+
 template fragmentStartBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], indexOffset: int, incrementCounter: bool) =
   newNbSlimBlock("fragmentStart"):
     for level in animations:
@@ -432,11 +468,21 @@ template fragmentCore*(animations: openArray[seq[FragmentAnimation]], endAnimati
   ## `fragment(@[@[fadeIn, highlightBlue]]): fragment(@[@[shrinks, semiFadeOut]]): block`.
   ## `fragment(@[@[fadeIn]], @[@[fadeOut]]): block` will first fadeIn the entire block and perform eventual animations in nested fragments. Once
   ## all of those are finished, it will run fadeOut on the entire block and its subfragments.
-  var fragments: seq[Table[string, string]]
-  fragmentStartBlock(fragments, animations, endAnimations, indexOffset, incrementCounter)
-  var startBlock = nb.blk # this *should* be the block created by fragmentStartBlock
-  body
-  fragmentEndBlock(fragments, animations, endAnimations, startBlock)
+  let blk = newNbFragment()
+  for level in animations:
+    if level.len > 1 and fadeIn in level:
+      # Add a fadeIn fragment at the same frame
+      blk.fragments.add FragmentItem(classStr: "", fragIndex: currentFragment + indexOffset)
+    blk.fragments.add FragmentItem(classStr: level.join(" "), fragIndex: currentFragment + indexOffset)
+    if incrementCounter:
+      currentFragment += 1
+
+  withContainer(nb, blk):
+    body
+  
+  for level in endAnimations:
+    blk.fragments.add FragmentItem(classStr: level.join(" "), fragIndex: currentFragment)
+  nb.add blk
 
 template fragmentCore*(animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], body: untyped) =
   fragmentCore(animations, endAnimations, 0, true, body)
