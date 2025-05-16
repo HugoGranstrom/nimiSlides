@@ -1,4 +1,4 @@
-import std/[strutils, strformat, sequtils, os]
+import std/[strutils, strformat, sequtils, os, json]
 export os
 import nimib
 import nimib/[capture, config]
@@ -56,28 +56,6 @@ proc slideOptions*(autoAnimate = false, iframeInteractive = true, colorBackgroun
 
 const reveal_version* = "5.0.4"
 
-const document = """
-<!DOCTYPE html>
-<html>
-  {{> head}}
-  <body>
-  {{> main}}
-  </body>
-</html>
-"""
-
-const head = """
-<head>
-  <meta content="text/html; charset=utf-8" http-equiv="content-type">
-  {{> revealCSS }}
-  {{#nb_style}}
-  <style>
-  {{{ nb_style }}}
-  </style>
-  {{/nb_style}}
-</head>
-"""
-
 const main = """
 <div class="reveal">
   <div class="slides">
@@ -118,14 +96,95 @@ const main = """
 </script>
 """
 
-const revealCSS = """
+func revealMainToHtml*(doc: NbDoc, nb: Nb): string =
+  let docJson = %[] # it's unused
+  let renderedBlocks = nbContainerToHtml(doc, nb)
+  result = withNewlines:
+    hlHtmlF"""
+<div class="reveal">
+  <div class="slides">
+    {renderedBlocks}
+  </div>
+</div>
+    """
+    nb.renderPartial("revealJS", docJson)
+    "<script>"
+    """
+    Reveal.initialize({
+      plugins: [ 
+        RevealHighlight,
+        RevealNotes,
+      ]
+    });
+    """
+    nb.renderPartial("customJS", docJson)
+    "</script>"
+
+#[ const document = """
+<!DOCTYPE html>
+<html>
+  {{> head}}
+  <body>
+  {{> main}}
+  </body>
+</html>
+""" ]#
+
+func revealNbDocToHtml*(blk: NbBlock, nb: Nb): string =
+  let doc = blk.NbDoc
+  let docJson = %[] # it's unused
+  result = withNewlines:
+    "<!DOCTYPE html>"
+    """<html lang="en-us">"""
+    nb.renderPartial("head", docJson)
+    "<body>"
+    revealMainToHtml(doc, nb)
+    "</body>"
+    "</html>"
+
+func revealHeadToHtml*(blk: JsonNode, nb: Nb): string =
+  let nbStyle = nb.doc.context{"nb_style"}
+  result = withNewLines:
+    "<head>"
+    """<meta content="text/html; charset=utf-8" http-equiv="content-type">"""
+    nb.renderPartial("revealCSS", blk)
+    if nbStyle.len > 0:
+      fmt"""
+      <style>
+        {nbStyle}
+      </style>
+      """
+    "</head>"
+
+#[ const head = """
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+  {{> revealCSS }}
+  {{#nb_style}}
+  <style>
+  {{{ nb_style }}}
+  </style>
+  {{/nb_style}}
+</head>
+""" ]#
+
+const revealCSS = hlHtml"""
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/reveal.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/theme/{{{slidesTheme}}}.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/plugin/highlight/monokai.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 """
 
-const revealJS = """
+func revealCSSToHtml*(blk: JsonNode, nb: Nb): string =
+  let revealVersion = nb.doc.context{"reveal_version"}.getStr
+  let slidesTheme = nb.doc.context{"slidesTheme"}.getStr
+  result = hlHtmlF"""
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/reveal.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/theme/{slidesTheme}.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/plugin/highlight/monokai.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+"""
+
+const revealJS = hlHtml"""
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/reveal.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/plugin/highlight/highlight.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/plugin/notes/notes.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -134,25 +193,82 @@ const revealJS = """
 {{/latex}}
 """
 
-proc useLocalReveal*(nb: var NbDoc, path: string) =
-  let path = nb.homeDir.string / path
-  let themeString = "{{{slidesTheme}}}"
-  nb.partials["revealCSS"] = fmt"""
+func revealJSToHtml*(blk: JsonNode, nb: Nb): string =
+  let revealVersion = nb.doc.context{"reveal_version"}.getStr
+  result = withNewLines:
+    hlHtmlF"""
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/reveal.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/plugin/highlight/highlight.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/plugin/notes/notes.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    """
+    if nb.doc.context{"latex"}.getBool:
+      hlHtmlF"""<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/plugin/math/math.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>"""
+
+proc localRevealCss*(blk: JsonNode, nb: Nb): string =
+  let path = nb.doc.homeDir.string / nb.doc.context{"local_reveal_path"}.getStr
+  result = fmt"""
 <link rel="stylesheet" href="{path}/dist/reveal.css"/>
-<link rel="stylesheet" href="{path}/dist/theme/{themeString}.css"/>
+<link rel="stylesheet" href="{path}/dist/theme/{nb.doc.context.getOrDefault("slidesTheme").getStr}.css"/>
 <link rel="stylesheet" href="{path}/plugin/highlight/monokai.css"/>  
   """
-  
-  let latexStart = "{{#latex}}"
-  let latexEnd = "{{/latex}}"
-  nb.partials["revealJS"] = fmt"""
+
+proc localRevealJs*(blk: JsonNode, nb: Nb): string =
+  let path = nb.doc.homeDir.string / nb.doc.context{"local_reveal_path"}.getStr
+  result = withNewlines:
+    fmt"""
 <script src="{path}/dist/reveal.js"></script>
 <script src="{path}/plugin/highlight/highlight.js"></script>
 <script src="{path}/plugin/notes/notes.js"></script>
-{latexStart}
-<script src="{path}/plugin/math/math.js"></script>
-{latexEnd}
-  """
+    """
+    if nb.doc.context{"latex"}.getBool(true):
+      fmt"""<script src="{path}/plugin/math/math.js"></script>"""
+
+func nimiSlidesNbCodeSourcePartial*(blk: JsonNode, nb: Nb): string =
+  let code = blk{"code"}.getStr
+  if code.len > 0:
+    &"<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers>{code.highlightNim}</code></pre>"
+  else:
+    ""
+
+func nimiSlidesNbCodeOutputPartial*(blk: JsonNode, nb: Nb): string =
+  let output = blk{"output"}.getStr
+  if output.len > 0:
+    #&"<pre class=\"nb-output\">{output}</pre>"
+    &"<pre style=\"width: 100%;\"><samp class=\"hljs\">{output}</samp></pre>"
+  else:
+    ""
+
+
+
+newNbBlock(NbAnimateCode of NbCode):
+  highlightedLines: seq[seq[int]]
+  toHtml:
+    withNewLines:
+      nb.renderPartial("animateCodeSource", jsonutils.toJson(blk))
+      nbContainerToHtml(blk, nb)
+      nb.renderPartial("nbCodeOutput", jsonutils.toJson(blk))
+
+# "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers=\"{{&highlightLines}}\">{{&codeHighlighted}}</code></pre>\n" & nb.backend.partials["nbCodeOutput"]
+func highlightedLinesToString*(lines: seq[seq[int]]): string =
+  var linesString: string
+  if lines.len > 0:
+    linesString &= "|"
+  for lineBundle in lines:
+    for line in lineBundle:
+      linesString &= $line & ","
+    linesString &= "|"
+  if lines.len > 0:
+    linesString = linesString[0 .. ^3]
+  return linesString
+
+func nimiSlidesAnimateCodeSourcePartial*(blk: JsonNode, nb: Nb): string =
+  let highlightedLinesString = blk{"highlightedLines"}.to(seq[seq[int]]).highlightedLinesToString()
+  result = nimiSlidesNbCodeSourcePartial(blk, nb).replace("data-line-numbers", &"data-line-numbers=\"{highlightedLinesString}\"")
+
+proc useLocalReveal*(nb: var Nb, path: string) =
+  nb.doc.context["local_reveal_path"] = %path
+  nb.backend.partials["revealCSS"] = localRevealCss
+  nb.backend.partials["revealJS"] = localRevealJs
 
 template setSlidesTheme*(theme: SlidesTheme) =
   nb.context["slidesTheme"] = ($theme).toLower
@@ -170,46 +286,50 @@ template disableVerticalCentering*() =
 template useScrollView*() =
   nb.context["useScrollView"] = true
 
-proc addStyle*(doc: NbDoc, style: string) =
-  doc.context["nb_style"] = doc.context["nb_style"].vString & "\n" & style
+proc addStyle*(nb: var Nb, style: string) =
+  nb.doc.context["nb_style"] = %(nb.doc.context{"nb_style"}.getStr & "\n" & style)
 
-proc revealTheme*(doc: var NbDoc) =
-  doc.partials["document"] = document
-  doc.partials["head"] = head
-  doc.partials["main"] = main
-  doc.partials["nbCodeSource"] = "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers>{{&codeHighlighted}}</code></pre>"
-  doc.partials["nbCodeOutput"] = "{{#output}}<pre style=\"width: 100%;\"><samp class=\"hljs\">{{output}}</samp></pre>{{/output}}"
+proc revealTheme*(nb: var Nb) =
+  #nb.backend.partials["document"] = document
+  nb.backend.funcs["NbDoc"] = revealNbDocToHtml
+  nb.backend.partials["head"] = revealHeadToHtml
+  #nb.backend.partials["main"] = main
+  
+  nb.backend.partials["nbCodeSource"] = nimiSlidesNbCodeSourcePartial
+  nb.backend.partials["nbCodeOutput"] = nimiSlidesNbCodeOutputPartial
 
-  doc.partials["revealCSS"] = revealCSS
-  doc.partials["revealJS"] = revealJS
+  nb.backend.partials["animateCodeSource"] = nimiSlidesAnimateCodeSourcePartial
 
-  doc.partials["animateCode"] = "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers=\"{{&highlightLines}}\">{{&codeHighlighted}}</code></pre>\n" & doc.partials["nbCodeOutput"]
-  doc.renderPlans["animateCode"] = doc.renderPlans["nbCode"]
+  nb.backend.partials["revealCSS"] = revealCSSToHtml
+  nb.backend.partials["revealJS"] = revealJSToHtml
 
-  doc.partials["fragmentStart"] = """
+  #[ nb.backend.partials["animateCode"] = "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers=\"{{&highlightLines}}\">{{&codeHighlighted}}</code></pre>\n" & nb.backend.partials["nbCodeOutput"]
+  #doc.renderPlans["animateCode"] = doc.renderPlans["nbCode"]
+
+  nb.backend.partials["fragmentStart"] = """
 {{#fragments}}
 <div class="fragment {{&classStr}}" data-fragment-index="{{&fragIndex}}" data-fragment-index-nimib="{{&fragIndex}}"> 
 {{/fragments}}
   """
 
-  doc.partials["fragmentEnd"] = """
+  nb.backend.partials["fragmentEnd"] = """
 {{#fragments}}
 </div>
 {{/fragments}}
   """
 
-  doc.partials["bigText"] = """<h2 class="r-fit-text"> {{&outputToHtml}} </h2>"""
-  doc.renderPlans["bigText"] = doc.renderPlans["nbText"]
+  nb.backend.partials["bigText"] = """<h2 class="r-fit-text"> {{&outputToHtml}} </h2>""" ]#
+  #doc.renderPlans["bigText"] = doc.renderPlans["nbText"]
 
-  doc.context["slidesTheme"] = "black"
-  doc.context["nb_style"] = ""
-  doc.context["reveal_version"] = reveal_version
+  nb.doc.context["slidesTheme"] = %"black"
+  nb.doc.context["nb_style"] = %""
+  nb.doc.context["reveal_version"] = %reveal_version
 
   try:
-    let slidesConfig = loadTomlSection(doc.rawCfg, "nimislides", NimiSlidesConfig)
+    let slidesConfig = loadTomlSection(nb.doc.rawCfg, "nimislides", NimiSlidesConfig)
     if slidesConfig.localReveal != "":
       echo "Using local Reveal.js installation specified in nimib.toml "
-      doc.useLocalReveal(slidesConfig.localReveal)
+      nb.useLocalReveal(slidesConfig.localReveal)
   except CatchableError:
     discard # if it doesn't exists, just let it be
 
@@ -400,12 +520,6 @@ template listItem*(animation: FragmentAnimation, body: untyped) =
 template listItem*(body: untyped) =
   listItem(fadeInThenSemiOut, body)
 
-template animateCode*(lines: string, body: untyped) =
-  newNbCodeBlock("animateCode", body):
-    nb.blk.context["highlightLines"] = lines
-    captureStdout(nb.blk.output):
-      body
-
 template animateCode*(lines: varargs[set[range[0..65535]], toSet], body: untyped) =
   ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
   ## lines: Specify which lines to highlight and in which order. The lines can be specified using either:
@@ -417,19 +531,18 @@ template animateCode*(lines: varargs[set[range[0..65535]], toSet], body: untyped
   ## animateCode(1, 2..3, {4, 6}): body
   ## ```
   ## This will first highlight line 1, then lines 2 and 3, and lastly line 4 and 6.
-  newNbCodeBlock("animateCode", body):
-    var linesString: string
-    if lines.len > 0:
-      linesString &= "|"
-    for lineBundle in lines:
-      for line in lineBundle:
-        linesString &= $line & ","
-      linesString &= "|"
-    if lines.len > 0:
-      linesString = linesString[0 .. ^3]
-    nb.blk.context["highlightLines"] = linesString
-    captureStdout(nb.blk.output):
+  var highlightedLines: seq[seq[int]]
+  for line in lines:
+    var lineSeq: seq[int]
+    for l in line:
+      lineSeq.add l
+    highlightedLines.add lineSeq
+  let blk = newNbAnimateCode(highlightedLines=highlightedLines)
+  blk.code = getCode(body)
+  nb.withContainer(blk):
+    captureStdout(blk.output):
       body
+  nb.add blk
 
 template newAnimateCodeBlock*(cmd: untyped, impl: untyped) =
   const cmdStr = astToStr(cmd)
