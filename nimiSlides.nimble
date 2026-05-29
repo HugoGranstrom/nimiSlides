@@ -8,7 +8,7 @@ srcDir        = "src"
 
 # Dependencies
 
-requires "nim >= 1.4.0"
+requires "nim >= 2.0.0"
 requires "nimib >= 0.4.0"
 
 import os
