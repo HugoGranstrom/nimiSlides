@@ -21,7 +21,7 @@ jobs:
         with:
           nim-version: ${{ matrix.nim }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - run: sudo apt install libpcre3 libpcre3-dev
+      - run: sudo apt install libpcre3 libpcre3-dev liblapack-dev
       - name: Install deps
         run: |
           nimble install -y
