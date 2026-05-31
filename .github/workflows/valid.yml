@@ -17,10 +17,11 @@ jobs:
     name: Nim ${{ matrix.nim }}
     steps:
       - uses: actions/checkout@v2
-      - uses: jiro4989/setup-nim-action@v1
+      - uses: jiro4989/setup-nim-action@v2.2.2
         with:
           nim-version: ${{ matrix.nim }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: sudo apt install libpcre3 libpcre3-dev
       - name: Install deps
         run: |
           nimble install -y
