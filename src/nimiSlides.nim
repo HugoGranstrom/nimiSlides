@@ -208,16 +208,18 @@ func revealJSToHtml*(blk: JsonNode, nb: Nb): string =
     if nb.doc.context{"latex"}.getBool:
       hlHtmlF"""<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/plugin/math/math.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>"""
 
-proc localRevealCss*(blk: JsonNode, nb: Nb): string =
-  let path = nb.doc.homeDir.string / nb.doc.context{"local_reveal_path"}.getStr
+func localRevealCss*(blk: JsonNode, nb: Nb): string =
+  {.cast(noSideEffect).}:
+    let path = nb.doc.homeDir.string / nb.doc.context{"local_reveal_path"}.getStr
   result = fmt"""
 <link rel="stylesheet" href="{path}/dist/reveal.css"/>
 <link rel="stylesheet" href="{path}/dist/theme/{nb.doc.context.getOrDefault("slidesTheme").getStr}.css"/>
 <link rel="stylesheet" href="{path}/plugin/highlight/monokai.css"/>  
   """
 
-proc localRevealJs*(blk: JsonNode, nb: Nb): string =
-  let path = nb.doc.homeDir.string / nb.doc.context{"local_reveal_path"}.getStr
+func localRevealJs*(blk: JsonNode, nb: Nb): string =
+  {.cast(noSideEffect).}:
+    let path = nb.doc.homeDir.string / nb.doc.context{"local_reveal_path"}.getStr
   result = withNewlines:
     fmt"""
 <script src="{path}/dist/reveal.js"></script>
@@ -331,26 +333,26 @@ newNbBlock(NbBigText of NbText):
       nb.renderPartial("nbText", jsonutils.toJson(blk))
       "</h2>"
 
-proc useLocalReveal*(nb: var Nb, path: string) =
+func useLocalReveal*(nb: var Nb, path: string) =
   nb.doc.context["local_reveal_path"] = %path
   nb.backend.partials["revealCSS"] = localRevealCss
   nb.backend.partials["revealJS"] = localRevealJs
 
 template setSlidesTheme*(theme: SlidesTheme) =
-  nb.context["slidesTheme"] = ($theme).toLower
+  nb.doc.context["slidesTheme"] = %($theme).toLower
 
 template useScrollWheel*() =
   ## Enable using the scroll-wheel to step forward in slides.
-  nb.context["useScrollWheel"] = true
+  nb.doc.context["useScrollWheel"] = %true
 
 template showSlideNumber*() =
-  nb.context["showSlideNumber"] = true
+  nb.doc.context["showSlideNumber"] = %true
 
 template disableVerticalCentering*() =
-  nb.context["disableCentering"] = true
+  nb.doc.context["disableCentering"] = %true
 
 template useScrollView*() =
-  nb.context["useScrollView"] = true
+  nb.doc.context["useScrollView"] = %true
 
 proc addStyle*(nb: var Nb, style: string) =
   nb.doc.context["nb_style"] = %(nb.doc.context{"nb_style"}.getStr & "\n" & style)
@@ -610,25 +612,26 @@ template animateCode*(lines: varargs[set[range[0..65535]], toSet], body: untyped
       body
   nb.add blk
 
-template newAnimateCodeBlock*(cmd: untyped, impl: untyped) =
-  const cmdStr = astToStr(cmd)
-
-  template `cmd`*(lines: varargs[set[range[0..65535]], toSet], body: untyped) =
-    newNbCodeBlock(cmdStr, body):
-      var linesString: string
-      if lines.len > 0:
-        linesString &= "|"
-      for lineBundle in lines:
-        for line in lineBundle:
-          linesString &= $line & ","
-        linesString &= "|"
-      if lines.len > 0:
-        linesString = linesString[0 .. ^3]
-      nb.blk.context["highlightLines"] = linesString
-    impl(body)
-
-  nb.partials[cmdStr] = nb.partials["animateCode"]
-  nb.renderPlans[cmdStr] = nb.renderPlans["animateCode"]
+template animateCodeSkip*(lines: varargs[set[range[0..65535]], toSet], body: untyped) =
+  ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
+  ## lines: Specify which lines to highlight and in which order. The lines can be specified using either:
+  ## - An `int` (highlight single line)
+  ## - A slice `x..y` (highlight a range of consequative lines)
+  ## - A set {x, y..z} (highlight any combination of lines)
+  ## Ex: 
+  ## ```nim
+  ## animateCode(1, 2..3, {4, 6}): body
+  ## ```
+  ## This will first highlight line 1, then lines 2 and 3, and lastly line 4 and 6.
+  var highlightedLines: seq[seq[int]]
+  for line in lines:
+    var lineSeq: seq[int]
+    for l in line:
+      lineSeq.add l
+    highlightedLines.add lineSeq
+  let blk = newNbAnimateCode(highlightedLines=highlightedLines)
+  blk.code = getCode(body)
+  nb.add blk
 
 template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") =
   let localText = textMessage
@@ -637,7 +640,7 @@ template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") 
   # HTML and add eventlistener
   # check what we get back from reveal's event
   let fragIndex = currentFragment # important it is before fragmentFadeIn!
-  let id = "typewriter" & $nb.newId()
+  let id = "typewriter" & $nb.doc.newId()
   fragmentFadeIn:
     nbKaraxCode(id, localText, fragIndex, speed, align):
       import nimiSlides/revealFFI
@@ -726,12 +729,12 @@ template column*(bodyInner: untyped) =
     bodyInner
 
 template footer*(text: string, fontSize: int = 20, opacity: range[0.0 .. 1.0] = 0.6, rawHtml = false) =
-  nb.context["footerFontSize"] = fontSize
-  nb.context["footerOpacity"] = opacity
+  nb.doc.context["footerFontSize"] = %fontSize
+  nb.doc.context["footerOpacity"] = %opacity
   if rawHtml:
-    nb.context["revealFooter"] = text
+    nb.doc.context["revealFooter"] = %text
   else:
-    nb.context["revealFooter"] = markdown(text, config=initGfmConfig()).dup(removeSuffix)
+    nb.doc.context["revealFooter"] = %markdown(text, config=initGfmConfig()).dup(removeSuffix)
 
   nbJsFromCodeGlobal:
     import nimiSlides/revealFFI
@@ -774,7 +777,7 @@ template cornerImage*(image: string, corner: Corner, size: int = 100, animate = 
         "transition: all 0.2s ease-out;"
       else:
         ""
-    let id = "cornerImage-" & $nb.newId()
+    let id = "cornerImage-" & $nb.doc.newId()
     let html = &"""<img src="$1" id="$2" style="opacity: 0%; position: fixed; width: $3px; height: auto; margin: 0px; $4 $5 $6"/>""" % [image, id, $size, vertical, horizontal, animateString]
     let currentSlideNr = currentSlideNumber
     

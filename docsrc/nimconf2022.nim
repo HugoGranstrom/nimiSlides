@@ -6,71 +6,6 @@ import nimiSlides
 nbInit(theme = revealTheme)
 nb.useLatex
 
-template nbCodeDontRun*(body: untyped) =
-  newNbCodeBlock("nbCodeDontRun", body):
-    discard 
-
-template nimibCode*(body: untyped) =
-  #nbText: "Nimib code:"
-  newNbCodeBlock("nimibCode", body):
-    discard
-  fragmentFadeIn:
-    nbRawHtml: "<hr/>"
-    #nbText: "Output:"
-    body
-
-template nimibCodeAnimate*(lines: varargs[seq[HSlice[int, int]]], body: untyped) =
-  ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
-  ## lines: Specify which lines to highlight and in which order. (Must be specified as a seq[HSlice])
-  ## Ex: 
-  ## ```nim
-  ## animateCode(@[1..1], @[3..4, 6..6]): body
-  ## ```
-  ## This will first highlight line 1, then lines 3, 4 and 6.
-  newNbCodeBlock("nimibCodeAnimate", body):
-    var linesString: string
-    if lines.len > 0:
-      linesString &= "|"
-    for lineBundle in lines:
-      for line in lineBundle:
-        linesString &= $line.a & "-" & $line.b & ","
-      linesString &= "|"
-    if lines.len > 0:
-      linesString = linesString[0 .. ^3]
-    nb.blk.context["highlightLines"] = linesString
-  fragmentFadeIn:
-    nbRawHtml: "<hr/>"
-    body
-
-template nimibCodeAnimate*(lines: varargs[HSlice[int, int], toHSlice], body: untyped) =
-  ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
-  ## lines: Specify which lines to highlight and in which order. (Must be specified as a HSlice)
-  ## Ex: 
-  ## ```nim
-  ## animateCode(1..1, 2..3, 5..5, 4..4): body
-  ## ```
-  ## This will first highlight line 1, then lines 2 and 3, then line 5 and last line 4.
-  var s: seq[seq[HSlice[int, int]]]
-  for line in lines:
-    s.add @[line]
-  nimibCodeAnimate(s):
-    body
-
-nb.partials["nimibCode"] = nb.partials["nbCode"]
-nb.renderPlans["nimibCode"] = nb.renderPlans["nbCode"]
-nb.partials["nimibCodeAnimate"] = nb.partials["animateCode"]
-nb.renderPlans["nimibCodeAnimate"] = nb.renderPlans["animateCode"]
-
-template nbCodeDontRunAnimateImpl(body: untyped) =
-  discard
-
-newAnimateCodeBlock(nbCodeDontRunAnimate, nbCodeDontRunAnimateImpl)
-
-nb.partials["nbCodeDontRun"] = nb.partials["nbCode"]
-nb.renderPlans["nbCodeDontRun"] = nb.renderPlans["nbCode"]
-nb.partials["nimibCode"] = nb.partials["nbCode"]
-nb.renderPlans["nimibCode"] = nb.renderPlans["nbCode"]
-
 template nimConfSlide(body: untyped) =
   slide:
     cornerImage("https://github.com/nim-lang/assets/raw/master/Art/logo-crown.png", UpperRight, size=100, animate=false)
@@ -252,12 +187,12 @@ Text can be *italic*, **bold** or ~~crossed over~~.
   nimConfSlide:
     nbText: """### Installation"""
 
-    nbCodeDontRun:
+    nbCodeSkip:
       nimble install nimiSlides
   
   nimConfSlide:
     nbText: "### Setting up"
-    nbCodeDontRun:
+    nbCodeSkip:
       import nimib, nimiSlides
       nbInit(theme = revealTheme)
 
@@ -273,7 +208,7 @@ Text can be *italic*, **bold** or ~~crossed over~~.
     columns:
       column:
         fragmentFadeIn:
-          nbCodeDontRunAnimate(1..4, 1..2, 3..4, 6..12, 6, 7..8, 9..10, 11..12):
+          animateCodeSkip(1..4, 1..2, 3..4, 6..12, 6, 7..8, 9..10, 11..12):
             slide:
               nbText: "1"
             slide:
@@ -431,7 +366,7 @@ slide:
       listItem: nbText: "Back again"
   
   nimConfSlide:
-    nimibCodeAnimate(1, 2..3, 4, 5..6, 7, 9):
+    animateCode(1, 2..3, 4, 5..6, 7, 9):
       unorderedList:
         listItem:
           nbText: "First item"
@@ -460,7 +395,7 @@ slide:
   
   nimConfAutoSlide:
     nbText: "## Columns"
-    nimibCodeAnimate(1, 2..3, 4..5, 6..7):
+    animateCode(1, 2..3, 4..5, 6..7):
       columns:
         column:
           nbText: "Left"
@@ -509,7 +444,7 @@ slide:
   
   slide(slideOptions(colorBackground = "darkviolet")):
     nbText: "## Color Background"
-    nbCodeDontRun:
+    nbCodeSkip:
       slide(slideOptions(colorBackground = "darkviolet")):
         nbText: "## Color Background"
   
@@ -518,7 +453,7 @@ slide:
 
   nimConfSlide:
     nbText: "## Image Background"
-    nbCodeDontRun:
+    nbCodeSkip:
       slide(slideOptions(imageBackground = "https://github.com/nim-lang/assets/raw/master/Art/logo-crown.png")):
         discard
 
@@ -527,13 +462,13 @@ slide:
 
   nimConfSlide:
     nbText: "## Iframe Background"
-    nbCodeDontRun:
+    nbCodeSkip:
       slide(slideOptions(iframeBackground = "https://nim-lang.org/")):
         discard
     
   nimConfSlide:
     nbText: "## Video Background"
-    nbCodeDontRun:
+    nbCodeSkip:
       slide(slideOptions(videoBackground = "link/to/videofile.mp4")):
         discard
     fragmentFadeIn:
@@ -575,7 +510,7 @@ slide:
 """
 
   nimConfSlide:
-    nbCodeDontRunAnimate(1..4, 6..10, 12..17):
+    animateCodeSkip(1..4, 6..10, 12..17):
       slide(slideOptions(autoAnimate=true)):
         nbText: """
 - First
@@ -639,7 +574,7 @@ slide:
     nbText: "## Using Templates"
   nimConfAutoSlide:
     nbText: "## Using Templates"
-    nbCodeDontRunAnimate({1, 3, 6}):
+    animateCodeSkip({1, 3, 6}):
       slide(slideOptions(autoAnimate=true)):
         nbText: "## Animate header"
       slide(slideOptions(autoAnimate=true)):
@@ -654,7 +589,7 @@ slide:
 
   nimConfAutoSlide:
     nbText: "## Using Templates"
-    nbCodeDontRunAnimate(1, 2..3, 3, 5..6):
+    animateCodeSkip(1, 2..3, 3, 5..6):
       template slideAutoAnimate(body: untyped) =
         slide(slideOptions(autoAnimate=true)):
           body
@@ -667,7 +602,7 @@ slide:
     stackElements:
       fragment(fadeInThenOut):
         nbText: "#### Without template"
-        nbCodeDontRun:
+        nbCodeSkip:
           slide(slideOptions(autoAnimate=true)):
             nbText: "## Animate header"
           slide(slideOptions(autoAnimate=true)):
@@ -679,7 +614,7 @@ slide:
             nbText: "And this"
       fragmentFadeIn:
         nbText: "#### With template"
-        nbCodeDontRun:
+        nbCodeSkip:
           slideAutoAnimate:
             nbText: "## Animate header"
           slideAutoAnimate:
@@ -698,10 +633,10 @@ slide:
     nbText: "Example: Histogram of Gaussian for different N"
   nimConfAutoSlide:
     nbText: "## Loops ♻️ + Generate images 🖼️"
-    nbCodeDontRunAnimate(1, 2, 3, 4..7, 9, 10, 11):
+    animateCodeSkip(1, 2, 3, 4..7, 9, 10, 11):
       for n in [50, 100, 1000, 10000]:
         let filename = &"images/gauss-{n}.png"
-        let samples = newSeqWith[float](n, gauss(0.0, 1.0))
+        let samples = newSeqWith(n, gauss(0.0, 1.0))
         let df = toDf(samples)
         ggplot(df, aes("samples")) +
           geom_histogram(fillColor="green") +
@@ -714,7 +649,7 @@ slide:
 slide:
   for n in [50, 100, 1000, 10000]:
     let filename = &"images/gauss-{n}.png"
-    let samples = newSeqWith[float](n, gauss(0.0, 1.0))
+    let samples = newSeqWith(n, gauss(0.0, 1.0))
     let df = toDf(samples)
     ggplot(df, aes("samples")) +
       geom_histogram(fillColor="green") +
