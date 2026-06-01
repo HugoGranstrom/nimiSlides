@@ -147,7 +147,7 @@ func revealNbDocToHtml*(blk: NbBlock, nb: Nb): string =
     "</html>"
 
 func revealHeadToHtml*(blk: JsonNode, nb: Nb): string =
-  let nbStyle = nb.doc.context{"nb_style"}
+  let nbStyle = nb.doc.context{"nb_style"}.getStr
   result = withNewLines:
     "<head>"
     """<meta content="text/html; charset=utf-8" http-equiv="content-type">"""
