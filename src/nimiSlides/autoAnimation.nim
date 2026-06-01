@@ -2,10 +2,13 @@ import std/[strutils]
 import nimib
 import ./[conversions]
 
-template autoAnimateSlides*(nSlides: int, body: untyped) =
+template autoAnimateSlidesCustom*(nSlides: int, slideTemplate: untyped, body: untyped) =
   for autoAnimateCounter {.inject.} in 1 .. nSlides:
-    slide(slideOptions(autoAnimate=true)):
+    slideTemplate(slideOptions(autoAnimate=true)):
       body
+
+template autoAnimateSlides*(nSlides: int, body: untyped) =
+  autoAnimateSlidesCustom(nSlides, slide, body)
 
 template showAt*(slideNrs: varargs[set[range[0..65535]], toSet], body: untyped) = # how to auto convert to set like in varargs?
   # use vararg and union all results!
