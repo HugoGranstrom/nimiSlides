@@ -44,6 +44,11 @@ li {
 
 nimConfTheme()
 
+proc liText(s: string) =
+  listItem:
+    nbText:
+      s
+
 newNbBlock(FieldSet of NbContainer):
   title: string
   toHtml:
@@ -74,7 +79,7 @@ template jsonShow(body: untyped) =
 
 template showJsonSerialized(body: untyped) =
   let code = getCode(body)
-  autoAnimateSlidesCustom(3, nimSlide):
+  autoAnimateSlidesCustom(nimSlide, 3):
     fieldSet("Nim"):
       nbRawHtml: preCodeTag("nim", code)
     showAt(2):
@@ -92,6 +97,31 @@ template intro =
       nbText: "## internals ref-actoring"
       nbText: "Hugo Granström"
       nbText: "NimConf 2026"
+    autoAnimateSlidesCustom(nimSlide, 3):
+      nbText: "## Story time"
+      showAt(1):
+        unorderedList:
+          liText: "Previously on Nimib"
+          unorderedList:
+            liText: "Rendering: Mustache templates"
+            liText: "Single NbBlock type"
+      showAt(2):
+        unorderedList:
+          liText: "In this episode of Nimib"
+          unorderedList:
+            liText: "Rendering: normal Nim functions"
+            liText: "Different type for each block"
+      showAt(3):
+        unorderedList:
+          liText: "Next time on Nimib"
+          unorderedList:
+            liText: "NimiSlides + NimiBook"
+            liText: "Static site generator"
+            liText: "Nimibex"
+
+
+template defineBlockExamples =
+  discard
 
 template jsonShowcase =
   nimSlide:
@@ -109,7 +139,7 @@ template jsonShowcase =
         nbText: "This is nested"
 
 intro
-
+defineBlockExamples
 jsonShowcase
 
 nbSave
