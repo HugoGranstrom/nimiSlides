@@ -88,8 +88,10 @@ template showJsonSerialized(body: untyped) =
 template intro =
   slide:
     nimSlide:
-      nbText: "Nimib v0.4: internals ref-actoring"
+      nbText: "## Nimib v0.4"
+      nbText: "## internals ref-actoring"
       nbText: "Hugo Granström"
+      nbText: "NimConf 2026"
 
 template jsonShowcase =
   nimSlide:
@@ -106,7 +108,7 @@ template jsonShowcase =
       nbDiv(classes="cool", styles="color: green"):
         nbText: "This is nested"
 
-#intro
+intro
 
 jsonShowcase
 
