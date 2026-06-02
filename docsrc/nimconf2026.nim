@@ -101,19 +101,21 @@ template intro =
       nbText: "## Story time"
       showAt(1):
         unorderedList:
-          liText: "Previously on Nimib"
+          liText: "Spirit of Nimib past"
           unorderedList:
             liText: "Rendering: Mustache templates"
             liText: "Single NbBlock type"
       showAt(2):
         unorderedList:
-          liText: "In this episode of Nimib"
+          liText: "Spirit of Nimib present"
           unorderedList:
             liText: "Rendering: normal Nim functions"
             liText: "Different type for each block"
+            liText: "Sugar"
+            liText: "JSON"
       showAt(3):
         unorderedList:
-          liText: "Next time on Nimib"
+          liText: "Spirit of Nimib future"
           unorderedList:
             liText: "NimiSlides + NimiBook"
             liText: "Static site generator"
@@ -121,7 +123,81 @@ template intro =
 
 
 template defineBlockExamples =
-  discard
+  nimSlide:
+    nbText: "## Defining a block"
+    unorderedList:
+      liText: "Simple example - usage bar"
+      liText: "Container example - collapsible section"
+  slide:
+    nimSlide(slideOptions(autoAnimate = true)):
+      nbText: "## Usage bar"
+      fragment:
+        for i in [20, 40, 60, 80]:
+          nbDiv():
+            nbRawHtml: hlHtml"""
+            <label>
+              $1%
+              <meter value="$2" min="0" max="1">$1%</meter>
+            </label>
+            """ % [$i, $(i / 100)]
+    nimSlide(slideOptions(autoAnimate = true)):   
+      nbText: "## Usage bar"
+      nbRawHtml: preCodeTag("html", hlHtml"""
+<label>
+  50%
+  <meter value="0.5" min="0" max="1">50%</meter>
+</label>""")
+    nimSlide(slideOptions(autoAnimate = true)):
+      nbText: "## Usage bar"
+      animateCode(1, 2):
+        newNbBlock(UsageBar):
+          label: string
+          altText: string
+          value: float
+          minValue: float
+          maxValue: float
+          toHtml:
+            # injects `blk: UsageBar`
+            &"""
+<label>
+  {blk.label}
+  <meter
+    value="{blk.value}"
+    min="{blk.minValue}"
+    max="{blk.maxValue}">
+      {blk.altText}
+  </meter>
+</label>
+"""
+
+        proc usageBar(
+            nb: var Nb,
+            label: string,
+            value: float, 
+            altText: string = $value,
+            minValue: float = 0.0,
+            maxValue: float = 1.0
+            ) =
+          let blk = newUsageBar(
+            label=label, value=value,
+            altText=altText, minValue=minValue,
+            maxValue=maxValue
+          )
+          nb.add blk
+
+    nimSlide(slideOptions(autoAnimate = true)):
+      nbText: "## Usage bar"
+      nbCode:
+        nb.usageBar(
+          label="Storage usage:",
+          value=0.8,
+          altText="80% of storage used"
+        )
+
+
+
+
+  
 
 template jsonShowcase =
   nimSlide:
@@ -138,8 +214,12 @@ template jsonShowcase =
       nbDiv(classes="cool", styles="color: green"):
         nbText: "This is nested"
 
-intro
+template outro =
+  discard
+
+#intro
 defineBlockExamples
-jsonShowcase
+#jsonShowcase
+#outro
 
 nbSave
