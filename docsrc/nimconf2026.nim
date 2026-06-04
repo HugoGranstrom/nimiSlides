@@ -149,7 +149,7 @@ template defineBlockExamples =
 </label>""")
     nimSlide(slideOptions(autoAnimate = true)):
       nbText: "## Usage bar"
-      animateCode(1, 2):
+      animateCode(1, 2..6, 7..8, 9..19, 21..28, 29..33, 34):
         newNbBlock(UsageBar):
           label: string
           altText: string
