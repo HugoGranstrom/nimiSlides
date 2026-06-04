@@ -131,15 +131,16 @@ template defineBlockExamples =
   slide:
     nimSlide(slideOptions(autoAnimate = true)):
       nbText: "## Usage bar"
-      fragment:
-        for i in [20, 40, 60, 80]:
-          nbDiv():
-            nbRawHtml: hlHtml"""
-            <label>
-              $1%
-              <meter value="$2" min="0" max="1">$1%</meter>
-            </label>
-            """ % [$i, $(i / 100)]
+    nimSlide(slideOptions(autoAnimate = true)):
+      nbText: "## Usage bar"
+      for i in [20, 40, 60, 80]:
+        nbDiv():
+          nbRawHtml: hlHtml"""
+          <label>
+            $1%
+            <meter value="$2" min="0" max="1">$1%</meter>
+          </label>
+          """ % [$i, $(i / 100)]
     nimSlide(slideOptions(autoAnimate = true)):   
       nbText: "## Usage bar"
       nbRawHtml: preCodeTag("html", hlHtml"""
@@ -193,11 +194,53 @@ template defineBlockExamples =
           value=0.8,
           altText="80% of storage used"
         )
+  let exampleCollapsible = hlHtml"""
+<details>
+  <summary>
+    What is hidden inside?
+  </summary>
+  Super secret text!
+</details>
+"""
+  slide:
+    nimSlide(slideOptions(autoAnimate = true)):
+      nbText: "## Collapsible section"
+    nimSlide(slideOptions(autoAnimate = true)):
+      nbText: "## Collapsible section"
+      nbRawHtml: exampleCollapsible
+    nimSlide(slideOptions(autoAnimate = true)):
+      nbText: "## Collapsible section"
+      nbRawHtml: preCodeTag("html", exampleCollapsible)
+    nimSlide(slideOptions(autoAnimate = true)):
+      nbText: "## Collapsible section"
+      animateCode(1, 2, 3, 3..11, 13..16, 17, 18..19, 20):
+        newNbBlock(CollapsibleSection of NbContainer):
+          summary: string
+          toHtml:
+            let renderedBlocks = nbContainerToHtml(blk, nb)
+            &"""
+<details>
+  <summary>
+    {blk.summary}
+  </summary>
+  {renderedBlocks}
+</details>"""
+            
+        template collapsibleSection(
+          text: string,
+          body: untyped
+        ) =
+          let blk = newCollapsibleSection(summary=text)
+          nb.withContainer(blk):
+            body
+          nb.add blk
+    nimSlide(slideOptions(autoAnimate = true)):
+      nbText: "## Collapsible section"
+      let secretMessage = "Never gonna give you up, never gonna let you down..."
+      nbCode:
+        collapsibleSection("Top secret"):
+          nbText(secretMessage)
 
-
-
-
-  
 
 template jsonShowcase =
   nimSlide:
