@@ -653,7 +653,13 @@ template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") 
         echo "Typing ", fragindex
         var el = getElementById(id.cstring)
         if i < localText.len:
-          el.innerHtml &= $localText[i]
+          var c = localText[i]
+          let s =
+            if c == '\n':
+              "<br/>"
+            else:
+              $c
+          el.innerHtml &= s
           inc i
           timeout = setTimeout(typewriterLocal, speed)
       
