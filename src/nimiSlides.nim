@@ -642,9 +642,11 @@ template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") 
   let fragIndex = currentFragment # important it is before fragmentFadeIn!
   let id = "typewriter" & $nb.doc.newId()
   fragmentFadeIn:
-    nbKaraxCode(id, localText, fragIndex, speed, align):
+    nbRawHtml: hlHTml"""
+      <p id="$1" style="align: $2">$3</p>
+    """ % [id, align, localText]
+    nbJsFromCode(id, localText, fragIndex, speed, align):
       import nimiSlides/revealFFI
-      import karax / vstyles
       var i = 0
       var timeout: Timeout
       proc typewriterLocal() =
@@ -654,9 +656,6 @@ template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") 
           el.innerHtml &= $localText[i]
           inc i
           timeout = setTimeout(typewriterLocal, speed)
-      karaxHtml:
-        p(id = id, style=style(textAlign, align.kstring)):
-          text localText.cstring
       
       window.addEventListener("load", proc (event: Event) =
         echo "Loading ", fragIndex
