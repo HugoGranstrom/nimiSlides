@@ -258,11 +258,12 @@ template jsonShowcase =
         nbText: "This is nested"
 
 template outro =
-  discard
+  nimSlide:
+    typewriter("Thank you for watching!" & ' '.repeat(30) & "\nSee you in NimibLand!")
 
-#intro
+intro
 defineBlockExamples
-#jsonShowcase
-#outro
+jsonShowcase
+outro
 
 nbSave
