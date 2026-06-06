@@ -110,7 +110,11 @@ template intro =
           liText: "Spirit of Nimib present"
           unorderedList:
             liText: "Rendering: normal Nim functions"
+            unorderedList:
+              liText: "Breaking change"
             liText: "Different type for each block"
+            unorderedList:
+              liText: "Container blocks"
             liText: "Sugar"
             liText: "JSON"
       showAt(3):
@@ -213,7 +217,7 @@ template defineBlockExamples =
       nbRawHtml: preCodeTag("html", exampleCollapsible)
     nimSlide(slideOptions(autoAnimate = true)):
       nbText: "## Collapsible section"
-      animateCode(1, 2, 3, 3..11, 13..16, 17, 18..19, 20):
+      animateCode(1, 2, 3, 4, 5..11, 13..16, 17, 18..19, 20):
         newNbBlock(CollapsibleSection of NbContainer):
           summary: string
           toHtml:
@@ -243,8 +247,19 @@ template defineBlockExamples =
 
 
 template jsonShowcase =
-  nimSlide:
+  autoAnimateSlidesCustom(nimSlide, 3):
     nbText: "## JSON serialization"
+    showAt(2):
+      unorderedList:
+        liText: "Uses Jsony"
+        liText: "Individual blocks or entire documents"
+    showAt(3):
+      animateCode(1, 2..3, 4..5):
+        let blk = newNbText(text="Hello JSON!")
+        # Serialize
+        echo blk.toJson()
+        # Deserialize
+        echo blk.toJson().fromJson(NbBlock).NbText.text
   nimSlide:
     showJsonSerialized:
       nbText: "*Hello* **there**"
