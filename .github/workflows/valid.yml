@@ -25,8 +25,7 @@ jobs:
       - name: Install deps
         run: |
           set -e
-          nimble install -y
-          nimble docsDeps
+          nimble sync -y
       - name: Build compiler-docs
         run: nimble docs
       - name: Build slideshows

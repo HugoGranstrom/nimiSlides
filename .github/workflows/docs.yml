@@ -18,8 +18,7 @@ jobs:
       - name: Generate
         run: |
           set -e
-          nimble install -y
-          nimble docsDeps
+          nimble sync -y
           nimble docs
           nimble buildDocs
           nimble buildBook
