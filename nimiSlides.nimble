@@ -9,12 +9,12 @@ srcDir        = "src"
 # Dependencies
 
 requires "nim >= 2.0.0"
-requires "nimib >= 0.4.0"
+requires "nimib >= 0.4.1"
 
 import os
 
 task docsDeps, "install dependencies required to build docs":
-    exec "nimble -y install ggplotnim@0.5.6 karax numericalnim nimibook@#head"
+    exec "nimble -y install ggplotnim@0.5.6 karax numericalnim nimibook@0.4.0"
 
 task buildDocs, "build all .nim files in docsrc/":
     for path in ["showcase.nim", "nimconf2022.nim", "miscSlides.nim", "index_old.nim", "fragments.nim"]:
