@@ -645,7 +645,8 @@ template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") 
     nbRawHtml: hlHTml"""
       <p id="$1" style="align: $2">$3</p>
     """ % [id, align, localText]
-    nbJsFromCode(id, localText, fragIndex, speed, align):
+    nbJsFromCodeOwnFile(id, localText, fragIndex, speed, align):
+      import std / [dom]
       import nimiSlides/revealFFI
       var i = 0
       var timeout: Timeout
