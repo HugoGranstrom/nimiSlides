@@ -24,6 +24,7 @@ jobs:
       - run: sudo apt install libpcre3 libpcre3-dev liblapack-dev
       - name: Install deps
         run: |
+          set -e
           nimble install -y
           nimble docsDeps
       - name: Build compiler-docs

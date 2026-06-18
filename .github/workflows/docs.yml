@@ -17,6 +17,7 @@ jobs:
       - uses: iffy/install-nim@v5
       - name: Generate
         run: |
+          set -e
           nimble install -y
           nimble docsDeps
           nimble docs
