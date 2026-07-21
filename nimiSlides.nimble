@@ -23,7 +23,7 @@ task docsDeps, "install dependencies required to build docs":
     exec "nimble -y install ggplotnim@0.5.6 karax numericalnim nimibook@0.4.0"
 
 task buildDocs, "build all .nim files in docsrc/":
-    for path in ["showcase.nim", "nimconf2022.nim", "miscSlides.nim", "index_old.nim", "fragments.nim"]:
+    for path in ["showcase.nim", "nimconf2022.nim", "nimconf2026.nim", "miscSlides.nim", "index_old.nim", "fragments.nim"]:
         let path = "docsrc" / path
         echo "Building: " & path
         let buildCommand = "nim r " & path
