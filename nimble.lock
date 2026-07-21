@@ -158,16 +158,16 @@
         "sha1": "408bde8679bce63dfb6f424e107eb37c5eb31510"
       }
     },
-    "nimpy": {
-      "version": "0.2.1",
-      "vcsRevision": "d559f7bcb8fb877b4eae4bd116b8fbc9e16560ef",
-      "url": "https://github.com/yglukhov/nimpy",
+    "nimlapack": {
+      "version": "0.3.1",
+      "vcsRevision": "231430b3d2156f5cbe8fe16bb8967cd9a93964c5",
+      "url": "https://github.com/andreaferretti/nimlapack",
       "downloadMethod": "git",
       "dependencies": [
         "nim"
       ],
       "checksums": {
-        "sha1": "0e88588fb093806b3e2d9f2a4b7e507abf863958"
+        "sha1": "fcb25795c6fb43f9251b7f34c3ad84c39e645afd"
       }
     },
     "zip": {
@@ -194,16 +194,16 @@
         "sha1": "2d714d280055de9d0a33e6a730f1099feb1261aa"
       }
     },
-    "nimlapack": {
-      "version": "0.3.1",
-      "vcsRevision": "231430b3d2156f5cbe8fe16bb8967cd9a93964c5",
-      "url": "https://github.com/andreaferretti/nimlapack",
+    "nimpy": {
+      "version": "0.2.1",
+      "vcsRevision": "d559f7bcb8fb877b4eae4bd116b8fbc9e16560ef",
+      "url": "https://github.com/yglukhov/nimpy",
       "downloadMethod": "git",
       "dependencies": [
         "nim"
       ],
       "checksums": {
-        "sha1": "fcb25795c6fb43f9251b7f34c3ad84c39e645afd"
+        "sha1": "0e88588fb093806b3e2d9f2a4b7e507abf863958"
       }
     },
     "shell": {
@@ -267,6 +267,18 @@
         "sha1": "abf5fd03e72ee4c316c50a0538b973e355dcb175"
       }
     },
+    "jsony": {
+      "version": "1.1.6",
+      "vcsRevision": "bb647e1ca21af25ffdc423bcb96feeeeae963ca2",
+      "url": "https://github.com/treeform/jsony",
+      "downloadMethod": "git",
+      "dependencies": [
+        "nim"
+      ],
+      "checksums": {
+        "sha1": "b28964a93a3cf7248126ba39047593cd63a3aa6d"
+      }
+    },
     "nimsimd": {
       "version": "1.3.2",
       "vcsRevision": "3f6b2668ffb0867d0bf786a658b817763e611350",
@@ -290,18 +302,6 @@
       ],
       "checksums": {
         "sha1": "d34f03fc0f6876dbf53f99601096728ec31f47a3"
-      }
-    },
-    "jsony": {
-      "version": "1.1.6",
-      "vcsRevision": "bb647e1ca21af25ffdc423bcb96feeeeae963ca2",
-      "url": "https://github.com/treeform/jsony",
-      "downloadMethod": "git",
-      "dependencies": [
-        "nim"
-      ],
-      "checksums": {
-        "sha1": "b28964a93a3cf7248126ba39047593cd63a3aa6d"
       }
     },
     "markdown": {
@@ -344,6 +344,18 @@
       ],
       "checksums": {
         "sha1": "5db15f36d37ea935e9f4bf4dd5ceff0110b274d8"
+      }
+    },
+    "cdt": {
+      "version": "#head",
+      "vcsRevision": "2437955da338f409aaa762596d686975b06eeb8e",
+      "url": "https://github.com/HugoGranstrom/cdt",
+      "downloadMethod": "git",
+      "dependencies": [
+        "nim"
+      ],
+      "checksums": {
+        "sha1": "195f0270aaf5d363925f7fdf8a4cc125e4832417"
       }
     },
     "dotenv": {
@@ -458,16 +470,17 @@
       }
     },
     "numericalnim": {
-      "version": "0.6.2",
-      "vcsRevision": "8c4fdb30e588a76e3a02b4a204aa21412512b529",
+      "version": "0.8.10",
+      "vcsRevision": "5156285dc74bfd994627e2dc451632164b6b0632",
       "url": "https://github.com/SciNim/numericalnim/",
       "downloadMethod": "git",
       "dependencies": [
         "nim",
-        "arraymancer"
+        "arraymancer",
+        "cdt"
       ],
       "checksums": {
-        "sha1": "9bad341a01a07e7abb4755c6f7b6d2a5e372aec8"
+        "sha1": "6c968fec52347dc351d6e376a076fa02c876bb9e"
       }
     },
     "datamancer": {

@@ -14,7 +14,7 @@ requires "nimib >= 0.4.1"
 dev:
     requires "ggplotnim == 0.5.6"
     requires "karax"
-    requires "numericalnim"
+    requires "numericalnim >= 0.8.9"
     requires "nimibook >= 0.4.0"
 
 import os
