@@ -1,246 +1,224 @@
 <!DOCTYPE HTML>
 <html lang="en-us" class="sidebar-visible no-js light">
     <head>
-        <!-- Book generated using nimibook -->
-        <meta charset="UTF-8">
-        <title>Backgrounds - NimiSlides</title>
+      <!-- Book generated using nimibook -->
+      <meta charset="UTF-8">
+      <title>Backgrounds - NimiSlides</title>
+      <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+      <meta name="description" content="NimiSlides Documentation">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="theme-color" content="#ffffff" />
+      <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐳</text></svg>">
+    
+      <link rel="stylesheet" href="../assets/css/variables.css">
+      <link rel="stylesheet" href="../assets/css/general.css">
+      <link rel="stylesheet" href="../assets/css/chrome.css">
+    
+      <link rel="stylesheet" href="../assets/FontAwesome/css/font-awesome.min.css">
+    
+      <link rel="stylesheet" href="../assets/css/highlight.css">
+      <link rel="stylesheet" href="../assets/css/tomorrow-night.css">
+      <link rel="stylesheet" href="../assets/css/ayu-highlight.css">
+    
+</head>
+<body>
+<!-- Provide site root to javascript -->
+<script type="text/javascript">
+    var path_to_root = "..//assets";
+    var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+</script>
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script type="text/javascript">
+    try {
+        var theme = localStorage.getItem('mdbook-theme');
+        var sidebar = localStorage.getItem('mdbook-sidebar');
 
-        <!-- Custom HTML head -->
+        if (theme.startsWith('"') && theme.endsWith('"')) {
+            localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+        }
 
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="NimiSlides Documentation">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+            localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+        }
+    } catch (e) { }
+</script>
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script type="text/javascript">
+    var theme;
+    try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+    if (theme === null || theme === undefined) { theme = default_theme; }
+    var html = document.querySelector('html');
+    html.classList.remove('no-js')
+    html.classList.remove('light')
+    html.classList.add(theme);
+    html.classList.add('js');
+</script>
 
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐳</text></svg>">
-        <link rel="stylesheet" href="../assets/css/variables.css">
-        <link rel="stylesheet" href="../assets/css/general.css">
-        <link rel="stylesheet" href="../assets/css/chrome.css">
+<!-- Hide / unhide sidebar before it is displayed -->
+<script type="text/javascript">
+    var html = document.querySelector('html');
+    var sidebar = 'hidden';
+    if (document.body.clientWidth >= 1080) {
+        try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+        sidebar = sidebar || 'visible';
+    }
+    html.classList.remove('sidebar-visible');
+    html.classList.add("sidebar-" + sidebar);
+</script>
+    
+<nav id="sidebar" class="sidebar" aria-label="Table of contents">
+    <div class="sidebar-scrollbox">
+        <ol class="chapter">
+<li class="chapter-item expanded ">
+  <a href="../index.html" tabindex="0">
+      Documentation
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/index.html" tabindex="0">
+    <strong aria-hidden="true">1.</strong> Tutorials
+  </a></li>
+  <li>
+  <ol class="section">
+<li class="chapter-item expanded ">
+  <a href="../tutorials/getting_started.html" tabindex="0">
+    <strong aria-hidden="true">1.1.</strong> Getting Started
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/code_block.html" tabindex="0">
+    <strong aria-hidden="true">1.2.</strong> Code Blocks
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/text_formatting.html" tabindex="0">
+    <strong aria-hidden="true">1.3.</strong> Text Formatting
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/images_media.html" tabindex="0">
+    <strong aria-hidden="true">1.4.</strong> Images & Media
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/layout.html" tabindex="0">
+    <strong aria-hidden="true">1.5.</strong> Layout
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/fragments/index.html" tabindex="0">
+    <strong aria-hidden="true">1.6.</strong> Fragments (Animations)
+  </a></li>
+  <li>
+  <ol class="section">
+<li class="chapter-item expanded ">
+  <a href="../tutorials/fragments/basics.html" tabindex="0">
+    <strong aria-hidden="true">1.6.1.</strong> Basics of Fragments
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/fragments/list_fragments.html" tabindex="0">
+    <strong aria-hidden="true">1.6.2.</strong> List of Fragments
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/fragments/lists.html" tabindex="0">
+    <strong aria-hidden="true">1.6.3.</strong> Animated Lists
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/fragments/end_fragments.html" tabindex="0">
+    <strong aria-hidden="true">1.6.4.</strong> End-Fragments
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/fragments/advanced_fragments.html" tabindex="0">
+    <strong aria-hidden="true">1.6.5.</strong> Advanced Fragments
+  </a></li>
+  </ol>
+  </li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/slide_options.html" tabindex="0">
+    <strong aria-hidden="true">1.7.</strong> Slide Options
+  </a></li>
+  <li>
+  <ol class="section">
+<li class="chapter-item expanded ">
+  <a href="../tutorials/auto_animate.html" tabindex="0">
+    <strong aria-hidden="true">1.7.1.</strong> Auto-Animate
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/backgrounds.html" class="active" tabindex="0">
+    <strong aria-hidden="true">1.7.2.</strong> Backgrounds
+  </a></li>
+  </ol>
+  </li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/themes.html" tabindex="0">
+    <strong aria-hidden="true">1.8.</strong> Themes & CSS
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/speaker.html" tabindex="0">
+    <strong aria-hidden="true">1.9.</strong> Speaker View
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/local_reveal.html" tabindex="0">
+    <strong aria-hidden="true">1.10.</strong> Local Reveal.js installation
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/inline_html.html" tabindex="0">
+    <strong aria-hidden="true">1.11.</strong> Inline HTML
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/pdf_export.html" tabindex="0">
+    <strong aria-hidden="true">1.12.</strong> Print / PDF Export
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../tutorials/misc.html" tabindex="0">
+    <strong aria-hidden="true">1.13.</strong> Misc
+  </a></li>
+  </ol>
+  </li>
+<li class="chapter-item expanded ">
+  <a href="../automation.html" tabindex="0">
+    <strong aria-hidden="true">2.</strong> Automation
+  </a></li>
+<li class="chapter-item expanded ">
+  <a href="../gotchas.html" tabindex="0">
+    <strong aria-hidden="true">3.</strong> Gotchas
+  </a></li>
+</ol>
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="../assets/FontAwesome/css/font-awesome.min.css">
+    </div>
+    <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+</nav>    
+<div id="page-wrapper" class="page-wrapper">
 
-        <!-- Highlight.js Stylesheets - I could use nimib native highlight but let's keep it for styling... -->
-        <link rel="stylesheet" href="../assets/css/highlight.css">
-        <link rel="stylesheet" href="../assets/css/tomorrow-night.css">
-        <link rel="stylesheet" href="../assets/css/ayu-highlight.css">
+  <div class="page">
+      
+      <div id="menu-bar-hover-placeholder"></div>
+      <div id="menu-bar" class="menu-bar sticky bordered">
+          <div class="left-buttons">
+              <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                  <i class="fa fa-bars"></i>
+              </button>
+              <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                  <i class="fa fa-paint-brush"></i>
+              </button>
+              <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                  <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li><li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li><li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li><li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li><li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+              </ul>
+          </div>
 
-        <!-- Custom theme stylesheets - why the "../"? -->
+          <h1 class="menu-title">NimiSlides</h1>
 
-
-        
-
-        
-        <!-- plausible analytics (new in nimibook) -->
-    </head>
-    <body>
-        <!-- Provide site root to javascript -->
-        <script type="text/javascript">
-            var path_to_root = "..//assets";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
-
-        <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
-            try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
-
-                if (theme.startsWith('"') && theme.endsWith('"')) {
-                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
-                }
-
-                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
-                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
-                }
-            } catch (e) { }
-        </script>
-
-        <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
-            var theme;
-            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
-            if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
-            html.classList.remove('no-js')
-            html.classList.remove('light')
-            html.classList.add(theme);
-            html.classList.add('js');
-        </script>
-
-        <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
-            if (document.body.clientWidth >= 1080) {
-                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
-                sidebar = sidebar || 'visible';
-            }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
-        </script>
-
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                                <ol class="chapter">
-                <li class="chapter-item expanded ">
-                  <a href="../index.html" tabindex="0">
-                      Documentation
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/index.html" tabindex="0">
-                    <strong aria-hidden="true">1.</strong> Tutorials
-                  </a></li>
-                  <li>
-                  <ol class="section">
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/getting_started.html" tabindex="0">
-                    <strong aria-hidden="true">1.1.</strong> Getting Started
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/code_block.html" tabindex="0">
-                    <strong aria-hidden="true">1.2.</strong> Code Blocks
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/text_formatting.html" tabindex="0">
-                    <strong aria-hidden="true">1.3.</strong> Text Formatting
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/images_media.html" tabindex="0">
-                    <strong aria-hidden="true">1.4.</strong> Images & Media
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/layout.html" tabindex="0">
-                    <strong aria-hidden="true">1.5.</strong> Layout
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/fragments/index.html" tabindex="0">
-                    <strong aria-hidden="true">1.6.</strong> Fragments (Animations)
-                  </a></li>
-                  <li>
-                  <ol class="section">
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/fragments/basics.html" tabindex="0">
-                    <strong aria-hidden="true">1.6.1.</strong> Basics of Fragments
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/fragments/list_fragments.html" tabindex="0">
-                    <strong aria-hidden="true">1.6.2.</strong> List of Fragments
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/fragments/lists.html" tabindex="0">
-                    <strong aria-hidden="true">1.6.3.</strong> Animated Lists
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/fragments/end_fragments.html" tabindex="0">
-                    <strong aria-hidden="true">1.6.4.</strong> End-Fragments
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/fragments/advanced_fragments.html" tabindex="0">
-                    <strong aria-hidden="true">1.6.5.</strong> Advanced Fragments
-                  </a></li>
-                  </ol>
-                  </li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/slide_options.html" tabindex="0">
-                    <strong aria-hidden="true">1.7.</strong> Slide Options
-                  </a></li>
-                  <li>
-                  <ol class="section">
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/auto_animate.html" tabindex="0">
-                    <strong aria-hidden="true">1.7.1.</strong> Auto-Animate
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/backgrounds.html" class="active" tabindex="0">
-                    <strong aria-hidden="true">1.7.2.</strong> Backgrounds
-                  </a></li>
-                  </ol>
-                  </li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/themes.html" tabindex="0">
-                    <strong aria-hidden="true">1.8.</strong> Themes & CSS
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/speaker.html" tabindex="0">
-                    <strong aria-hidden="true">1.9.</strong> Speaker View
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/local_reveal.html" tabindex="0">
-                    <strong aria-hidden="true">1.10.</strong> Local Reveal.js installation
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/inline_html.html" tabindex="0">
-                    <strong aria-hidden="true">1.11.</strong> Inline HTML
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/pdf_export.html" tabindex="0">
-                    <strong aria-hidden="true">1.12.</strong> Print / PDF Export
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../tutorials/misc.html" tabindex="0">
-                    <strong aria-hidden="true">1.13.</strong> Misc
-                  </a></li>
-                  </ol>
-                  </li>
-                <li class="chapter-item expanded ">
-                  <a href="../automation.html" tabindex="0">
-                    <strong aria-hidden="true">2.</strong> Automation
-                  </a></li>
-                <li class="chapter-item expanded ">
-                  <a href="../gotchas.html" tabindex="0">
-                    <strong aria-hidden="true">3.</strong> Gotchas
-                  </a></li>
-                </ol>
-<!-- I could use also an unescaped context value -->
-            </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
-        </nav>
-
-        <div id="page-wrapper" class="page-wrapper">
-
-            <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
-                    <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
-                        </button>
-                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-                        </ul>
-                    </div>
-
-                    <h1 class="menu-title">NimiSlides</h1>
-
-                    <div class="right-buttons">
-                        <a href="https://github.com/HugoGranstrom/nimiSlides" title="Git repository" aria-label="Git repository">
-                            <i id="git-repository-button" class="fa fa-github"></i>
-                        </a>
-
-                    </div>
-                </div>
-
-
-                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
-                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
-                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
-                    });
-                </script>
-
-                <div id="content" class="content">
-                    <main>
-                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <div class="right-buttons">
+              <a href="https://github.com/HugoGranstrom/nimiSlides" title="Git repository" aria-label="Git repository">
+                  <i id="git-repository-button" class="fa fa-github"></i>
+              </a>
+          </div>
+      </div>
+      <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+      <script type="text/javascript">
+          document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+          document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+          Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+              link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+          });
+      </script>
+      <div id="content" class="content">
+          <main>
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/theme/black.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/plugin/highlight/monokai.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -249,12 +227,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/plugin/highlight/highlight.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/plugin/notes/notes.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/plugin/math/math.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-                        <style>
+<style>
 table tbody tr:nth-child(2n) {
   background: 0;
 }
 </style>
-                        <h1>Backgrounds</h1>
+<h1>Backgrounds</h1>
 <p>The background of a slide can be set through <a href="./slide_options.html">slide options</a>.
 The types of background are:</p>
 <ul>
@@ -267,14 +245,14 @@ All of these become fullscreen, hence backgrounds are the way to show fullscreen
 <h2>Solid Color Background</h2>
 <p>The solid color is specified by passing a valid CSS color (e.g. <code>red</code>, <code>#F1B434</code>, etc)
 to the <code>colorBackground</code> parameter of <code>slideOptions</code>:</p>
-                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide(slideOptions(colorBackground=<span class="hljs-string">&quot;#F1B434&quot;</span>)):
+<pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide(slideOptions(colorBackground=<span class="hljs-string">&quot;#F1B434&quot;</span>)):
   nbText: <span class="hljs-string">&quot;Yellow Background!&quot;</span></code></pre>
-                          <div class="reveal" id="revealId0" style="height: 400px;">
+<div class="reveal" id="revealId0" style="height: 400px;">
     <div class="slides">
-                        <section data-nimib-slide-number="1" data-background-color="#F1B434" >
-                        <p>Yellow Background!</p>
-                        </section>
-                            </div>
+<section data-nimib-slide-number="1" data-background-color="#F1B434" >
+<p>Yellow Background!</p>
+</section>
+</div>
   </div>
   <script>
     let deck_revealId0 = new Reveal(document.getElementById("revealId0"), {
@@ -288,10 +266,10 @@ to the <code>colorBackground</code> parameter of <code>slideOptions</code>:</p>
     })
     deck_revealId0.initialize()
   </script>
-                        <h2>Gradient Color Background</h2>
+<h2>Gradient Color Background</h2>
 <p>The color gradient is specified by passing a valid CSS color (e.g. <code>linear-gradient</code>, <code>radial-gradient</code>, <code>conic-gradient</code>)
 to the <code>gradientBackground</code> parameter of <code>slideOptions</code>:</p>
-                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide(slideOptions(gradientBackground=<span class="hljs-string">&quot;linear-gradient(to bottom, #F1B434, black)&quot;</span>)):
+<pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide(slideOptions(gradientBackground=<span class="hljs-string">&quot;linear-gradient(to bottom, #F1B434, black)&quot;</span>)):
   nbText: <span class="hljs-string">&quot;Linear&quot;</span>
 
 slide(slideOptions(gradientBackground=<span class="hljs-string">&quot;radial-gradient(#F1B434, black)&quot;</span>)):
@@ -299,18 +277,18 @@ slide(slideOptions(gradientBackground=<span class="hljs-string">&quot;radial-gra
 
 slide(slideOptions(gradientBackground=<span class="hljs-string">&quot;conic-gradient(#F1B434, black)&quot;</span>)):
   nbText: <span class="hljs-string">&quot;Conic&quot;</span></code></pre>
-                          <div class="reveal" id="revealId1" style="height: 400px;">
+<div class="reveal" id="revealId1" style="height: 400px;">
     <div class="slides">
-                        <section data-nimib-slide-number="1" data-background-gradient="linear-gradient(to bottom, #F1B434, black)" >
-                        <p>Linear</p>
-                        </section>
-                        <section data-nimib-slide-number="2" data-background-gradient="radial-gradient(#F1B434, black)" >
-                        <p>Radial</p>
-                        </section>
-                        <section data-nimib-slide-number="3" data-background-gradient="conic-gradient(#F1B434, black)" >
-                        <p>Conic</p>
-                        </section>
-                            </div>
+<section data-nimib-slide-number="1" data-background-gradient="linear-gradient(to bottom, #F1B434, black)" >
+<p>Linear</p>
+</section>
+<section data-nimib-slide-number="2" data-background-gradient="radial-gradient(#F1B434, black)" >
+<p>Radial</p>
+</section>
+<section data-nimib-slide-number="3" data-background-gradient="conic-gradient(#F1B434, black)" >
+<p>Conic</p>
+</section>
+</div>
   </div>
   <script>
     let deck_revealId1 = new Reveal(document.getElementById("revealId1"), {
@@ -324,16 +302,16 @@ slide(slideOptions(gradientBackground=<span class="hljs-string">&quot;conic-grad
     })
     deck_revealId1.initialize()
   </script>
-                        <h2>Image Background</h2>
+<h2>Image Background</h2>
 <p>The image is specified by passing a link
 to the <code>imageBackground</code> parameter of <code>slideOptions</code>:</p>
-                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide(slideOptions(imageBackground=<span class="hljs-string">&quot;https://github.com/nim-lang/assets/raw/master/Art/logo-crown.png&quot;</span>)):
+<pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide(slideOptions(imageBackground=<span class="hljs-string">&quot;https://github.com/nim-lang/assets/raw/master/Art/logo-crown.png&quot;</span>)):
   <span class="hljs-keyword">discard</span></code></pre>
-                          <div class="reveal" id="revealId2" style="height: 400px;">
+<div class="reveal" id="revealId2" style="height: 400px;">
     <div class="slides">
-                        <section data-nimib-slide-number="1" data-background-image="https://github.com/nim-lang/assets/raw/master/Art/logo-crown.png" >
-                        </section>
-                            </div>
+<section data-nimib-slide-number="1" data-background-image="https://github.com/nim-lang/assets/raw/master/Art/logo-crown.png" >
+</section>
+</div>
   </div>
   <script>
     let deck_revealId2 = new Reveal(document.getElementById("revealId2"), {
@@ -347,20 +325,20 @@ to the <code>imageBackground</code> parameter of <code>slideOptions</code>:</p>
     })
     deck_revealId2.initialize()
   </script>
-                        <p>As you can see, I didn't add any content to the slide and instead used a <code>discard</code>.
+<p>As you can see, I didn't add any content to the slide and instead used a <code>discard</code>.
 You can add content to the slide, but it can be hard to see against an image.</p>
 <h2>Video Background</h2>
 <p>The video background can play a concrete video file (mp4 etc),
 but if you want to show a Youtube video you should use the Iframe background instead.
 The image is specified by passing a link
 to the <code>videoBackground</code> parameter of <code>slideOptions</code>:</p>
-                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide(slideOptions(videoBackground=<span class="hljs-string">&quot;https://user-images.githubusercontent.com/5092565/178597724-16287a00-5c31-4500-83d8-e07160a36369.mp4&quot;</span>)):
+<pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide(slideOptions(videoBackground=<span class="hljs-string">&quot;https://user-images.githubusercontent.com/5092565/178597724-16287a00-5c31-4500-83d8-e07160a36369.mp4&quot;</span>)):
   <span class="hljs-keyword">discard</span></code></pre>
-                          <div class="reveal" id="revealId3" style="height: 400px;">
+<div class="reveal" id="revealId3" style="height: 400px;">
     <div class="slides">
-                        <section data-nimib-slide-number="1" data-background-video="https://user-images.githubusercontent.com/5092565/178597724-16287a00-5c31-4500-83d8-e07160a36369.mp4" >
-                        </section>
-                            </div>
+<section data-nimib-slide-number="1" data-background-video="https://user-images.githubusercontent.com/5092565/178597724-16287a00-5c31-4500-83d8-e07160a36369.mp4" >
+</section>
+</div>
   </div>
   <script>
     let deck_revealId3 = new Reveal(document.getElementById("revealId3"), {
@@ -374,19 +352,19 @@ to the <code>videoBackground</code> parameter of <code>slideOptions</code>:</p>
     })
     deck_revealId3.initialize()
   </script>
-                        <h2>Iframe Background (Youtube videos as well)</h2>
+<h2>Iframe Background (Youtube videos as well)</h2>
 <p>If you want to show a website or youtube video in fullscreen,
 you should use an Iframe background. The background will be interactible
 unless <code>iframeInteractive=false</code> is passed to the slide option.
 The website is specified by passing a link
 to the <code>iframeBackground</code> parameter of <code>slideOptions</code>:</p>
-                        <pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide(slideOptions(iframeBackground=<span class="hljs-string">&quot;https://www.youtube-nocookie.com/embed/Sf1TndCcIlU&quot;</span>)):
+<pre style="width: 100%"><code class="nim hljs" data-noescape data-line-numbers>slide(slideOptions(iframeBackground=<span class="hljs-string">&quot;https://www.youtube-nocookie.com/embed/Sf1TndCcIlU&quot;</span>)):
   <span class="hljs-keyword">discard</span></code></pre>
-                          <div class="reveal" id="revealId4" style="height: 400px;">
+<div class="reveal" id="revealId4" style="height: 400px;">
     <div class="slides">
-                        <section data-nimib-slide-number="1" data-background-iframe="https://www.youtube-nocookie.com/embed/Sf1TndCcIlU" data-background-interactive >
-                        </section>
-                            </div>
+<section data-nimib-slide-number="1" data-background-iframe="https://www.youtube-nocookie.com/embed/Sf1TndCcIlU" data-background-interactive >
+</section>
+</div>
   </div>
   <script>
     let deck_revealId4 = new Reveal(document.getElementById("revealId4"), {
@@ -400,46 +378,33 @@ to the <code>iframeBackground</code> parameter of <code>slideOptions</code>:</p>
     })
     deck_revealId4.initialize()
   </script>
-                    </main>
+          </main>
 
-                    <nav class="nav-wrapper" aria-label="Page navigation">
-                        <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../tutorials/auto_animate.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
+          <nav class="nav-wrapper" aria-label="Page navigation">
+              <!-- Mobile navigation buttons -->
+                  <a rel="prev" href="../tutorials/auto_animate.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                      <i class="fa fa-angle-left"></i>
+                  </a>
+                  <a rel="next" href="../tutorials/themes.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                      <i class="fa fa-angle-right"></i>
+                  </a>
 
-                            <a rel="next" href="../tutorials/themes.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
+              <div style="clear: both"></div>
+          </nav>
+      </div>
+  </div>
 
-                        <div style="clear: both"></div>
-                    </nav>
-                </div>
-            </div>
+  <nav class="nav-wide-wrapper" aria-label="Page navigation">
+          <a rel="prev" href="../tutorials/auto_animate.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+              <i class="fa fa-angle-left"></i>
+          </a>
+          <a rel="next" href="../tutorials/themes.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+              <i class="fa fa-angle-right"></i>
+          </a>
+  </nav>
 
-            <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../tutorials/auto_animate.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-
-                    <a rel="next" href="../tutorials/themes.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-            </nav>
-
-        </div>
-
-
-
-
-
-
-
-        <script src="../assets/js/clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../assets/js/book.js" type="text/javascript" charset="utf-8"></script>
-
-        <!-- Custom JS scripts -->
-
-
-    </body>
+</div>
+<script src="../assets/js/clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../assets/js/book.js" type="text/javascript" charset="utf-8"></script>
+</body>
 </html>
