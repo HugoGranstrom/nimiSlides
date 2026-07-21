@@ -26,7 +26,7 @@ jobs:
       - name: Install deps
         run: |
           set -e
-          nimble install -y https://github.com/zetashift/fontim https://github.com/HugoGranstrom/cdt -g
+          nimble install -y https://github.com/zetashift/fontim https://github.com/HugoGranstrom/cdt@#head -g
           nimble sync -y
           nimble setup
       - name: Build compiler-docs
