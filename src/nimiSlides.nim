@@ -357,12 +357,7 @@ template useScrollView*() =
 proc addStyle*(nb: var Nb, style: string) =
   nb.doc.context["nb_style"] = %(nb.doc.context{"nb_style"}.getStr & "\n" & style)
 
-proc revealTheme*(nb: var Nb) =
-  #nb.backend.partials["document"] = document
-  nb.backend.funcs["NbDoc"] = revealNbDocToHtml
-  nb.backend.partials["head"] = revealHeadToHtml
-  #nb.backend.partials["main"] = main
-  
+proc populateNimiSlidesBlockPartials*(nb: var Nb) =
   nb.backend.partials["nbCodeSource"] = nimiSlidesNbCodeSourcePartial
   nb.backend.partials["nbCodeOutput"] = nimiSlidesNbCodeOutputPartial
 
@@ -376,6 +371,12 @@ proc revealTheme*(nb: var Nb) =
 
   nb.backend.partials["fragmentStart"] = nimiSlidesFragmentStartPartial
   nb.backend.partials["fragmentEnd"] = nimiSlidesFragmentEndPartial
+
+proc revealTheme*(nb: var Nb) =
+  nb.backend.funcs["NbDoc"] = revealNbDocToHtml
+  nb.backend.partials["head"] = revealHeadToHtml
+  
+  nb.populateNimiSlidesBlockPartials()
 
   nb.doc.context["slidesTheme"] = %"black"
   nb.doc.context["nb_style"] = %""
