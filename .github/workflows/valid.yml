@@ -28,6 +28,7 @@ jobs:
           set -e
           nimble install -y https://github.com/zetashift/fontim -g
           nimble sync -y
+          nimble setup
       - name: Build compiler-docs
         run: nimble docs
       - name: Build slideshows
