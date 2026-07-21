@@ -11,21 +11,28 @@ jobs:
     strategy:
       matrix:
         nim:
-          - '1.6.x'
           - 'stable'
           - 'devel'
       fail-fast: false
     name: Nim ${{ matrix.nim }}
     steps:
       - uses: actions/checkout@v2
-      - uses: jiro4989/setup-nim-action@v1
+      - uses: jiro4989/setup-nim-action@v2.2.2
         with:
           nim-version: ${{ matrix.nim }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: sudo apt install libpcre3 libpcre3-dev liblapack-dev
+      - run: nimble install nimble -g
+      - name: Pre-Install deps
+        run: |
+          set -e
+          nimble install -y https://github.com/zetashift/fontim -g
+          nimble install -y -g https://github.com/HugoGranstrom/cdt@0.1.1
       - name: Install deps
         run: |
-          nimble install -y
-          nimble docsDeps
+          set -e
+          nimble sync -y
+          nimble setup
       - name: Build compiler-docs
         run: nimble docs
       - name: Build slideshows

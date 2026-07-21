@@ -5,7 +5,7 @@ nbInit(theme = revealTheme)
 nb.useLatex()
 
 when defined(themeWhite):
-  nb.filename = "./showcase_white.html"
+  nb.doc.filename = "./showcase_white.html"
   setSlidesTheme(White)
 else:
   setSlidesTheme(Moon)

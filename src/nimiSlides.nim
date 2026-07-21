@@ -1,4 +1,4 @@
-import std/[strutils, strformat, sequtils, os]
+import std/[strutils, strformat, sequtils, os, json]
 export os
 import nimib
 import nimib/[capture, config]
@@ -28,6 +28,10 @@ type
     highlightCurrentGreen = "highlight-current-green"
     highlightCurrentBlue = "highlight-current-blue"
 
+  FragmentItem* = object
+    classStr: string
+    fragIndex: int
+
   SlidesTheme* = enum
     Black, Beige, Blood, Dracula, League, Moon, Night, Serif, Simple, Sky, Solarized, White
 
@@ -56,167 +60,148 @@ proc slideOptions*(autoAnimate = false, iframeInteractive = true, colorBackgroun
 
 const reveal_version* = "5.0.4"
 
-const document = """
-<!DOCTYPE html>
-<html>
-  {{> head}}
-  <body>
-  {{> main}}
-  </body>
-</html>
-"""
-
-const head = """
-<head>
-  <meta content="text/html; charset=utf-8" http-equiv="content-type">
-  {{> revealCSS }}
-  {{#nb_style}}
-  <style>
-  {{{ nb_style }}}
-  </style>
-  {{/nb_style}}
-</head>
-"""
-
-const main = """
+func revealMainToHtml*(doc: NbDoc, nb: Nb): string =
+  let docJson = %[] # it's unused
+  let renderedBlocks = nbContainerToHtml(doc, nb)
+  result = withNewlines:
+    hlHtmlF"""
 <div class="reveal">
   <div class="slides">
-    {{#blocks}}
-    {{&.}}
-    {{/blocks}}
+    {renderedBlocks}
   </div>
-  {{#revealFooter}}
-  <div id="reveal-footer" style="position: absolute; text-align: center; width: 100%; bottom: 0%; visibility: hidden; opacity: {{footerOpacity}}; font-size: {{footerFontSize}}px">
-    {{&revealFooter}}
-  </div>
-  {{/revealFooter}}
 </div>
-{{> revealJS }}
-<script>
-  Reveal.initialize({
-    plugins: [ 
-      RevealHighlight,
-      RevealNotes,
-      {{#latex}}
-      RevealMath.KaTeX,
-      {{/latex}}
-    ],
-    {{#useScrollWheel}}
-    mouseWheel: true,
-    {{/useScrollWheel}}
-    {{#showSlideNumber}}
-    slideNumber: 'c/t',
-    {{/showSlideNumber}}
-    {{#disableCentering}}
-    center: false,
-    {{/disableCentering}}
-    {{#useScrollView}}
-    view: 'scroll',
-    {{/useScrollView}}
-  });
-{{> customJS}}
-</script>
+    """
+    nb.renderPartial("revealJS", docJson)
+    "<script>"
+    """
+    Reveal.initialize({
+      plugins: [ 
+        RevealHighlight,
+        RevealNotes,
+      ]
+    });
+    """
+    nb.renderPartial("customJS", docJson)
+    "</script>"
+
+func revealNbDocToHtml*(blk: NbBlock, nb: Nb): string =
+  let doc = blk.NbDoc
+  let docJson = %[] # it's unused
+  result = withNewlines:
+    "<!DOCTYPE html>"
+    """<html lang="en-us">"""
+    nb.renderPartial("head", docJson)
+    "<body>"
+    revealMainToHtml(doc, nb)
+    "</body>"
+    "</html>"
+
+func revealHeadToHtml*(blk: JsonNode, nb: Nb): string =
+  let nbStyle = nb.doc.context{"nb_style"}.getStr
+  result = withNewLines:
+    "<head>"
+    """<meta content="text/html; charset=utf-8" http-equiv="content-type">"""
+    nb.renderPartial("revealCSS", blk)
+    if nbStyle.len > 0:
+      fmt"""
+      <style>
+        {nbStyle}
+      </style>
+      """
+    "</head>"
+
+func revealCSSToHtml*(blk: JsonNode, nb: Nb): string =
+  let revealVersion = nb.doc.context{"reveal_version"}.getStr
+  let slidesTheme = nb.doc.context{"slidesTheme"}.getStr
+  result = hlHtmlF"""
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/reveal.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/theme/{slidesTheme}.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/plugin/highlight/monokai.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 """
 
-const revealCSS = """
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/reveal.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/theme/{{{slidesTheme}}}.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+func revealJSToHtml*(blk: JsonNode, nb: Nb): string =
+  let revealVersion = nb.doc.context{"reveal_version"}.getStr
+  result = withNewLines:
+    hlHtmlF"""
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/reveal.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/plugin/highlight/highlight.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/plugin/notes/notes.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    """
+    if nb.doc.context{"latex"}.getBool:
+      hlHtmlF"""<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/plugin/math/math.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>"""
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/plugin/highlight/monokai.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-"""
-
-const revealJS = """
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/reveal.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/plugin/highlight/highlight.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/plugin/notes/notes.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-{{#latex}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/plugin/math/math.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-{{/latex}}
-"""
-
-proc useLocalReveal*(nb: var NbDoc, path: string) =
-  let path = nb.homeDir.string / path
-  let themeString = "{{{slidesTheme}}}"
-  nb.partials["revealCSS"] = fmt"""
+func localRevealCss*(blk: JsonNode, nb: Nb): string =
+  {.cast(noSideEffect).}:
+    let path = nb.doc.homeDir.string / nb.doc.context{"local_reveal_path"}.getStr
+  result = fmt"""
 <link rel="stylesheet" href="{path}/dist/reveal.css"/>
-<link rel="stylesheet" href="{path}/dist/theme/{themeString}.css"/>
+<link rel="stylesheet" href="{path}/dist/theme/{nb.doc.context.getOrDefault("slidesTheme").getStr}.css"/>
 <link rel="stylesheet" href="{path}/plugin/highlight/monokai.css"/>  
   """
-  
-  let latexStart = "{{#latex}}"
-  let latexEnd = "{{/latex}}"
-  nb.partials["revealJS"] = fmt"""
+
+func localRevealJs*(blk: JsonNode, nb: Nb): string =
+  {.cast(noSideEffect).}:
+    let path = nb.doc.homeDir.string / nb.doc.context{"local_reveal_path"}.getStr
+  result = withNewlines:
+    fmt"""
 <script src="{path}/dist/reveal.js"></script>
 <script src="{path}/plugin/highlight/highlight.js"></script>
 <script src="{path}/plugin/notes/notes.js"></script>
-{latexStart}
-<script src="{path}/plugin/math/math.js"></script>
-{latexEnd}
-  """
+    """
+    if nb.doc.context{"latex"}.getBool(true):
+      fmt"""<script src="{path}/plugin/math/math.js"></script>"""
 
-template setSlidesTheme*(theme: SlidesTheme) =
-  nb.context["slidesTheme"] = ($theme).toLower
+func nimiSlidesNbCodeSourcePartial*(blk: JsonNode, nb: Nb): string =
+  let code = blk{"code"}.getStr
+  if code.len > 0:
+    &"<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers>{code.highlightNim}</code></pre>"
+  else:
+    ""
 
-template useScrollWheel*() =
-  ## Enable using the scroll-wheel to step forward in slides.
-  nb.context["useScrollWheel"] = true
+func nimiSlidesNbCodeOutputPartial*(blk: JsonNode, nb: Nb): string =
+  let output = blk{"output"}.getStr
+  if output.len > 0:
+    #&"<pre class=\"nb-output\">{output}</pre>"
+    &"<pre style=\"width: 100%;\"><samp class=\"hljs\">{output}</samp></pre>"
+  else:
+    ""
 
-template showSlideNumber*() =
-  nb.context["showSlideNumber"] = true
+newNbBlock(NbAnimateCode of NbCode):
+  highlightedLines: seq[seq[int]]
+  toHtml:
+    withNewLines:
+      nb.renderPartial("animateCodeSource", jsonutils.toJson(blk))
+      nbContainerToHtml(blk, nb)
+      nb.renderPartial("nbCodeOutput", jsonutils.toJson(blk))
 
-template disableVerticalCentering*() =
-  nb.context["disableCentering"] = true
+# "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers=\"{{&highlightLines}}\">{{&codeHighlighted}}</code></pre>\n" & nb.backend.partials["nbCodeOutput"]
+func highlightedLinesToString*(lines: seq[seq[int]]): string =
+  var linesString: string
+  if lines.len > 0:
+    linesString &= "|"
+  for lineBundle in lines:
+    for line in lineBundle:
+      linesString &= $line & ","
+    linesString &= "|"
+  if lines.len > 0:
+    linesString = linesString[0 .. ^3]
+  return linesString
 
-template useScrollView*() =
-  nb.context["useScrollView"] = true
+func nimiSlidesAnimateCodeSourcePartial*(blk: JsonNode, nb: Nb): string =
+  let highlightedLinesString = blk{"highlightedLines"}.to(seq[seq[int]]).highlightedLinesToString()
+  result = nimiSlidesNbCodeSourcePartial(blk, nb).replace("data-line-numbers", &"data-line-numbers=\"{highlightedLinesString}\"")
 
-proc addStyle*(doc: NbDoc, style: string) =
-  doc.context["nb_style"] = doc.context["nb_style"].vString & "\n" & style
+newNbBlock(NbSlide of NbContainer):
+  options: SlideOptions
+  slideNumber: int
+  toHtml:
+    withNewLines:
+      nb.renderPartial("slideStart", jsonutils.toJson(blk))
+      nbContainerToHtml(blk, nb)
+      nb.renderPartial("slideEnd", jsonutils.toJson(blk))
 
-proc revealTheme*(doc: var NbDoc) =
-  doc.partials["document"] = document
-  doc.partials["head"] = head
-  doc.partials["main"] = main
-  doc.partials["nbCodeSource"] = "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers>{{&codeHighlighted}}</code></pre>"
-  doc.partials["nbCodeOutput"] = "{{#output}}<pre style=\"width: 100%;\"><samp class=\"hljs\">{{output}}</samp></pre>{{/output}}"
-
-  doc.partials["revealCSS"] = revealCSS
-  doc.partials["revealJS"] = revealJS
-
-  doc.partials["animateCode"] = "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers=\"{{&highlightLines}}\">{{&codeHighlighted}}</code></pre>\n" & doc.partials["nbCodeOutput"]
-  doc.renderPlans["animateCode"] = doc.renderPlans["nbCode"]
-
-  doc.partials["fragmentStart"] = """
-{{#fragments}}
-<div class="fragment {{&classStr}}" data-fragment-index="{{&fragIndex}}" data-fragment-index-nimib="{{&fragIndex}}"> 
-{{/fragments}}
-  """
-
-  doc.partials["fragmentEnd"] = """
-{{#fragments}}
-</div>
-{{/fragments}}
-  """
-
-  doc.partials["bigText"] = """<h2 class="r-fit-text"> {{&outputToHtml}} </h2>"""
-  doc.renderPlans["bigText"] = doc.renderPlans["nbText"]
-
-  doc.context["slidesTheme"] = "black"
-  doc.context["nb_style"] = ""
-  doc.context["reveal_version"] = reveal_version
-
-  try:
-    let slidesConfig = loadTomlSection(doc.rawCfg, "nimislides", NimiSlidesConfig)
-    if slidesConfig.localReveal != "":
-      echo "Using local Reveal.js installation specified in nimib.toml "
-      doc.useLocalReveal(slidesConfig.localReveal)
-  except CatchableError:
-    discard # if it doesn't exists, just let it be
-
-var currentFragment*, currentSlideNumber*: int
-
-proc slideOptionsToAttributes*(options: SlideOptions): string =
-  result.add """data-nimib-slide-number="$1" """ % [$currentSlideNumber]
+proc slideOptionsToAttributes*(options: SlideOptions, slideNumber: int): string =
+  result.add """data-nimib-slide-number="$1" """ % [$slideNumber]
   if options.autoAnimate:
     result.add "data-auto-animate "
   if options.colorBackground.len > 0:
@@ -232,22 +217,121 @@ proc slideOptionsToAttributes*(options: SlideOptions): string =
   elif options.gradientBackground.len > 0:
     result.add """data-background-gradient="$1" """ % [options.gradientBackground]
 
-template slide*(options: untyped, body: untyped): untyped =
-  currentSlideNumber += 1
+func nimiSlidesSlideStartPartial*(blk: JsonNode, nb: Nb): string =
+  let optionsStr = blk{"options"}.to(SlideOptions).slideOptionsToAttributes(blk{"slideNumber"}.getInt)
+  result = &"<section {optionsStr}>"
 
-  nbRawHtml: "<section $1>" % [slideOptionsToAttributes(options)]
+func nimiSlidesSlideEndPartial*(blk: JsonNode, nb: Nb): string =
+  "</section>"
+
+newNbBlock(NbFragment of NbContainer):
+  fragments: seq[FragmentItem]
+  toHtml:
+    withNewLines:
+      nb.renderPartial("fragmentStart", jsonutils.toJson(blk))
+      nbContainerToHtml(blk, nb)
+      nb.renderPartial("fragmentEnd", jsonutils.toJson(blk))
+
+func nimiSlidesFragmentStartPartial*(blk: JsonNode, nb: Nb): string =
+  if blk{"fragments"}.len > 0:
+    result = ""
+    for fragment in blk{"fragments"}:
+      let classStr = fragment{"classStr"}.getStr
+      let fragIndex = fragment{"fragIndex"}.getInt
+      result &= hlHtmlF"""
+      <div class="fragment {classStr}" data-fragment-index="{fragIndex}" data-fragment-index-nimib="{fragIndex}">
+      """
+      result &= "\n"
+  else:
+    result = ""
+
+func nimiSlidesFragmentEndPartial*(blk: JsonNode, nb: Nb): string =
+  "</div>\n".repeat(blk{"fragments"}.len)
+
+newNbBlock(NbBigText of NbText):
+  toHtml:
+    withNewlines:
+      "<h2 class=\"r-fit-text\">"
+      nb.renderPartial("nbText", jsonutils.toJson(blk))
+      "</h2>"
+
+func useLocalReveal*(nb: var Nb, path: string) =
+  nb.doc.context["local_reveal_path"] = %path
+  nb.backend.partials["revealCSS"] = localRevealCss
+  nb.backend.partials["revealJS"] = localRevealJs
+
+template setSlidesTheme*(theme: SlidesTheme) =
+  nb.doc.context["slidesTheme"] = %($theme).toLower
+
+template useScrollWheel*() =
+  ## Enable using the scroll-wheel to step forward in slides.
+  nb.doc.context["useScrollWheel"] = %true
+
+template showSlideNumber*() =
+  nb.doc.context["showSlideNumber"] = %true
+
+template disableVerticalCentering*() =
+  nb.doc.context["disableCentering"] = %true
+
+template useScrollView*() =
+  nb.doc.context["useScrollView"] = %true
+
+proc addStyle*(nb: var Nb, style: string) =
+  nb.doc.context["nb_style"] = %(nb.doc.context{"nb_style"}.getStr & "\n" & style)
+
+proc populateNimiSlidesBlockPartials*(nb: var Nb) =
+  nb.backend.partials["nbCodeSource"] = nimiSlidesNbCodeSourcePartial
+  nb.backend.partials["nbCodeOutput"] = nimiSlidesNbCodeOutputPartial
+
+  nb.backend.partials["animateCodeSource"] = nimiSlidesAnimateCodeSourcePartial
+
+  nb.backend.partials["revealCSS"] = revealCSSToHtml
+  nb.backend.partials["revealJS"] = revealJSToHtml
+
+  nb.backend.partials["slideStart"] = nimiSlidesSlideStartPartial
+  nb.backend.partials["slideEnd"] = nimiSlidesSlideEndPartial
+
+  nb.backend.partials["fragmentStart"] = nimiSlidesFragmentStartPartial
+  nb.backend.partials["fragmentEnd"] = nimiSlidesFragmentEndPartial
+
+proc revealTheme*(nb: var Nb) =
+  nb.backend.funcs["NbDoc"] = revealNbDocToHtml
+  nb.backend.partials["head"] = revealHeadToHtml
+  
+  nb.populateNimiSlidesBlockPartials()
+
+  nb.doc.context["slidesTheme"] = %"black"
+  nb.doc.context["nb_style"] = %""
+  nb.doc.context["reveal_version"] = %reveal_version
+
+  try:
+    let slidesConfig = loadTomlSection(nb.doc.rawCfg, "nimislides", NimiSlidesConfig)
+    if slidesConfig.localReveal != "":
+      echo "Using local Reveal.js installation specified in nimib.toml "
+      nb.useLocalReveal(slidesConfig.localReveal)
+  except CatchableError:
+    discard # if it doesn't exists, just let it be
+
+var currentFragment*, currentSlideNumber*: int
+
+template slide*(toptions: untyped, body: untyped): untyped =
+  currentSlideNumber += 1
+  let blk = newNbSlide(slideNumber=currentSlideNumber, options=toptions)
+  
   when declaredInScope(CountVarNimiSlide):
     when CountVarNimiSlide < 2:
       static: inc CountVarNimiSlide
-      body
+      nb.withContainer(blk):
+        body
       static: dec CountVarNimiSlide
     else:
       {.error: "You can only nest slides once!".}
   else:
     var CountVarNimiSlide {.inject, compileTime.} = 1 # we just entered the first level
-    body
+    nb.withContainer(blk):
+      body
     static: dec CountVarNimiSlide
-  nbRawHtml: "</section>"
+  nb.add blk
 
 template slide*(body: untyped) =
   slide(slideOptions()):
@@ -256,6 +340,23 @@ template slide*(body: untyped) =
 template slideAutoAnimate*(body: untyped) =
   slide(slideOptions(autoAnimate=true)):
     body
+
+template fragmentCoreOld*(animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], indexOffset: untyped, incrementCounter: untyped, body: untyped) =
+  ## Creates a fragment of the content of body. Nesting works.
+  ## animations: each seq in animations are animations that are to be applied at the same time. The first seq's animations
+  ##             are applied on the first button click, and the second seq's animations on the second click etc.
+  ## endAnimations: animations that should be applied AT THE END of block. 
+  ## Example: 
+  ## `fragment(@[@[fadeIn, highlightBlue], @[shrinks, semiFadeOut]]): block` will at the first click of a button fadeIn and highlightBlue
+  ## the content of the block. At the second click the same content will shrink and semiFadeOut. This code is also equivilent with
+  ## `fragment(@[@[fadeIn, highlightBlue]]): fragment(@[@[shrinks, semiFadeOut]]): block`.
+  ## `fragment(@[@[fadeIn]], @[@[fadeOut]]): block` will first fadeIn the entire block and perform eventual animations in nested fragments. Once
+  ## all of those are finished, it will run fadeOut on the entire block and its subfragments.
+  var fragments: seq[Table[string, string]]
+  fragmentStartBlock(fragments, animations, endAnimations, indexOffset, incrementCounter)
+  var startBlock = nb.blk # this *should* be the block created by fragmentStartBlock
+  body
+  fragmentEndBlock(fragments, animations, endAnimations, startBlock)
 
 template fragmentStartBlock(fragments: seq[Table[string, string]], animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], indexOffset: int, incrementCounter: bool) =
   newNbSlimBlock("fragmentStart"):
@@ -296,11 +397,21 @@ template fragmentCore*(animations: openArray[seq[FragmentAnimation]], endAnimati
   ## `fragment(@[@[fadeIn, highlightBlue]]): fragment(@[@[shrinks, semiFadeOut]]): block`.
   ## `fragment(@[@[fadeIn]], @[@[fadeOut]]): block` will first fadeIn the entire block and perform eventual animations in nested fragments. Once
   ## all of those are finished, it will run fadeOut on the entire block and its subfragments.
-  var fragments: seq[Table[string, string]]
-  fragmentStartBlock(fragments, animations, endAnimations, indexOffset, incrementCounter)
-  var startBlock = nb.blk # this *should* be the block created by fragmentStartBlock
-  body
-  fragmentEndBlock(fragments, animations, endAnimations, startBlock)
+  let blk = newNbFragment()
+  for level in animations:
+    if level.len > 1 and fadeIn in level:
+      # Add a fadeIn fragment at the same frame
+      blk.fragments.add FragmentItem(classStr: "", fragIndex: currentFragment + indexOffset)
+    blk.fragments.add FragmentItem(classStr: level.join(" "), fragIndex: currentFragment + indexOffset)
+    if incrementCounter:
+      currentFragment += 1
+
+  withContainer(nb, blk):
+    body
+  
+  for level in endAnimations:
+    blk.fragments.add FragmentItem(classStr: level.join(" "), fragIndex: currentFragment)
+  nb.add blk
 
 template fragmentCore*(animations: openArray[seq[FragmentAnimation]], endAnimations: openArray[seq[FragmentAnimation]], body: untyped) =
   fragmentCore(animations, endAnimations, 0, true, body)
@@ -400,12 +511,6 @@ template listItem*(animation: FragmentAnimation, body: untyped) =
 template listItem*(body: untyped) =
   listItem(fadeInThenSemiOut, body)
 
-template animateCode*(lines: string, body: untyped) =
-  newNbCodeBlock("animateCode", body):
-    nb.blk.context["highlightLines"] = lines
-    captureStdout(nb.blk.output):
-      body
-
 template animateCode*(lines: varargs[set[range[0..65535]], toSet], body: untyped) =
   ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
   ## lines: Specify which lines to highlight and in which order. The lines can be specified using either:
@@ -417,39 +522,39 @@ template animateCode*(lines: varargs[set[range[0..65535]], toSet], body: untyped
   ## animateCode(1, 2..3, {4, 6}): body
   ## ```
   ## This will first highlight line 1, then lines 2 and 3, and lastly line 4 and 6.
-  newNbCodeBlock("animateCode", body):
-    var linesString: string
-    if lines.len > 0:
-      linesString &= "|"
-    for lineBundle in lines:
-      for line in lineBundle:
-        linesString &= $line & ","
-      linesString &= "|"
-    if lines.len > 0:
-      linesString = linesString[0 .. ^3]
-    nb.blk.context["highlightLines"] = linesString
-    captureStdout(nb.blk.output):
+  var highlightedLines: seq[seq[int]]
+  for line in lines:
+    var lineSeq: seq[int]
+    for l in line:
+      lineSeq.add l
+    highlightedLines.add lineSeq
+  let blk = newNbAnimateCode(highlightedLines=highlightedLines)
+  blk.code = getCode(body)
+  nb.withContainer(blk):
+    captureStdout(blk.output):
       body
+  nb.add blk
 
-template newAnimateCodeBlock*(cmd: untyped, impl: untyped) =
-  const cmdStr = astToStr(cmd)
-
-  template `cmd`*(lines: varargs[set[range[0..65535]], toSet], body: untyped) =
-    newNbCodeBlock(cmdStr, body):
-      var linesString: string
-      if lines.len > 0:
-        linesString &= "|"
-      for lineBundle in lines:
-        for line in lineBundle:
-          linesString &= $line & ","
-        linesString &= "|"
-      if lines.len > 0:
-        linesString = linesString[0 .. ^3]
-      nb.blk.context["highlightLines"] = linesString
-    impl(body)
-
-  nb.partials[cmdStr] = nb.partials["animateCode"]
-  nb.renderPlans[cmdStr] = nb.renderPlans["animateCode"]
+template animateCodeSkip*(lines: varargs[set[range[0..65535]], toSet], body: untyped) =
+  ## Shows code and its output just like nbCode, but highlights different lines of the code in the order specified in `lines`.
+  ## lines: Specify which lines to highlight and in which order. The lines can be specified using either:
+  ## - An `int` (highlight single line)
+  ## - A slice `x..y` (highlight a range of consequative lines)
+  ## - A set {x, y..z} (highlight any combination of lines)
+  ## Ex: 
+  ## ```nim
+  ## animateCode(1, 2..3, {4, 6}): body
+  ## ```
+  ## This will first highlight line 1, then lines 2 and 3, and lastly line 4 and 6.
+  var highlightedLines: seq[seq[int]]
+  for line in lines:
+    var lineSeq: seq[int]
+    for l in line:
+      lineSeq.add l
+    highlightedLines.add lineSeq
+  let blk = newNbAnimateCode(highlightedLines=highlightedLines)
+  blk.code = getCode(body)
+  nb.add blk
 
 template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") =
   let localText = textMessage
@@ -458,23 +563,29 @@ template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") 
   # HTML and add eventlistener
   # check what we get back from reveal's event
   let fragIndex = currentFragment # important it is before fragmentFadeIn!
-  let id = "typewriter" & $nb.newId()
+  let id = "typewriter" & $nb.doc.newId()
   fragmentFadeIn:
-    nbKaraxCode(id, localText, fragIndex, speed, align):
+    nbRawHtml: hlHTml"""
+      <p id="$1" style="align: $2">$3</p>
+    """ % [id, align, localText]
+    nbJsFromCodeOwnFile(id, localText, fragIndex, speed, align):
+      import std / [dom]
       import nimiSlides/revealFFI
-      import karax / vstyles
       var i = 0
       var timeout: Timeout
       proc typewriterLocal() =
         echo "Typing ", fragindex
         var el = getElementById(id.cstring)
         if i < localText.len:
-          el.innerHtml &= $localText[i]
+          var c = localText[i]
+          let s =
+            if c == '\n':
+              "<br/>"
+            else:
+              $c
+          el.innerHtml &= s
           inc i
           timeout = setTimeout(typewriterLocal, speed)
-      karaxHtml:
-        p(id = id, style=style(textAlign, align.kstring)):
-          text localText.cstring
       
       window.addEventListener("load", proc (event: Event) =
         echo "Loading ", fragIndex
@@ -504,9 +615,9 @@ template typewriter*(textMessage: string, typeSpeed = 50, alignment = "center") 
                 discard
         ))
 
-template bigText*(text: string) =
-  newNbSlimBlock("bigText"):
-    nb.blk.output = text
+template bigText*(ttext: string) =
+  let blk = newNbBigText(text=ttext)
+  nb.add blk
 
 template fitImage*(src: string) =
   nbRawHtml: hlHtml"""<img data-src="$1" class="r-stretch">""" % [src]
@@ -519,47 +630,40 @@ template speakerNote*(text: string) =
 """ % [markdown(text)]
 
 template align*(text: string, body: untyped) =
-  nbRawHtml: """
-<div style="text-align: $1;">
-""" % text
-  body
-  nbRawHtml: "</div>"
+  nbDiv(styles="text-align: $1;" % text, classes=""):
+    body
 
 #templates can't have default args and untyped args at the same time
 #so we use overloading to get the same effect
 
 template columns*(columnGap: float, body: untyped) =
   #tempted to use fmt"", but strformat doesn't support template args in the format string
-  nbRawHtml: """<div style="display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); overflow-wrap: break-word; column-gap: $1 em;">
-  """ % $columnGap
-  body
-  nbRawHtml: "</div>"
+  nbDiv(styles="display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); overflow-wrap: break-word; column-gap: $1 em;" % $columnGap, classes=""):
+    body
 
 template columns*(body: untyped) =
   columns(1.0,body)
 
 template adaptiveColumns*(columnGap: float, body: untyped) =
-  nbRawHtml: """<div style="display: grid; grid-auto-flow: column; overflow-wrap: break-word; column-gap: $1 em;">
-  """ % $columnGap
-  body
-  nbRawHtml: "</div>"
+  nbDiv(styles="display: grid; grid-auto-flow: column; overflow-wrap: break-word; column-gap: $1 em;" % $columnGap, classes=""):
+    body
+
 
 template adaptiveColumns*(body: untyped) =
   adaptiveColumns(1.0,body)
 
 template column*(bodyInner: untyped) =
   ## column should always be used inside a `columns` block
-  nbRawHtml: "<div>"
-  bodyInner
-  nbRawHtml: "</div>"
+  nbDiv:
+    bodyInner
 
 template footer*(text: string, fontSize: int = 20, opacity: range[0.0 .. 1.0] = 0.6, rawHtml = false) =
-  nb.context["footerFontSize"] = fontSize
-  nb.context["footerOpacity"] = opacity
+  nb.doc.context["footerFontSize"] = %fontSize
+  nb.doc.context["footerOpacity"] = %opacity
   if rawHtml:
-    nb.context["revealFooter"] = text
+    nb.doc.context["revealFooter"] = %text
   else:
-    nb.context["revealFooter"] = markdown(text, config=initGfmConfig()).dup(removeSuffix)
+    nb.doc.context["revealFooter"] = %markdown(text, config=initGfmConfig()).dup(removeSuffix)
 
   nbJsFromCodeGlobal:
     import nimiSlides/revealFFI
@@ -602,7 +706,7 @@ template cornerImage*(image: string, corner: Corner, size: int = 100, animate = 
         "transition: all 0.2s ease-out;"
       else:
         ""
-    let id = "cornerImage-" & $nb.newId()
+    let id = "cornerImage-" & $nb.doc.newId()
     let html = &"""<img src="$1" id="$2" style="opacity: 0%; position: fixed; width: $3px; height: auto; margin: 0px; $4 $5 $6"/>""" % [image, id, $size, vertical, horizontal, animateString]
     let currentSlideNr = currentSlideNumber
     

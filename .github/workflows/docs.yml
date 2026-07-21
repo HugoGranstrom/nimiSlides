@@ -12,11 +12,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: iffy/install-nim@v4
+      - name: apt install
+        run: sudo apt install -y libpcre3 libblas-dev liblapack-dev
+      - uses: iffy/install-nim@v5
       - name: Generate
         run: |
-          nimble install -y
-          nimble docsDeps
+          set -e
+          nimble install -g nimble
+          nimble install -y -g https://github.com/zetashift/fontim
+          nimble install -y -g https://github.com/HugoGranstrom/cdt@0.1.1
+          nimble sync -y
+          nimble setup
           nimble docs
           nimble buildDocs
           nimble buildBook

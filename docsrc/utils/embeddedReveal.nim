@@ -22,33 +22,14 @@ table tbody tr:nth-child(2n) {
 </style>
 """
 
-  nb.partials["nbCodeSource"] = "<pre style=\"width: 100%\"><code class=\"nim hljs\" data-noescape data-line-numbers>{{&codeHighlighted}}</code></pre>"
-  nb.partials["nbCodeOutput"] = "{{#output}}<pre style=\"width: 100%;\"><samp class=\"hljs\">{{output}}</samp></pre>{{/output}}"
+  nb.populateNimiSlidesBlockPartials()
 
-  nb.partials["animateCode"] = "<pre style=\"width: 100%;\"><code class=\"nim hljs\" data-noescape data-line-numbers=\"{{&highlightLines}}\">{{&codeHighlighted}}</code></pre>\n" & nb.partials["nbCodeOutput"]
-  nb.renderPlans["animateCode"] = nb.renderPlans["nbCode"]
-
-  nb.partials["fragmentStart"] = """
-{{#fragments}}
-<div class="fragment {{&classStr}}" data-fragment-index="{{&fragIndex}}" data-fragment-index-nimib="{{&fragIndex}}"> 
-{{/fragments}}
-  """
-
-  nb.partials["fragmentEnd"] = """
-{{#fragments}}
-</div>
-{{/fragments}}
-  """
-
-  nb.partials["bigText"] = """<h2 class="r-fit-text"> {{&outputToHtml}} </h2>"""
-  nb.renderPlans["bigText"] = nb.renderPlans["nbText"]
-
-  nb.context["disableHighlightJs"] = true
+  nb.disableHighlightJs()
 
 template embeddedSlides*(body: untyped) =
   currentFragment = 0
   currentSlideNumber = 0
-  let id = "revealId" & $nb.newId()
+  let id = "revealId" & $nb.doc.newId()
   nbRawHtml: hlHtmlF"""
   <div class="reveal" id="$1" style="height: 400px;">
     <div class="slides">
