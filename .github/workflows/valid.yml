@@ -27,7 +27,7 @@ jobs:
         run: |
           set -e
           nimble install -y https://github.com/zetashift/fontim -g
-          nimble install -y -g https://github.com/HugoGranstrom/cdt@#head
+          nimble install -y -g https://github.com/HugoGranstrom/cdt
       - name: Install deps
         run: |
           set -e
