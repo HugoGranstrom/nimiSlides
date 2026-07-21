@@ -22,11 +22,11 @@ jobs:
           nim-version: ${{ matrix.nim }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - run: sudo apt install libpcre3 libpcre3-dev liblapack-dev
-      - run: nimble install nimble
+      - run: nimble install nimble -g
       - name: Install deps
         run: |
           set -e
-          nimble install -y fontim@0.2.0
+          nimble install -y fontim@0.2.0 -g
           nimble sync -y --verbose
       - name: Build compiler-docs
         run: nimble docs
