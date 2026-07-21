@@ -23,11 +23,14 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - run: sudo apt install libpcre3 libpcre3-dev liblapack-dev
       - run: nimble install nimble -g
-      - name: Install deps
+      - name: Pre-Install deps
         run: |
           set -e
           nimble install -y https://github.com/zetashift/fontim -g
           nimble install -y -g https://github.com/HugoGranstrom/cdt@#head
+      - name: Install deps
+        run: |
+          set -e
           nimble sync -y
           nimble setup
       - name: Build compiler-docs
