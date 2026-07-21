@@ -18,7 +18,11 @@ jobs:
       - name: Generate
         run: |
           set -e
+          nimble install -g nimble
+          nimble install -y -g https://github.com/zetashift/fontim
+          nimble install -y -g https://github.com/HugoGranstrom/cdt@0.1.1
           nimble sync -y
+          nimble setup
           nimble docs
           nimble buildDocs
           nimble buildBook
