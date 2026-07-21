@@ -37,5 +37,5 @@ task buildBook, "Builds the nimiBook docs":
     selfExec(" r nbook.nim build")
 
 task docs, "Generate automatic docs":
-    exec "nim doc --project --index:on --git.url:https://github.com/HugoGranstrom/nimiSlides --git.commit:main --outdir:docs/docs src/nimiSlides.nim"
+    selfExec " doc --project --index:on --git.url:https://github.com/HugoGranstrom/nimiSlides --git.commit:main --outdir:docs/docs src/nimiSlides.nim"
 
