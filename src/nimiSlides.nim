@@ -60,46 +60,6 @@ proc slideOptions*(autoAnimate = false, iframeInteractive = true, colorBackgroun
 
 const reveal_version* = "5.0.4"
 
-const main = """
-<div class="reveal">
-  <div class="slides">
-    {{#blocks}}
-    {{&.}}
-    {{/blocks}}
-  </div>
-  {{#revealFooter}}
-  <div id="reveal-footer" style="position: absolute; text-align: center; width: 100%; bottom: 0%; visibility: hidden; opacity: {{footerOpacity}}; font-size: {{footerFontSize}}px">
-    {{&revealFooter}}
-  </div>
-  {{/revealFooter}}
-</div>
-{{> revealJS }}
-<script>
-  Reveal.initialize({
-    plugins: [ 
-      RevealHighlight,
-      RevealNotes,
-      {{#latex}}
-      RevealMath.KaTeX,
-      {{/latex}}
-    ],
-    {{#useScrollWheel}}
-    mouseWheel: true,
-    {{/useScrollWheel}}
-    {{#showSlideNumber}}
-    slideNumber: 'c/t',
-    {{/showSlideNumber}}
-    {{#disableCentering}}
-    center: false,
-    {{/disableCentering}}
-    {{#useScrollView}}
-    view: 'scroll',
-    {{/useScrollView}}
-  });
-{{> customJS}}
-</script>
-"""
-
 func revealMainToHtml*(doc: NbDoc, nb: Nb): string =
   let docJson = %[] # it's unused
   let renderedBlocks = nbContainerToHtml(doc, nb)
@@ -123,16 +83,6 @@ func revealMainToHtml*(doc: NbDoc, nb: Nb): string =
     """
     nb.renderPartial("customJS", docJson)
     "</script>"
-
-#[ const document = """
-<!DOCTYPE html>
-<html>
-  {{> head}}
-  <body>
-  {{> main}}
-  </body>
-</html>
-""" ]#
 
 func revealNbDocToHtml*(blk: NbBlock, nb: Nb): string =
   let doc = blk.NbDoc
@@ -160,25 +110,6 @@ func revealHeadToHtml*(blk: JsonNode, nb: Nb): string =
       """
     "</head>"
 
-#[ const head = """
-<head>
-  <meta content="text/html; charset=utf-8" http-equiv="content-type">
-  {{> revealCSS }}
-  {{#nb_style}}
-  <style>
-  {{{ nb_style }}}
-  </style>
-  {{/nb_style}}
-</head>
-""" ]#
-
-const revealCSS = hlHtml"""
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/reveal.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/theme/{{{slidesTheme}}}.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/plugin/highlight/monokai.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-"""
-
 func revealCSSToHtml*(blk: JsonNode, nb: Nb): string =
   let revealVersion = nb.doc.context{"reveal_version"}.getStr
   let slidesTheme = nb.doc.context{"slidesTheme"}.getStr
@@ -186,15 +117,6 @@ func revealCSSToHtml*(blk: JsonNode, nb: Nb): string =
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/reveal.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/theme/{slidesTheme}.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{revealVersion}/plugin/highlight/monokai.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-"""
-
-const revealJS = hlHtml"""
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/reveal.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/plugin/highlight/highlight.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/plugin/notes/notes.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-{{#latex}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/{{{reveal_version}}}/plugin/math/math.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-{{/latex}}
 """
 
 func revealJSToHtml*(blk: JsonNode, nb: Nb): string =
