@@ -25,7 +25,8 @@ jobs:
       - name: Install deps
         run: |
           set -e
-          nimble sync -y
+          nimble install -y https://github.com/zetashift/fontim
+          nimble sync -y --verbose
       - name: Build compiler-docs
         run: nimble docs
       - name: Build slideshows
