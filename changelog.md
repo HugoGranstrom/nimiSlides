@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.4.0
+- Adapted the code to work with Nimib v0.4.0.
+
 ## v0.2.2
 - `columns` now create equally sized columns, no matter the content. (A empty column takes up as much width as one full of content).
 - `adaptiveColumns` has the behavior of the old `columns` where columns only are as big as their content needs.
