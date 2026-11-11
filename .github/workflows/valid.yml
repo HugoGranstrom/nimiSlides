@@ -7,7 +7,7 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # libpcre3 is not packaged in ubuntu 26.04 (ubuntu-latest)
     strategy:
       matrix:
         nim:
