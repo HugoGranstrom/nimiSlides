@@ -6,7 +6,7 @@ setSlidesTheme(Moon)
 nb.useLatex
 
 slide:
-  nbText: md"""
+  nbText: hlMd"""
   # Fragments
   This slideshow is a showcase of the fragments capabilities of nimiSlides. For the source code, look [here](https://github.com/HugoGranstrom/nimiSlides/blob/main/docs/fragments.nim).
   """

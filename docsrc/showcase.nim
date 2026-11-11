@@ -107,7 +107,7 @@ slide:
 
 
 slide:
-  nbText: md"""
+  nbText: hlMd"""
 # Math ➕
 You can show off all your fancy equations ⚛
 $$ e^{\pi i} = -1 $$
@@ -116,7 +116,7 @@ $$ \int_0^{\infty} \frac{1}{1 + e^x} dx$$
 
 slide:
   slide:
-    nbText: md"""    
+    nbText: hlMd"""    
 # Images 🖼️
 You can have the code generating an image in the slides and then load the image. This way it's always up to date! 
 """
