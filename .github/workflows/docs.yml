@@ -8,7 +8,7 @@ on:
 jobs:
   gen:
     name: Generate and deploy docs
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-24.04 # libpcre3 is not packaged in ubuntu 26.04 (ubuntu-latest)
 
     steps:
       - uses: actions/checkout@v2
